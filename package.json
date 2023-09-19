@@ -1,6 +1,6 @@
 {
     "name": "generator-norgate-av",
-    "version": "0.0.0-development",
+    "version": "1.0.0",
     "description": "A collection of various project boilerplates",
     "keywords": [
         "yeoman-generator",

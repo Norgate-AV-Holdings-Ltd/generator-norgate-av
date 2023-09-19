@@ -137,16 +137,17 @@ exports.askForGit = (generator, projectConfig) => {
  * @param {Object} projectConfig
  */
 exports.askForPackageManager = (generator, projectConfig) => {
-    const defaultPkg = "yarn";
+    const defaultPkg = "pnpm";
 
     const pkgRunCommand = {
         yarn: "yarn",
-        npm: "npm run",
+        npm: "npm",
+        pnpm: "pnpm",
     };
 
     const { pkg } = generator.options;
 
-    if (pkg === "npm" || pkg === "yarn") {
+    if (pkg === "npm" || pkg === "yarn" || pkg === "pnpm") {
         projectConfig.pkg = pkg;
         projectConfig.pkgRunCommand = pkgRunCommand[projectConfig.pkg];
         return Promise.resolve();
@@ -165,6 +166,10 @@ exports.askForPackageManager = (generator, projectConfig) => {
             name: "pkg",
             message: "Which package manager to use?",
             choices: [
+                {
+                    name: "pnpm",
+                    value: "pnpm",
+                },
                 {
                     name: "yarn",
                     value: "yarn",

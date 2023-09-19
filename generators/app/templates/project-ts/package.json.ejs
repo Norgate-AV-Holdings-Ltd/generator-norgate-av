@@ -1,0 +1,46 @@
+{
+    "name": <%- JSON.stringify(name) %>,
+    "displayName": <%- JSON.stringify(displayName) %>,
+    "description": <%- JSON.stringify(description) %>,
+    "version": "0.0.0-development",
+    "license": "MIT",
+    "main": "./src/index.ts",
+    "engines": {
+        "node": ">=14"
+    },
+    "scripts": {
+        "start": "nodemon",
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix .",
+        "pretty:fix": "prettier --write .",
+        "commit": "git-cz",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        <%- dep("@commitlint/cli") %>,
+        <%- dep("@commitlint/config-conventional") %>,
+        <%- dep("@types/eslint") %>,
+        <%- dep("@types/eslint-config-prettier") %>,
+        <%- dep("@types/eslint-plugin-prettier") %>,
+        <%- dep("@types/node") %>,
+        <%- dep("@types/nodemon") %>,
+        <%- dep("@types/prettier") %>,
+        <%- dep("@typescript-eslint/eslint-plugin") %>,
+        <%- dep("@typescript-eslint/parser") %>,
+        <%- dep("cz-conventional-changelog") %>,
+        <%- dep("eslint") %>,
+        <%- dep("eslint-config-airbnb-base") %>,
+        <%- dep("eslint-config-prettier") %>,
+        <%- dep("eslint-plugin-import") %>,
+        <%- dep("eslint-plugin-prettier") %>,
+        <%- dep("husky") %>,
+        <%- dep("lint-staged") %>,
+        <%- dep("nodemon") %>,
+        <%- dep("prettier") %>,
+        <%- dep("tslib") %>,
+        <%- dep("ts-node") %>,
+        <%- dep("ts-node-dev") %>,
+        <%- dep("typescript") %>
+    },
+    "dependencies": {}
+}

@@ -3,3 +3,4 @@ dist/*
 node_modules/*
 .history/*
 generators/app/templates/*
+USAGE

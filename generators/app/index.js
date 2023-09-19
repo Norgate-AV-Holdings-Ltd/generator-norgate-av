@@ -4,10 +4,11 @@ const yosay = require("yosay");
 
 const path = require("path");
 const which = require("which");
+const env = require("./env");
 
-const javascript = require("./generate-javascript");
+const crestronSimpl = require("./generate-crestron-simpl");
 
-const projectGenerators = [javascript];
+const projectGenerators = [crestronSimpl];
 
 module.exports = class extends Generator {
     constructor(args, opts) {
@@ -34,7 +35,6 @@ module.exports = class extends Generator {
             type: Boolean,
             alias: "o",
             description: "Open the generated project in Visual Studio Code",
-            default: true,
         });
 
         this.option("projectType", {
@@ -60,6 +60,7 @@ module.exports = class extends Generator {
         this.option("projectDescription", {
             type: String,
             description: "Description of the project",
+            default: "",
         });
 
         this.option("pkg", {
@@ -67,19 +68,20 @@ module.exports = class extends Generator {
             alias: "p",
             description:
                 'Package manager to use. Possible values, "yarn" or "npm"',
-            default: "yarn",
+            // default: "yarn",
         });
 
         this.option("git", {
             type: Boolean,
             alias: "g",
             description: "Initialize a git repo",
-            default: true,
+            // default: true,
         });
 
         this.projectConfig = Object.create(null);
         this.projectConfig.installDependencies = false;
-        this.projectConfig.skipPrompts = this.options.yes;
+
+        this.options.skipPrompts = this.options.yes;
 
         this.projectGenerator = undefined;
 
@@ -89,7 +91,9 @@ module.exports = class extends Generator {
     async initializing() {
         this.log(
             yosay(
-                `Welcome to the ${chalk.red("Norgate AV")} project generator!`,
+                `Welcome to the\n${chalk.magenta(
+                    "Norgate AV",
+                )}\nproject generator!`,
             ),
         );
 
@@ -103,6 +107,22 @@ module.exports = class extends Generator {
 
             this.destinationRoot(folderPath);
         }
+
+        const dependencies = await env.getDependencies();
+        this.projectConfig.dependencies = dependencies;
+
+        this.projectConfig.dep = (name) => {
+            const version = dependencies[name];
+
+            if (typeof version === "undefined") {
+                throw new Error(`Module ${name} is not listed in env.js`);
+            }
+
+            return `${JSON.stringify(name)}: ${JSON.stringify(version)}`;
+        };
+
+        const node = await env.getNodeVersion();
+        this.projectConfig.node = node;
     }
 
     async prompting() {
@@ -171,7 +191,14 @@ module.exports = class extends Generator {
         this.env.cwd = this.destinationPath();
 
         this.log();
-        this.log(`Writing in ${this.destinationPath()}...`);
+        this.log(`Bootstrapping ${chalk.cyan(this.projectConfig.name)}...`);
+        this.log();
+        this.log(
+            `Creating a new ${chalk.cyan(
+                this.projectGenerator.name,
+            )} project in ${chalk.green(this.destinationPath())}.`,
+        );
+        this.log();
 
         this.sourceRoot(
             path.join(__dirname, `./templates/${this.projectConfig.type}`),
@@ -180,7 +207,29 @@ module.exports = class extends Generator {
         this.projectGenerator.writing(this, this.projectConfig);
     }
 
-    install() {
+    // async _gitInit() {
+    //     const { git } = this.projectConfig;
+
+    //     if (!git) {
+    //         return Promise.resolve();
+    //     }
+
+    //     const gitPath = await which("git");
+
+    //     if (gitPath) {
+    //         await this.spawnCommand("git", ["init", "--quiet"]);
+    //         this.log();
+    //         this.log("Initialized a git repository.");
+    //     } else {
+    //         this.log();
+    //         this.log(`${chalk.red.bold("Oops!")} 🤦‍♂️`);
+    //         this.log(
+    //             "You opted to use Git but Git is not installed on your system.",
+    //         );
+    //     }
+    // }
+
+    async install() {
         if (this.abort) {
             this.env.options.skipInstall = true;
             return;
@@ -193,27 +242,19 @@ module.exports = class extends Generator {
         }
 
         if (this.projectConfig.git) {
-            this.spawnCommand("git", ["init", "--quiet"]);
+            await this.spawnCommand("git", ["init", "--quiet"]);
+            this.log();
+            this.log("Initialized a git repository.");
         }
+
+        this.log();
+        this.log("Installing packages. This might take a couple of minutes.");
     }
 
     async end() {
         if (this.abort) {
             return;
         }
-
-        // if (this.projectGenerator.update) {
-        //     this.log("");
-        //     this.log("Your project has been updated!");
-        //     this.log("");
-        //     this.log(
-        //         "To start editing with Visual Studio Code, use the following commands:",
-        //     );
-        //     this.log("");
-        //     this.log("     code .");
-        //     this.log("");
-        //     return;
-        // }
 
         if (this.projectConfig.git) {
             await this.spawnCommand("git", ["add", "-A"]);
@@ -224,13 +265,28 @@ module.exports = class extends Generator {
                 "--no-verify",
                 "--quiet",
             ]);
+
+            this.log();
+            this.log("Created git commit.");
         }
 
-        this.log("");
-        this.log("Created a git commit.");
-        this.log("");
-        this.log(`Your project ${this.projectConfig.name} has been created!`);
-        this.log("");
+        this.log();
+        this.log(
+            `${chalk.green("Success!")} Created ${chalk.cyan(
+                this.projectConfig.name,
+            )} at ${chalk.green(this.destinationPath())}`,
+        );
+        this.log("Inside that directory, you can run several commands:");
+
+        if (this.projectGenerator.endMessage) {
+            this.projectGenerator.endMessage(this, this.projectConfig);
+        }
+
+        this.log(
+            `Open ${chalk.cyan(
+                "README.md",
+            )} inside the new project for further instructions.`,
+        );
 
         const [codeLocation] = await Promise.all([
             which("code").catch(() => undefined),
@@ -240,65 +296,54 @@ module.exports = class extends Generator {
             const cdLocation =
                 this.options.destination || this.projectConfig.name;
 
+            this.log();
             this.log(
                 "To start editing with Visual Studio Code, use the following commands:",
             );
 
-            this.log("");
-            this.log(`     code ${cdLocation}`);
-            this.log("");
+            this.log();
+            this.log(`  ${chalk.cyan("code")} ${cdLocation}`);
+            this.log();
         }
 
-        this.log(
-            "Open README.md inside the new project for further instructions.",
-        );
-
-        this.log("");
-
-        if (this.projectGenerator.endMessage) {
-            this.projectGenerator.endMessage(this, this.projectConfig);
-        }
-
-        this.log("\r\n");
+        this.log();
+        this.log(chalk.magenta("Happy Hacking! 😀"));
+        this.log();
 
         if (this.options.open) {
             if (codeLocation) {
                 this.log(
-                    `Opening ${this.destinationPath()} in Visual Studio Code...`,
+                    `Opening ${chalk.green(
+                        this.destinationPath(),
+                    )} in Visual Studio Code...`,
                 );
 
                 this.spawnCommand(codeLocation, [this.destinationPath()]);
             } else {
-                this.log("'code' command not found.");
+                this.log(`${chalk.cyan("`code`")} command not found.`);
             }
         } else if (codeLocation) {
-            if (this.options.skipPrompts) {
-                this.spawnCommand(codeLocation, [this.destinationPath()]);
-            } else {
-                const choices = [];
+            const choices = [];
 
-                if (codeLocation) {
-                    choices.push({
-                        name: "Open with `code`",
-                        value: codeLocation,
-                    });
-                }
-
-                choices.push({ name: "Skip", value: "skip" });
-
-                const answer = await this.prompt({
-                    type: "list",
-                    name: "openWith",
-                    message:
-                        "Do you want to open the new folder with Visual Studio Code?",
-                    choices,
+            if (codeLocation) {
+                choices.push({
+                    name: "Open with `code`",
+                    value: codeLocation,
                 });
+            }
 
-                if (answer && answer.openWith && answer.openWith !== "skip") {
-                    this.spawnCommand(answer.openWith, [
-                        this.destinationPath(),
-                    ]);
-                }
+            choices.push({ name: "Skip", value: "skip" });
+
+            const answer = await this.prompt({
+                type: "list",
+                name: "openWith",
+                message:
+                    "Do you want to open the new folder with Visual Studio Code?",
+                choices,
+            });
+
+            if (answer && answer.openWith && answer.openWith !== "skip") {
+                this.spawnCommand(answer.openWith, [this.destinationPath()]);
             }
         }
     }

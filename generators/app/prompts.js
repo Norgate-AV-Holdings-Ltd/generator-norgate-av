@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const path = require("path");
 const validator = require("./validator");
 
@@ -138,14 +137,24 @@ exports.askForGit = (generator, projectConfig) => {
  * @param {Object} projectConfig
  */
 exports.askForPackageManager = (generator, projectConfig) => {
+    const defaultPkg = "pnpm";
+
+    const pkgRunCommand = {
+        yarn: "yarn",
+        npm: "npm",
+        pnpm: "pnpm",
+    };
+
     const { pkg } = generator.options;
 
-    if (pkg === "npm" || pkg === "yarn") {
+    if (pkg === "npm" || pkg === "yarn" || pkg === "pnpm") {
         projectConfig.pkg = pkg;
+        projectConfig.pkgRunCommand = pkgRunCommand[projectConfig.pkg];
         return Promise.resolve();
     }
 
-    projectConfig.pkg = "yarn";
+    projectConfig.pkg = defaultPkg;
+    projectConfig.pkgRunCommand = pkgRunCommand[projectConfig.pkg];
 
     if (generator.options.skipPrompts) {
         return Promise.resolve();
@@ -158,6 +167,10 @@ exports.askForPackageManager = (generator, projectConfig) => {
             message: "Which package manager to use?",
             choices: [
                 {
+                    name: "pnpm",
+                    value: "pnpm",
+                },
+                {
                     name: "yarn",
                     value: "yarn",
                 },
@@ -166,8 +179,34 @@ exports.askForPackageManager = (generator, projectConfig) => {
                     value: "npm",
                 },
             ],
+            default: defaultPkg,
         })
         .then((pkgManagerAnswer) => {
             projectConfig.pkg = pkgManagerAnswer.pkg;
+            projectConfig.pkgRunCommand = pkgRunCommand[projectConfig.pkg];
+        });
+};
+
+/**
+ * @param {import('yeoman-generator')} generator
+ * @param {Object} projectConfig
+ */
+exports.askForCheckJavaScript = (generator, projectConfig) => {
+    projectConfig.checkJavaScript = false;
+
+    if (generator.options.skipPrompts) {
+        return Promise.resolve();
+    }
+
+    return generator
+        .prompt({
+            type: "confirm",
+            name: "checkJavaScript",
+            message: "Enable JavaScript type checking in 'jsconfig.json'?",
+            default: false,
+        })
+        .then((strictJavaScriptAnswer) => {
+            projectConfig.checkJavaScript =
+                strictJavaScriptAnswer.checkJavaScript;
         });
 };

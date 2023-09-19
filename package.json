@@ -13,46 +13,56 @@
     "main": "generators/app/index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Norgate-AV-Solutions-Ltd/generator-norgate-av.git"
+        "url": "https://github.com/Norgate-AV/generator-norgate-av.git"
     },
     "bugs": {
-        "url": "https://github.com/Norgate-AV-Solutions-Ltd/generator-norgate-av/issues"
+        "url": "https://github.com/Norgate-AV/generator-norgate-av/issues"
     },
     "files": [
         "generators"
     ],
     "engines": {
-        "node": ">=14"
+        "node": ">=16"
     },
     "scripts": {
-        "pretest": "yarn lint",
+        "pretest": "pnpm lint",
         "test": "jest",
         "test:watch": "jest --watch",
         "lint": "eslint .",
         "lint:fix": "eslint --fix .",
         "pretty:fix": "prettier --write .",
         "commit": "git-cz",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "doctoc": "doctoc --title '## Contents 📖' README.md",
+        "contrib:add": "all-contributors add",
+        "contrib:generate": "all-contributors generate",
+        "contrib:check": "all-contributors check"
     },
     "devDependencies": {
-        "@commitlint/cli": "^16.2.3",
-        "@commitlint/config-conventional": "^16.2.1",
+        "@commitlint/cli": "^17.0.2",
+        "@commitlint/config-conventional": "^17.0.2",
         "@semantic-release/changelog": "^6.0.1",
         "@semantic-release/git": "^10.0.1",
+        "@types/jest": "^28.1.1",
+        "@types/node": "^20.6.2",
+        "@types/yeoman-generator": "^5.2.10",
+        "@types/yeoman-test": "^4.0.3",
+        "all-contributors-cli": "^6.20.0",
         "cz-conventional-changelog": "3.3.0",
-        "eslint": "^8.15.0",
+        "doctoc": "^2.2.0",
+        "eslint": "^8.17.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-prettier": "^4.0.0",
         "husky": "^8.0.1",
         "jest": "^28.1.0",
-        "lint-staged": "^12.4.1",
-        "prettier": "^2.6.2",
-        "semantic-release": "^19.0.2",
+        "lint-staged": "^14.0.1",
+        "prettier": "^3.0.3",
+        "semantic-release": "^22.0.0",
         "yeoman-assert": "^3.1.1",
         "yeoman-environment": "^3.9.1",
-        "yeoman-test": "^6.3.0"
+        "yeoman-test": "^7.4.0"
     },
     "dependencies": {
         "chalk": "^4.1.2",

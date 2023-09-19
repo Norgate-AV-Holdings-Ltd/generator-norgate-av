@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 const prompts = require("./prompts");
 
 module.exports = {
@@ -13,20 +14,7 @@ module.exports = {
         await prompts.askForProjectDisplayName(generator, projectConfig);
         await prompts.askForProjectId(generator, projectConfig);
         await prompts.askForProjectDescription(generator, projectConfig);
-
-        projectConfig.checkJavaScript = false;
-        await generator
-            .prompt({
-                type: "confirm",
-                name: "checkJavaScript",
-                message: "Enable JavaScript type checking in 'jsconfig.json'?",
-                default: false,
-            })
-            .then((strictJavaScriptAnswer) => {
-                projectConfig.checkJavaScript =
-                    strictJavaScriptAnswer.checkJavaScript;
-            });
-
+        await prompts.askForCheckJavaScript(generator, projectConfig);
         await prompts.askForGit(generator, projectConfig);
         await prompts.askForPackageManager(generator, projectConfig);
     },
@@ -57,12 +45,12 @@ module.exports = {
         );
 
         generator.fs.copy(
-            generator.templatePath(".commitlintrc.json"),
+            generator.templatePath("commitlintrc.json"),
             generator.destinationPath(".commitlintrc.json"),
         );
 
         generator.fs.copy(
-            generator.templatePath(".eslintrc.json"),
+            generator.templatePath("eslintrc.json"),
             generator.destinationPath(".eslintrc.json"),
         );
 
@@ -72,12 +60,12 @@ module.exports = {
         );
 
         generator.fs.copy(
-            generator.templatePath(".lintstagedrc.json"),
+            generator.templatePath("lintstagedrc.json"),
             generator.destinationPath(".lintstagedrc.json"),
         );
 
         generator.fs.copy(
-            generator.templatePath(".prettierrc.json"),
+            generator.templatePath("prettierrc.json"),
             generator.destinationPath(".prettierrc.json"),
         );
 
@@ -119,12 +107,11 @@ module.exports = {
             generator.destinationPath("LICENSE"),
         );
 
-        if (projectConfig.checkJavaScript) {
-            generator.fs.copy(
-                generator.templatePath("jsconfig.json"),
-                generator.destinationPath("jsconfig.json"),
-            );
-        }
+        generator.fs.copyTpl(
+            generator.templatePath("jsconfig.json.ejs"),
+            generator.destinationPath("jsconfig.json"),
+            projectConfig,
+        );
 
         generator.fs.copyTpl(
             generator.templatePath("package.json.ejs"),
@@ -139,5 +126,53 @@ module.exports = {
         );
 
         projectConfig.installDependencies = true;
+    },
+
+    /**
+     * @param {import('yeoman-generator')} generator
+     * @param {Object} projectConfig
+     */
+    endMessage: (generator, projectConfig) => {
+        generator.log();
+        generator.log(
+            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} start`)}`,
+        );
+        generator.log('  Will start "nodemon" on the main entry point');
+        generator.log();
+
+        generator.log();
+        generator.log(`  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint`)}`);
+        generator.log("  Will lint your code and report any violations");
+        generator.log();
+
+        generator.log();
+        generator.log(
+            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint:fix`)}`,
+        );
+        generator.log(
+            "  Will lint your code and automatically fix any violations it can",
+        );
+        generator.log();
+
+        generator.log();
+        generator.log(
+            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} pretty:fix`)}`,
+        );
+        generator.log("  Will format your code according to Prettier's rules");
+        generator.log();
+
+        generator.log();
+        generator.log(
+            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} commit`)}`,
+        );
+        generator.log(
+            "  Will invoke the Commitizen CLI to guide you through creating a properly formatted commit message",
+        );
+        generator.log();
+
+        generator.log("We suggest that you begin by typing:");
+        generator.log();
+        generator.log(`  ${chalk.cyan("cd")} ${projectConfig.name}`);
+        generator.log();
     },
 };

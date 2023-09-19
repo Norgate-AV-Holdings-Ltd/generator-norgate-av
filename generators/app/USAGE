@@ -1,0 +1,6 @@
+Example usages:
+
+  yo norgate-av                             # Create a project in a folder with the project's name as prompted in the generator.
+  yo norgate-av . -o                        # Create a project in the current folder and open with Visual Studio Code.
+  yo norgate-av cowbell -t ts -y            # Create a TypeScript project in './cowbell', skip prompts, use defaults.
+  yo norgate-av dopephish -t js -g          # Create a JavaScript project in './dopephish', initializes a git repository.

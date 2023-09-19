@@ -14,7 +14,6 @@ module.exports = {
         await prompts.askForProjectDisplayName(generator, projectConfig);
         await prompts.askForProjectId(generator, projectConfig);
         await prompts.askForProjectDescription(generator, projectConfig);
-        await prompts.askForCheckJavaScript(generator, projectConfig);
         await prompts.askForGit(generator, projectConfig);
         await prompts.askForPackageManager(generator, projectConfig);
     },

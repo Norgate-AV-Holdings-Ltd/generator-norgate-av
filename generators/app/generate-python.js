@@ -53,6 +53,21 @@ module.exports = {
             generator.destinationPath(".lintstagedrc.json"),
         );
 
+        generator.fs.copy(
+            generator.templatePath("prettierrc.json"),
+            generator.destinationPath(".prettierrc.json"),
+        );
+
+        generator.fs.copy(
+            generator.templatePath("prettierignore"),
+            generator.destinationPath(".prettierignore"),
+        );
+
+        generator.fs.copy(
+            generator.templatePath("changelogrc.json"),
+            generator.destinationPath(".changelogrc.json"),
+        );
+
         generator.fs.copyTpl(
             generator.templatePath("CHANGELOG.md"),
             generator.destinationPath("CHANGELOG.md"),
@@ -78,6 +93,11 @@ module.exports = {
             generator.fs.copy(
                 generator.templatePath("gitattributes"),
                 generator.destinationPath(".gitattributes"),
+            );
+
+            generator.fs.copy(
+                generator.templatePath("GitVersion.yml"),
+                generator.destinationPath("GitVersion.yml"),
             );
         }
 

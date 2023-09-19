@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.0...v1.0.1) (2023-09-19)
+
+
+### Bug Fixes
+
+* fix typo in project dir name ([368cc68](https://github.com/Norgate-AV/generator-norgate-av/commit/368cc685fbde0e7acaf767b374423b6125218cfe))
+
 ## 1.0.0 (2023-09-19)
 
 

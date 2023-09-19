@@ -14,6 +14,18 @@ module.exports.getDependencies = async () => {
     return versions;
 };
 
+module.exports.getNodeVersion = async () => {
+    const node = JSON.parse(
+        (
+            await fs.promises.readFile(
+                path.join(__dirname, "dependencies", "package.json"),
+            )
+        ).toString(),
+    ).engines.node;
+
+    return node;
+};
+
 module.exports.getGitPath = async () => {
     const gitPath = await which("git").catch(() => undefined);
     return gitPath;

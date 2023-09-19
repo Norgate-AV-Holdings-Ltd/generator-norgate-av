@@ -6,14 +6,9 @@ const path = require("path");
 const which = require("which");
 const env = require("./env");
 
-const typescript = require("./generate-typescript");
-const javascript = require("./generate-javascript");
-const cli = require("./generate-cli");
-const html = require("./generate-html");
-const clang = require("./generate-clang");
-const python = require("./generate-python");
+const crestronSimpl = require("./generate-crestron-simpl");
 
-const projectGenerators = [typescript, javascript, cli, html, clang, python];
+const projectGenerators = [crestronSimpl];
 
 module.exports = class extends Generator {
     constructor(args, opts) {
@@ -73,14 +68,14 @@ module.exports = class extends Generator {
             alias: "p",
             description:
                 'Package manager to use. Possible values, "yarn" or "npm"',
-            default: "yarn",
+            // default: "yarn",
         });
 
         this.option("git", {
             type: Boolean,
             alias: "g",
             description: "Initialize a git repo",
-            default: true,
+            // default: true,
         });
 
         this.projectConfig = Object.create(null);
@@ -125,6 +120,9 @@ module.exports = class extends Generator {
 
             return `${JSON.stringify(name)}: ${JSON.stringify(version)}`;
         };
+
+        const node = await env.getNodeVersion();
+        this.projectConfig.node = node;
     }
 
     async prompting() {

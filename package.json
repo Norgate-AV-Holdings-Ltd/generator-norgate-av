@@ -25,7 +25,7 @@
         "node": ">=14"
     },
     "scripts": {
-        "pretest": "yarn lint",
+        "pretest": "pnpm lint",
         "test": "jest",
         "test:watch": "jest --watch",
         "lint": "eslint .",
@@ -44,7 +44,7 @@
         "@semantic-release/changelog": "^6.0.1",
         "@semantic-release/git": "^10.0.1",
         "@types/jest": "^28.1.1",
-        "@types/node": "^18.0.0",
+        "@types/node": "^20.6.2",
         "@types/yeoman-generator": "^5.2.10",
         "@types/yeoman-test": "^4.0.3",
         "all-contributors-cli": "^6.20.0",
@@ -57,12 +57,12 @@
         "eslint-plugin-prettier": "^4.0.0",
         "husky": "^8.0.1",
         "jest": "^28.1.0",
-        "lint-staged": "^13.0.1",
-        "prettier": "^2.7.1",
-        "semantic-release": "^19.0.3",
+        "lint-staged": "^14.0.1",
+        "prettier": "^3.0.3",
+        "semantic-release": "^22.0.0",
         "yeoman-assert": "^3.1.1",
         "yeoman-environment": "^3.9.1",
-        "yeoman-test": "^6.3.0"
+        "yeoman-test": "^7.4.0"
     },
     "dependencies": {
         "chalk": "^4.1.2",

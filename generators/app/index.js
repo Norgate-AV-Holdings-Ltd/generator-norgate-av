@@ -6,14 +6,15 @@ const path = require("path");
 const which = require("which");
 const env = require("./env");
 
-const simpl = require("./generate-crestron-simpl");
-const c = require("./generate-c");
-const ts = require("./generate-typescript");
-const js = require("./generate-javascript");
+const simpl = require("./generate-simpl");
+const ts = require("./generate-ts");
+const js = require("./generate-js");
+const cli = require("./generate-node-cli");
 const html = require("./generate-html");
 const python = require("./generate-python");
+const c = require("./generate-c");
 
-const generators = [simpl, c, ts, js, html, python];
+const generators = [simpl, ts, js, cli, html, python, c];
 
 module.exports = class extends Generator {
     constructor(args, opts) {

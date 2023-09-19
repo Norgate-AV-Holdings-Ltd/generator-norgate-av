@@ -13,10 +13,10 @@
     "main": "generators/app/index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Norgate-AV-Solutions-Ltd/generator-norgate-av.git"
+        "url": "https://github.com/Norgate-AV/generator-norgate-av.git"
     },
     "bugs": {
-        "url": "https://github.com/Norgate-AV-Solutions-Ltd/generator-norgate-av/issues"
+        "url": "https://github.com/Norgate-AV/generator-norgate-av/issues"
     },
     "files": [
         "generators"

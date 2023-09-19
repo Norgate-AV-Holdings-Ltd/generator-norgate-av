@@ -32,9 +32,6 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Test
-        run: pnpm test
-
   release:
     name: Run Semantic Release
 

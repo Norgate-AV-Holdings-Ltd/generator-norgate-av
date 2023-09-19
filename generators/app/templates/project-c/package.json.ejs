@@ -5,18 +5,19 @@
     "version": "0.0.0-development",
     "license": "MIT",
     "engines": {
-        "node": ">=14"
+        "node": ">=16"
     },
     "scripts": {
+        "pretty:fix": "prettier --write .",
         "commit": "git-cz",
         "prepare": "husky install"
     },
     "devDependencies": {
         <%- dep("@commitlint/cli") %>,
         <%- dep("@commitlint/config-conventional") %>,
+        <%- dep("commitizen") %>,
         <%- dep("cz-conventional-changelog") %>,
-        <%- dep("husky") %>,
-        <%- dep("lint-staged") %>,
-    },
+        <%- dep("husky") %>, <%- dep("lint-staged") %>,
+        <%- dep("prettier") %> },
     "dependencies": {}
 }

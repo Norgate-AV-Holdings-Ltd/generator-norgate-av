@@ -2,9 +2,9 @@ const chalk = require("chalk");
 const prompts = require("./prompts");
 
 module.exports = {
-    id: "project-ts",
-    aliases: ["typescript", "ts", "node-ts"],
-    name: "Node.js (TypeScript)",
+    id: "project-simpl",
+    aliases: ["crestron-simpl", "simpl"],
+    name: "Crestron SIMPL",
 
     /**
      * @param {import('yeoman-generator')} generator
@@ -28,9 +28,16 @@ module.exports = {
             generator.destinationPath(".github"),
         );
 
-        generator.fs.copy(
+        generator.fs.copyTpl(
             generator.templatePath("husky"),
             generator.destinationPath(".husky"),
+            projectConfig,
+        );
+
+        generator.fs.copyTpl(
+            generator.templatePath("nvmrc"),
+            generator.destinationPath(".nvmrc"),
+            projectConfig,
         );
 
         generator.fs.copy(
@@ -39,23 +46,18 @@ module.exports = {
         );
 
         generator.fs.copy(
-            generator.templatePath("src"),
-            generator.destinationPath("src"),
+            generator.templatePath("src/gitkeep"),
+            generator.destinationPath("src/.gitkeep"),
+        );
+
+        generator.fs.copy(
+            generator.templatePath("ui/gitkeep"),
+            generator.destinationPath("ui/.gitkeep"),
         );
 
         generator.fs.copy(
             generator.templatePath("commitlintrc.json"),
             generator.destinationPath(".commitlintrc.json"),
-        );
-
-        generator.fs.copy(
-            generator.templatePath("eslintrc.json"),
-            generator.destinationPath(".eslintrc.json"),
-        );
-
-        generator.fs.copy(
-            generator.templatePath("eslintignore"),
-            generator.destinationPath(".eslintignore"),
         );
 
         generator.fs.copy(
@@ -71,6 +73,11 @@ module.exports = {
         generator.fs.copy(
             generator.templatePath("prettierignore"),
             generator.destinationPath(".prettierignore"),
+        );
+
+        generator.fs.copy(
+            generator.templatePath("changelogrc.json"),
+            generator.destinationPath(".changelogrc.json"),
         );
 
         generator.fs.copyTpl(
@@ -99,21 +106,16 @@ module.exports = {
                 generator.templatePath("gitattributes"),
                 generator.destinationPath(".gitattributes"),
             );
+
+            generator.fs.copy(
+                generator.templatePath("GitVersion.yml"),
+                generator.destinationPath("GitVersion.yml"),
+            );
         }
 
         generator.fs.copy(
             generator.templatePath("LICENSE"),
             generator.destinationPath("LICENSE"),
-        );
-
-        generator.fs.copy(
-            generator.templatePath("tsconfig.eslint.json"),
-            generator.destinationPath("tsconfig.eslint.json"),
-        );
-
-        generator.fs.copy(
-            generator.templatePath("tsconfig.json"),
-            generator.destinationPath("tsconfig.json"),
         );
 
         generator.fs.copyTpl(
@@ -136,34 +138,6 @@ module.exports = {
      * @param {Object} projectConfig
      */
     endMessage: (generator, projectConfig) => {
-        generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} start`)}`,
-        );
-        generator.log('  Will start "nodemon" on the main entry point');
-        generator.log();
-
-        generator.log();
-        generator.log(`  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint`)}`);
-        generator.log("  Will lint your code and report any violations");
-        generator.log();
-
-        generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint:fix`)}`,
-        );
-        generator.log(
-            "  Will lint your code and automatically fix any violations it can",
-        );
-        generator.log();
-
-        generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} pretty:fix`)}`,
-        );
-        generator.log("  Will format your code according to Prettier's rules");
-        generator.log();
-
         generator.log();
         generator.log(
             `  ${chalk.cyan(`${projectConfig.pkgRunCommand} commit`)}`,

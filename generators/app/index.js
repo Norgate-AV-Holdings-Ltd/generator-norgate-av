@@ -6,13 +6,20 @@ const path = require("path");
 const which = require("which");
 const env = require("./env");
 
-const crestronSimpl = require("./generate-crestron-simpl");
+const simpl = require("./generate-crestron-simpl");
+const c = require("./generate-c");
+const ts = require("./generate-typescript");
+const js = require("./generate-javascript");
+const html = require("./generate-html");
+const python = require("./generate-python");
 
-const projectGenerators = [crestronSimpl];
+const generators = [simpl, c, ts, js, html, python];
 
 module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
+
+        this.appname = "Norgate AV Project Generator";
 
         this.description =
             "Generates project boilerplates of various types ready for development.";
@@ -40,7 +47,7 @@ module.exports = class extends Generator {
         this.option("projectType", {
             type: String,
             alias: "t",
-            description: `${projectGenerators
+            description: `${generators
                 .slice(0, 6)
                 .map((projectType) => projectType.aliases[0])
                 .join(", ")}...`,
@@ -131,7 +138,7 @@ module.exports = class extends Generator {
         if (projectType) {
             // const projectTypeId = `project-${projectType}`;
 
-            const projectGenerator = projectGenerators.find(
+            const projectGenerator = generators.find(
                 (generator) => generator.aliases.indexOf(projectType) !== -1,
             );
 
@@ -139,7 +146,7 @@ module.exports = class extends Generator {
                 this.projectConfig.type = projectGenerator.id;
             } else {
                 this.log(
-                    `Invalid project type: ${projectType}\nPossible types are: ${projectGenerators
+                    `Invalid project type: ${projectType}\nPossible types are: ${generators
                         .map((generator) => generator.aliases.join(", "))
                         .join(", ")}`,
                 );
@@ -149,7 +156,7 @@ module.exports = class extends Generator {
         } else {
             const choices = [];
 
-            for (const generator of projectGenerators) {
+            for (const generator of generators) {
                 const { name, id } = generator;
 
                 if (name) {
@@ -168,7 +175,7 @@ module.exports = class extends Generator {
             ).type;
         }
 
-        this.projectGenerator = projectGenerators.find(
+        this.projectGenerator = generators.find(
             (generator) => generator.id === this.projectConfig.type,
         );
 

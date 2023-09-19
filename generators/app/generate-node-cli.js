@@ -2,9 +2,9 @@ const chalk = require("chalk");
 const prompts = require("./prompts");
 
 module.exports = {
-    id: "project-cli",
+    id: "project-node-cli",
     aliases: ["cli", "node-cli"],
-    name: "Node.js (CLI)",
+    name: "Node (CLI)",
 
     /**
      * @param {import('yeoman-generator')} generator

@@ -2,9 +2,9 @@ const chalk = require("chalk");
 const prompts = require("./prompts");
 
 module.exports = {
-    id: "project-js",
-    aliases: ["javascript", "js", "node-js"],
-    name: "Node.js (JavaScript)",
+    id: "project-ts",
+    aliases: ["typescript", "ts", "node-ts"],
+    name: "Node (TypeScript)",
 
     /**
      * @param {import('yeoman-generator')} generator
@@ -106,10 +106,14 @@ module.exports = {
             generator.destinationPath("LICENSE"),
         );
 
-        generator.fs.copyTpl(
-            generator.templatePath("jsconfig.json.ejs"),
-            generator.destinationPath("jsconfig.json"),
-            projectConfig,
+        generator.fs.copy(
+            generator.templatePath("tsconfig.eslint.json"),
+            generator.destinationPath("tsconfig.eslint.json"),
+        );
+
+        generator.fs.copy(
+            generator.templatePath("tsconfig.json"),
+            generator.destinationPath("tsconfig.json"),
         );
 
         generator.fs.copyTpl(

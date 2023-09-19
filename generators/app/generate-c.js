@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const prompts = require("./prompts");
 
 module.exports = {
-    id: "project-clang",
+    id: "project-c",
     aliases: ["c", "clang"],
     name: "C",
 
@@ -106,34 +106,6 @@ module.exports = {
      * @param {Object} projectConfig
      */
     endMessage: (generator, projectConfig) => {
-        // generator.log();
-        // generator.log(
-        //     `  ${chalk.cyan(`${projectConfig.pkgRunCommand} start`)}`,
-        // );
-        // generator.log('  Will start "nodemon" on the main entry point');
-        // generator.log();
-
-        // generator.log();
-        // generator.log(`  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint`)}`);
-        // generator.log("  Will lint your code and report any violations");
-        // generator.log();
-
-        // generator.log();
-        // generator.log(
-        //     `  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint:fix`)}`,
-        // );
-        // generator.log(
-        //     "  Will lint your code and automatically fix any violations it can",
-        // );
-        // generator.log();
-
-        // generator.log();
-        // generator.log(
-        //     `  ${chalk.cyan(`${projectConfig.pkgRunCommand} pretty:fix`)}`,
-        // );
-        // generator.log("  Will format your code according to Prettier's rules");
-        // generator.log();
-
         generator.log();
         generator.log(
             `  ${chalk.cyan(`${projectConfig.pkgRunCommand} commit`)}`,

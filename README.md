@@ -45,6 +45,10 @@ npm install -g yo generator-norgate-av
 # or
 
 yarn global add yo generator-norgate-av
+
+# or
+
+pnpm add -g yo generator-norgate-av
 ```
 
 ## Usage :rocket:
@@ -72,23 +76,30 @@ The generator will
 
 ```bash
 Usage:
-  yo norgate-av [<destination>] [options]
+  yo norgate-av:app [<destination>] [options]
 
-Argument (optional):
-  The destination to create the project in, absolute or relative to the current working
-  directory. Use '.' for the current folder.
-  If not provided, defaults to a folder in the current working directory with the project
-  display name.
+Generates project boilerplates of various types ready for development.
 
 Options:
-  -h,   --help                          # Print the generator's options and usage
-  -y,   --yes                           # Quick mode, skip all optional prompts and use defaults
-  -o,   --open                          # Open the generated project in Visual Studio Code
-  -t,   --projectType                   # ts, js...
-        --projectId                     # Id of the project
-        --projectDescription            # Description of the project
-  -p,   --pkg                           # "yarn" or "npm"
-  -g,   --git                           # Initialize a git repo
+  -h,   --help                # Print the generator's options and usage
+        --skip-cache          # Do not remember prompt answers                                Default: false
+        --skip-install        # Do not automatically install dependencies                     Default: false
+        --force-install       # Fail on install dependencies error                            Default: false
+        --ask-answered        # Show prompts for already configured options                   Default: false
+  -y,   --yes                 # Quick mode, skip all optional prompts and use defaults
+  -o,   --open                # Open the generated project in Visual Studio Code
+  -t,   --projectType         # crestron-simpl, typescript, javascript, cli, html, python...
+  -n,   --projectDisplayName  # Display name of the project
+        --projectId           # Id of the project
+        --projectDescription  # Description of the project
+  -p,   --pkg                 # Package manager to use. Possible values, "pnpm", "yarn" or "npm"
+  -g,   --git                 # Initialize a git repo
+
+Arguments:
+  destination  #
+    The folder to create the project in, absolute or relative to the current working directory.
+    Use '.' for the current folder. If not provided, defaults to a folder with the project display name.
+    Type: String  Required: false
 
 Example usages:
   yo norgate-av                         # Create an project in a folder with the projects's name.

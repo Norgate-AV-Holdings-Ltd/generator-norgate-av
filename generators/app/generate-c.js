@@ -44,6 +44,11 @@ module.exports = {
         );
 
         generator.fs.copy(
+            generator.templatePath("Makefile"),
+            generator.destinationPath("Makefile"),
+        );
+
+        generator.fs.copy(
             generator.templatePath("commitlintrc.json"),
             generator.destinationPath(".commitlintrc.json"),
         );

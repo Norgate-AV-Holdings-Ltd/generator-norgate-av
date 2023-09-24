@@ -186,27 +186,3 @@ exports.askForPackageManager = (generator, projectConfig) => {
             projectConfig.pkgRunCommand = pkgRunCommand[projectConfig.pkg];
         });
 };
-
-/**
- * @param {import('yeoman-generator')} generator
- * @param {Object} projectConfig
- */
-exports.askForCheckJavaScript = (generator, projectConfig) => {
-    projectConfig.checkJavaScript = false;
-
-    if (generator.options.skipPrompts) {
-        return Promise.resolve();
-    }
-
-    return generator
-        .prompt({
-            type: "confirm",
-            name: "checkJavaScript",
-            message: "Enable JavaScript type checking in 'jsconfig.json'?",
-            default: false,
-        })
-        .then((strictJavaScriptAnswer) => {
-            projectConfig.checkJavaScript =
-                strictJavaScriptAnswer.checkJavaScript;
-        });
-};

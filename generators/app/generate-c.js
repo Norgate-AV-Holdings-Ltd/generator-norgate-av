@@ -6,10 +6,6 @@ module.exports = {
     aliases: ["c", "clang"],
     name: "C",
 
-    /**
-     * @param {import('yeoman-generator')} generator
-     * @param {Object} projectConfig
-     */
     prompting: async (generator, projectConfig) => {
         await prompts.askForProjectDisplayName(generator, projectConfig);
         await prompts.askForProjectId(generator, projectConfig);
@@ -18,10 +14,6 @@ module.exports = {
         await prompts.askForPackageManager(generator, projectConfig);
     },
 
-    /**
-     * @param {import('yeoman-generator')} generator
-     * @param {Object} projectConfig
-     */
     writing: (generator, projectConfig) => {
         generator.fs.copy(
             generator.templatePath("github"),
@@ -89,6 +81,12 @@ module.exports = {
             generator.destinationPath(".editorconfig"),
         );
 
+        generator.fs.copyTpl(
+            generator.templatePath("nvmrc"),
+            generator.destinationPath(".nvmrc"),
+            projectConfig,
+        );
+
         if (projectConfig.git) {
             generator.fs.copy(
                 generator.templatePath("gitignore"),
@@ -126,10 +124,6 @@ module.exports = {
         projectConfig.installDependencies = true;
     },
 
-    /**
-     * @param {import('yeoman-generator')} generator
-     * @param {Object} projectConfig
-     */
     endMessage: (generator, projectConfig) => {
         generator.log();
         generator.log(

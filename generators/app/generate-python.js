@@ -6,10 +6,6 @@ module.exports = {
     aliases: ["python", "py"],
     name: "Python",
 
-    /**
-     * @param {import('yeoman-generator')} generator
-     * @param {Object} projectConfig
-     */
     prompting: async (generator, projectConfig) => {
         await prompts.askForProjectDisplayName(generator, projectConfig);
         await prompts.askForProjectId(generator, projectConfig);
@@ -17,10 +13,6 @@ module.exports = {
         await prompts.askForGit(generator, projectConfig);
     },
 
-    /**
-     * @param {import('yeoman-generator')} generator
-     * @param {Object} projectConfig
-     */
     writing: (generator, projectConfig) => {
         generator.fs.copy(
             generator.templatePath("github"),
@@ -84,10 +76,6 @@ module.exports = {
         projectConfig.installDependencies = false;
     },
 
-    /**
-     * @param {import('yeoman-generator')} generator
-     * @param {Object} projectConfig
-     */
     endMessage: (generator, projectConfig) => {
         generator.log("We suggest that you begin by typing:");
         generator.log();

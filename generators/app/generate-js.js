@@ -131,24 +131,8 @@ module.exports = {
 
     endMessage: (generator, projectConfig) => {
         generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} start`)}`,
-        );
+        generator.log(`  ${chalk.cyan(`${projectConfig.pkgRunCommand} dev`)}`);
         generator.log('  Will start "nodemon" on the main entry point');
-        generator.log();
-
-        generator.log();
-        generator.log(`  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint`)}`);
-        generator.log("  Will lint your code and report any violations");
-        generator.log();
-
-        generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint:fix`)}`,
-        );
-        generator.log(
-            "  Will lint your code and automatically fix any violations it can",
-        );
         generator.log();
 
         generator.log();

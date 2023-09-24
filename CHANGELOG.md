@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.4...v1.0.5) (2023-09-24)
+
+
+### Bug Fixes
+
+* insert dash for ejs template ([5110b4c](https://github.com/Norgate-AV/generator-norgate-av/commit/5110b4ccd175ed9c3bfd346f42597cbdcc5792eb))
+
 ## [1.0.4](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.3...v1.0.4) (2023-09-24)
 
 

@@ -14,7 +14,19 @@ module.exports.getDependencies = async () => {
     return versions;
 };
 
-module.exports.getNodeVersion = async () => {
+module.exports.getDevDependencies = async () => {
+    const versions = JSON.parse(
+        (
+            await fs.promises.readFile(
+                path.join(__dirname, "dependencies", "package.json"),
+            )
+        ).toString(),
+    ).devDependencies;
+
+    return versions;
+};
+
+module.exports.getNodeEngine = async () => {
     const node = JSON.parse(
         (
             await fs.promises.readFile(

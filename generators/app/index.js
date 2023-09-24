@@ -119,6 +119,19 @@ module.exports = class extends Generator {
         const dependencies = await env.getDependencies();
         this.projectConfig.dependencies = dependencies;
 
+        const devDependencies = await env.getDevDependencies();
+        this.projectConfig.devDependencies = devDependencies;
+
+        this.projectConfig.devDep = (name) => {
+            const version = devDependencies[name];
+
+            if (typeof version === "undefined") {
+                throw new Error(`Module ${name} is not listed in env.js`);
+            }
+
+            return `${JSON.stringify(name)}: ${JSON.stringify(version)}`;
+        };
+
         this.projectConfig.dep = (name) => {
             const version = dependencies[name];
 
@@ -129,7 +142,7 @@ module.exports = class extends Generator {
             return `${JSON.stringify(name)}: ${JSON.stringify(version)}`;
         };
 
-        const node = await env.getNodeVersion();
+        const node = await env.getNodeEngine();
         this.projectConfig.node = node;
     }
 

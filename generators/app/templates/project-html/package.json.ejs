@@ -15,13 +15,14 @@
         "node": ">=<%- node.split(".")[0] %>"
     },
     "scripts": {
-        "pretty:fix": "prettier --write .",
         "commit": "git-cz",
+        "pretty:fix": "prettier --write .",
         "prepare": "husky install"
     },
     "devDependencies": {
         <%- devDep("@commitlint/cli") %>,
         <%- devDep("@commitlint/config-conventional") %>,
+        <%- devDep("commitizen") %>,
         <%- devDep("cz-conventional-changelog") %>,
         <%- devDep("husky") %>,
         <%- devDep("lint-staged") %>,

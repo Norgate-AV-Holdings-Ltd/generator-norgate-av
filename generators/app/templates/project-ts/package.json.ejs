@@ -4,43 +4,51 @@
     "description": <%- JSON.stringify(description) %>,
     "version": "0.0.0-development",
     "license": "MIT",
-    "main": "./src/index.ts",
+    "main": "./dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "bugs": {
+        "url": ""
+    },
     "engines": {
-        "node": ">=14"
+        "node": ">=<% node.split(".")[0] %>"
     },
     "scripts": {
-        "start": "nodemon",
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix .",
-        "pretty:fix": "prettier --write .",
         "commit": "git-cz",
+        "clean": "rimraf dist",
+        "lint": "tsc --noEmit",
+        "pretty:fix": "prettier --write .",
+        "prebuild": "<%- pkg %> clean",
+        "build": "tsup",
+        "prestart": "<%- pkg %> lint && <%- pkg %> build",
+        "start": "cross-env NODE_ENV=production node dist/index.js",
+        "dev": "nodemon --exec ts-node src/index.ts",
         "prepare": "husky install"
     },
     "devDependencies": {
-        <%- dep("@commitlint/cli") %>,
-        <%- dep("@commitlint/config-conventional") %>,
-        <%- dep("@types/eslint") %>,
-        <%- dep("@types/eslint-config-prettier") %>,
-        <%- dep("@types/eslint-plugin-prettier") %>,
-        <%- dep("@types/node") %>,
-        <%- dep("@types/nodemon") %>,
-        <%- dep("@types/prettier") %>,
-        <%- dep("@typescript-eslint/eslint-plugin") %>,
-        <%- dep("@typescript-eslint/parser") %>,
-        <%- dep("cz-conventional-changelog") %>,
-        <%- dep("eslint") %>,
-        <%- dep("eslint-config-airbnb-base") %>,
-        <%- dep("eslint-config-prettier") %>,
-        <%- dep("eslint-plugin-import") %>,
-        <%- dep("eslint-plugin-prettier") %>,
-        <%- dep("husky") %>,
-        <%- dep("lint-staged") %>,
-        <%- dep("nodemon") %>,
-        <%- dep("prettier") %>,
-        <%- dep("tslib") %>,
-        <%- dep("ts-node") %>,
-        <%- dep("ts-node-dev") %>,
-        <%- dep("typescript") %>
+        <%- devDep("@commitlint/cli") %>,
+        <%- devDep("@commitlint/config-conventional") %>,
+        <%- devDep("@types/config") %>,
+        <%- devDep("@types/node") %>,
+        <%- devDep("@types/nodemon") %>,
+        <%- devDep("commitizen") %>,
+        <%- devDep("cross-env") %>,
+        <%- devDep("cz-conventional-changelog") %>,
+        <%- devDep("husky") %>",
+        <%- devDep("lint-staged") %>,
+        <%- devDep("nodemon") %>,
+        <%- devDep("prettier") %>,
+        <%- devDep("rimraf") %>,
+        <%- devDep("terser") %>,
+        <%- devDep("ts-node") %>,
+        <%- devDep("tsup") %>",
+        <%- devDep("typescript") %>
     },
-    "dependencies": {}
+    "dependencies": {
+        <%- dep("config") %>,
+        <%- dep("dotenv") %>,
+        <%- dep("envalid") %>
+    }
 }

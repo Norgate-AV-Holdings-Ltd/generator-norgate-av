@@ -15,7 +15,6 @@ module.exports = {
         await prompts.askForProjectId(generator, projectConfig);
         await prompts.askForProjectDescription(generator, projectConfig);
         await prompts.askForGit(generator, projectConfig);
-        await prompts.askForPackageManager(generator, projectConfig);
     },
 
     /**
@@ -29,11 +28,6 @@ module.exports = {
         );
 
         generator.fs.copy(
-            generator.templatePath("husky"),
-            generator.destinationPath(".husky"),
-        );
-
-        generator.fs.copy(
             generator.templatePath("vscode"),
             generator.destinationPath(".vscode"),
         );
@@ -41,26 +35,6 @@ module.exports = {
         generator.fs.copy(
             generator.templatePath("src"),
             generator.destinationPath("src"),
-        );
-
-        generator.fs.copy(
-            generator.templatePath("commitlintrc.json"),
-            generator.destinationPath(".commitlintrc.json"),
-        );
-
-        generator.fs.copy(
-            generator.templatePath("lintstagedrc.json"),
-            generator.destinationPath(".lintstagedrc.json"),
-        );
-
-        generator.fs.copy(
-            generator.templatePath("prettierrc.json"),
-            generator.destinationPath(".prettierrc.json"),
-        );
-
-        generator.fs.copy(
-            generator.templatePath("prettierignore"),
-            generator.destinationPath(".prettierignore"),
         );
 
         generator.fs.copy(
@@ -72,11 +46,6 @@ module.exports = {
             generator.templatePath("CHANGELOG.md"),
             generator.destinationPath("CHANGELOG.md"),
             projectConfig,
-        );
-
-        generator.fs.copy(
-            generator.templatePath("czrc"),
-            generator.destinationPath(".czrc"),
         );
 
         generator.fs.copy(
@@ -107,18 +76,12 @@ module.exports = {
         );
 
         generator.fs.copyTpl(
-            generator.templatePath("package.json.ejs"),
-            generator.destinationPath("package.json"),
-            projectConfig,
-        );
-
-        generator.fs.copyTpl(
             generator.templatePath("README.md"),
             generator.destinationPath("README.md"),
             projectConfig,
         );
 
-        projectConfig.installDependencies = true;
+        projectConfig.installDependencies = false;
     },
 
     /**
@@ -126,43 +89,6 @@ module.exports = {
      * @param {Object} projectConfig
      */
     endMessage: (generator, projectConfig) => {
-        generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} start`)}`,
-        );
-        generator.log('  Will start "nodemon" on the main entry point');
-        generator.log();
-
-        generator.log();
-        generator.log(`  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint`)}`);
-        generator.log("  Will lint your code and report any violations");
-        generator.log();
-
-        generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} lint:fix`)}`,
-        );
-        generator.log(
-            "  Will lint your code and automatically fix any violations it can",
-        );
-        generator.log();
-
-        generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} pretty:fix`)}`,
-        );
-        generator.log("  Will format your code according to Prettier's rules");
-        generator.log();
-
-        generator.log();
-        generator.log(
-            `  ${chalk.cyan(`${projectConfig.pkgRunCommand} commit`)}`,
-        );
-        generator.log(
-            "  Will invoke the Commitizen CLI to guide you through creating a properly formatted commit message",
-        );
-        generator.log();
-
         generator.log("We suggest that you begin by typing:");
         generator.log();
         generator.log(`  ${chalk.cyan("cd")} ${projectConfig.name}`);

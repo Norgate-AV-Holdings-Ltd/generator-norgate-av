@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.3...v1.0.4) (2023-09-24)
+
+
+### Bug Fixes
+
+* **project-ts:** remove trailing quotes in ejs file ([9a278a5](https://github.com/Norgate-AV/generator-norgate-av/commit/9a278a5d38e8bfeb1766ccf04fcec363c9ad4ffe))
+
 ## [1.0.3](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.2...v1.0.3) (2023-09-24)
 
 ## [1.0.2](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.1...v1.0.2) (2023-09-24)

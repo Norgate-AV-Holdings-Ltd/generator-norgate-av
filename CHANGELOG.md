@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.2](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.1...v1.0.2) (2023-09-24)
+
+
+### Bug Fixes
+
+* **templates:** add missing .changelogrc.json file ([7c11bbe](https://github.com/Norgate-AV/generator-norgate-av/commit/7c11bbe8cfafe0230f9b1c01441c96427f0a977d)), closes [#95](https://github.com/Norgate-AV/generator-norgate-av/issues/95) [#96](https://github.com/Norgate-AV/generator-norgate-av/issues/96) [#97](https://github.com/Norgate-AV/generator-norgate-av/issues/97) [#98](https://github.com/Norgate-AV/generator-norgate-av/issues/98)
+* **c-template:** copy Makefile into project ([b2ea949](https://github.com/Norgate-AV/generator-norgate-av/commit/b2ea949102dec9443c70d460d40615746aafebee)), closes [#100](https://github.com/Norgate-AV/generator-norgate-av/issues/100)
+* **python-template:** remove nodejs related files ([0d055dd](https://github.com/Norgate-AV/generator-norgate-av/commit/0d055ddbaf965d6d867590b637f1bb32351f2f3f)), closes [#99](https://github.com/Norgate-AV/generator-norgate-av/issues/99)
+
 ## [1.0.1](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.0...v1.0.1) (2023-09-19)
 
 

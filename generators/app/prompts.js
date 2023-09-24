@@ -1,10 +1,6 @@
 const path = require("path");
 const validator = require("./validator");
 
-/**
- * @param {import('yeoman-generator')} generator
- * @param {Object} projectConfig
- */
 exports.askForProjectDisplayName = (generator, projectConfig) => {
     const { projectDisplayName } = generator.options;
 
@@ -34,11 +30,6 @@ exports.askForProjectDisplayName = (generator, projectConfig) => {
         });
 };
 
-/**
- * Ask for project id ("name" in package.json)
- * @param {import('yeoman-generator')} generator
- * @param {Object} projectConfig
- */
 exports.askForProjectId = (generator, projectConfig) => {
     const projectName = generator.options.projectId;
 
@@ -73,11 +64,6 @@ exports.askForProjectId = (generator, projectConfig) => {
         });
 };
 
-/**
- * Ask for project description
- * @param {import('yeoman-generator')} generator
- * @param {Object} projectConfig
- */
 exports.askForProjectDescription = (generator, projectConfig) => {
     const { projectDescription } = generator.options;
 
@@ -103,10 +89,6 @@ exports.askForProjectDescription = (generator, projectConfig) => {
         });
 };
 
-/**
- * @param {import('yeoman-generator')} generator
- * @param {Object} projectConfig
- */
 exports.askForGit = (generator, projectConfig) => {
     const { git } = generator.options;
 
@@ -132,10 +114,6 @@ exports.askForGit = (generator, projectConfig) => {
         });
 };
 
-/**
- * @param {import('yeoman-generator')} generator
- * @param {Object} projectConfig
- */
 exports.askForPackageManager = (generator, projectConfig) => {
     const defaultPkg = "pnpm";
 

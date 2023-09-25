@@ -1,9 +1,9 @@
-const Generator = require("yeoman-generator");
-const chalk = require("chalk");
-const yosay = require("yosay");
+import Generator, { GeneratorOptions } from "yeoman-generator";
+import chalk from "chalk";
+import yosay from "yosay";
+import path from "path";
+import which from "which";
 
-const path = require("path");
-const which = require("which");
 const env = require("./env");
 
 const simpl = require("./generate-simpl");
@@ -16,8 +16,12 @@ const c = require("./generate-c");
 
 const generators = [simpl, ts, js, cli, html, python, c];
 
-module.exports = class extends Generator {
-    constructor(args, opts) {
+export default class extends Generator {
+    public projectConfig: any;
+    public projectGenerator: any;
+    public abort: boolean;
+
+    constructor(args: any, opts: GeneratorOptions) {
         super(args, opts);
 
         this.appname = "Norgate AV Project Generator";
@@ -122,7 +126,7 @@ module.exports = class extends Generator {
         const devDependencies = await env.getDevDependencies();
         this.projectConfig.devDependencies = devDependencies;
 
-        this.projectConfig.devDep = (name) => {
+        this.projectConfig.devDep = (name: string) => {
             const version = devDependencies[name];
 
             if (typeof version === "undefined") {
@@ -132,7 +136,7 @@ module.exports = class extends Generator {
             return `${JSON.stringify(name)}: ${JSON.stringify(version)}`;
         };
 
-        this.projectConfig.dep = (name) => {
+        this.projectConfig.dep = (name: string) => {
             const version = dependencies[name];
 
             if (typeof version === "undefined") {
@@ -368,4 +372,4 @@ module.exports = class extends Generator {
             }
         }
     }
-};
+}

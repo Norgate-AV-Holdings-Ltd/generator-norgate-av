@@ -42,8 +42,8 @@
         "@semantic-release/git": "^10.0.1",
         "@types/node": "^20.6.5",
         "@types/which": "^3.0.0",
-        "@types/yeoman-generator": "^5.2.10",
-        "@types/yeoman-test": "^4.0.3",
+        "@types/yeoman-generator": "^5.2.12",
+        "@types/yeoman-test": "^4.0.4",
         "@types/yosay": "^2.0.1",
         "all-contributors-cli": "^6.20.0",
         "commitizen": "^4.3.0",
@@ -61,8 +61,8 @@
         "yeoman-test": "^7.4.0"
     },
     "dependencies": {
-        "chalk": "^4.1.2",
-        "which": "^2.0.2",
+        "chalk": "^5.3.0",
+        "which": "^4.0.0",
         "yeoman-generator": "^5.6.1",
         "yosay": "^2.0.2"
     }

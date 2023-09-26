@@ -1,6 +1,8 @@
 build/*
 dist/*
+generators/*
 node_modules/*
 .history/*
-generators/app/templates/*
+src/app/templates/*
 USAGE
+tsup.schema.json

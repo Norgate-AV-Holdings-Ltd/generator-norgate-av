@@ -1,0 +1,43 @@
+{
+    "name": <%- JSON.stringify(name) %>,
+    "displayName": <%- JSON.stringify(displayName) %>,
+    "description": <%- JSON.stringify(description) %>,
+    "version": "0.0.0-development",
+    "license": "MIT",
+    "main": "./src/index.js",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "bugs": {
+        "url": ""
+    },
+    "engines": {
+        "node": ">=<%- node.split(".")[0] %>"
+    },
+    "scripts": {
+        "commit": "git-cz",
+        "pretty:fix": "prettier --write .",
+        "start": "nodemon src/index.js",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        <%- devDep("@commitlint/cli") %>,
+        <%- devDep("@commitlint/config-conventional") %>,
+        <%- devDep("@types/config") %>,
+        <%- devDep("@types/node") %>,
+        <%- devDep("@types/nodemon") %>,
+        <%- devDep("commitizen") %>,
+        <%- devDep("cross-env") %>,
+        <%- devDep("cz-conventional-changelog") %>,
+        <%- devDep("husky") %>,
+        <%- devDep("lint-staged") %>,
+        <%- devDep("nodemon") %>,
+        <%- devDep("prettier") %>
+    },
+    "dependencies": {
+        <%- dep("config") %>,
+        <%- dep("dotenv") %>,
+        <%- dep("envalid") %>
+    }
+}

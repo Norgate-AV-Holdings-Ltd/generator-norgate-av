@@ -13,5 +13,6 @@
         "moduleResolution": "node16",
         "noUncheckedIndexedAccess": true
     },
-    "include": ["generators/app/*.ts"]
+    "include": ["src"],
+    "exclude": ["**/templates"]
 }

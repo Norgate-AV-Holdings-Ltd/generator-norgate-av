@@ -1,0 +1,31 @@
+{
+    "name": <%- JSON.stringify(name) %>,
+    "displayName": <%- JSON.stringify(displayName) %>,
+    "description": <%- JSON.stringify(description) %>,
+    "version": "0.0.0-development",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "bugs": {
+        "url": ""
+    },
+    "engines": {
+        "node": ">=<%- node.split(".")[0] %>"
+    },
+    "scripts": {
+        "pretty:fix": "prettier --write .",
+        "commit": "git-cz",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        <%- devDep("@commitlint/cli") %>,
+        <%- devDep("@commitlint/config-conventional") %>,
+        <%- devDep("commitizen") %>,
+        <%- devDep("cz-conventional-changelog") %>,
+        <%- devDep("husky") %>,
+        <%- devDep("lint-staged") %>,
+        <%- devDep("prettier") %>
+    }
+}

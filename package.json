@@ -10,7 +10,7 @@
         "boilerplate"
     ],
     "license": "MIT",
-    "main": "generators/app/index.js",
+    "main": "dist/app/index.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/Norgate-AV/generator-norgate-av.git"
@@ -19,7 +19,7 @@
         "url": "https://github.com/Norgate-AV/generator-norgate-av/issues"
     },
     "files": [
-        "generators"
+        "dist"
     ],
     "engines": {
         "node": ">=16"
@@ -27,11 +27,11 @@
     "scripts": {
         "commit": "git-cz",
         "lint": "tsc --noEmit",
-        "clean": "rimraf generators",
+        "clean": "rimraf dist",
         "prebuild": "pnpm clean",
         "build": "tsup",
         "postbuild": "pnpm copy:templates",
-        "copy:templates": "ncp src/app/templates generators/app/templates && ncp src/app/dependencies generators/app/dependencies",
+        "copy:templates": "ncp src/app/templates dist/app/templates && ncp src/app/dependencies dist/app/dependencies",
         "test": "vitest --no-threads",
         "pretty:fix": "prettier --write .",
         "doctoc": "doctoc --title '## Contents 📖' README.md",

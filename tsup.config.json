@@ -1,6 +1,6 @@
 {
     "entry": ["src/app/index.ts"],
-    "outDir": "generators/app",
+    "outDir": "dist/app",
     "minify": "terser",
     "minifyWhitespace": true,
     "minifyIdentifiers": true,

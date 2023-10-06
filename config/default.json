@@ -1,0 +1,12 @@
+{
+    "templates": {
+        "clang": {
+            "files": [
+                {
+                    "from": "main.c",
+                    "to": "main.c"
+                }
+            ]
+        }
+    }
+}

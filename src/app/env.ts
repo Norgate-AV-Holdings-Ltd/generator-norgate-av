@@ -3,15 +3,15 @@ import path from "path";
 import which from "which";
 
 interface CommonPackageJson {
-    engines: Record<string, string>;
+    engines: {
+        node: string;
+    };
     devDependencies: Record<string, string>;
     dependencies: Record<string, string>;
 }
 
 async function getCommonPackageJson(): Promise<CommonPackageJson> {
-    const file = await fs.promises.readFile(
-        path.join(__dirname, "dependencies/package.json"),
-    );
+    const file = await fs.promises.readFile(path.join(__dirname, "dependencies/package.json"));
 
     return JSON.parse(file.toString());
 }
@@ -24,7 +24,7 @@ export async function getDevDependencies(): Promise<Record<string, string>> {
     return (await getCommonPackageJson()).devDependencies;
 }
 
-export async function getNodeEngine(): Promise<string | undefined> {
+export async function getNodeEngine(): Promise<string> {
     return (await getCommonPackageJson()).engines.node;
 }
 

@@ -1,10 +1,9 @@
+import Generator from "yeoman-generator";
 import path from "path";
 import * as validator from "./validator";
+import Project from "./project.options";
 
-export async function askForProjectDisplayName(
-    generator: any,
-    projectConfig: any,
-): Promise<void> {
+export async function askForProjectDisplayName(generator: any, projectConfig: any): Promise<void> {
     const { projectDisplayName } = generator.options;
 
     if (projectDisplayName) {
@@ -33,10 +32,7 @@ export async function askForProjectDisplayName(
         });
 }
 
-export async function askForProjectId(
-    generator: any,
-    projectConfig: any,
-): Promise<void> {
+export async function askForProjectId(generator: any, projectConfig: any): Promise<void> {
     const projectName = generator.options.projectId;
 
     if (projectName) {
@@ -47,9 +43,7 @@ export async function askForProjectId(
     let def = projectConfig.name;
 
     if (!def && projectConfig.displayName) {
-        def = projectConfig.displayName
-            .toLowerCase()
-            .replace(/[^a-z0-9]/g, "-");
+        def = projectConfig.displayName.toLowerCase().replace(/[^a-z0-9]/g, "-");
     }
 
     if (def && generator.options.skipPrompts) {
@@ -70,10 +64,49 @@ export async function askForProjectId(
         });
 }
 
-export async function askForProjectDescription(
-    generator: any,
-    projectConfig: any,
-): Promise<void> {
+export class Question implements TemplateQuestion {
+    private readonly generator: Generator;
+    private readonly project: Project;
+
+    constructor(generator: any, project: any) {
+        this.generator = generator;
+        this.project = project;
+    }
+
+    public async prompt(): Promise<void> {
+        const projectName = this.generator.options.projectId;
+
+        if (projectName) {
+            this.project.name = projectName;
+            return Promise.resolve();
+        }
+
+        let def = this.project.name;
+
+        if (!def && this.project.displayName) {
+            def = this.project.displayName.toLowerCase().replace(/[^a-z0-9]/g, "-");
+        }
+
+        if (def && this.generator.options.skipPrompts) {
+            this.project.name = def;
+            return Promise.resolve();
+        }
+
+        return this.generator
+            .prompt({
+                type: "input",
+                name: "name",
+                message: "What's the identifier of your project?",
+                default: def || "",
+                validate: validator.validateProjectId,
+            })
+            .then((answer: any) => {
+                this.project.name = answer.name;
+            });
+    }
+}
+
+export async function askForProjectDescription(generator: any, projectConfig: any): Promise<void> {
     const { projectDescription } = generator.options;
 
     if (projectDescription) {
@@ -98,10 +131,7 @@ export async function askForProjectDescription(
         });
 }
 
-export async function askForGit(
-    generator: any,
-    projectConfig: any,
-): Promise<void> {
+export async function askForGit(generator: any, projectConfig: any): Promise<void> {
     const { git } = generator.options;
 
     if (typeof git === "boolean") {

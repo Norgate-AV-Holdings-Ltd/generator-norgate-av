@@ -93,7 +93,6 @@ export default class extends Generator<GeneratorOptions> {
         try {
             this.template = TemplateFactory.createTemplate(this.project.type, {
                 generator: this,
-                options: this.options,
             });
 
             await this.template.prompting();
@@ -202,23 +201,23 @@ export default class extends Generator<GeneratorOptions> {
         this.log();
 
         if (!this.options.open) {
-            // const choices = [];
-            // if (codeLocation) {
-            //     choices.push({
-            //         name: "Open with `code`",
-            //         value: codeLocation,
-            //     });
-            // }
-            // choices.push({ name: "Skip", value: "skip" });
-            // const answer = await this.prompt({
-            //     type: "list",
-            //     name: "openWith",
-            //     message: "Do you want to open the new folder with Visual Studio Code?",
-            //     choices,
-            // });
-            // if (answer && answer.openWith && answer.openWith !== "skip") {
-            //     this.spawnCommand(answer.openWith, [this.destinationPath()]);
-            // }
+            const choices = [];
+            if (code) {
+                choices.push({
+                    name: "Open with `code`",
+                    value: code,
+                });
+            }
+            choices.push({ name: "Skip", value: "skip" });
+            const answer = await this.prompt({
+                type: "list",
+                name: "openWith",
+                message: "Do you want to open the new folder with Visual Studio Code?",
+                choices,
+            });
+            if (answer && answer.openWith && answer.openWith !== "skip") {
+                this.spawnCommand(answer.openWith, [this.destinationPath()]);
+            }
             return;
         }
 
@@ -236,4 +235,28 @@ export default class extends Generator<GeneratorOptions> {
         this.log(`Opening ${chalk.green(this.destinationPath())} in Visual Studio Code...`);
         await this.spawnCommand(code, [this.destinationPath()]);
     }
+}
+
+class CodeHelper {
+    public static async getPath(): Promise<string | Error> {
+        const code = await which("code").catch(() => undefined);
+
+        if (!code) {
+            throw new Error(`${chalk.cyan("`code`")} command not found.`);
+        }
+
+        return code;
+    }
+
+    // public static async open(path: string): Promise<void> {
+    //     const code = await which("code").catch(() => undefined);
+
+    //     if (!code) {
+    //         this.log(`${chalk.cyan("`code`")} command not found.`);
+    //         return;
+    //     }
+
+    //     this.log(`Opening ${chalk.green(path)} in Visual Studio Code...`);
+    //     await this.spawnCommand(code, [path]);
+    // }
 }

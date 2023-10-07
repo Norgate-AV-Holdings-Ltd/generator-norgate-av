@@ -15,6 +15,11 @@ class TemplateFactory {
 
         if (!template) {
             throw new Error(`No template found with id ${id}`);
+            // this.log(
+            //     `Invalid project type: ${type}\nPossible types are: ${this.templateChoices
+            //         .map((template) => template.aliases.join(", "))
+            //         .join(", ")}`,
+            // );
         }
 
         return new template(generator, options);

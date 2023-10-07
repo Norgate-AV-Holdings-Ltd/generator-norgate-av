@@ -37,10 +37,38 @@ class ClangTemplate implements Template {
         // await prompts.askForProjectDescription(generator, projectConfig);
         // await prompts.askForGit(generator, projectConfig);
         // await prompts.askForPackageManager(generator, projectConfig);
-        for (const question of this.questions) {
-            await question.prompt(this.generator, this.project);
-        }
+        // for (const question of this.questions) {
+        //     await question.prompt(this.generator, this.project);
+        // }
+        // await this.askForProjectDisplayName();
+        await this.promptForProjectId();
     }
+
+    private async promptForProjectId(): Promise<void> {
+        if (this.project.id) {
+            return;
+        }
+
+        const { id } = await this.generator.prompt({
+            type: "input",
+            name: "id",
+            message: "Project ID",
+            default: this.project.id,
+        });
+
+        this.project.id = id;
+    }
+
+    // private async askForProjectDisplayName(): Promise<void> {
+    //     const { displayName } = await this.generator.prompt({
+    //         type: "input",
+    //         name: "displayName",
+    //         message: "Project display name",
+    //         default: this.project.displayName,
+    //     });
+
+    //     this.project.displayName = displayName;
+    // }
 
     public async writing(): Promise<void> {
         for (const path of this.paths) {

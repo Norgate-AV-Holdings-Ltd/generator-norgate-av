@@ -17,14 +17,11 @@ class ClangTemplate implements Template {
     public static readonly name: string = "C";
 
     private readonly generator: Generator;
-    private readonly project: Project;
     private readonly paths: PathMap[] = config.get<PathMap[]>("templates.clang.paths");
-
     private readonly questions: any[] = [];
 
-    constructor(generator: Generator, project: Project) {
+    constructor(generator: Generator) {
         this.generator = generator;
-        this.project = project;
     }
 
     public getName(): string {

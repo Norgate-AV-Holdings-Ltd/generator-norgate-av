@@ -3,6 +3,17 @@ import TemplateFactory from "../template.factory";
 
 const options: CliOption[] = [
     {
+        name: "type",
+        config: {
+            type: String,
+            alias: "t",
+            description: `${TemplateFactory.getAvailableTemplates()
+                .slice(0, 6)
+                .map((template) => template.aliases[0])
+                .join(", ")}...`,
+        },
+    },
+    {
         name: "description",
         config: {
             type: String,
@@ -28,17 +39,6 @@ const options: CliOption[] = [
         },
     },
     {
-        name: "type",
-        config: {
-            type: String,
-            alias: "t",
-            description: `${TemplateFactory.getAvailableTemplates()
-                .slice(0, 6)
-                .map((template) => template.aliases[0])
-                .join(", ")}...`,
-        },
-    },
-    {
         name: "id",
         config: {
             type: String,
@@ -60,6 +60,7 @@ const options: CliOption[] = [
             type: Boolean,
             alias: "g",
             description: "Initialize a git repo",
+            default: true,
         },
     },
 ];

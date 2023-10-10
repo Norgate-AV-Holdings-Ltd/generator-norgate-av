@@ -1,24 +1,21 @@
-import Generator, { GeneratorOptions as BaseGeneratorOptions } from "yeoman-generator";
+import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
 import path from "path";
 import which from "which";
+import { AppOptions } from "./app.options";
 import TemplateFactory from "./template.factory";
 import Template, { TemplateId } from "./template.interface";
-import options from "./cli/cli.options";
-import args from "./cli/cli.arguments";
-import Project from "./project.options";
+import cliOptions from "./cli/cli.options";
+import cliArguments from "./cli/cli.arguments";
 import { GitHelper } from "./GitHelper";
 
-interface GeneratorOptions extends BaseGeneratorOptions {}
-
-export default class extends Generator<GeneratorOptions> {
-    private project: Project = new Project();
+class AppGenerator extends Generator<AppOptions> {
     private template: Template | undefined = undefined;
     private readonly templateChoices: TemplateId[] = TemplateFactory.getAvailableTemplates();
     private abort: boolean = false;
 
-    constructor(args: string | string[], opts: GeneratorOptions) {
+    constructor(args: string | string[], opts: AppOptions) {
         super(args, opts);
 
         this._initializeCliArguments();
@@ -29,13 +26,13 @@ export default class extends Generator<GeneratorOptions> {
     }
 
     private _initializeCliArguments(): void {
-        for (const { name, config } of args) {
+        for (const { name, config } of cliArguments) {
             this.argument(name, config);
         }
     }
 
     private _initializeCliOptions(): void {
-        for (const { name, config } of options) {
+        for (const { name, config } of cliOptions) {
             this.option(name, config);
         }
     }
@@ -53,47 +50,30 @@ export default class extends Generator<GeneratorOptions> {
         this.destinationRoot(folderPath);
     }
 
+    private async _promptForProjectType(choices: TemplateId[]) {
+        const answer = await this.prompt({
+            type: "list",
+            name: "type",
+            message: "What type of project do you want to create?",
+            pageSize: choices.length,
+            choices: choices.map((type) => {
+                return {
+                    name: type.name,
+                    value: type.id,
+                };
+            }),
+        });
+
+        return answer.type;
+    }
+
     public async prompting() {
         const { type } = this.options;
 
-        if (!type) {
-            const answer = await this.prompt({
-                type: "list",
-                name: "type",
-                message: "What type of project do you want to create?",
-                pageSize: this.templateChoices.length,
-                choices: this.templateChoices.map((template) => {
-                    return {
-                        name: template.name,
-                        value: template.id,
-                    };
-                }),
-            });
-
-            this.project.type = answer.type;
-        } else {
-            const template = this.templateChoices.find(
-                (template) => template.aliases.indexOf(type) !== -1,
-            );
-
-            if (template) {
-                this.project.type = template.id;
-            } else {
-                this.log(
-                    `Invalid project type: ${type}\nPossible types are: ${this.templateChoices
-                        .map((template) => template.aliases.join(", "))
-                        .join(", ")}`,
-                );
-
-                this.abort = true;
-                return;
-            }
-        }
+        this.project.type = type || (await this._promptForProjectType(this.templateChoices));
 
         try {
-            this.template = TemplateFactory.createTemplate(this.project.type, {
-                generator: this,
-            });
+            this.template = TemplateFactory.createTemplate(this);
 
             await this.template.prompting();
         } catch (error) {
@@ -200,28 +180,28 @@ export default class extends Generator<GeneratorOptions> {
         this.log(chalk.magenta("Happy Hacking! 😀"));
         this.log();
 
-        if (!this.options.open) {
-            const choices = [];
-            if (code) {
-                choices.push({
-                    name: "Open with `code`",
-                    value: code,
-                });
-            }
-            choices.push({ name: "Skip", value: "skip" });
-            const answer = await this.prompt({
-                type: "list",
-                name: "openWith",
-                message: "Do you want to open the new folder with Visual Studio Code?",
-                choices,
-            });
-            if (answer && answer.openWith && answer.openWith !== "skip") {
-                this.spawnCommand(answer.openWith, [this.destinationPath()]);
-            }
-            return;
+        if (this.options.open) {
+            this._openWithCode();
         }
 
-        this._openWithCode();
+        // const choices = [];
+        // if (code) {
+        //     choices.push({
+        //         name: "Open with `code`",
+        //         value: code,
+        //     });
+        // }
+        // choices.push({ name: "Skip", value: "skip" });
+        // const answer = await this.prompt({
+        //     type: "list",
+        //     name: "openWith",
+        //     message: "Do you want to open the new folder with Visual Studio Code?",
+        //     choices,
+        // });
+        // if (answer && answer.openWith && answer.openWith !== "skip") {
+        //     this.spawnCommand(answer.openWith, [this.destinationPath()]);
+        // }
+        // return;
     }
 
     private async _openWithCode() {
@@ -248,15 +228,17 @@ class CodeHelper {
         return code;
     }
 
-    // public static async open(path: string): Promise<void> {
-    //     const code = await which("code").catch(() => undefined);
+    public static async open(generator: any, path: string): Promise<void> {
+        const code = await which("code").catch(() => undefined);
 
-    //     if (!code) {
-    //         this.log(`${chalk.cyan("`code`")} command not found.`);
-    //         return;
-    //     }
+        if (!code) {
+            this.log(`${chalk.cyan("`code`")} command not found.`);
+            return;
+        }
 
-    //     this.log(`Opening ${chalk.green(path)} in Visual Studio Code...`);
-    //     await this.spawnCommand(code, [path]);
-    // }
+        this.log(`Opening ${chalk.green(path)} in Visual Studio Code...`);
+        await this.spawnCommand(code, [path]);
+    }
 }
+
+export default AppGenerator;

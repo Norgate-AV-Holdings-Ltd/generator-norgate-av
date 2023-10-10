@@ -1,28 +1,26 @@
-import Generator, { GeneratorOptions } from "yeoman-generator";
+import App from "./app";
 import Template, { TemplateId } from "./template.interface";
 import ClangTemplate from "./clang.template";
 
 class TemplateFactory {
     private static readonly templates = [ClangTemplate];
 
-    public static createTemplate(
-        id: string,
-        { generator, options }: { generator: Generator; options: GeneratorOptions },
-    ): Template {
+    public static createTemplate(generator: App) {
+        const { type } = generator.options;
+
         const template = this.templates.find((template) => {
-            return template.aliases.includes(id) || template.id === id;
+            return template.aliases.indexOf(type) || template.id === type;
         });
 
         if (!template) {
-            throw new Error(`No template found with id ${id}`);
-            // this.log(
-            //     `Invalid project type: ${type}\nPossible types are: ${this.templateChoices
-            //         .map((template) => template.aliases.join(", "))
-            //         .join(", ")}`,
-            // );
+            throw new Error(
+                `Invalid project type: ${type}\nPossible types are: ${this.templates
+                    .map((template) => template.aliases.join(", "))
+                    .join(", ")}`,
+            );
         }
 
-        return new template(generator, options);
+        return new template(generator);
     }
 
     public static getAvailableTemplates(): TemplateId[] {

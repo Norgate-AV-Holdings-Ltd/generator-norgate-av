@@ -3,6 +3,6 @@ dist/*
 generators/*
 node_modules/*
 .history/*
-src/app/templates/*
+src/app/templates-files/*
 USAGE
 tsup.schema.json

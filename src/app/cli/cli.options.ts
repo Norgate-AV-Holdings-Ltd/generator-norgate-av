@@ -1,5 +1,5 @@
 import { CliOption } from "./cli.interface";
-import TemplateFactory from "../template.factory";
+import TemplateFactory from "../templates/TemplateFactory";
 
 const options: CliOption[] = [
     {
@@ -27,7 +27,8 @@ const options: CliOption[] = [
         config: {
             type: Boolean,
             alias: "y",
-            description: "Quick mode, skip all optional prompts and use defaults",
+            description:
+                "Quick mode, skip all optional prompts and use defaults",
         },
     },
     {
@@ -50,7 +51,8 @@ const options: CliOption[] = [
         config: {
             type: String,
             alias: "p",
-            description: 'Package manager to use. Possible values: ["pnpm", "yarn", "npm"]',
+            description:
+                'Package manager to use. Possible values: ["pnpm", "yarn", "npm"]',
             default: "pnpm",
         },
     },

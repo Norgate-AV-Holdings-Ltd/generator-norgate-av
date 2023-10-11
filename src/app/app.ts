@@ -4,15 +4,16 @@ import yosay from "yosay";
 import path from "path";
 import which from "which";
 import { AppOptions } from "./app.options";
-import TemplateFactory from "./template.factory";
-import Template, { TemplateId } from "./template.interface";
+import { TemplateFactory, Template, TemplateId } from "./templates";
+import { GitHelper } from "./helpers";
 import cliOptions from "./cli/cli.options";
 import cliArguments from "./cli/cli.arguments";
-import { GitHelper } from "./GitHelper";
 
-class AppGenerator extends Generator<AppOptions> {
+export class AppGenerator extends Generator<AppOptions> {
+    private readonly yosay: Function = yosay;
     private template: Template | undefined = undefined;
-    private readonly templateChoices: TemplateId[] = TemplateFactory.getAvailableTemplates();
+    private readonly templateChoices: TemplateId[] =
+        TemplateFactory.getAvailableTemplates();
     private abort: boolean = false;
 
     constructor(args: string | string[], opts: AppOptions) {
@@ -21,7 +22,8 @@ class AppGenerator extends Generator<AppOptions> {
         this._initializeCliArguments();
         this._initializeCliOptions();
 
-        this.desc("Generates project boilerplates of various types ready for development.");
+        this.description =
+            "Generates project boilerplates of various types ready for development.";
         this.options.skipPrompts = this.options.yes;
     }
 
@@ -38,16 +40,20 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     public async initializing() {
-        const { destination } = this.options;
+        this.log(
+            this.yosay(
+                `Welcome to the\n${chalk.bold.magenta(
+                    "Norgate AV",
+                )}\nproject generator!`,
+            ),
+        );
 
-        this.log(yosay(`Welcome to the\n${chalk.bold.magenta("Norgate AV")}\nproject generator!`));
-
-        if (!destination) {
-            return;
-        }
-
-        const folderPath = path.resolve(this.destinationPath(), destination);
-        this.destinationRoot(folderPath);
+        this.destinationRoot(
+            path.resolve(
+                this.destinationPath(),
+                this.options.destination || "",
+            ),
+        );
     }
 
     private async _promptForProjectType(choices: TemplateId[]) {
@@ -62,19 +68,19 @@ class AppGenerator extends Generator<AppOptions> {
                     value: type.id,
                 };
             }),
+            when: !this.options.type,
         });
 
         return answer.type;
     }
 
     public async prompting() {
-        const { type } = this.options;
-
-        this.project.type = type || (await this._promptForProjectType(this.templateChoices));
+        this.options.type =
+            this.options.type ||
+            (await this._promptForProjectType(this.templateChoices));
 
         try {
             this.template = TemplateFactory.createTemplate(this);
-
             await this.template.prompting();
         } catch (error) {
             this.abort = true;
@@ -96,13 +102,15 @@ class AppGenerator extends Generator<AppOptions> {
         this.log(`Bootstrapping ${chalk.cyan(this.project.name)}...`);
         this.log();
         this.log(
-            `Creating a new ${chalk.cyan(this.template?.getName())} project in ${chalk.green(
-                this.env.cwd,
-            )}.`,
+            `Creating a new ${chalk.cyan(
+                this.template?.getName(),
+            )} project in ${chalk.green(this.env.cwd)}.`,
         );
         this.log();
 
-        this.sourceRoot(path.join(__dirname, `./templates/${this.project.type}`));
+        this.sourceRoot(
+            path.join(__dirname, `./templates/${this.project.type}`),
+        );
         this.template?.writing();
     }
 
@@ -126,7 +134,9 @@ class AppGenerator extends Generator<AppOptions> {
             } catch (error) {
                 this.log();
                 this.log(`${chalk.red.bold("Oops!")} 🤦‍♂️`);
-                this.log("You opted to use Git but Git is not installed on your system.");
+                this.log(
+                    "You opted to use Git but Git is not installed on your system.",
+                );
                 this.log();
                 this.log("Skipping git setup.");
                 this.log();
@@ -153,23 +163,27 @@ class AppGenerator extends Generator<AppOptions> {
 
         this.log();
         this.log(
-            `${chalk.green("Success!")} Created ${chalk.cyan(this.project.name)} at ${chalk.green(
-                this.destinationPath(),
-            )}`,
+            `${chalk.green("Success!")} Created ${chalk.cyan(
+                this.project.name,
+            )} at ${chalk.green(this.destinationPath())}`,
         );
         this.log("Inside that directory, you can run several commands:");
 
         this.template?.end();
 
         this.log(
-            `Open ${chalk.cyan("README.md")} inside the new project for further instructions.`,
+            `Open ${chalk.cyan(
+                "README.md",
+            )} inside the new project for further instructions.`,
         );
 
         if (!this.options.open && !this.options.skipPrompts) {
             const location = this.options.destination || this.project.name;
 
             this.log();
-            this.log("To start editing with Visual Studio Code, use the following commands:");
+            this.log(
+                "To start editing with Visual Studio Code, use the following commands:",
+            );
 
             this.log();
             this.log(`  ${chalk.cyan("code")} ${location}`);
@@ -212,7 +226,11 @@ class AppGenerator extends Generator<AppOptions> {
             return;
         }
 
-        this.log(`Opening ${chalk.green(this.destinationPath())} in Visual Studio Code...`);
+        this.log(
+            `Opening ${chalk.green(
+                this.destinationPath(),
+            )} in Visual Studio Code...`,
+        );
         await this.spawnCommand(code, [this.destinationPath()]);
     }
 }
@@ -240,5 +258,5 @@ class CodeHelper {
         await this.spawnCommand(code, [path]);
     }
 }
-
+export type App = typeof AppGenerator;
 export default AppGenerator;

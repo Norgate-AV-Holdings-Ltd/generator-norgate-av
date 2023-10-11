@@ -15,7 +15,7 @@ dependencies:
     specifier: ^4.0.0
     version: 4.0.0
   yeoman-generator:
-    specifier: ^5.6.1
+    specifier: ^5.9.0
     version: 5.9.0(mem-fs@2.3.0)(yeoman-environment@3.19.3)
   yosay:
     specifier: ^2.0.2
@@ -38,8 +38,8 @@ devDependencies:
     specifier: ^3.3.1
     version: 3.3.1
   "@types/node":
-    specifier: ^20.8.2
-    version: 20.8.2
+    specifier: ^20.8.4
+    version: 20.8.4
   "@types/which":
     specifier: ^3.0.0
     version: 3.0.0
@@ -277,7 +277,7 @@ packages:
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
       resolve-from: 5.0.0
-      ts-node: 10.9.1(@types/node@20.8.2)(typescript@5.2.2)
+      ts-node: 10.9.1(@types/node@20.8.4)(typescript@5.2.2)
       typescript: 5.2.2
     transitivePeerDependencies:
       - "@swc/core"
@@ -1720,24 +1720,10 @@ packages:
       "@types/ms": 0.7.32
     dev: true
 
-  /@types/diff@5.0.4:
-    resolution:
-      {
-        integrity: sha512-d7489/WO4B65k0SIqxXtviR9+MrPDipWQF6w+5D7YPrqgu6Qb87JsTdWQaNZo7itcdbViQSev3Jaz7dtKO0+Dg==,
-      }
-    dev: true
-
   /@types/diff@5.0.5:
     resolution:
       {
         integrity: sha512-rt7WqM1bWwKJMRxlB5Rhke56UN21Bqwp1ILER31bafTivcapYdfhtPd5xRWfhf08yjPxoDcfjVkkECdRwFe7EA==,
-      }
-    dev: true
-
-  /@types/ejs@3.1.2:
-    resolution:
-      {
-        integrity: sha512-ZmiaE3wglXVWBM9fyVC17aGPkLo/UgaOjEiI2FXQfyczrCefORPxIe+2dVmnmk3zkVIbizjrlQzmPGhSYGXG5g==,
       }
     dev: true
 
@@ -1780,20 +1766,6 @@ packages:
       "@types/unist": 2.0.8
     dev: true
 
-  /@types/mem-fs-editor@7.0.3:
-    resolution:
-      {
-        integrity: sha512-ZvW3LwmY2A44EZHOmpG44OpfumpVkjp1TqXKsh9T/+yL7xlQu5ZO7eP8GQhSL/JW5KXbJKz3CMP12QKzrjSXWg==,
-      }
-    dependencies:
-      "@types/ejs": 3.1.2
-      "@types/json-schema": 7.0.13
-      "@types/mem-fs": 1.1.2
-      "@types/node": 20.8.2
-      "@types/vinyl": 2.0.7
-      globby: 11.1.0
-    dev: true
-
   /@types/mem-fs-editor@7.0.4:
     resolution:
       {
@@ -1803,19 +1775,9 @@ packages:
       "@types/ejs": 3.1.3
       "@types/json-schema": 7.0.13
       "@types/mem-fs": 1.1.3
-      "@types/node": 20.8.2
+      "@types/node": 20.8.4
       "@types/vinyl": 2.0.8
       globby: 11.1.0
-    dev: true
-
-  /@types/mem-fs@1.1.2:
-    resolution:
-      {
-        integrity: sha512-tt+4IoDO8/wmtaP2bHnB91c8AnzYtR9MK6NxfcZY9E3XgtmzOiFMeSXu3EZrBeevd0nJ87iGoUiFDGsb9QUvew==,
-      }
-    dependencies:
-      "@types/node": 20.8.2
-      "@types/vinyl": 2.0.7
     dev: true
 
   /@types/mem-fs@1.1.3:
@@ -1824,7 +1786,7 @@ packages:
         integrity: sha512-fFRjo3o+PN+jjJGaI9vJ8QLBHmeSAaM62IEaDOWSOcRdQ5naXHacq31uI60EEbcvxLY9tkwI8rMnRQ7YL6M9mg==,
       }
     dependencies:
-      "@types/node": 20.8.2
+      "@types/node": 20.8.4
       "@types/vinyl": 2.0.8
     dev: true
 
@@ -1861,11 +1823,13 @@ packages:
       }
     dev: true
 
-  /@types/node@20.8.2:
+  /@types/node@20.8.4:
     resolution:
       {
-        integrity: sha512-Vvycsc9FQdwhxE3y3DzeIxuEJbWGDsnrxvMADzTDF/lcdR9/K+AQIeAghTQsHtotg/q0j3WEOYS/jQgSdWue3w==,
+        integrity: sha512-ZVPnqU58giiCjSxjVUESDtdPk4QR5WQhhINbc9UBrKLU68MX5BF6kbQzTrkwbolyr0X8ChBpXfavr5mZFKZQ5A==,
       }
+    dependencies:
+      undici-types: 5.25.3
 
   /@types/normalize-package-data@2.4.1:
     resolution:
@@ -1886,7 +1850,7 @@ packages:
         integrity: sha512-LpKpmb7FGevYgXnBXYs6HWnmiFyVG07Pt1cnbgM1IhEacITTiUaBXXvOR3Y50ksaJWGSfhbEvQFivQEFGCC55w==,
       }
     dependencies:
-      "@types/node": 20.8.2
+      "@types/node": 20.8.4
     dev: true
 
   /@types/unist@2.0.8:
@@ -1903,7 +1867,7 @@ packages:
       }
     dependencies:
       "@types/expect": 1.20.4
-      "@types/node": 20.8.2
+      "@types/node": 20.8.4
 
   /@types/vinyl@2.0.8:
     resolution:
@@ -1912,7 +1876,7 @@ packages:
       }
     dependencies:
       "@types/expect": 1.20.4
-      "@types/node": 20.8.2
+      "@types/node": 20.8.4
     dev: true
 
   /@types/which@3.0.0:
@@ -1927,24 +1891,6 @@ packages:
       {
         integrity: sha512-H+M5HpdV7hVLT/m+TTXKP3aIBYnQyzbBP3w1DGLXJIVcsayszOB0Yaef53EwK9ztJKvyvxBUcVcjD1FnifoLaw==,
       }
-    dev: true
-
-  /@types/yeoman-environment@2.10.8:
-    resolution:
-      {
-        integrity: sha512-/g92Z/PAMXklSoWafGxTW8DxB4admgl5NDHvKn0qMkz2C0GJUvbV7tpU9LbKNnlMO+ynerz5bCVbhuBzEHbb6Q==,
-      }
-    dependencies:
-      "@types/diff": 5.0.4
-      "@types/inquirer": 8.2.6
-      "@types/mem-fs": 1.1.2
-      "@types/text-table": 0.2.3
-      "@types/vinyl": 2.0.7
-      "@types/yeoman-generator": 5.2.12
-      chalk: 4.1.2
-      commander: 9.5.0
-      execa: 5.1.1
-      rxjs: 6.6.7
     dev: true
 
   /@types/yeoman-environment@2.10.9:
@@ -2670,7 +2616,7 @@ packages:
       fs-minipass: 3.0.3
       glob: 10.3.10
       lru-cache: 7.18.3
-      minipass: 7.0.3
+      minipass: 7.0.4
       minipass-collect: 1.0.2
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
@@ -3316,7 +3262,7 @@ packages:
     dependencies:
       "@types/node": 20.5.1
       cosmiconfig: 8.3.6(typescript@5.2.2)
-      ts-node: 10.9.1(@types/node@20.8.2)(typescript@5.2.2)
+      ts-node: 10.9.1(@types/node@20.8.4)(typescript@5.2.2)
       typescript: 5.2.2
     dev: true
 
@@ -4165,7 +4111,7 @@ packages:
       }
     engines: { node: ^14.17.0 || ^16.13.0 || >=18.0.0 }
     dependencies:
-      minipass: 7.0.3
+      minipass: 7.0.4
 
   /fs.realpath@1.0.0:
     resolution:
@@ -6380,13 +6326,6 @@ packages:
       }
     engines: { node: ">=8" }
 
-  /minipass@7.0.3:
-    resolution:
-      {
-        integrity: sha512-LhbbwCfz3vsb12j/WkWQPZfKTsgqIe1Nf/ti1pKjYESGLHIVjWU96G9/ljLH4F9mWNVhlQOm0VySdAWzf05dpg==,
-      }
-    engines: { node: ">=16 || 14 >=14.17" }
-
   /minipass@7.0.4:
     resolution:
       {
@@ -6708,10 +6647,10 @@ packages:
     dependencies:
       semver: 7.5.4
 
-  /npm-install-checks@6.2.0:
+  /npm-install-checks@6.3.0:
     resolution:
       {
-        integrity: sha512-744wat5wAAHsxa4590mWO0tJ8PKxR8ORZsH9wGpQc3nWTzozMAgBN/XyqYw7mg3yqLM8dLwEnwSfKMmXAjF69g==,
+        integrity: sha512-W29RiK/xtpCGqn6f3ixfRYGk+zRyr+Ew9F2E20BfXxT5/euLdA/Nm7fO7OeTGuAmTs30cpgInyJ0cYe708YTZw==,
       }
     engines: { node: ^14.17.0 || ^16.13.0 || >=18.0.0 }
     dependencies:
@@ -6800,7 +6739,7 @@ packages:
       }
     engines: { node: ^14.17.0 || ^16.13.0 || >=18.0.0 }
     dependencies:
-      npm-install-checks: 6.2.0
+      npm-install-checks: 6.3.0
       npm-normalize-package-bin: 3.0.1
       npm-package-arg: 10.1.0
       semver: 7.5.4
@@ -7571,7 +7510,7 @@ packages:
         optional: true
     dependencies:
       lilconfig: 2.1.0
-      ts-node: 10.9.1(@types/node@20.8.2)(typescript@5.2.2)
+      ts-node: 10.9.1(@types/node@20.8.4)(typescript@5.2.2)
       yaml: 2.3.1
     dev: true
 
@@ -8579,7 +8518,7 @@ packages:
       }
     engines: { node: ^14.17.0 || ^16.13.0 || >=18.0.0 }
     dependencies:
-      minipass: 7.0.3
+      minipass: 7.0.4
 
   /ssri@8.0.1:
     resolution:
@@ -9115,7 +9054,7 @@ packages:
       }
     dev: true
 
-  /ts-node@10.9.1(@types/node@20.8.2)(typescript@5.2.2):
+  /ts-node@10.9.1(@types/node@20.8.4)(typescript@5.2.2):
     resolution:
       {
         integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==,
@@ -9137,7 +9076,7 @@ packages:
       "@tsconfig/node12": 1.0.11
       "@tsconfig/node14": 1.0.3
       "@tsconfig/node16": 1.0.4
-      "@types/node": 20.8.2
+      "@types/node": 20.8.4
       acorn: 8.10.0
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -9316,6 +9255,12 @@ packages:
         integrity: sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==,
       }
     dev: true
+
+  /undici-types@5.25.3:
+    resolution:
+      {
+        integrity: sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==,
+      }
 
   /unicode-emoji-modifier-base@1.0.0:
     resolution:
@@ -9561,7 +9506,7 @@ packages:
       remove-trailing-separator: 1.1.0
       replace-ext: 1.0.1
 
-  /vite-node@0.34.6(@types/node@20.8.2)(terser@5.21.0):
+  /vite-node@0.34.6(@types/node@20.8.4)(terser@5.21.0):
     resolution:
       {
         integrity: sha512-nlBMJ9x6n7/Amaz6F3zJ97EBwR2FkzhBRxF5e+jE6LA3yi6Wtc2lyTij1OnDMIr34v5g/tVQtsVAzhT0jc5ygA==,
@@ -9574,7 +9519,7 @@ packages:
       mlly: 1.4.2
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.4.9(@types/node@20.8.2)(terser@5.21.0)
+      vite: 4.4.9(@types/node@20.8.4)(terser@5.21.0)
     transitivePeerDependencies:
       - "@types/node"
       - less
@@ -9586,7 +9531,7 @@ packages:
       - terser
     dev: true
 
-  /vite@4.4.9(@types/node@20.8.2)(terser@5.21.0):
+  /vite@4.4.9(@types/node@20.8.4)(terser@5.21.0):
     resolution:
       {
         integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==,
@@ -9617,7 +9562,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      "@types/node": 20.8.2
+      "@types/node": 20.8.4
       esbuild: 0.18.20
       postcss: 8.4.30
       rollup: 3.29.3
@@ -9662,7 +9607,7 @@ packages:
     dependencies:
       "@types/chai": 4.3.6
       "@types/chai-subset": 1.3.3
-      "@types/node": 20.8.2
+      "@types/node": 20.8.4
       "@vitest/expect": 0.34.6
       "@vitest/runner": 0.34.6
       "@vitest/snapshot": 0.34.6
@@ -9681,8 +9626,8 @@ packages:
       strip-literal: 1.3.0
       tinybench: 2.5.1
       tinypool: 0.7.0
-      vite: 4.4.9(@types/node@20.8.2)(terser@5.21.0)
-      vite-node: 0.34.6(@types/node@20.8.2)(terser@5.21.0)
+      vite: 4.4.9(@types/node@20.8.4)(terser@5.21.0)
+      vite-node: 0.34.6(@types/node@20.8.4)(terser@5.21.0)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
@@ -10097,8 +10042,8 @@ packages:
       yeoman-generator: "*"
     dependencies:
       "@types/inquirer": 8.2.6
-      "@types/mem-fs-editor": 7.0.3
-      "@types/yeoman-environment": 2.10.8
+      "@types/mem-fs-editor": 7.0.4
+      "@types/yeoman-environment": 2.10.9
       "@types/yeoman-generator": 5.2.12
       inquirer: 8.2.6
       lodash: 4.17.21

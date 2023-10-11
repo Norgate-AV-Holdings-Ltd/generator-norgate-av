@@ -2,14 +2,13 @@ import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
 import path from "path";
-import which from "which";
 import { AppOptions } from "./app.options";
 import { TemplateFactory, Template, TemplateId } from "./templates";
-import { GitHelper } from "./helpers";
+import { CodeHelper, GitHelper } from "./helpers";
 import cliOptions from "./cli/cli.options";
 import cliArguments from "./cli/cli.arguments";
 
-export class AppGenerator extends Generator<AppOptions> {
+class AppGenerator extends Generator<AppOptions> {
     private readonly yosay: Function = yosay;
     private template: Template | undefined = undefined;
     private readonly templateChoices: TemplateId[] =
@@ -39,7 +38,7 @@ export class AppGenerator extends Generator<AppOptions> {
         }
     }
 
-    public async initializing() {
+    public async initializing(): Promise<void> {
         this.log(
             this.yosay(
                 `Welcome to the\n${chalk.bold.magenta(
@@ -56,7 +55,9 @@ export class AppGenerator extends Generator<AppOptions> {
         );
     }
 
-    private async _promptForProjectType(choices: TemplateId[]) {
+    private async _promptForProjectType(
+        choices: TemplateId[],
+    ): Promise<string> {
         const answer = await this.prompt({
             type: "list",
             name: "type",
@@ -74,7 +75,7 @@ export class AppGenerator extends Generator<AppOptions> {
         return answer.type;
     }
 
-    public async prompting() {
+    public async prompting(): Promise<void> {
         this.options.type =
             this.options.type ||
             (await this._promptForProjectType(this.templateChoices));
@@ -87,46 +88,31 @@ export class AppGenerator extends Generator<AppOptions> {
         }
     }
 
-    public async writing() {
+    public async writing(): Promise<void> {
         if (this.abort) {
             return;
         }
 
         if (!this.options.destination) {
-            this.destinationRoot(this.destinationPath(this.project.name));
+            this.destinationRoot(this.destinationPath(this.options.name));
         }
 
-        this.env.cwd = this.destinationPath();
-
-        this.log();
-        this.log(`Bootstrapping ${chalk.cyan(this.project.name)}...`);
-        this.log();
-        this.log(
-            `Creating a new ${chalk.cyan(
-                this.template?.getName(),
-            )} project in ${chalk.green(this.env.cwd)}.`,
-        );
-        this.log();
-
-        this.sourceRoot(
-            path.join(__dirname, `./templates/${this.project.type}`),
-        );
         this.template?.writing();
     }
 
-    public async install() {
+    public async install(): Promise<void> {
         if (this.abort) {
             this.env.options.skipInstall = true;
             return;
         }
 
-        if (this.project.installDependencies) {
-            this.env.options.nodePackageManager = this.project.pkg;
+        if (this.options.installDependencies) {
+            this.env.options.nodePackageManager = this.options.pkg;
         } else {
             this.env.options.skipInstall = true;
         }
 
-        if (this.project.git) {
+        if (this.options.git) {
             try {
                 await GitHelper.init(this);
                 this.log();
@@ -140,7 +126,7 @@ export class AppGenerator extends Generator<AppOptions> {
                 this.log();
                 this.log("Skipping git setup.");
                 this.log();
-                this.project.git = false;
+                this.options.git = false;
             }
         }
 
@@ -148,12 +134,12 @@ export class AppGenerator extends Generator<AppOptions> {
         this.log("Installing packages. This might take a couple of minutes.");
     }
 
-    public async end() {
+    public async end(): Promise<void> {
         if (this.abort) {
             return;
         }
 
-        if (this.project.git) {
+        if (this.options.git) {
             await GitHelper.add(this);
             await GitHelper.commit(this);
 
@@ -164,7 +150,7 @@ export class AppGenerator extends Generator<AppOptions> {
         this.log();
         this.log(
             `${chalk.green("Success!")} Created ${chalk.cyan(
-                this.project.name,
+                this.options.name,
             )} at ${chalk.green(this.destinationPath())}`,
         );
         this.log("Inside that directory, you can run several commands:");
@@ -178,7 +164,7 @@ export class AppGenerator extends Generator<AppOptions> {
         );
 
         if (!this.options.open && !this.options.skipPrompts) {
-            const location = this.options.destination || this.project.name;
+            const location = this.options.destination || this.options.name;
 
             this.log();
             this.log(
@@ -195,7 +181,7 @@ export class AppGenerator extends Generator<AppOptions> {
         this.log();
 
         if (this.options.open) {
-            this._openWithCode();
+            CodeHelper.open(this, this.destinationPath());
         }
 
         // const choices = [];
@@ -217,46 +203,6 @@ export class AppGenerator extends Generator<AppOptions> {
         // }
         // return;
     }
-
-    private async _openWithCode() {
-        const code = await which("code").catch(() => undefined);
-
-        if (!code) {
-            this.log(`${chalk.cyan("`code`")} command not found.`);
-            return;
-        }
-
-        this.log(
-            `Opening ${chalk.green(
-                this.destinationPath(),
-            )} in Visual Studio Code...`,
-        );
-        await this.spawnCommand(code, [this.destinationPath()]);
-    }
 }
 
-class CodeHelper {
-    public static async getPath(): Promise<string | Error> {
-        const code = await which("code").catch(() => undefined);
-
-        if (!code) {
-            throw new Error(`${chalk.cyan("`code`")} command not found.`);
-        }
-
-        return code;
-    }
-
-    public static async open(generator: any, path: string): Promise<void> {
-        const code = await which("code").catch(() => undefined);
-
-        if (!code) {
-            this.log(`${chalk.cyan("`code`")} command not found.`);
-            return;
-        }
-
-        this.log(`Opening ${chalk.green(path)} in Visual Studio Code...`);
-        await this.spawnCommand(code, [path]);
-    }
-}
-export type App = typeof AppGenerator;
 export default AppGenerator;

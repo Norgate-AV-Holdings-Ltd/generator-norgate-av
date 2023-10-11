@@ -14,5 +14,5 @@
         "noUncheckedIndexedAccess": true
     },
     "include": ["src"],
-    "exclude": ["**/templates"]
+    "exclude": ["**/template-files"]
 }

@@ -2,6 +2,8 @@
     "entry": ["src/app/index.ts"],
     "outDir": "dist/app",
     "minify": "terser",
+    "dts": true,
+    "sourcemap": true,
     "minifyWhitespace": true,
     "minifyIdentifiers": true,
     "minifySyntax": true,

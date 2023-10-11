@@ -1,5 +1,5 @@
 import { Question } from "yeoman-generator";
-import { AppGenerator } from "../app";
+import AppGenerator from "..";
 
 export abstract class TemplateQuestion {
     protected readonly generator: AppGenerator;

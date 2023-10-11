@@ -1,7 +1,7 @@
 import { Question } from "yeoman-generator";
 import path from "path";
-import { AppGenerator } from "../app";
-import { TemplateQuestion } from "./TemplateQuestion";
+import AppGenerator from "..";
+import { TemplateQuestion } from ".";
 
 export class ProjectDisplayNameQuestion extends TemplateQuestion {
     constructor(generator: AppGenerator) {

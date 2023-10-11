@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import config from "config";
-import { AppGenerator } from "../app";
+import path from "path";
+import AppGenerator from "..";
 import { Template } from ".";
 import {
     ProjectDisplayNameQuestion,
@@ -40,6 +41,13 @@ export class ClangTemplate implements Template {
         return ClangTemplate.name;
     }
 
+    public getSourceRoot(): string {
+        return path.join(
+            __dirname,
+            `./template-files/${this.generator.options.type}`,
+        );
+    }
+
     public async prompting(): Promise<void> {
         const questions = this.questions.map((question) =>
             new question(this.generator).getQuestion(),
@@ -53,6 +61,22 @@ export class ClangTemplate implements Template {
     }
 
     public async writing(): Promise<void> {
+        this.generator.env.cwd = this.generator.destinationPath();
+
+        this.generator.log();
+        this.generator.log(
+            `Bootstrapping ${chalk.cyan(this.generator.options.name)}...`,
+        );
+        this.generator.log();
+        this.generator.log(
+            `Creating a new ${chalk.cyan(
+                this.getName(),
+            )} project in ${chalk.green(this.generator.env.cwd)}.`,
+        );
+        this.generator.log();
+
+        this.generator.sourceRoot(this.getSourceRoot());
+
         for (const path of this.paths) {
             this.generator.fs.copyTpl(
                 this.generator.templatePath(path.from),

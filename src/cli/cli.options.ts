@@ -1,5 +1,5 @@
 import { CliOption } from "./cli.interface";
-import TemplateFactory from "../templates/TemplateFactory";
+import { TemplateFactory } from "../templates";
 
 const options: CliOption[] = [
     {

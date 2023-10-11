@@ -1,7 +1,5 @@
-import { Template } from "./Template";
-import { TemplateId } from "./TemplateId";
-import { ClangTemplate } from ".";
-import { AppGenerator } from "../app";
+import { Template, TemplateId, ClangTemplate } from ".";
+import AppGenerator from "..";
 
 export class TemplateFactory {
     private static readonly templates = [ClangTemplate];

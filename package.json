@@ -31,7 +31,7 @@
         "prebuild": "pnpm clean",
         "build": "tsup",
         "postbuild": "pnpm copy:templates",
-        "copy:templates": "ncp src/app/templates dist/app/templates && ncp src/app/dependencies dist/app/dependencies",
+        "copy:templates": "ncp src/app/template-files dist/app/template-files && ncp src/app/dependencies dist/app/dependencies",
         "test": "vitest --no-threads",
         "pretty:fix": "prettier --write .",
         "doctoc": "doctoc --title '## Contents 📖' README.md",
@@ -46,7 +46,7 @@
         "@semantic-release/changelog": "^6.0.1",
         "@semantic-release/git": "^10.0.1",
         "@types/config": "^3.3.1",
-        "@types/node": "^20.8.2",
+        "@types/node": "^20.8.4",
         "@types/which": "^3.0.0",
         "@types/yeoman-assert": "^3.1.2",
         "@types/yeoman-generator": "^5.2.12",
@@ -74,7 +74,7 @@
         "chalk": "^4.1.2",
         "config": "^3.3.9",
         "which": "^4.0.0",
-        "yeoman-generator": "^5.6.1",
+        "yeoman-generator": "^5.9.0",
         "yosay": "^2.0.2"
     }
 }

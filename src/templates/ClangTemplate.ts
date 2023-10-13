@@ -22,16 +22,16 @@ export class ClangTemplate implements Template {
     public static readonly name: string = "C";
 
     private readonly generator: AppGenerator;
-    private readonly paths: PathMap[] = config.get<PathMap[]>(
-        "templates.clang.paths",
-    );
-    private readonly questions = [
-        ProjectDisplayNameQuestion,
-        ProjectIdQuestion,
-        ProjectDescriptionQuestion,
-        GitQuestion,
-        NodePackageManagerQuestion,
-    ];
+    // private readonly paths: PathMap[] = config.get<PathMap[]>(
+    //     "templates.clang.paths",
+    // );
+    // private readonly questions = [
+    //     ProjectDisplayNameQuestion,
+    //     ProjectIdQuestion,
+    //     ProjectDescriptionQuestion,
+    //     GitQuestion,
+    //     NodePackageManagerQuestion,
+    // ];
 
     constructor(generator: AppGenerator) {
         this.generator = generator;
@@ -49,15 +49,13 @@ export class ClangTemplate implements Template {
     }
 
     public async prompting(): Promise<void> {
-        const questions = this.questions.map((question) =>
-            new question(this.generator).getQuestion(),
-        );
-
-        const answers = await this.generator.prompt(questions);
-
-        for (const [key, value] of Object.entries(answers)) {
-            this.generator.options[key] = this.generator.options[key] || value;
-        }
+        // const questions = this.questions.map((question) =>
+        //     new question(this.generator).getQuestion(),
+        // );
+        // const answers = await this.generator.prompt(questions);
+        // for (const [key, value] of Object.entries(answers)) {
+        //     this.generator.options[key] = this.generator.options[key] || value;
+        // }
     }
 
     public async writing(): Promise<void> {
@@ -77,13 +75,13 @@ export class ClangTemplate implements Template {
 
         this.generator.sourceRoot(this.getSourceRoot());
 
-        for (const path of this.paths) {
-            this.generator.fs.copyTpl(
-                this.generator.templatePath(path.from),
-                this.generator.destinationPath(path.to),
-                this.generator.options,
-            );
-        }
+        // for (const path of this.paths) {
+        //     this.generator.fs.copyTpl(
+        //         this.generator.templatePath(path.from),
+        //         this.generator.destinationPath(path.to),
+        //         this.generator.options,
+        //     );
+        // }
         // this.generator.fs.copy(
         //     this.generator.templatePath("github"),
         //     this.generator.destinationPath(".github"),

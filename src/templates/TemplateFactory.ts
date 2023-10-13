@@ -1,4 +1,5 @@
-import { Template, TemplateId, ClangTemplate } from ".";
+import { Template, TemplateId } from "../templates";
+import { ClangTemplate } from "./ClangTemplate";
 import AppGenerator from "..";
 
 export class TemplateFactory {
@@ -7,14 +8,14 @@ export class TemplateFactory {
     public static createTemplate(generator: AppGenerator): Template {
         const { type } = generator.options;
 
-        const template = this.templates.find((template) => {
-            return template.aliases.indexOf(type) || template.id === type;
+        const template = this.templates.find(({ aliases, id }) => {
+            return aliases.indexOf(type) || id === type;
         });
 
         if (!template) {
             throw new Error(
                 `Invalid project type: ${type}\nPossible types are: ${this.templates
-                    .map((template) => template.aliases.join(", "))
+                    .map(({ aliases }) => aliases.join(", "))
                     .join(", ")}`,
             );
         }
@@ -23,13 +24,15 @@ export class TemplateFactory {
     }
 
     public static getAvailableTemplates(): TemplateId[] {
-        return this.templates.map(({ id, name, aliases }) => {
+        const templates = this.templates.map(({ id, name, aliases }) => {
             return {
                 id,
                 name,
                 aliases,
             };
         });
+
+        return templates;
     }
 }
 

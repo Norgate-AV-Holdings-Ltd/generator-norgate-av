@@ -1,5 +1,5 @@
-export interface TemplateId {
+export type TemplateId = {
     id: string;
     name: string;
     aliases: string[];
-}
+};

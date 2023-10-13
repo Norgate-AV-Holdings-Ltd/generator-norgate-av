@@ -7,12 +7,11 @@ import { TemplateFactory, Template, TemplateId } from "./templates";
 import { CodeHelper, GitHelper } from "./helpers";
 import cliOptions from "./cli/cli.options";
 import cliArguments from "./cli/cli.arguments";
+import { ProjectTypeQuestion } from "./questions";
 
-class AppGenerator extends Generator<AppOptions> {
-    private readonly yosay: Function = yosay;
+export class AppGenerator extends Generator<AppOptions> {
     private template: Template | undefined = undefined;
-    private readonly templateChoices: TemplateId[] =
-        TemplateFactory.getAvailableTemplates();
+    private readonly templateChoices = TemplateFactory.getAvailableTemplates();
     private abort: boolean = false;
 
     constructor(args: string | string[], opts: AppOptions) {
@@ -40,7 +39,7 @@ class AppGenerator extends Generator<AppOptions> {
 
     public async initializing(): Promise<void> {
         this.log(
-            this.yosay(
+            yosay(
                 `Welcome to the\n${chalk.bold.magenta(
                     "Norgate AV",
                 )}\nproject generator!`,
@@ -58,37 +57,33 @@ class AppGenerator extends Generator<AppOptions> {
     private async _promptForProjectType(
         choices: TemplateId[],
     ): Promise<string> {
-        const answer = await this.prompt({
-            type: "list",
-            name: "type",
-            message: "What type of project do you want to create?",
-            pageSize: choices.length,
-            choices: choices.map((type) => {
-                return {
-                    name: type.name,
-                    value: type.id,
-                };
-            }),
-            when: !this.options.type,
-        });
+        const answer = await this.prompt(
+            new ProjectTypeQuestion(this, choices).getQuestion(),
+        );
 
         return answer.type;
     }
 
     public async prompting(): Promise<void> {
+        this.log("Prompting");
         this.options.type =
             this.options.type ||
             (await this._promptForProjectType(this.templateChoices));
 
         try {
             this.template = TemplateFactory.createTemplate(this);
+            this.log(this.template.getName());
             await this.template.prompting();
         } catch (error) {
+            this.log(error);
             this.abort = true;
         }
+
+        this.log("Prompting Complete");
     }
 
     public async writing(): Promise<void> {
+        this.log("Writing");
         if (this.abort) {
             return;
         }
@@ -98,6 +93,7 @@ class AppGenerator extends Generator<AppOptions> {
         }
 
         this.template?.writing();
+        this.log("Writing Complete");
     }
 
     public async install(): Promise<void> {

@@ -24,15 +24,13 @@ export class TemplateFactory {
     }
 
     public static getAvailableTemplates(): TemplateId[] {
-        const templates = this.templates.map(({ id, name, aliases }) => {
+        return this.templates.map(({ id, name, aliases }) => {
             return {
                 id,
                 name,
                 aliases,
             };
         });
-
-        return templates;
     }
 }
 

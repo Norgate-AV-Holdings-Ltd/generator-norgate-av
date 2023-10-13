@@ -1,8 +1,8 @@
 import { Question } from "yeoman-generator";
 import AppGenerator from "..";
-import { TemplateQuestion } from ".";
+import { ProjectQuestion } from "./ProjectQuestion";
 
-export class NodePackageManagerQuestion extends TemplateQuestion {
+export class NodePackageManagerQuestion extends ProjectQuestion {
     private readonly defaultPackageManager: string = "pnpm";
 
     constructor(generator: AppGenerator) {

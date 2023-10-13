@@ -2,7 +2,7 @@ import chalk from "chalk";
 import config from "config";
 import path from "path";
 import AppGenerator from "..";
-import { Template } from ".";
+import { Template } from "./Template";
 import {
     ProjectDisplayNameQuestion,
     ProjectIdQuestion,
@@ -25,37 +25,43 @@ export class ClangTemplate implements Template {
     // private readonly paths: PathMap[] = config.get<PathMap[]>(
     //     "templates.clang.paths",
     // );
-    // private readonly questions = [
-    //     ProjectDisplayNameQuestion,
-    //     ProjectIdQuestion,
-    //     ProjectDescriptionQuestion,
-    //     GitQuestion,
-    //     NodePackageManagerQuestion,
-    // ];
+    private readonly questions = [
+        ProjectDisplayNameQuestion,
+        ProjectIdQuestion,
+        ProjectDescriptionQuestion,
+        GitQuestion,
+        NodePackageManagerQuestion,
+    ];
 
     constructor(generator: AppGenerator) {
         this.generator = generator;
     }
 
-    public getName(): string {
-        return ClangTemplate.name;
+    public getSignature() {
+        return {
+            id: ClangTemplate.id,
+            name: ClangTemplate.name,
+            aliases: ClangTemplate.aliases,
+        };
     }
 
     public getSourceRoot(): string {
         return path.join(
             __dirname,
-            `./template-files/${this.generator.options.type}`,
+            `./template-files/${this.getSignature().id}`,
         );
     }
 
     public async prompting(): Promise<void> {
-        // const questions = this.questions.map((question) =>
-        //     new question(this.generator).getQuestion(),
-        // );
-        // const answers = await this.generator.prompt(questions);
-        // for (const [key, value] of Object.entries(answers)) {
-        //     this.generator.options[key] = this.generator.options[key] || value;
-        // }
+        const questions = this.questions.map((question) =>
+            new question(this.generator).getQuestion(),
+        );
+
+        const answers = await this.generator.prompt(questions);
+
+        for (const [key, value] of Object.entries(answers)) {
+            this.generator.options[key] = this.generator.options[key] || value;
+        }
     }
 
     public async writing(): Promise<void> {
@@ -68,7 +74,7 @@ export class ClangTemplate implements Template {
         this.generator.log();
         this.generator.log(
             `Creating a new ${chalk.cyan(
-                this.getName(),
+                this.getSignature().name,
             )} project in ${chalk.green(this.generator.env.cwd)}.`,
         );
         this.generator.log();

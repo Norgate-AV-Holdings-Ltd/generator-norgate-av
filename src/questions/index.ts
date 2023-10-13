@@ -1,4 +1,4 @@
-export { TemplateQuestion } from "./TemplateQuestion";
+export { ProjectQuestion } from "./ProjectQuestion";
 export { QuestionFactory } from "./QuestionFactory";
 export { ProjectTypeQuestion } from "./ProjectTypeQuestion";
 export { ProjectDisplayNameQuestion } from "./ProjectDisplayNameQuestion";

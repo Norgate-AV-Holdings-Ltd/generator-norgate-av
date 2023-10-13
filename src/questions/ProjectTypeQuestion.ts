@@ -1,9 +1,9 @@
 import { Question } from "yeoman-generator";
 import AppGenerator from "..";
-import { TemplateQuestion } from ".";
+import { ProjectQuestion } from "./ProjectQuestion";
 import { TemplateId } from "../templates";
 
-export class ProjectTypeQuestion extends TemplateQuestion {
+export class ProjectTypeQuestion extends ProjectQuestion {
     private readonly choices: TemplateId[];
 
     constructor(generator: AppGenerator, choices: TemplateId[]) {

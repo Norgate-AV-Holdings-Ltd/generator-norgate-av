@@ -1,8 +1,8 @@
 import { Question } from "yeoman-generator";
 import AppGenerator from "..";
-import { TemplateQuestion } from ".";
+import { ProjectQuestion } from "./ProjectQuestion";
 
-export class GitQuestion extends TemplateQuestion {
+export class GitQuestion extends ProjectQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
     }

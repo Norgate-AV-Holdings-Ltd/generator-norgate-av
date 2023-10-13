@@ -1,10 +1,10 @@
 import { Question } from "yeoman-generator";
 import AppGenerator from "..";
 
-export abstract class TemplateQuestion {
+export abstract class ProjectQuestion {
     protected readonly generator: AppGenerator;
 
-    constructor(generator: AppGenerator) {
+    protected constructor(generator: AppGenerator) {
         this.generator = generator;
     }
 

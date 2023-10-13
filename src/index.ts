@@ -72,7 +72,7 @@ export class AppGenerator extends Generator<AppOptions> {
 
         try {
             this.template = TemplateFactory.createTemplate(this);
-            this.log(this.template.getName());
+            this.log(this.template.getSignature().name);
             await this.template.prompting();
         } catch (error) {
             this.log(error);
@@ -177,7 +177,7 @@ export class AppGenerator extends Generator<AppOptions> {
         this.log();
 
         if (this.options.open) {
-            CodeHelper.open(this, this.destinationPath());
+            await CodeHelper.open(this, this.destinationPath());
         }
 
         // const choices = [];

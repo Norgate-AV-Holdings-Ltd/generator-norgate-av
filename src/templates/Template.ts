@@ -1,5 +1,5 @@
 export interface Template {
-    getName(): string;
+    getSignature(): { id: string; name: string; aliases: string[] };
     getSourceRoot(): string;
     prompting(): Promise<void>;
     writing(): Promise<void>;

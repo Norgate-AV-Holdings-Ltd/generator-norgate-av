@@ -1,6 +1,7 @@
 import { Question } from "yeoman-generator";
 import AppGenerator from "..";
 import { ProjectQuestion } from "./ProjectQuestion";
+import { Answers } from "./Answers";
 
 export class ProjectIdQuestion extends ProjectQuestion {
     private readonly pattern: RegExp = /^[a-z0-9][a-z0-9-]*$/i;
@@ -9,12 +10,12 @@ export class ProjectIdQuestion extends ProjectQuestion {
         super(generator);
     }
 
-    public getQuestion(): Question<{ name: string }> {
+    public getQuestion(): Question<Answers> {
         return {
             type: "input",
             name: "name",
             message: "What's the identifier of your project?",
-            default: (answers: any) => {
+            default: (answers: Answers) => {
                 return answers.displayName
                     .toLowerCase()
                     .replace(/[^a-z0-9]/g, "-");

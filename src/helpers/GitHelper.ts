@@ -6,9 +6,25 @@ export class GitHelper {
         return await which("git").catch(() => undefined);
     }
 
+    private static getGitUserName(generator: Generator): string {
+        return generator.user.git.name();
+    }
+
+    private static getGitUserEmail(generator: Generator): string {
+        return generator.user.git.email();
+    }
+
     public static async init(generator: Generator): Promise<void | Error> {
         if (!(await GitHelper.isGitInstalled())) {
             throw new Error("Git executable not found on PATH");
+        }
+
+        if (!GitHelper.getGitUserName(generator)) {
+            throw new Error("Git username has not been setup");
+        }
+
+        if (!GitHelper.getGitUserEmail(generator)) {
+            throw new Error("Git user email has not been setup");
         }
 
         await generator.spawnCommand("git", ["init", "--quiet"]);
@@ -19,12 +35,28 @@ export class GitHelper {
             throw new Error("Git executable not found on PATH");
         }
 
+        if (!GitHelper.getGitUserName(generator)) {
+            throw new Error("Git username has not been setup");
+        }
+
+        if (!GitHelper.getGitUserEmail(generator)) {
+            throw new Error("Git user email has not been setup");
+        }
+
         await generator.spawnCommand("git", ["add", "-A"]);
     }
 
     public static async commit(generator: Generator): Promise<void | Error> {
         if (!(await GitHelper.isGitInstalled())) {
             throw new Error("Git executable not found on PATH");
+        }
+
+        if (!GitHelper.getGitUserName(generator)) {
+            throw new Error("Git username has not been setup");
+        }
+
+        if (!GitHelper.getGitUserEmail(generator)) {
+            throw new Error("Git user email has not been setup");
         }
 
         await generator.spawnCommand("git", [

@@ -23,6 +23,11 @@ export class AppGenerator extends Generator<AppOptions> {
         this.description =
             "Generates project boilerplates of various types ready for development.";
         this.options.skipPrompts = this.options.yes;
+
+        if (this.options.skipPrompts) {
+            this.options.git = true;
+            this.options.pkg = "pnpm";
+        }
     }
 
     private _initializeCliArguments(): void {
@@ -65,25 +70,22 @@ export class AppGenerator extends Generator<AppOptions> {
     }
 
     public async prompting(): Promise<void> {
-        this.log("Prompting");
         this.options.type =
             this.options.type ||
             (await this._promptForProjectType(this.templateChoices));
 
         try {
             this.template = TemplateFactory.createTemplate(this);
-            this.log(this.template.getSignature().name);
             await this.template.prompting();
         } catch (error) {
             this.log(error);
             this.abort = true;
         }
-
-        this.log("Prompting Complete");
     }
 
     public async writing(): Promise<void> {
-        this.log("Writing");
+        this.log(this.options);
+        this.abort = true;
         if (this.abort) {
             return;
         }
@@ -93,7 +95,6 @@ export class AppGenerator extends Generator<AppOptions> {
         }
 
         this.template?.writing();
-        this.log("Writing Complete");
     }
 
     public async install(): Promise<void> {

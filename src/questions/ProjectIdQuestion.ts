@@ -14,9 +14,11 @@ export class ProjectIdQuestion extends ProjectQuestion {
             type: "input",
             name: "name",
             message: "What's the identifier of your project?",
-            default: this.generator.options.displayName
-                .toLowerCase()
-                .replace(/[^a-z0-9]/g, "-"),
+            default: (answers: any) => {
+                return answers.displayName
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]/g, "-");
+            },
             when:
                 !this.generator.options.id &&
                 !this.generator.options.skipPrompts,

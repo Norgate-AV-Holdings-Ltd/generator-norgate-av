@@ -53,7 +53,6 @@ const options: CliOption[] = [
             alias: "p",
             description:
                 'Package manager to use. Possible values: ["pnpm", "yarn", "npm"]',
-            default: "pnpm",
         },
     },
     {
@@ -62,7 +61,6 @@ const options: CliOption[] = [
             type: Boolean,
             alias: "g",
             description: "Initialize a git repo",
-            default: true,
         },
     },
 ];

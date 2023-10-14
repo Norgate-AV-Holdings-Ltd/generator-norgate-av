@@ -1,37 +1,38 @@
 import { Question } from "yeoman-generator";
+import config from "config";
+import BaseQuestion from "./BaseQuestion";
+import { Answers, NodePackageManager } from "../@types";
 import AppGenerator from "..";
-import { ProjectQuestion } from "./ProjectQuestion";
 
-export class NodePackageManagerQuestion extends ProjectQuestion {
-    private readonly defaultPackageManager: string = "pnpm";
+class NodePackageManagerQuestion extends BaseQuestion {
+    private readonly default = config.get<NodePackageManager>(
+        "package-manager.node.default",
+    );
+    private readonly choices = config.get<NodePackageManager[]>(
+        "package-manager.node.choices",
+    );
 
     constructor(generator: AppGenerator) {
         super(generator);
     }
 
-    public getQuestion(): Question<{ pkg: string }> {
+    public getQuestion(): Question<Answers> {
         return {
             type: "list",
             name: "pkg",
             message: "Which package manager to use?",
-            choices: [
-                {
-                    name: "pnpm",
-                    value: "pnpm",
-                },
-                {
-                    name: "yarn",
-                    value: "yarn",
-                },
-                {
-                    name: "npm",
-                    value: "npm",
-                },
-            ],
-            default: this.defaultPackageManager,
+            choices: this.choices.map((choice) => {
+                return {
+                    name: choice,
+                    value: choice,
+                };
+            }),
+            default: this.default,
             when:
                 !this.generator.options.pkg &&
                 !this.generator.options.skipPrompts,
         };
     }
 }
+
+export default NodePackageManagerQuestion;

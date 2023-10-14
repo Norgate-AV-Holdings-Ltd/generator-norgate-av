@@ -1,6 +1,6 @@
 import { GeneratorOptions } from "yeoman-generator";
 
-export type AppOptions = GeneratorOptions & {
+type AppOptions = GeneratorOptions & {
     type: string;
     description?: string;
     id?: string;
@@ -9,3 +9,5 @@ export type AppOptions = GeneratorOptions & {
     open?: boolean;
     yes?: boolean;
 };
+
+export default AppOptions;

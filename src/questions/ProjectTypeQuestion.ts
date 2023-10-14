@@ -1,17 +1,17 @@
 import { Question } from "yeoman-generator";
+import { Answers, TemplateSignature } from "../@types";
+import BaseQuestion from "./BaseQuestion";
 import AppGenerator from "..";
-import { ProjectQuestion } from "./ProjectQuestion";
-import { TemplateId } from "../templates";
 
-export class ProjectTypeQuestion extends ProjectQuestion {
-    private readonly choices: TemplateId[];
+class ProjectTypeQuestion extends BaseQuestion {
+    private readonly choices: TemplateSignature[];
 
-    constructor(generator: AppGenerator, choices: TemplateId[]) {
+    constructor(generator: AppGenerator, choices: TemplateSignature[]) {
         super(generator);
         this.choices = choices;
     }
 
-    public getQuestion(): Question<{ type: string }> {
+    public getQuestion(): Question<Answers> {
         return {
             type: "list",
             name: "type",
@@ -27,3 +27,5 @@ export class ProjectTypeQuestion extends ProjectQuestion {
         };
     }
 }
+
+export default ProjectTypeQuestion;

@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import which from "which";
 
-export class CodeHelper {
+class CodeHelper {
     public static async getPath(): Promise<string | Error> {
         const code = await which("code").catch(() => undefined);
 
@@ -24,3 +24,5 @@ export class CodeHelper {
         await generator.spawnCommand(code, [path]);
     }
 }
+
+export default CodeHelper;

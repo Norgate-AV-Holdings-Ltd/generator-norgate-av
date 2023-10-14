@@ -1,7 +1,7 @@
 import Generator from "yeoman-generator";
 import which from "which";
 
-export class GitHelper {
+class GitHelper {
     private static async isGitInstalled(): Promise<string | undefined> {
         return await which("git").catch(() => undefined);
     }
@@ -68,3 +68,5 @@ export class GitHelper {
         ]);
     }
 }
+
+export default GitHelper;

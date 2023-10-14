@@ -1,8 +1,6 @@
-export { ProjectQuestion } from "./ProjectQuestion";
-export { QuestionFactory } from "./QuestionFactory";
-export { ProjectTypeQuestion } from "./ProjectTypeQuestion";
-export { ProjectDisplayNameQuestion } from "./ProjectDisplayNameQuestion";
-export { ProjectDescriptionQuestion } from "./ProjectDescriptionQuestion";
-export { ProjectIdQuestion } from "./ProjectIdQuestion";
-export { GitQuestion } from "./GitQuestion";
-export { NodePackageManagerQuestion } from "./NodePackageManagerQuestion";
+export { default as ProjectTypeQuestion } from "./ProjectTypeQuestion";
+export { default as ProjectDisplayNameQuestion } from "./ProjectDisplayNameQuestion";
+export { default as ProjectDescriptionQuestion } from "./ProjectDescriptionQuestion";
+export { default as ProjectIdQuestion } from "./ProjectIdQuestion";
+export { default as GitQuestion } from "./GitQuestion";
+export { default as NodePackageManagerQuestion } from "./NodePackageManagerQuestion";

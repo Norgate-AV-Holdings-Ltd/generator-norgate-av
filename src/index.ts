@@ -2,16 +2,14 @@ import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
 import path from "path";
-import { AppOptions } from "./app.options";
-import { TemplateFactory, Template, TemplateId } from "./templates";
-import { CodeHelper, GitHelper } from "./helpers";
-import cliOptions from "./cli/cli.options";
-import cliArguments from "./cli/cli.arguments";
+import { AppOptions, TemplateInterface, TemplateSignature } from "./@types";
+import { GeneratorFactory } from "./generators";
+import { CliHelper, CodeHelper, GitHelper } from "./helpers";
 import { ProjectTypeQuestion } from "./questions";
 
-export class AppGenerator extends Generator<AppOptions> {
-    private template: Template | undefined = undefined;
-    private readonly templateChoices = TemplateFactory.getAvailableTemplates();
+class AppGenerator extends Generator<AppOptions> {
+    private template: TemplateInterface | undefined = undefined;
+    private readonly templateChoices = GeneratorFactory.getAvailable();
     private abort: boolean = false;
 
     constructor(args: string | string[], opts: AppOptions) {
@@ -31,13 +29,13 @@ export class AppGenerator extends Generator<AppOptions> {
     }
 
     private _initializeCliArguments(): void {
-        for (const { name, config } of cliArguments) {
+        for (const { name, config } of CliHelper.getArguments()) {
             this.argument(name, config);
         }
     }
 
     private _initializeCliOptions(): void {
-        for (const { name, config } of cliOptions) {
+        for (const { name, config } of CliHelper.getOptions()) {
             this.option(name, config);
         }
     }
@@ -60,7 +58,7 @@ export class AppGenerator extends Generator<AppOptions> {
     }
 
     private async _promptForProjectType(
-        choices: TemplateId[],
+        choices: TemplateSignature[],
     ): Promise<string> {
         const answer = await this.prompt(
             new ProjectTypeQuestion(this, choices).getQuestion(),
@@ -75,7 +73,7 @@ export class AppGenerator extends Generator<AppOptions> {
             (await this._promptForProjectType(this.templateChoices));
 
         try {
-            this.template = TemplateFactory.createTemplate(this);
+            this.template = GeneratorFactory.create(this);
             await this.template.prompting();
         } catch (error) {
             this.log(error);

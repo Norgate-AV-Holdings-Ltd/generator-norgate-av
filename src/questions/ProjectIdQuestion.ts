@@ -1,9 +1,9 @@
 import { Question } from "yeoman-generator";
+import { Answers } from "../@types";
+import BaseQuestion from "./BaseQuestion";
 import AppGenerator from "..";
-import { ProjectQuestion } from "./ProjectQuestion";
-import { Answers } from "./Answers";
 
-export class ProjectIdQuestion extends ProjectQuestion {
+class ProjectIdQuestion extends BaseQuestion {
     private readonly pattern: RegExp = /^[a-z0-9][a-z0-9-]*$/i;
 
     constructor(generator: AppGenerator) {
@@ -37,3 +37,5 @@ export class ProjectIdQuestion extends ProjectQuestion {
         };
     }
 }
+
+export default ProjectIdQuestion;

@@ -1,12 +1,71 @@
 {
     "templates": {
-        "clang": {
-            "files": [
-                {
-                    "from": "main.c",
-                    "to": "main.c"
-                }
-            ]
+        "template-c": {
+            "signature": {
+                "name": "C",
+                "id": "template-c",
+                "aliases": ["c", "clang"]
+            },
+            "package-managers": {
+                "$ref": "#/package-managers/node"
+            }
+        },
+        "typescript": {
+            "signature": {
+                "name": "Typescript",
+                "id": "project-ts",
+                "aliases": ["ts", "typescript"]
+            },
+            "package-managers": {
+                "$ref": "#/package-managers/node"
+            }
+        },
+        "javascript": {
+            "signature": {
+                "name": "Javascript",
+                "id": "project-js",
+                "aliases": ["js", "javascript"]
+            },
+            "package-managers": {
+                "$ref": "#/package-managers/node"
+            }
+        },
+        "python": {
+            "signature": {
+                "name": "Python",
+                "id": "project-py",
+                "aliases": ["py", "python"]
+            }
+        },
+        "html": {
+            "signature": {
+                "name": "HTML",
+                "id": "project-html",
+                "aliases": ["html", "web", "vanilla"]
+            },
+            "package-managers": {
+                "$ref": "#/package-managers/node"
+            }
+        },
+        "simpl": {
+            "signature": {
+                "name": "Simpl",
+                "id": "project-simpl",
+                "aliases": ["simpl"]
+            },
+            "package-managers": {
+                "$ref": "#/package-managers/node"
+            }
+        }
+    },
+    "files": {
+        "base-directory": "templates",
+        "common": {}
+    },
+    "package-managers": {
+        "node": {
+            "default": "pnpm",
+            "choices": ["pnpm", "yarn", "npm"]
         }
     }
 }

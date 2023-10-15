@@ -1,32 +1,32 @@
-import { TemplateInterface, TemplateSignature } from "../@types";
+import { GeneratorInterface, GeneratorSignature } from "../@types";
 import { ClangGenerator } from "./ClangGenerator";
 import AppGenerator from "..";
 
-export class GeneratorFactory {
-    private static readonly templates = [ClangGenerator];
+class GeneratorFactory {
+    private static readonly generators = [ClangGenerator];
 
-    public static create(generator: AppGenerator): TemplateInterface {
+    public static create(generator: AppGenerator): GeneratorInterface {
         const { type } = generator.options;
 
-        const template = this.templates.find(
+        const Generator = this.generators.find(
             ({ signature: { aliases, id } }) => {
                 return aliases.indexOf(type) || id === type;
             },
         );
 
-        if (!template) {
+        if (!Generator) {
             throw new Error(
-                `Invalid project type: ${type}\nPossible types are: ${this.templates
+                `Invalid project type: ${type}\nPossible types are: ${this.generators
                     .map(({ signature: { aliases } }) => aliases.join(", "))
                     .join(", ")}`,
             );
         }
 
-        return new template(generator);
+        return new Generator(generator);
     }
 
-    public static getAvailable(): TemplateSignature[] {
-        return this.templates.map(({ signature: { id, name, aliases } }) => {
+    public static getAvailable(): GeneratorSignature[] {
+        return this.generators.map(({ signature: { id, name, aliases } }) => {
             return {
                 id,
                 name,

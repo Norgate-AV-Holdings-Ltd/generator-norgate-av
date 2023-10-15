@@ -1,12 +1,12 @@
 import { Question } from "yeoman-generator";
-import { Answers, TemplateSignature } from "../@types";
+import { Answers, GeneratorSignature } from "../@types";
 import BaseQuestion from "./BaseQuestion";
 import AppGenerator from "..";
 
-class ProjectTypeQuestion extends BaseQuestion {
-    private readonly choices: TemplateSignature[];
+class ProjectType extends BaseQuestion {
+    private readonly choices: GeneratorSignature[];
 
-    constructor(generator: AppGenerator, choices: TemplateSignature[]) {
+    constructor(generator: AppGenerator, choices: GeneratorSignature[]) {
         super(generator);
         this.choices = choices;
     }
@@ -28,4 +28,4 @@ class ProjectTypeQuestion extends BaseQuestion {
     }
 }
 
-export default ProjectTypeQuestion;
+export default ProjectType;

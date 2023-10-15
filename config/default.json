@@ -6,55 +6,55 @@
                 "id": "template-c",
                 "aliases": ["c", "clang"]
             },
-            "package-managers": {
-                "$ref": "#/package-managers/node"
+            "package-manager": {
+                "$ref": "#/package-manager/node"
             }
         },
-        "typescript": {
+        "template-ts": {
             "signature": {
                 "name": "Typescript",
-                "id": "project-ts",
+                "id": "template-ts",
                 "aliases": ["ts", "typescript"]
             },
-            "package-managers": {
-                "$ref": "#/package-managers/node"
+            "package-manager": {
+                "$ref": "#/package-manager/node"
             }
         },
-        "javascript": {
+        "template-js": {
             "signature": {
                 "name": "Javascript",
-                "id": "project-js",
+                "id": "template-js",
                 "aliases": ["js", "javascript"]
             },
-            "package-managers": {
-                "$ref": "#/package-managers/node"
+            "package-manager": {
+                "$ref": "#/package-manager/node"
             }
         },
-        "python": {
+        "template-py": {
             "signature": {
                 "name": "Python",
-                "id": "project-py",
+                "id": "template-py",
                 "aliases": ["py", "python"]
             }
         },
-        "html": {
+        "template-html": {
             "signature": {
                 "name": "HTML",
-                "id": "project-html",
+                "id": "template-html",
                 "aliases": ["html", "web", "vanilla"]
             },
-            "package-managers": {
-                "$ref": "#/package-managers/node"
+            "package-manager": {
+                "$ref": "#/package-manager/node"
             }
         },
-        "simpl": {
+        "template-simpl": {
             "signature": {
                 "name": "Simpl",
-                "id": "project-simpl",
+                "id": "template-simpl",
                 "aliases": ["simpl"]
             },
-            "package-managers": {
-                "$ref": "#/package-managers/node"
+            "package-manager": {
+                "$ref": "#/package-manager/node"
             }
         }
     },
@@ -62,7 +62,7 @@
         "base-directory": "templates",
         "common": {}
     },
-    "package-managers": {
+    "package-manager": {
         "node": {
             "default": "pnpm",
             "choices": ["pnpm", "yarn", "npm"]

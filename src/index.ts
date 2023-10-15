@@ -2,13 +2,13 @@ import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
 import path from "path";
-import { AppOptions, TemplateInterface, TemplateSignature } from "./@types";
+import { AppOptions, GeneratorInterface, GeneratorSignature } from "./@types";
 import { GeneratorFactory } from "./generators";
 import { CliHelper, CodeHelper, GitHelper } from "./helpers";
-import { ProjectTypeQuestion } from "./questions";
+import { ProjectType } from "./questions";
 
 class AppGenerator extends Generator<AppOptions> {
-    private template: TemplateInterface | undefined = undefined;
+    private template: GeneratorInterface | undefined = undefined;
     private readonly templateChoices = GeneratorFactory.getAvailable();
     private abort: boolean = false;
 
@@ -58,10 +58,10 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     private async _promptForProjectType(
-        choices: TemplateSignature[],
+        choices: GeneratorSignature[],
     ): Promise<string> {
         const answer = await this.prompt(
-            new ProjectTypeQuestion(this, choices).getQuestion(),
+            new ProjectType(this, choices).getQuestion(),
         );
 
         return answer.type;
@@ -84,6 +84,7 @@ class AppGenerator extends Generator<AppOptions> {
     public async writing(): Promise<void> {
         this.log(this.options);
         this.abort = true;
+
         if (this.abort) {
             return;
         }

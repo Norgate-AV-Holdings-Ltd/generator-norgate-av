@@ -4,7 +4,7 @@ import BaseQuestion from "./BaseQuestion";
 import { Answers, NodePackageManager } from "../@types";
 import AppGenerator from "..";
 
-class NodePackageManagerQuestion extends BaseQuestion {
+class PackageManager extends BaseQuestion {
     private readonly default = config.get<NodePackageManager>(
         "package-manager.node.default",
     );
@@ -35,4 +35,4 @@ class NodePackageManagerQuestion extends BaseQuestion {
     }
 }
 
-export default NodePackageManagerQuestion;
+export default PackageManager;

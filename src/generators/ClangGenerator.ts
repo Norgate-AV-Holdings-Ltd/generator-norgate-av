@@ -1,36 +1,36 @@
 import chalk from "chalk";
 import config from "config";
 import path from "path";
-import { TemplateInterface, TemplateSignature } from "../@types";
+import { GeneratorInterface, GeneratorSignature } from "../@types";
 import AppGenerator from "..";
 import {
-    ProjectDisplayNameQuestion,
-    ProjectIdQuestion,
-    ProjectDescriptionQuestion,
-    GitQuestion,
-    NodePackageManagerQuestion,
+    ProjectName,
+    ProjectId,
+    ProjectDescription,
+    Git,
+    PackageManager,
 } from "../questions";
 
-export class ClangGenerator implements TemplateInterface {
-    public static readonly signature = config.get<TemplateSignature>(
+export class ClangGenerator implements GeneratorInterface {
+    public static readonly signature = config.get<GeneratorSignature>(
         "templates.template-c.signature",
     );
 
     private readonly generator: AppGenerator;
 
     private readonly questions = [
-        ProjectDisplayNameQuestion,
-        ProjectIdQuestion,
-        ProjectDescriptionQuestion,
-        GitQuestion,
-        NodePackageManagerQuestion,
+        ProjectName,
+        ProjectId,
+        ProjectDescription,
+        Git,
+        PackageManager,
     ];
 
     constructor(generator: AppGenerator) {
         this.generator = generator;
     }
 
-    public getSignature(): TemplateSignature {
+    public getSignature(): GeneratorSignature {
         return ClangGenerator.signature;
     }
 

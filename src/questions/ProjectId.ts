@@ -3,7 +3,7 @@ import { Answers } from "../@types";
 import BaseQuestion from "./BaseQuestion";
 import AppGenerator from "..";
 
-class ProjectIdQuestion extends BaseQuestion {
+class ProjectId extends BaseQuestion {
     private readonly pattern: RegExp = /^[a-z0-9][a-z0-9-]*$/i;
 
     constructor(generator: AppGenerator) {
@@ -38,4 +38,4 @@ class ProjectIdQuestion extends BaseQuestion {
     }
 }
 
-export default ProjectIdQuestion;
+export default ProjectId;

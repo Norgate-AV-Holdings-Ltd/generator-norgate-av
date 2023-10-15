@@ -3,7 +3,7 @@ import { Answers } from "../@types";
 import BaseQuestion from "./BaseQuestion";
 import AppGenerator from "..";
 
-class ProjectDescriptionQuestion extends BaseQuestion {
+class ProjectDescription extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
     }
@@ -21,4 +21,4 @@ class ProjectDescriptionQuestion extends BaseQuestion {
     }
 }
 
-export default ProjectDescriptionQuestion;
+export default ProjectDescription;

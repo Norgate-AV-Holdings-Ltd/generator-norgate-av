@@ -53,9 +53,7 @@ export class ClangGenerator implements GeneratorInterface {
         );
     }
 
-    public async intializaing() {
-        // await this.getPackageManager();
-    }
+    public async initializing(): Promise<void> {}
 
     public async prompting(): Promise<void> {
         // await this.getPackageManager();

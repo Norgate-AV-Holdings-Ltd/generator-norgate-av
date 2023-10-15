@@ -8,8 +8,8 @@ import { CliHelper, CodeHelper, GitHelper } from "./helpers";
 import { ProjectType } from "./questions";
 
 class AppGenerator extends Generator<AppOptions> {
-    private template: GeneratorInterface | undefined = undefined;
-    private readonly templateChoices = GeneratorFactory.getAvailable();
+    private generator: GeneratorInterface | undefined = undefined;
+    private readonly choices = GeneratorFactory.getAvailable();
     private abort: boolean = false;
 
     constructor(args: string | string[], opts: AppOptions) {
@@ -49,6 +49,8 @@ class AppGenerator extends Generator<AppOptions> {
             ),
         );
 
+        this.generator?.initializing();
+
         this.destinationRoot(
             path.resolve(
                 this.destinationPath(),
@@ -70,11 +72,11 @@ class AppGenerator extends Generator<AppOptions> {
     public async prompting(): Promise<void> {
         this.options.type =
             this.options.type ||
-            (await this._promptForProjectType(this.templateChoices));
+            (await this._promptForProjectType(this.choices));
 
         try {
-            this.template = GeneratorFactory.create(this);
-            await this.template.prompting();
+            this.generator = GeneratorFactory.create(this);
+            await this.generator.prompting();
         } catch (error) {
             this.log(error);
             this.abort = true;
@@ -93,7 +95,7 @@ class AppGenerator extends Generator<AppOptions> {
             this.destinationRoot(this.destinationPath(this.options.name));
         }
 
-        this.template?.writing();
+        this.generator?.writing();
     }
 
     public async install(): Promise<void> {
@@ -126,6 +128,8 @@ class AppGenerator extends Generator<AppOptions> {
             }
         }
 
+        this.generator?.install();
+
         this.log();
         this.log("Installing packages. This might take a couple of minutes.");
     }
@@ -151,7 +155,7 @@ class AppGenerator extends Generator<AppOptions> {
         );
         this.log("Inside that directory, you can run several commands:");
 
-        this.template?.end();
+        this.generator?.end();
 
         this.log(
             `Open ${chalk.cyan(

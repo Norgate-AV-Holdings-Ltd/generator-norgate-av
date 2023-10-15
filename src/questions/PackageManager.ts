@@ -6,10 +6,10 @@ import AppGenerator from "..";
 
 class PackageManager extends BaseQuestion {
     private readonly default = config.get<NodePackageManager>(
-        "package-manager.node.default",
+        "pkgmanager.node.default",
     );
     private readonly choices = config.get<NodePackageManager[]>(
-        "package-manager.node.choices",
+        "pkgmanager.node.choices",
     );
 
     constructor(generator: AppGenerator) {

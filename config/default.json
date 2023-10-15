@@ -1,68 +1,68 @@
 {
     "templates": {
-        "template-c": {
+        "c": {
             "signature": {
                 "name": "C",
                 "id": "template-c",
                 "aliases": ["c", "clang"]
             },
-            "package-manager": {
-                "$ref": "#/package-manager/node"
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
             }
         },
-        "template-ts": {
+        "ts": {
             "signature": {
                 "name": "Typescript",
                 "id": "template-ts",
                 "aliases": ["ts", "typescript"]
             },
-            "package-manager": {
-                "$ref": "#/package-manager/node"
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
             }
         },
-        "template-js": {
+        "js": {
             "signature": {
                 "name": "Javascript",
                 "id": "template-js",
                 "aliases": ["js", "javascript"]
             },
-            "package-manager": {
-                "$ref": "#/package-manager/node"
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
             }
         },
-        "template-py": {
+        "py": {
             "signature": {
                 "name": "Python",
                 "id": "template-py",
                 "aliases": ["py", "python"]
             }
         },
-        "template-html": {
+        "html": {
             "signature": {
                 "name": "HTML",
                 "id": "template-html",
                 "aliases": ["html", "web", "vanilla"]
             },
-            "package-manager": {
-                "$ref": "#/package-manager/node"
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
             }
         },
-        "template-simpl": {
+        "simpl": {
             "signature": {
                 "name": "Simpl",
                 "id": "template-simpl",
                 "aliases": ["simpl"]
             },
-            "package-manager": {
-                "$ref": "#/package-manager/node"
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
             }
         }
     },
     "files": {
-        "base-directory": "templates",
+        "directory": "templates",
         "common": {}
     },
-    "package-manager": {
+    "pkgmanager": {
         "node": {
             "default": "pnpm",
             "choices": ["pnpm", "yarn", "npm"]

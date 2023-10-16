@@ -13,7 +13,7 @@ import {
 } from "../questions";
 import NodeProject from "../project/NodeProject";
 
-export class ClangGenerator implements GeneratorInterface {
+class ClangGenerator implements GeneratorInterface {
     public static readonly signature = config.get<GeneratorSignature>(
         "generators.c.signature",
     );

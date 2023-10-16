@@ -1,5 +1,5 @@
 import { GeneratorInterface, GeneratorSignature } from "../@types";
-import { ClangGenerator } from "./ClangGenerator";
+import ClangGenerator from "./ClangGenerator";
 import AppGenerator from "..";
 
 class GeneratorFactory {

@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import config from "config";
 import path from "path";
-// import { resolveRefs, resolveRefsAt } from "json-refs";
+// import { resolveRefs } from "json-refs";
 import { GeneratorInterface, GeneratorSignature } from "../@types";
 import AppGenerator from "..";
 import {
@@ -14,7 +14,7 @@ import {
 
 export class ClangGenerator implements GeneratorInterface {
     public static readonly signature = config.get<GeneratorSignature>(
-        "templates.c.signature",
+        "generators.c.signature",
     );
 
     private readonly generator: AppGenerator;
@@ -32,13 +32,8 @@ export class ClangGenerator implements GeneratorInterface {
     }
 
     // private async getPackageManager() {
-    //     this.generator.log(
-    //         JSON.stringify(
-    //             await resolveRefsAt(config.get("templates.c.pkgmanager.$ref")),
-    //             null,
-    //             4,
-    //         ),
-    //     );
+    //     const { resolved }: any = await resolveRefs(config.util.toObject());
+    //     this.generator.log(resolved.templates.c.pkgmanager);
     // }
 
     public getSignature(): GeneratorSignature {

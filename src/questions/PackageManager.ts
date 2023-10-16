@@ -1,20 +1,33 @@
 import { Question } from "yeoman-generator";
 import config from "config";
+// import { resolveRefs } from "json-refs";
 import BaseQuestion from "./BaseQuestion";
 import { Answers, NodePackageManager } from "../@types";
 import AppGenerator from "..";
 
 class PackageManager extends BaseQuestion {
-    private readonly default = config.get<NodePackageManager>(
-        "pkgmanager.node.default",
-    );
-    private readonly choices = config.get<NodePackageManager[]>(
+    // private config: any;
+    private default = config.get<NodePackageManager>("pkgmanager.node.default");
+    private choices = config.get<NodePackageManager[]>(
         "pkgmanager.node.choices",
     );
 
     constructor(generator: AppGenerator) {
         super(generator);
+        // this.initialize();
     }
+
+    // private async initialize() {
+    //     const { resolved }: any = await resolveRefs(config.util.toObject());
+    //     this.config = resolved;
+    //     // this.default = this.getDefault();
+    // }
+
+    // private getDefault() {
+    //     return this.config.templates[
+    //         this.generator.generator?.getSignature().id
+    //     ].pkgmanager.default;
+    // }
 
     public getQuestion(): Question<Answers> {
         return {

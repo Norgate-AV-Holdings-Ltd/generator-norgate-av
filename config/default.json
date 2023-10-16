@@ -1,6 +1,6 @@
 {
     "generators": {
-        "c": {
+        "template-c": {
             "signature": {
                 "name": "C",
                 "id": "template-c",

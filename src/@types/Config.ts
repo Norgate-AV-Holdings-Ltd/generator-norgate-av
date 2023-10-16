@@ -1,20 +1,20 @@
-import GeneratorSignature from "./GeneratorSignature";
-
-type PackageManagerRef = {
-    $ref: string;
-};
-
-type PackageManagerResolvedRef = {
-    default: string;
-    choices: Array<string>;
-};
-
-type TemplateConfig = {
-    signature: GeneratorSignature;
-    pkgmanager: PackageManagerRef | PackageManagerResolvedRef;
-};
+import PathMap from "./PathMap";
+import PackageManager from "./PackageManager";
+import TemplateConfig from "./TemplateConfig";
 
 type Config = {
-    templates: Record<string, TemplateConfig>;
-    pkgmanager: Record<string, PackageManagerResolvedRef>;
+    generators: {
+        [key: string]: TemplateConfig;
+    };
+    files: {
+        directory: string;
+        paths: {
+            [key: string]: PathMap;
+        };
+    };
+    pkgmanager: {
+        [key: string]: PackageManager;
+    };
 };
+
+export default Config;

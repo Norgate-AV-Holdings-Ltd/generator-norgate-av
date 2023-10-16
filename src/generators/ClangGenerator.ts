@@ -1,8 +1,8 @@
 import chalk from "chalk";
 import config from "config";
 import path from "path";
-import { resolveRefs } from "json-refs";
-import { GeneratorInterface, GeneratorSignature } from "../@types";
+import { ResolvedRefsResults, resolveRefs } from "json-refs";
+import { Config, GeneratorInterface, GeneratorSignature } from "../@types";
 import AppGenerator from "..";
 import {
     ProjectName,
@@ -61,11 +61,29 @@ export class ClangGenerator implements GeneratorInterface {
         }
     }
 
+    private async getFilePaths() {
+        try {
+            const result: ResolvedRefsResults = await resolveRefs(
+                config.util.toObject(),
+            );
+
+            const resolved = result.resolved as Config;
+
+            const id = this.getSignature().id;
+
+            return resolved.generators[id]?.paths;
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
     public async writing(): Promise<void> {
-        // Resolve json references in config
-        const { resolved }: any = await resolveRefs(config.util.toObject());
-        // Get the resolved values
-        const paths = resolved.generators.c.paths;
+        const paths = await this.getFilePaths();
+
+        if (!paths) {
+            return;
+        }
+
         this.generator.log(paths);
 
         this.generator.env.cwd = this.generator.destinationPath();

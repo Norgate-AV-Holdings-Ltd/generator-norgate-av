@@ -49,8 +49,6 @@ class AppGenerator extends Generator<AppOptions> {
             ),
         );
 
-        this.generator?.initializing();
-
         this.destinationRoot(
             path.resolve(
                 this.destinationPath(),
@@ -84,8 +82,8 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     public async writing(): Promise<void> {
-        this.log(this.options);
-        this.abort = true;
+        // this.log(this.options);
+        // this.abort = true;
 
         if (this.abort) {
             return;

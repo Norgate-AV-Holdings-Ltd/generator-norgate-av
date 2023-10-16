@@ -23,7 +23,49 @@
                     "$ref": "#/files/paths/src"
                 },
                 {
+                    "$ref": "#/files/paths/changelogrc"
+                },
+                {
                     "$ref": "#/files/paths/commitlintrc"
+                },
+                {
+                    "$ref": "#/files/paths/czrc"
+                },
+                {
+                    "$ref": "#/files/paths/editorconfig"
+                },
+                {
+                    "$ref": "#/files/paths/gitattributes"
+                },
+                {
+                    "$ref": "#/files/paths/gitignore"
+                },
+                {
+                    "$ref": "#/files/paths/gitversion"
+                },
+                {
+                    "$ref": "#/files/paths/lintstagedrc"
+                },
+                {
+                    "$ref": "#/files/paths/makefile"
+                },
+                {
+                    "$ref": "#/files/paths/nvmrc"
+                },
+                {
+                    "$ref": "#/files/paths/packagejson"
+                },
+                {
+                    "$ref": "#/files/paths/prettierrc"
+                },
+                {
+                    "$ref": "#/files/paths/prettierignore"
+                },
+                {
+                    "$ref": "#/files/paths/license"
+                },
+                {
+                    "$ref": "#/files/paths/readme"
                 }
             ]
         },

@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import config from "config";
 import path from "path";
-// import { resolveRefs } from "json-refs";
+import { resolveRefs } from "json-refs";
 import { GeneratorInterface, GeneratorSignature } from "../@types";
 import AppGenerator from "..";
 import {
@@ -48,8 +48,6 @@ export class ClangGenerator implements GeneratorInterface {
         );
     }
 
-    public async initializing(): Promise<void> {}
-
     public async prompting(): Promise<void> {
         // await this.getPackageManager();
         const questions = this.questions.map((question) =>
@@ -64,6 +62,12 @@ export class ClangGenerator implements GeneratorInterface {
     }
 
     public async writing(): Promise<void> {
+        // Resolve json references in config
+        const { resolved }: any = await resolveRefs(config.util.toObject());
+        // Get the resolved values
+        const paths = resolved.generators.c.paths;
+        this.generator.log(paths);
+
         this.generator.env.cwd = this.generator.destinationPath();
 
         this.generator.log();
@@ -80,13 +84,13 @@ export class ClangGenerator implements GeneratorInterface {
 
         this.generator.sourceRoot(this.getSourceRoot());
 
-        // for (const path of this.paths) {
-        //     this.generator.fs.copyTpl(
-        //         this.generator.templatePath(path.from),
-        //         this.generator.destinationPath(path.to),
-        //         this.generator.options,
-        //     );
-        // }
+        for (const path of paths) {
+            this.generator.fs.copyTpl(
+                this.generator.templatePath(path.from),
+                this.generator.destinationPath(path.to),
+                this.generator.options,
+            );
+        }
         // this.generator.fs.copy(
         //     this.generator.templatePath("github"),
         //     this.generator.destinationPath(".github"),

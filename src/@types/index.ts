@@ -6,6 +6,7 @@ export { default as Config } from "./Config";
 export { default as GeneratorInterface } from "./GeneratorInterface";
 export { default as GeneratorSignature } from "./GeneratorSignature";
 export { default as NodePackageManager } from "./NodePackageManager";
+export { default as PackageJson } from "./PackageJson";
 export { default as PackageManager } from "./PackageManager";
 export { default as PathMap } from "./PathMap";
 export { default as TemplateConfig } from "./TemplateConfig";

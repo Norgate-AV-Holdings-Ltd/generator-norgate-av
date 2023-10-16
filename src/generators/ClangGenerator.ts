@@ -11,6 +11,7 @@ import {
     Git,
     PackageManager,
 } from "../questions";
+import NodeProject from "../project/NodeProject";
 
 export class ClangGenerator implements GeneratorInterface {
     public static readonly signature = config.get<GeneratorSignature>(
@@ -18,6 +19,7 @@ export class ClangGenerator implements GeneratorInterface {
     );
 
     private readonly generator: AppGenerator;
+    private nodeProject: NodeProject;
 
     private readonly questions = [
         ProjectName,
@@ -30,11 +32,6 @@ export class ClangGenerator implements GeneratorInterface {
     constructor(generator: AppGenerator) {
         this.generator = generator;
     }
-
-    // private async getPackageManager() {
-    //     const { resolved }: any = await resolveRefs(config.util.toObject());
-    //     this.generator.log(resolved.templates.c.pkgmanager);
-    // }
 
     public getSignature(): GeneratorSignature {
         return ClangGenerator.signature;
@@ -49,7 +46,6 @@ export class ClangGenerator implements GeneratorInterface {
     }
 
     public async prompting(): Promise<void> {
-        // await this.getPackageManager();
         const questions = this.questions.map((question) =>
             new question(this.generator).getQuestion(),
         );

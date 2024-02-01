@@ -2,10 +2,14 @@ import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
 import path from "path";
-import { AppOptions, GeneratorInterface, GeneratorSignature } from "./@types";
-import { GeneratorFactory } from "./generators";
-import { CliHelper, CodeHelper, GitHelper } from "./helpers";
-import { ProjectType } from "./questions";
+import {
+    AppOptions,
+    GeneratorInterface,
+    GeneratorSignature,
+} from "./@types/index.js";
+import { GeneratorFactory } from "./generators/index.js";
+import { CliHelper, CodeHelper, GitHelper } from "./helpers/index.js";
+import { ProjectType } from "./questions/index.js";
 
 class AppGenerator extends Generator<AppOptions> {
     private generator: GeneratorInterface | undefined = undefined;

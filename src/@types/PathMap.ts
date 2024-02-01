@@ -1,6 +1,4 @@
-type PathMap = {
+export type PathMap = {
     from: string;
     to: string;
 };
-
-export default PathMap;

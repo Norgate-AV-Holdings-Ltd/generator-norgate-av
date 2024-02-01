@@ -1,15 +1,13 @@
-import { Question } from "yeoman-generator";
-import { Answers } from "../@types";
-import AppGenerator from "..";
+import { PromptQuestion } from "@yeoman/types";
+import { Answers } from "../@types/index.js";
+import AppGenerator from "../app.js";
 
-abstract class BaseQuestion {
+export abstract class BaseQuestion {
     protected readonly generator: AppGenerator;
 
     protected constructor(generator: AppGenerator) {
         this.generator = generator;
     }
 
-    public abstract getQuestion(): Question<Answers>;
+    public abstract getQuestion(): PromptQuestion<Answers>;
 }
-
-export default BaseQuestion;

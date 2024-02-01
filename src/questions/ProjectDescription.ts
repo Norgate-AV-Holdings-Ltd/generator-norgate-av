@@ -1,14 +1,14 @@
-import { Question } from "yeoman-generator";
-import { Answers } from "../@types";
-import BaseQuestion from "./BaseQuestion";
-import AppGenerator from "..";
+import { PromptQuestion } from "@yeoman/types";
+import { Answers } from "../@types/index.js";
+import { BaseQuestion } from "./index.js";
+import AppGenerator from "../app.js";
 
-class ProjectDescription extends BaseQuestion {
+export class ProjectDescription extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
     }
 
-    public getQuestion(): Question<Answers> {
+    public getQuestion(): PromptQuestion<Answers> {
         return {
             type: "input",
             name: "description",
@@ -20,5 +20,3 @@ class ProjectDescription extends BaseQuestion {
         };
     }
 }
-
-export default ProjectDescription;

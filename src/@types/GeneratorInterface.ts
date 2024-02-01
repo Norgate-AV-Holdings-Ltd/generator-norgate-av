@@ -1,6 +1,6 @@
-import GeneratorSignature from "./GeneratorSignature";
+import { GeneratorSignature } from "./index.js";
 
-interface GeneratorInterface {
+export interface GeneratorInterface {
     getSignature(): GeneratorSignature;
     getSourceRoot(): string;
     // initializing(): Promise<void>;
@@ -9,5 +9,3 @@ interface GeneratorInterface {
     install(): Promise<void>;
     end(): Promise<void>;
 }
-
-export default GeneratorInterface;

@@ -1,6 +1,6 @@
-import NodePackageManager from "./NodePackageManager";
+import { NodePackageManager } from "./index.js";
 
-type Answers = {
+export type Answers = {
     type: string;
     displayName: string;
     name: string;
@@ -8,5 +8,3 @@ type Answers = {
     git: boolean;
     pkg: NodePackageManager;
 };
-
-export default Answers;

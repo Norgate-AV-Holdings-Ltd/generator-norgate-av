@@ -1,2 +1,2 @@
-export { default as GeneratorFactory } from "./GeneratorFactory";
-export { default as ClangTemplate } from "./ClangGenerator";
+export { GeneratorFactory } from "./GeneratorFactory.js";
+export { ClangGenerator } from "./ClangGenerator.js";

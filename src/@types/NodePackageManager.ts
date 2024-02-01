@@ -1,3 +1,1 @@
-type NodePackageManager = "pnpm" | "yarn" | "npm";
-
-export default NodePackageManager;
+export type NodePackageManager = "pnpm" | "yarn" | "npm";

@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
-import { PackageJson } from "../@types";
+import { PackageJson } from "type-fest";
 
 class NodeProject {
     private static instance: NodeProject;

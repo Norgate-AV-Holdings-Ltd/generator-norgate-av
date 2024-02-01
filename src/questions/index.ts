@@ -1,6 +1,7 @@
-export { default as ProjectType } from "./ProjectType";
-export { default as ProjectName } from "./ProjectName";
-export { default as ProjectDescription } from "./ProjectDescription";
-export { default as ProjectId } from "./ProjectId";
-export { default as Git } from "./Git";
-export { default as PackageManager } from "./PackageManager";
+export { BaseQuestion } from "./BaseQuestion.js";
+export { Git } from "./Git.js";
+export { PackageManager } from "./PackageManager.js";
+export { ProjectDescription } from "./ProjectDescription.js";
+export { ProjectId } from "./ProjectId.js";
+export { ProjectName } from "./ProjectName.js";
+export { ProjectType } from "./ProjectType.js";

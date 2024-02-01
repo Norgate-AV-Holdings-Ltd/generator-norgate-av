@@ -1,16 +1,16 @@
-import { Question } from "yeoman-generator";
-import { Answers } from "../@types";
-import BaseQuestion from "./BaseQuestion";
-import AppGenerator from "..";
+import { PromptQuestion } from "@yeoman/types";
+import { Answers } from "../@types/index.js";
+import { BaseQuestion } from "./index.js";
+import AppGenerator from "../app.js";
 
-class ProjectId extends BaseQuestion {
+export class ProjectId extends BaseQuestion {
     private readonly pattern: RegExp = /^[a-z0-9][a-z0-9-]*$/i;
 
     constructor(generator: AppGenerator) {
         super(generator);
     }
 
-    public getQuestion(): Question<Answers> {
+    public getQuestion(): PromptQuestion<Answers> {
         return {
             type: "input",
             name: "name",
@@ -37,5 +37,3 @@ class ProjectId extends BaseQuestion {
         };
     }
 }
-
-export default ProjectId;

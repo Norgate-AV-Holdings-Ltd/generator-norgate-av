@@ -1,7 +1,7 @@
-import { CliArgument, CliOption } from "../@types";
-import { GeneratorFactory } from "../generators";
+import { CliArgument, CliOption } from "../@types/index.js";
+import { GeneratorFactory } from "../generators/index.js";
 
-class CliHelper {
+export class CliHelper {
     public static getArguments(): CliArgument[] {
         return [
             {
@@ -83,5 +83,3 @@ class CliHelper {
         ];
     }
 }
-
-export default CliHelper;

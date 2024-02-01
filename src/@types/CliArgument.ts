@@ -1,8 +1,6 @@
-import { ArgumentConfig } from "yeoman-generator";
+import { ArgumentSpec } from "yeoman-generator";
 
-type CliArgument = {
+export type CliArgument = {
     name: string;
-    config: ArgumentConfig;
+    config: ArgumentSpec;
 };
-
-export default CliArgument;

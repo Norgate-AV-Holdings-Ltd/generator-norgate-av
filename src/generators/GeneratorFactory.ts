@@ -1,8 +1,8 @@
-import { GeneratorInterface, GeneratorSignature } from "../@types";
-import ClangGenerator from "./ClangGenerator";
-import AppGenerator from "..";
+import { GeneratorInterface, GeneratorSignature } from "../@types/index.js";
+import { ClangGenerator } from "./index.js";
+import AppGenerator from "../app.js";
 
-class GeneratorFactory {
+export class GeneratorFactory {
     private static readonly generators = [ClangGenerator];
 
     public static create(generator: AppGenerator): GeneratorInterface {
@@ -35,5 +35,3 @@ class GeneratorFactory {
         });
     }
 }
-
-export default GeneratorFactory;

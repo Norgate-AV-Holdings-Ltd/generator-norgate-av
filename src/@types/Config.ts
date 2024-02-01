@@ -1,8 +1,6 @@
-import PathMap from "./PathMap";
-import PackageManager from "./PackageManager";
-import TemplateConfig from "./TemplateConfig";
+import { PackageManager, PathMap, TemplateConfig } from "./index.js";
 
-type Config = {
+export type Config = {
     generators: {
         [key: string]: TemplateConfig;
     };
@@ -16,5 +14,3 @@ type Config = {
         [key: string]: PackageManager;
     };
 };
-
-export default Config;

@@ -1,14 +1,14 @@
-import { Question } from "yeoman-generator";
+import { PromptQuestion } from "@yeoman/types";
 import config from "config";
 // import { resolveRefs } from "json-refs";
-import BaseQuestion from "./BaseQuestion";
-import { Answers, NodePackageManager } from "../@types";
-import AppGenerator from "..";
+import { BaseQuestion } from "./index.js";
+import { Answers, NodePackageManager } from "../@types/index.js";
+import AppGenerator from "../app.js";
 
-class PackageManager extends BaseQuestion {
+export class PackageManager extends BaseQuestion {
     // private config: any;
     private default = config.get<NodePackageManager>("pkgmanager.node.default");
-    private choices = config.get<NodePackageManager[]>(
+    private choices = config.get<Array<NodePackageManager>>(
         "pkgmanager.node.choices",
     );
 
@@ -29,7 +29,7 @@ class PackageManager extends BaseQuestion {
     //     ].pkgmanager.default;
     // }
 
-    public getQuestion(): Question<Answers> {
+    public getQuestion(): PromptQuestion<Answers> {
         return {
             type: "list",
             name: "pkg",
@@ -47,5 +47,3 @@ class PackageManager extends BaseQuestion {
         };
     }
 }
-
-export default PackageManager;

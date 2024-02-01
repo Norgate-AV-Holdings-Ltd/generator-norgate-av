@@ -2,18 +2,22 @@ import chalk from "chalk";
 import config from "config";
 import path from "path";
 import { ResolvedRefsResults, resolveRefs } from "json-refs";
-import { Config, GeneratorInterface, GeneratorSignature } from "../@types";
-import AppGenerator from "..";
+import {
+    Config,
+    GeneratorInterface,
+    GeneratorSignature,
+} from "../@types/index.js";
+import AppGenerator from "../app.js";
 import {
     ProjectName,
     ProjectId,
     ProjectDescription,
     Git,
     PackageManager,
-} from "../questions";
-import NodeProject from "../project/NodeProject";
+} from "../questions/index.js";
+import NodeProject from "../project/NodeProject.js";
 
-class ClangGenerator implements GeneratorInterface {
+export class ClangGenerator implements GeneratorInterface {
     public static readonly signature = config.get<GeneratorSignature>(
         "generators.c.signature",
     );
@@ -232,5 +236,3 @@ class ClangGenerator implements GeneratorInterface {
         this.generator.log();
     }
 }
-
-export default ClangGenerator;

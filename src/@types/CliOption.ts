@@ -1,8 +1,6 @@
-import { OptionConfig } from "yeoman-generator";
+import { CliOptionSpec } from "yeoman-generator";
 
-type CliOption = {
+export type CliOption = {
     name: string;
-    config: OptionConfig;
+    config: CliOptionSpec;
 };
-
-export default CliOption;

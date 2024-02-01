@@ -1,3 +1,3 @@
-export { default as CliHelper } from "./CliHelper";
-export { default as CodeHelper } from "./CodeHelper";
-export { default as GitHelper } from "./GitHelper";
+export { CliHelper } from "./CliHelper.js";
+export { CodeHelper } from "./CodeHelper.js";
+export { GitHelper } from "./GitHelper.js";

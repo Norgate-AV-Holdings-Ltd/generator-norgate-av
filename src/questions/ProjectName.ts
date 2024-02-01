@@ -1,15 +1,15 @@
-import { Question } from "yeoman-generator";
+import { PromptQuestion } from "@yeoman/types";
 import path from "path";
-import AppGenerator from "..";
-import { Answers } from "../@types";
-import BaseQuestion from "./BaseQuestion";
+import AppGenerator from "../app.js";
+import { Answers } from "../@types/index.js";
+import { BaseQuestion } from "./index.js";
 
-class ProjectName extends BaseQuestion {
+export class ProjectName extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
     }
 
-    public getQuestion(): Question<Answers> {
+    public getQuestion(): PromptQuestion<Answers> {
         const nameFromFolder = this.generator.options.destination
             ? path.basename(this.generator.destinationPath())
             : "";
@@ -25,5 +25,3 @@ class ProjectName extends BaseQuestion {
         };
     }
 }
-
-export default ProjectName;

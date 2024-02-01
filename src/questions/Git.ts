@@ -1,14 +1,14 @@
-import { Question } from "yeoman-generator";
-import BaseQuestion from "./BaseQuestion";
-import { Answers } from "../@types";
-import AppGenerator from "..";
+import { PromptQuestion } from "@yeoman/types";
+import { BaseQuestion } from "./index.js";
+import { Answers } from "../@types/index.js";
+import AppGenerator from "../app.js";
 
-class Git extends BaseQuestion {
+export class Git extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
     }
 
-    public getQuestion(): Question<Answers> {
+    public getQuestion(): PromptQuestion<Answers> {
         return {
             type: "confirm",
             name: "git",
@@ -20,5 +20,3 @@ class Git extends BaseQuestion {
         };
     }
 }
-
-export default Git;

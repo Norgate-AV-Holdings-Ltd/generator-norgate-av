@@ -14,10 +14,10 @@
         "noUncheckedIndexedAccess": true,
         "resolveJsonModule": true,
         "types": ["node"],
-        "typeRoots": ["lib/@types", "node_modules/@types"],
+        "typeRoots": ["src/@types", "node_modules/@types"],
         "allowSyntheticDefaultImports": true,
-        "noEmit": true,
+        "noEmit": true
     },
     "include": ["src"],
-    "exclude": ["**/template-files"],
+    "exclude": ["**/template-files"]
 }

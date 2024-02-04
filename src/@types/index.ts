@@ -1,12 +1,9 @@
 export { Answers } from "./Answers.js";
 export { AppOptions } from "./AppOptions.js";
-export { CliArgument } from "./CliArgument.js";
-export { CliOption } from "./CliOption.js";
 export { Config } from "./Config.js";
 export { GeneratorInterface } from "./GeneratorInterface.js";
 export { GeneratorSignature } from "./GeneratorSignature.js";
 export { NodePackageManager } from "./NodePackageManager.js";
-export { PackageJson } from "./PackageJson.js";
 export { PackageManager } from "./PackageManager.js";
 export { PathMap } from "./PathMap.js";
 export { TemplateConfig } from "./TemplateConfig.js";

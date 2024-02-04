@@ -8,4 +8,7 @@ export type AppOptions = BaseOptions & {
     git: boolean;
     open?: boolean;
     yes?: boolean;
+    skipPrompts: boolean;
+    destination: string;
+    name: string;
 };

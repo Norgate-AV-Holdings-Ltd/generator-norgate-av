@@ -3,6 +3,7 @@ import chalk from "chalk";
 import yosay from "yosay";
 import path from "path";
 import {
+    Answers,
     AppOptions,
     GeneratorInterface,
     GeneratorSignature,
@@ -24,7 +25,7 @@ class AppGenerator extends Generator<AppOptions> {
 
         this.description =
             "Generates project boilerplates of various types ready for development.";
-        this.options.skipPrompts = this.options.yes;
+        this.options.skipPrompts = this.options.yes || false;
 
         if (this.options.skipPrompts) {
             this.options.git = true;
@@ -33,14 +34,14 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     private _initializeCliArguments(): void {
-        for (const { name, config } of CliHelper.getArguments()) {
-            this.argument(name, config);
+        for (const arg of CliHelper.getArguments()) {
+            this.argument(arg.name, arg);
         }
     }
 
     private _initializeCliOptions(): void {
-        for (const { name, config } of CliHelper.getOptions()) {
-            this.option(name, config);
+        for (const option of CliHelper.getOptions()) {
+            this.option(option);
         }
     }
 
@@ -56,17 +57,20 @@ class AppGenerator extends Generator<AppOptions> {
         this.destinationRoot(
             path.resolve(
                 this.destinationPath(),
-                this.options.destination || "",
+                this.options.destinationRoot || "",
             ),
         );
     }
 
     private async _promptForProjectType(
-        choices: GeneratorSignature[],
+        choices: Array<GeneratorSignature>,
     ): Promise<string> {
-        const answer = await this.prompt(
-            new ProjectType(this, choices).getQuestion(),
-        );
+        const question = new ProjectType(this, choices).getQuestion();
+
+        const answer = await this.prompt<Answers>({
+            ...question,
+            name: question.name as string,
+        });
 
         return answer.type;
     }
@@ -102,15 +106,15 @@ class AppGenerator extends Generator<AppOptions> {
 
     public async install(): Promise<void> {
         if (this.abort) {
-            this.env.options.skipInstall = true;
+            this.options.skipInstall = true;
             return;
         }
 
-        if (this.options.installDependencies) {
-            this.env.options.nodePackageManager = this.options.pkg;
-        } else {
-            this.env.options.skipInstall = true;
-        }
+        // if (this.options.installDependencies) {
+        //     this.options.nodePackageManager = this.options.pkg;
+        // } else {
+        //     this.options.skipInstall = true;
+        // }
 
         if (this.options.git) {
             try {

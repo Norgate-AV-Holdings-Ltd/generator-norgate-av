@@ -64,7 +64,7 @@
         "husky": "^9.0.10",
         "lint-staged": "^15.2.1",
         "ncp": "^2.0.0",
-        "prettier": "^3.2.4",
+        "prettier": "^3.2.5",
         "rimraf": "^5.0.5",
         "semantic-release": "^23.0.0",
         "terser": "^5.27.0",
@@ -79,8 +79,9 @@
     },
     "dependencies": {
         "chalk": "^5.3.0",
-        "config": "^3.3.10",
+        "config": "^3.3.11",
         "json-refs": "^3.0.15",
+        "mem-fs": "^4.0.0",
         "which": "^4.0.0",
         "yeoman-generator": "^7.1.1",
         "yosay": "^3.0.0"

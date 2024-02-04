@@ -25,7 +25,7 @@ export class GeneratorFactory {
         return new Generator(generator);
     }
 
-    public static getAvailable(): GeneratorSignature[] {
+    public static getAvailable(): Array<GeneratorSignature> {
         return this.generators.map(({ signature: { id, name, aliases } }) => {
             return {
                 id,

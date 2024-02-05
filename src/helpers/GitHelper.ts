@@ -23,15 +23,15 @@ export class GitHelper {
             throw new Error("Git executable not found on PATH");
         }
 
-        if (!GitHelper.getGitUserName(generator)) {
+        if (!(await GitHelper.getGitUserName(generator))) {
             throw new Error("Git username has not been setup");
         }
 
-        if (!GitHelper.getGitUserEmail(generator)) {
+        if (!(await GitHelper.getGitUserEmail(generator))) {
             throw new Error("Git user email has not been setup");
         }
 
-        await generator.spawnCommand("git", ["init", "--quiet"]);
+        await generator.spawn("git", ["init", "--quiet"]);
     }
 
     public static async add(generator: Generator): Promise<void | Error> {
@@ -39,15 +39,15 @@ export class GitHelper {
             throw new Error("Git executable not found on PATH");
         }
 
-        if (!GitHelper.getGitUserName(generator)) {
+        if (!(await GitHelper.getGitUserName(generator))) {
             throw new Error("Git username has not been setup");
         }
 
-        if (!GitHelper.getGitUserEmail(generator)) {
+        if (!(await GitHelper.getGitUserEmail(generator))) {
             throw new Error("Git user email has not been setup");
         }
 
-        await generator.spawnCommand("git", ["add", "-A"]);
+        await generator.spawn("git", ["add", "-A"]);
     }
 
     public static async commit(generator: Generator): Promise<void | Error> {
@@ -55,15 +55,15 @@ export class GitHelper {
             throw new Error("Git executable not found on PATH");
         }
 
-        if (!GitHelper.getGitUserName(generator)) {
+        if (!(await GitHelper.getGitUserName(generator))) {
             throw new Error("Git username has not been setup");
         }
 
-        if (!GitHelper.getGitUserEmail(generator)) {
+        if (!(await GitHelper.getGitUserEmail(generator))) {
             throw new Error("Git user email has not been setup");
         }
 
-        await generator.spawnCommand("git", [
+        await generator.spawn("git", [
             "commit",
             "-m",
             "chore: initial commit",

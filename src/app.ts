@@ -60,6 +60,8 @@ class AppGenerator extends Generator<AppOptions> {
                 this.options.destinationRoot || "",
             ),
         );
+
+        return Promise.resolve();
     }
 
     private async _promptForProjectType(
@@ -101,7 +103,7 @@ class AppGenerator extends Generator<AppOptions> {
             this.destinationRoot(this.destinationPath(this.options.name));
         }
 
-        this.generator?.writing();
+        await this.generator?.writing();
     }
 
     public async install(): Promise<void> {
@@ -134,7 +136,7 @@ class AppGenerator extends Generator<AppOptions> {
             }
         }
 
-        this.generator?.install();
+        await this.generator?.install();
 
         this.log();
         this.log("Installing packages. This might take a couple of minutes.");
@@ -161,7 +163,7 @@ class AppGenerator extends Generator<AppOptions> {
         );
         this.log("Inside that directory, you can run several commands:");
 
-        this.generator?.end();
+        await this.generator?.end();
 
         this.log(
             `Open ${chalk.cyan(

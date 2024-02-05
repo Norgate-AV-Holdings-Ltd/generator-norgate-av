@@ -1,5 +1,5 @@
+import path from "node:path";
 import { PromptQuestion } from "@yeoman/types";
-import path from "path";
 import AppGenerator from "../app.js";
 import { Answers } from "../@types/index.js";
 import { BaseQuestion } from "./index.js";

@@ -22,7 +22,7 @@ export class CliHelper {
                 alias: "t",
                 description: `${GeneratorFactory.getAvailable()
                     .slice(0, 6)
-                    .map((generator) => generator.aliases[0])
+                    .map((signature) => signature.aliases[0])
                     .join(", ")}...`,
             },
             {

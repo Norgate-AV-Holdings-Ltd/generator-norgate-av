@@ -1,6 +1,7 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import chalk from "chalk";
 import config from "config";
-import path from "path";
 import { ResolvedRefsResults, resolveRefs } from "json-refs";
 import {
     Config,
@@ -18,10 +19,6 @@ import {
 import NodeProject from "../project/NodeProject.js";
 
 export class ClangGenerator implements GeneratorInterface {
-    // public static readonly signature = config.get<GeneratorSignature>(
-    //     "generators.c.signature",
-    // );
-
     private readonly generator: AppGenerator;
     private nodeProject: NodeProject;
 
@@ -33,20 +30,24 @@ export class ClangGenerator implements GeneratorInterface {
         PackageManager,
     ];
 
-    constructor(generator: AppGenerator) {
+    public constructor(generator: AppGenerator) {
         this.generator = generator;
     }
 
-    static getSignature(): GeneratorSignature {
+    public static getSignature(): GeneratorSignature {
         return config.get<GeneratorSignature>("generators.c.signature");
     }
 
     public getSourceRoot(): string {
         return path.join(
-            __dirname,
+            path.dirname(fileURLToPath(import.meta.url)),
             config.get<string>("files.directory"),
             ClangGenerator.getSignature().id,
         );
+    }
+
+    public async initializing(): Promise<void> {
+        // this.nodeProject = new NodeProject(this.generator);
     }
 
     public async prompting(): Promise<void> {
@@ -58,7 +59,7 @@ export class ClangGenerator implements GeneratorInterface {
             questions.map((q) => {
                 return {
                     ...q,
-                    name: q.name || "",
+                    name: q.name as string,
                 };
             }),
         );

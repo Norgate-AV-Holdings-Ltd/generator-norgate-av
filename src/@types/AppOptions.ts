@@ -11,4 +11,5 @@ export type AppOptions = BaseOptions & {
     skipPrompts: boolean;
     destination: string;
     name: string;
+    displayName: string;
 };

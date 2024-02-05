@@ -1,2 +1,2 @@
-export { GeneratorFactory } from "./GeneratorFactory.js";
-export { ClangGenerator } from "./ClangGenerator.js";
+export * from "./GeneratorFactory.js";
+export * from "./ClangGenerator.js";

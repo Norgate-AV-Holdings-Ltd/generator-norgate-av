@@ -1,7 +1,7 @@
-export { BaseQuestion } from "./BaseQuestion.js";
-export { Git } from "./Git.js";
-export { PackageManager } from "./PackageManager.js";
-export { ProjectDescription } from "./ProjectDescription.js";
-export { ProjectId } from "./ProjectId.js";
-export { ProjectName } from "./ProjectName.js";
-export { ProjectType } from "./ProjectType.js";
+export * from "./BaseQuestion.js";
+export * from "./Git.js";
+export * from "./PackageManager.js";
+export * from "./ProjectDescription.js";
+export * from "./ProjectId.js";
+export * from "./ProjectName.js";
+export * from "./ProjectType.js";

@@ -1,9 +1,9 @@
-export { Answers } from "./Answers.js";
-export { AppOptions } from "./AppOptions.js";
-export { Config } from "./Config.js";
-export { GeneratorInterface } from "./GeneratorInterface.js";
-export { GeneratorSignature } from "./GeneratorSignature.js";
-export { NodePackageManager } from "./NodePackageManager.js";
-export { PackageManager } from "./PackageManager.js";
-export { PathMap } from "./PathMap.js";
-export { TemplateConfig } from "./TemplateConfig.js";
+export * from "./Answers.js";
+export * from "./AppOptions.js";
+export * from "./Config.js";
+export * from "./GeneratorInterface.js";
+export * from "./GeneratorSignature.js";
+export * from "./NodePackageManager.js";
+export * from "./PackageManager.js";
+export * from "./PathMap.js";
+export * from "./TemplateConfig.js";

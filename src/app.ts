@@ -1,14 +1,14 @@
+import path from "node:path";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
-import path from "path";
 import {
     Answers,
     AppOptions,
     GeneratorInterface,
     GeneratorSignature,
 } from "./@types/index.js";
-import { GeneratorFactory } from "./generators/index.js";
+import { GeneratorFactory } from "./generators/GeneratorFactory.js";
 import { CliHelper, CodeHelper, GitHelper } from "./helpers/index.js";
 import { ProjectType } from "./questions/index.js";
 
@@ -17,8 +17,8 @@ class AppGenerator extends Generator<AppOptions> {
     private readonly choices = GeneratorFactory.getAvailable();
     private abort: boolean = false;
 
-    constructor(args: string | string[], opts: AppOptions) {
-        super(args, opts);
+    constructor(args: string | Array<string>, options: AppOptions) {
+        super(args, options);
 
         this._initializeCliArguments();
         this._initializeCliOptions();
@@ -92,8 +92,8 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     public async writing(): Promise<void> {
-        // this.log(this.options);
-        // this.abort = true;
+        this.log(this.options);
+        this.abort = true;
 
         if (this.abort) {
             return;

@@ -3,21 +3,26 @@ import { ClangGenerator } from "./index.js";
 import AppGenerator from "../app.js";
 
 export class GeneratorFactory {
-    private static readonly generators = [ClangGenerator];
+    static generators = [ClangGenerator];
 
     public static create(generator: AppGenerator): GeneratorInterface {
         const { type } = generator.options;
 
-        const Generator = this.generators.find(
-            ({ signature: { aliases, id } }) => {
-                return aliases.indexOf(type) || id === type;
-            },
+        // const Generator = GeneratorFactory.generators.find(
+        //     ({ signature: { aliases, id } }) => {
+        //         return aliases.indexOf(type) || id === type;
+        //     },
+        // );
+        const Generator = GeneratorFactory.generators.find(
+            (generator) =>
+                generator.getSignature().aliases.includes(type) ||
+                generator.getSignature().id === type,
         );
 
         if (!Generator) {
             throw new Error(
-                `Invalid project type: ${type}\nPossible types are: ${this.generators
-                    .map(({ signature: { aliases } }) => aliases.join(", "))
+                `Invalid project type: ${type}\nPossible types are: ${GeneratorFactory.getAvailable()
+                    .map(({ aliases }) => aliases.join(", "))
                     .join(", ")}`,
             );
         }
@@ -25,13 +30,12 @@ export class GeneratorFactory {
         return new Generator(generator);
     }
 
-    public static getAvailable(): Array<GeneratorSignature> {
-        return this.generators.map(({ signature: { id, name, aliases } }) => {
-            return {
-                id,
-                name,
-                aliases,
-            };
-        });
+    static getAvailable(): Array<GeneratorSignature> {
+        console.log("getAvailable");
+        const signatures = GeneratorFactory.generators.map((generator) =>
+            generator.getSignature(),
+        );
+        console.log(signatures);
+        return signatures;
     }
 }

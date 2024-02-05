@@ -18,9 +18,9 @@ import {
 import NodeProject from "../project/NodeProject.js";
 
 export class ClangGenerator implements GeneratorInterface {
-    public static readonly signature = config.get<GeneratorSignature>(
-        "generators.c.signature",
-    );
+    // public static readonly signature = config.get<GeneratorSignature>(
+    //     "generators.c.signature",
+    // );
 
     private readonly generator: AppGenerator;
     private nodeProject: NodeProject;
@@ -37,15 +37,15 @@ export class ClangGenerator implements GeneratorInterface {
         this.generator = generator;
     }
 
-    public getSignature(): GeneratorSignature {
-        return ClangGenerator.signature;
+    static getSignature(): GeneratorSignature {
+        return config.get<GeneratorSignature>("generators.c.signature");
     }
 
     public getSourceRoot(): string {
         return path.join(
             __dirname,
             config.get<string>("files.directory"),
-            this.getSignature().id,
+            ClangGenerator.getSignature().id,
         );
     }
 
@@ -54,7 +54,14 @@ export class ClangGenerator implements GeneratorInterface {
             new question(this.generator).getQuestion(),
         );
 
-        const answers = await this.generator.prompt(questions);
+        const answers = await this.generator.prompt(
+            questions.map((q) => {
+                return {
+                    ...q,
+                    name: q.name || "",
+                };
+            }),
+        );
 
         for (const [key, value] of Object.entries(answers)) {
             this.generator.options[key] = this.generator.options[key] || value;
@@ -69,7 +76,7 @@ export class ClangGenerator implements GeneratorInterface {
 
             const resolved = result.resolved as Config;
 
-            const id = this.getSignature().id;
+            const id = ClangGenerator.getSignature().id;
 
             return resolved.generators[id]?.paths;
         } catch (error: any) {
@@ -95,7 +102,7 @@ export class ClangGenerator implements GeneratorInterface {
         this.generator.log();
         this.generator.log(
             `Creating a new ${chalk.cyan(
-                this.getSignature().name,
+                ClangGenerator.getSignature().name,
             )} project in ${chalk.green(this.generator.env.cwd)}.`,
         );
         this.generator.log();

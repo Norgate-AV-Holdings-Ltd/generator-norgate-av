@@ -58,8 +58,6 @@ export class ClangGenerator implements GeneratorInterface {
     }
 
     public async prompting(): Promise<void> {
-        // const { options } = this.generator;
-
         const questions = this.questions.map((question) =>
             new question(this.generator).getQuestion(),
         );

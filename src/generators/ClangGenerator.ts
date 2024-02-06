@@ -4,6 +4,7 @@ import chalk from "chalk";
 import config from "config";
 import { ResolvedRefsResults, resolveRefs } from "json-refs";
 import {
+    Answers,
     Config,
     GeneratorInterface,
     GeneratorSignature,
@@ -16,11 +17,10 @@ import {
     Git,
     PackageManager,
 } from "../questions/index.js";
-import NodeProject from "../project/NodeProject.js";
+// import NodeProject from "../project/NodeProject.js";
 
 export class ClangGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
-    private nodeProject = new NodeProject();
 
     private readonly questions = [
         ProjectName,
@@ -35,7 +35,9 @@ export class ClangGenerator implements GeneratorInterface {
     }
 
     public static getSignature(): GeneratorSignature {
-        return config.get<GeneratorSignature>("generators.c.signature");
+        return config.get<GeneratorSignature>(
+            "generators.template-c.signature",
+        );
     }
 
     public getSourceRoot(): string {
@@ -47,7 +49,7 @@ export class ClangGenerator implements GeneratorInterface {
     }
 
     public async prompting(): Promise<void> {
-        await this.nodeProject.initialize();
+        // const { options } = this.generator;
 
         const questions = this.questions.map((question) =>
             new question(this.generator).getQuestion(),
@@ -62,15 +64,26 @@ export class ClangGenerator implements GeneratorInterface {
             }),
         );
 
-        for (const [key, value] of Object.entries(answers)) {
-            this.generator.options[key] = this.generator.options[key] || value;
-        }
+        this.updateOptions(answers);
+    }
+
+    private updateOptions(answers: Answers): void {
+        this.generator.options.type =
+            this.generator.options.type || answers.type;
+        this.generator.options.name =
+            this.generator.options.name || answers.name;
+        this.generator.options.description =
+            this.generator.options.description || answers.description;
+        this.generator.options.git = this.generator.options.git || answers.git;
+        this.generator.options.pkg = this.generator.options.pkg || answers.pkg;
+        this.generator.options.displayName =
+            this.generator.options.displayName || answers.displayName;
     }
 
     private async getFilePaths() {
         try {
             const result: ResolvedRefsResults = await resolveRefs(
-                config.util.toObject(),
+                config.util.toObject() as Config,
             );
 
             const resolved = result.resolved as Config;
@@ -78,8 +91,8 @@ export class ClangGenerator implements GeneratorInterface {
             const id = ClangGenerator.getSignature().id;
 
             return resolved.generators[id]?.paths;
-        } catch (error: any) {
-            throw new Error(error);
+        } catch (error) {
+            this.generator.log(error);
         }
     }
 
@@ -87,6 +100,7 @@ export class ClangGenerator implements GeneratorInterface {
         const paths = await this.getFilePaths();
 
         if (!paths) {
+            this.generator.abort = true;
             return;
         }
 

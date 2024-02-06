@@ -1,23 +1,14 @@
 import path from "node:path";
-import fs from "node:fs/promises";
+import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { PackageJson } from "type-fest";
-import { findUp } from "find-up";
+import { findUpSync } from "find-up";
 
 class NodeProject {
-    // private static instance: NodeProject;
-    private packageJson: PackageJson | null = null;
-    public node: string = "";
-    public installDependencies: boolean = false;
+    private static readonly packageJson = this.getPackageJson();
 
-    public constructor() {}
-
-    public async initialize() {
-        this.packageJson = await this.getPackageJson();
-    }
-
-    private async getPackageJson(): Promise<PackageJson> {
-        const file = await findUp("dependencies/package.json", {
+    private static getPackageJson(): PackageJson {
+        const file = findUpSync("dependencies/package.json", {
             cwd: path.dirname(fileURLToPath(import.meta.url)),
         });
 
@@ -25,33 +16,43 @@ class NodeProject {
             throw new Error("Could not find package.json file.");
         }
 
-        return JSON.parse(await fs.readFile(file, "utf-8")) as PackageJson;
+        return JSON.parse(fs.readFileSync(file, "utf-8")) as PackageJson;
     }
 
-    public getDependency(name: string): string {
+    public static getDependency(name: string): string {
         const { dependencies } = this.packageJson;
+
+        if (!dependencies) {
+            throw new Error("No dependencies found in package.json");
+        }
+
         const version = dependencies[name];
 
-        if (typeof version === "undefined") {
+        if (!version) {
             throw new Error(`Module ${name} is not listed`);
         }
 
         return `${JSON.stringify(name)}: ${JSON.stringify(version)}`;
     }
 
-    public getDevDependency(name: string): string {
+    public static getDevDependency(name: string): string {
         const { devDependencies } = this.packageJson;
+
+        if (!devDependencies) {
+            throw new Error("No devDependencies found in package.json");
+        }
+
         const version = devDependencies[name];
 
-        if (typeof version === "undefined") {
+        if (!version) {
             throw new Error(`Module ${name} is not listed`);
         }
 
         return `${JSON.stringify(name)}: ${JSON.stringify(version)}`;
     }
 
-    public getNodeEngine() {
-        return this.packageJson.engines.node;
+    public static getNodeEngine(): string {
+        return this.packageJson.engines?.node || ">=18";
     }
 }
 

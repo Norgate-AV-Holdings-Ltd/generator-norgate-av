@@ -1,6 +1,6 @@
 {
     "generators": {
-        "c": {
+        "template-c": {
             "signature": {
                 "name": "C",
                 "id": "template-c",
@@ -120,117 +120,211 @@
     "files": {
         "directory": "templates",
         "paths": {
-            "readme": {
-                "from": "README.md",
-                "to": "README.md"
+            "shared": {
+                "github": {
+                    "from": "github",
+                    "to": ".github"
+                },
+                "husky": {
+                    "from": "husky",
+                    "to": ".husky"
+                },
+                "vscode": {
+                    "from": "vscode",
+                    "to": ".vscode"
+                },
+                "changelog": {
+                    "from": "CHANGELOG.md",
+                    "to": "CHANGELOG.md"
+                },
+                "changelogrc": {
+                    "from": "changelogrc.json",
+                    "to": ".changelogrc.json"
+                },
+                "commitlintrc": {
+                    "from": "commitlintrc.json",
+                    "to": ".commitlintrc.json"
+                },
+                "czrc": {
+                    "from": "czrc",
+                    "to": ".czrc"
+                },
+                "editorconfig": {
+                    "from": "editorconfig",
+                    "to": ".editorconfig"
+                },
+                "env": {
+                    "from": "env",
+                    "to": ".env"
+                },
+                "gitversion": {
+                    "from": "GitVersion.yml",
+                    "to": "GitVersion.yml"
+                },
+                "license": {
+                    "from": "LICENSE",
+                    "to": "LICENSE"
+                },
+                "lintstagedrc": {
+                    "from": "lintstagedrc.json",
+                    "to": ".lintstagedrc.json"
+                },
+                "nvmrc": {
+                    "from": "nvmrc",
+                    "to": ".nvmrc"
+                },
+                "npmrc": {
+                    "from": "npmrc",
+                    "to": ".npmrc"
+                },
+                "prettierignore": {
+                    "from": "prettierignore",
+                    "to": ".prettierignore"
+                },
+                "prettierrc": {
+                    "from": "prettierrc.json",
+                    "to": ".prettierrc.json"
+                },
+                "readme": {
+                    "from": "README.md",
+                    "to": "README.md"
+                }
             },
-            "license": {
-                "from": "LICENSE",
-                "to": "LICENSE"
+            "template-c": {
+                "gitattributes": {
+                    "from": "gitattributes",
+                    "to": ".gitattributes"
+                },
+                "gitignore": {
+                    "from": "gitignore",
+                    "to": ".gitignore"
+                },
+                "makefile": {
+                    "from": "Makefile",
+                    "to": "Makefile"
+                },
+                "packagejson": {
+                    "from": "package.json.ejs",
+                    "to": "package.json"
+                },
+                "src": {
+                    "from": "src",
+                    "to": "src"
+                }
             },
-            "prettierignore": {
-                "from": "prettierignore",
-                "to": ".prettierignore"
+            "template-ts": {
+                "gitattributes": {
+                    "from": "gitattributes",
+                    "to": ".gitattributes"
+                },
+                "gitignore": {
+                    "from": "gitignore",
+                    "to": ".gitignore"
+                },
+                "packagejson": {
+                    "from": "package.json.ejs",
+                    "to": "package.json"
+                },
+                "src": {
+                    "from": "src",
+                    "to": "src"
+                },
+                "tsconfig": {
+                    "from": "tsconfig.json",
+                    "to": "tsconfig.json"
+                },
+                "tsupconfig": {
+                    "from": "tsup.config.json",
+                    "to": "tsup.config.json"
+                },
+                "tsupschema": {
+                    "from": "tsup.schema.json",
+                    "to": "tsup.schema.json"
+                }
             },
-            "prettierrc": {
-                "from": "prettierrc.json",
-                "to": ".prettierrc.json"
+            "template-js": {
+                "gitattributes": {
+                    "from": "gitattributes",
+                    "to": ".gitattributes"
+                },
+                "gitignore": {
+                    "from": "gitignore",
+                    "to": ".gitignore"
+                },
+                "packagejson": {
+                    "from": "package.json.ejs",
+                    "to": "package.json"
+                },
+                "src": {
+                    "from": "src",
+                    "to": "src"
+                }
             },
-            "packagejson": {
-                "from": "package.json.ejs",
-                "to": "package.json"
+            "template-py": {
+                "gitattributes": {
+                    "from": "gitattributes",
+                    "to": ".gitattributes"
+                },
+                "gitignore": {
+                    "from": "gitignore",
+                    "to": ".gitignore"
+                },
+                "src": {
+                    "from": "src",
+                    "to": "src"
+                }
             },
-            "tsconfig": {
-                "from": "tsconfig.json",
-                "to": "tsconfig.json"
+            "template-html": {
+                "assets": {
+                    "from": "assets",
+                    "to": "assets"
+                },
+                "gitattributes": {
+                    "from": "gitattributes",
+                    "to": ".gitattributes"
+                },
+                "gitignore": {
+                    "from": "gitignore",
+                    "to": ".gitignore"
+                },
+                "packagejson": {
+                    "from": "package.json.ejs",
+                    "to": "package.json"
+                },
+                "public": {
+                    "from": "public",
+                    "to": "public"
+                },
+                "src": {
+                    "from": "src",
+                    "to": "src"
+                }
             },
-            "tsupconfig": {
-                "from": "tsup.config.json",
-                "to": "tsup.config.json"
-            },
-            "tsupschema": {
-                "from": "tsup.schema.json",
-                "to": "tsup.schema.json"
-            },
-            "nvmrc": {
-                "from": "nvmrc",
-                "to": ".nvmrc"
-            },
-            "npmrc": {
-                "from": "npmrc",
-                "to": ".npmrc"
-            },
-            "env": {
-                "from": "env",
-                "to": ".env"
-            },
-            "makefile": {
-                "from": "Makefile",
-                "to": "Makefile"
-            },
-            "lintstagedrc": {
-                "from": "lintstagedrc.json",
-                "to": ".lintstagedrc.json"
-            },
-            "gitversion": {
-                "from": "GitVersion.yml",
-                "to": "GitVersion.yml"
-            },
-            "gitignore": {
-                "from": "gitignore",
-                "to": ".gitignore"
-            },
-            "gitattributes": {
-                "from": "gitattributes",
-                "to": ".gitattributes"
-            },
-            "editorconfig": {
-                "from": "editorconfig",
-                "to": ".editorconfig"
-            },
-            "czrc": {
-                "from": "czrc",
-                "to": ".czrc"
-            },
-            "commitlintrc": {
-                "from": "commitlintrc.json",
-                "to": ".commitlintrc.json"
-            },
-            "changelogrc": {
-                "from": "changelogrc.json",
-                "to": ".changelogrc.json"
-            },
-            "changelog": {
-                "from": "CHANGELOG.md",
-                "to": "CHANGELOG.md"
-            },
-            "github": {
-                "from": "github",
-                "to": ".github"
-            },
-            "husky": {
-                "from": "husky",
-                "to": ".husky"
-            },
-            "vscode": {
-                "from": "vscode",
-                "to": ".vscode"
-            },
-            "src": {
-                "from": "src",
-                "to": "src"
-            },
-            "public": {
-                "from": "public",
-                "to": "public"
-            },
-            "assets": {
-                "from": "assets",
-                "to": "assets"
-            },
-            "ui": {
-                "from": "ui",
-                "to": "ui"
+            "template-simpl": {
+                "assets": {
+                    "from": "assets",
+                    "to": "assets"
+                },
+                "gitattributes": {
+                    "from": "gitattributes",
+                    "to": ".gitattributes"
+                },
+                "gitignore": {
+                    "from": "gitignore",
+                    "to": ".gitignore"
+                },
+                "packagejson": {
+                    "from": "package.json.ejs",
+                    "to": "package.json"
+                },
+                "src": {
+                    "from": "src",
+                    "to": "src"
+                },
+                "ui": {
+                    "from": "ui",
+                    "to": "ui"
+                }
             }
         }
     },

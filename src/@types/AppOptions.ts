@@ -12,4 +12,5 @@ export type AppOptions = BaseOptions & {
     destination: string;
     name: string;
     displayName: string;
+    node: string;
 };

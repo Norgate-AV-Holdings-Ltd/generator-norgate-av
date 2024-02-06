@@ -15,7 +15,7 @@ import { ProjectType } from "./questions/index.js";
 class AppGenerator extends Generator<AppOptions> {
     private generator: GeneratorInterface | undefined = undefined;
     private readonly choices = GeneratorFactory.getAvailable();
-    private abort: boolean = false;
+    public abort: boolean = false;
 
     constructor(args: string | Array<string>, options: AppOptions) {
         super(args, options);
@@ -99,10 +99,6 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     public async writing(): Promise<void> {
-        // this.log(this.abort);
-        // this.log(this.options);
-        this.abort = true;
-
         if (this.abort) {
             return;
         }

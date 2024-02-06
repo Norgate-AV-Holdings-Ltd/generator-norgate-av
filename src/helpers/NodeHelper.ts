@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { PackageJson } from "type-fest";
 import { findUpSync } from "find-up";
 
-class NodeProject {
+export class NodeHelper {
     private static readonly packageJson = this.getPackageJson();
 
     private static getPackageJson(): PackageJson {
@@ -52,8 +52,6 @@ class NodeProject {
     }
 
     public static getNodeEngine(): string {
-        return this.packageJson.engines?.node || ">=18";
+        return this.packageJson.engines?.node || "18";
     }
 }
-
-export default NodeProject;

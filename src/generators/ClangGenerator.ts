@@ -17,10 +17,11 @@ import {
     Git,
     PackageManager,
 } from "../questions/index.js";
-// import NodeProject from "../project/NodeProject.js";
+import { NodeHelper } from "../helpers/index.js";
 
 export class ClangGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
+    private readonly name = ClangGenerator.getSignature().name;
 
     private readonly questions = [
         ProjectName,
@@ -32,6 +33,14 @@ export class ClangGenerator implements GeneratorInterface {
 
     public constructor(generator: AppGenerator) {
         this.generator = generator;
+        this.generator.options.node = {
+            engine: NodeHelper.getNodeEngine(),
+            getDependency: (name: string) => NodeHelper.getDependency(name),
+            getDevDependency: (name: string) =>
+                NodeHelper.getDevDependency(name),
+            installDependencies: true,
+            getNodeEngine: () => NodeHelper.getNodeEngine(),
+        };
     }
 
     public static getSignature(): GeneratorSignature {
@@ -115,7 +124,7 @@ export class ClangGenerator implements GeneratorInterface {
         this.generator.log();
         this.generator.log(
             `Creating a new ${chalk.cyan(
-                ClangGenerator.getSignature().name,
+                this.name,
             )} project in ${chalk.green(this.generator.env.cwd)}.`,
         );
         this.generator.log();
@@ -129,112 +138,6 @@ export class ClangGenerator implements GeneratorInterface {
                 this.generator.options,
             );
         }
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("github"),
-        //     this.generator.destinationPath(".github"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("husky"),
-        //     this.generator.destinationPath(".husky"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("vscode"),
-        //     this.generator.destinationPath(".vscode"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("src"),
-        //     this.generator.destinationPath("src"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("Makefile"),
-        //     this.generator.destinationPath("Makefile"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("commitlintrc.json"),
-        //     this.generator.destinationPath(".commitlintrc.json"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("lintstagedrc.json"),
-        //     this.generator.destinationPath(".lintstagedrc.json"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("prettierrc.json"),
-        //     this.generator.destinationPath(".prettierrc.json"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("prettierignore"),
-        //     this.generator.destinationPath(".prettierignore"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("changelogrc.json"),
-        //     this.generator.destinationPath(".changelogrc.json"),
-        // );
-
-        // this.generator.fs.copyTpl(
-        //     this.generator.templatePath("CHANGELOG.md"),
-        //     this.generator.destinationPath("CHANGELOG.md"),
-        //     this.project,
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("czrc"),
-        //     this.generator.destinationPath(".czrc"),
-        // );
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("editorconfig"),
-        //     this.generator.destinationPath(".editorconfig"),
-        // );
-
-        // this.generator.fs.copyTpl(
-        //     this.generator.templatePath("nvmrc"),
-        //     this.generator.destinationPath(".nvmrc"),
-        //     this.project,
-        // );
-
-        // if (this.project.git) {
-        //     this.generator.fs.copy(
-        //         this.generator.templatePath("gitignore"),
-        //         this.generator.destinationPath(".gitignore"),
-        //     );
-
-        //     this.generator.fs.copy(
-        //         this.generator.templatePath("gitattributes"),
-        //         this.generator.destinationPath(".gitattributes"),
-        //     );
-
-        //     this.generator.fs.copy(
-        //         this.generator.templatePath("GitVersion.yml"),
-        //         this.generator.destinationPath("GitVersion.yml"),
-        //     );
-        // }
-
-        // this.generator.fs.copy(
-        //     this.generator.templatePath("LICENSE"),
-        //     this.generator.destinationPath("LICENSE"),
-        // );
-
-        // this.generator.fs.copyTpl(
-        //     this.generator.templatePath("package.json.ejs"),
-        //     this.generator.destinationPath("package.json"),
-        //     this.project,
-        // );
-
-        // this.generator.fs.copyTpl(
-        //     this.generator.templatePath("README.md"),
-        //     this.generator.destinationPath("README.md"),
-        //     this.project,
-        // );
-
         // this.project.installDependencies = true;
     }
 
@@ -254,5 +157,7 @@ export class ClangGenerator implements GeneratorInterface {
         this.generator.log();
         this.generator.log(`  ${chalk.cyan("cd")} ${name}`);
         this.generator.log();
+
+        return Promise.resolve();
     }
 }

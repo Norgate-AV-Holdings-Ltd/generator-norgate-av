@@ -4,6 +4,7 @@ export * from "./Config.js";
 export * from "./GeneratorInterface.js";
 export * from "./GeneratorSignature.js";
 export * from "./NodePackageManager.js";
+export * from "./NodeProject.js";
 export * from "./PackageManager.js";
 export * from "./PathMap.js";
 export * from "./TemplateConfig.js";

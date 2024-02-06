@@ -1,32 +1,31 @@
 import path from "node:path";
 import fs from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { PackageJson } from "type-fest";
+import { findUp } from "find-up";
 
 class NodeProject {
-    private static instance: NodeProject;
-    private packageJson!: PackageJson;
+    // private static instance: NodeProject;
+    private packageJson: PackageJson | null = null;
     public node: string = "";
     public installDependencies: boolean = false;
 
-    constructor(packageJson: PackageJson) {
-        this.packageJson = packageJson;
+    public constructor() {}
+
+    public async initialize() {
+        this.packageJson = await this.getPackageJson();
     }
 
-    public static async getInstance() {
-        if (!this.instance) {
-            this.instance = new NodeProject(await this.getPackageJson());
+    private async getPackageJson(): Promise<PackageJson> {
+        const file = await findUp("dependencies/package.json", {
+            cwd: path.dirname(fileURLToPath(import.meta.url)),
+        });
+
+        if (!file) {
+            throw new Error("Could not find package.json file.");
         }
 
-        return this.instance;
-    }
-
-    private static async getPackageJson(): Promise<PackageJson> {
-        const file = await fs.readFile(
-            path.join(__dirname, "dependencies/package.json"),
-            "utf-8",
-        );
-
-        return JSON.parse(file);
+        return JSON.parse(await fs.readFile(file, "utf-8")) as PackageJson;
     }
 
     public getDependency(name: string): string {

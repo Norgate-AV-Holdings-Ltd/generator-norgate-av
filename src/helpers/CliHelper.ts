@@ -2,14 +2,19 @@ import { ArgumentSpec, CliOptionSpec } from "yeoman-generator";
 import { GeneratorFactory } from "../generators/index.js";
 
 export class CliHelper {
-    public static getArguments(): Array<ArgumentSpec> {
+    public static getArguments(): Array<{
+        name: string;
+        config: Partial<ArgumentSpec>;
+    }> {
         return [
             {
                 name: "destination",
-                type: String,
-                required: false,
-                description:
-                    "\n    The folder to create the project in, absolute or relative to the current working directory.\n    Use '.' for the current folder. If not provided, defaults to a folder with the project display name.\n  ",
+                config: {
+                    type: String,
+                    required: false,
+                    description:
+                        "\n    The folder to create the project in, absolute or relative to the current working directory.\n    Use '.' for the current folder. If not provided, defaults to a folder with the project display name.\n  ",
+                },
             },
         ];
     }

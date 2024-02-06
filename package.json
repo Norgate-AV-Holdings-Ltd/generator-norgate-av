@@ -84,6 +84,7 @@
     "dependencies": {
         "chalk": "^5.3.0",
         "config": "^3.3.11",
+        "find-up": "^7.0.0",
         "json-refs": "^3.0.15",
         "mem-fs": "^4.0.0",
         "which": "^4.0.0",

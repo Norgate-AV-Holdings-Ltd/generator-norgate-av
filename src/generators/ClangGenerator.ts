@@ -20,7 +20,7 @@ import NodeProject from "../project/NodeProject.js";
 
 export class ClangGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
-    private nodeProject: NodeProject;
+    private nodeProject = new NodeProject();
 
     private readonly questions = [
         ProjectName,
@@ -46,11 +46,9 @@ export class ClangGenerator implements GeneratorInterface {
         );
     }
 
-    public async initializing(): Promise<void> {
-        // this.nodeProject = new NodeProject(this.generator);
-    }
-
     public async prompting(): Promise<void> {
+        await this.nodeProject.initialize();
+
         const questions = this.questions.map((question) =>
             new question(this.generator).getQuestion(),
         );

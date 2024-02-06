@@ -20,6 +20,8 @@ class AppGenerator extends Generator<AppOptions> {
     constructor(args: string | Array<string>, options: AppOptions) {
         super(args, options);
 
+        this.appname = "Norgate AV Project Generator";
+
         this._initializeCliArguments();
         this._initializeCliOptions();
 
@@ -35,14 +37,12 @@ class AppGenerator extends Generator<AppOptions> {
 
     private _initializeCliArguments(): void {
         for (const arg of CliHelper.getArguments()) {
-            this.argument(arg.name, arg);
+            this.argument(arg.name, arg.config);
         }
     }
 
     private _initializeCliOptions(): void {
-        for (const option of CliHelper.getOptions()) {
-            this.option(option);
-        }
+        this.option(CliHelper.getOptions());
     }
 
     public async initializing(): Promise<void> {
@@ -57,14 +57,14 @@ class AppGenerator extends Generator<AppOptions> {
         this.destinationRoot(
             path.resolve(
                 this.destinationPath(),
-                this.options.destinationRoot || "",
+                this.options.destination || "",
             ),
         );
 
         return Promise.resolve();
     }
 
-    private async _promptForProjectType(
+    private async _getProjectType(
         choices: Array<GeneratorSignature>,
     ): Promise<string> {
         const question = new ProjectType(this, choices).getQuestion();
@@ -77,22 +77,30 @@ class AppGenerator extends Generator<AppOptions> {
         return answer.type;
     }
 
+    private _logError(error: unknown): void {
+        if (!(error instanceof Error)) {
+            return;
+        }
+
+        this.log(chalk.red(error.message));
+    }
+
     public async prompting(): Promise<void> {
         this.options.type =
-            this.options.type ||
-            (await this._promptForProjectType(this.choices));
+            this.options.type || (await this._getProjectType(this.choices));
 
         try {
             this.generator = GeneratorFactory.create(this);
             await this.generator.prompting();
         } catch (error) {
-            this.log(error);
+            this._logError(error);
             this.abort = true;
         }
     }
 
     public async writing(): Promise<void> {
-        this.log(this.options);
+        // this.log(this.abort);
+        // this.log(this.options);
         this.abort = true;
 
         if (this.abort) {

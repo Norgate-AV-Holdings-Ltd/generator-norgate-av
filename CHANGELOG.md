@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.0...v2.0.1) (2024-02-07)
+
+### 🐛 Bug Fixes
+
+-   do not lint templates directory ([579f28f](https://github.com/Norgate-AV/generator-norgate-av/commit/579f28f27ef62e4d2f88e24efcf4415d40b29fa2))
+-   fix ci workflow to correctly build and release ([61c24d2](https://github.com/Norgate-AV/generator-norgate-av/commit/61c24d20f4e138c433f917379e2e6962f20c8502))
+
 ## [2.0.0](https://github.com/Norgate-AV/generator-norgate-av/compare/v1.0.6...v2.0.0) (2024-02-07)
 
 ### ⚠ BREAKING CHANGES

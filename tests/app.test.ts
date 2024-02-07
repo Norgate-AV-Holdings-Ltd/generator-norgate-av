@@ -1,8 +1,9 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+// import path from "node:path";
+// import { fileURLToPath } from "node:url";
 // import assert from "yeoman-assert";
-import helpers, { RunResult } from "yeoman-test";
-import { describe, beforeAll, afterAll, expect, it } from "vitest";
+// import helpers, { RunResult } from "yeoman-test";
+// import { describe, beforeAll, afterAll, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 
 describe("generator-norgate-av:app", () => {
     // let result: RunResult;

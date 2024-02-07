@@ -1,5 +1,6 @@
 build/*
 dist/*
+generators/*
 node_modules/*
 .history/*
 src/app/templates/*

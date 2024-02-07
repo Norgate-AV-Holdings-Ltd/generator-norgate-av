@@ -1,0 +1,53 @@
+{
+    "name": <%- JSON.stringify(name) %>,
+    "displayName": <%- JSON.stringify(displayName) %>,
+    "description": <%- JSON.stringify(description) %>,
+    "version": "0.0.0",
+    "license": "MIT",
+    "main": "./dist/app.js",
+    "types": "./dist/app.d.ts",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "engines": {
+        "node": ">=<%- node.getNodeEngine().split(".")[0] %>"
+    },
+    "scripts": {
+        "commit": "git-cz",
+        "clean": "rimraf dist",
+        "lint": "tsc",
+        "pretty:fix": "prettier --write .",
+        "prebuild": "<%- pkg %> clean",
+        "build": "tsup",
+        "prestart": "<%- pkg %> lint && <%- pkg %> build",
+        "start": "cross-env NODE_ENV=production node dist/app.js",
+        "dev": "nodemon --exec vite-node src/app.ts",
+        "prepare": "husky"
+    },
+    "devDependencies": {
+        <%- node.getDevDependency("@commitlint/cli") %>,
+        <%- node.getDevDependency("@commitlint/config-conventional") %>,
+        <%- node.getDevDependency("@types/config") %>,
+        <%- node.getDevDependency("@types/node") %>,
+        <%- node.getDevDependency("@types/nodemon") %>,
+        <%- node.getDevDependency("commitizen") %>,
+        <%- node.getDevDependency("cross-env") %>,
+        <%- node.getDevDependency("cz-conventional-changelog") %>,
+        <%- node.getDevDependency("husky") %>,
+        <%- node.getDevDependency("lint-staged") %>,
+        <%- node.getDevDependency("nodemon") %>,
+        <%- node.getDevDependency("prettier") %>,
+        <%- node.getDevDependency("rimraf") %>,
+        <%- node.getDevDependency("terser") %>,
+        <%- node.getDevDependency("tsup") %>,
+        <%- node.getDevDependency("typescript") %>,
+        <%- node.getDevDependency("vitest") %>
+    },
+    "dependencies": {
+        <%- node.getDependency("config") %>,
+        <%- node.getDependency("dotenv") %>,
+        <%- node.getDependency("envalid") %>
+    }
+}

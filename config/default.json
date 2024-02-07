@@ -1,0 +1,588 @@
+{
+    "generators": {
+        "template-c": {
+            "signature": {
+                "name": "C",
+                "id": "template-c",
+                "aliases": ["c", "clang"]
+            },
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
+            },
+            "paths": [
+                {
+                    "$ref": "#/files/paths/github"
+                },
+                {
+                    "$ref": "#/files/paths/husky"
+                },
+                {
+                    "$ref": "#/files/paths/vscode"
+                },
+                {
+                    "$ref": "#/files/paths/src"
+                },
+                {
+                    "$ref": "#/files/paths/changelogrc"
+                },
+                {
+                    "$ref": "#/files/paths/commitlintrc"
+                },
+                {
+                    "$ref": "#/files/paths/czrc"
+                },
+                {
+                    "$ref": "#/files/paths/editorconfig"
+                },
+                {
+                    "$ref": "#/files/paths/gitattributes"
+                },
+                {
+                    "$ref": "#/files/paths/gitignore"
+                },
+                {
+                    "$ref": "#/files/paths/gitversion"
+                },
+                {
+                    "$ref": "#/files/paths/lintstagedrc"
+                },
+                {
+                    "$ref": "#/files/paths/makefile"
+                },
+                {
+                    "$ref": "#/files/paths/nvmrc"
+                },
+                {
+                    "$ref": "#/files/paths/packagejson"
+                },
+                {
+                    "$ref": "#/files/paths/prettierrc"
+                },
+                {
+                    "$ref": "#/files/paths/prettierignore"
+                },
+                {
+                    "$ref": "#/files/paths/license"
+                },
+                {
+                    "$ref": "#/files/paths/readme"
+                }
+            ]
+        },
+        "template-ts": {
+            "signature": {
+                "name": "Node (TypeScript)",
+                "id": "template-ts",
+                "aliases": ["ts", "typescript", "node-ts"]
+            },
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
+            },
+            "paths": [
+                {
+                    "$ref": "#/files/paths/github"
+                },
+                {
+                    "$ref": "#/files/paths/husky"
+                },
+                {
+                    "$ref": "#/files/paths/vscode"
+                },
+                {
+                    "$ref": "#/files/paths/src"
+                },
+                {
+                    "$ref": "#/files/paths/changelogrc"
+                },
+                {
+                    "$ref": "#/files/paths/commitlintrc"
+                },
+                {
+                    "$ref": "#/files/paths/czrc"
+                },
+                {
+                    "$ref": "#/files/paths/editorconfig"
+                },
+                {
+                    "$ref": "#/files/paths/gitattributes"
+                },
+                {
+                    "$ref": "#/files/paths/gitignore"
+                },
+                {
+                    "$ref": "#/files/paths/gitversion"
+                },
+                {
+                    "$ref": "#/files/paths/lintstagedrc"
+                },
+                {
+                    "$ref": "#/files/paths/nvmrc"
+                },
+                {
+                    "$ref": "#/files/paths/packagejson"
+                },
+                {
+                    "$ref": "#/files/paths/prettierrc"
+                },
+                {
+                    "$ref": "#/files/paths/prettierignore"
+                },
+                {
+                    "$ref": "#/files/paths/license"
+                },
+                {
+                    "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/tsconfig"
+                },
+                {
+                    "$ref": "#/files/paths/tsupconfig"
+                },
+                {
+                    "$ref": "#/files/paths/tsupschema"
+                }
+            ]
+        },
+        "template-js": {
+            "signature": {
+                "name": "Node (Javascript)",
+                "id": "template-js",
+                "aliases": ["js", "javascript", "node-js"]
+            },
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
+            },
+            "paths": [
+                {
+                    "$ref": "#/files/paths/github"
+                },
+                {
+                    "$ref": "#/files/paths/husky"
+                },
+                {
+                    "$ref": "#/files/paths/vscode"
+                },
+                {
+                    "$ref": "#/files/paths/src"
+                },
+                {
+                    "$ref": "#/files/paths/changelogrc"
+                },
+                {
+                    "$ref": "#/files/paths/commitlintrc"
+                },
+                {
+                    "$ref": "#/files/paths/czrc"
+                },
+                {
+                    "$ref": "#/files/paths/editorconfig"
+                },
+                {
+                    "$ref": "#/files/paths/gitattributes"
+                },
+                {
+                    "$ref": "#/files/paths/gitignore"
+                },
+                {
+                    "$ref": "#/files/paths/gitversion"
+                },
+                {
+                    "$ref": "#/files/paths/lintstagedrc"
+                },
+                {
+                    "$ref": "#/files/paths/nvmrc"
+                },
+                {
+                    "$ref": "#/files/paths/packagejson"
+                },
+                {
+                    "$ref": "#/files/paths/prettierrc"
+                },
+                {
+                    "$ref": "#/files/paths/prettierignore"
+                },
+                {
+                    "$ref": "#/files/paths/license"
+                },
+                {
+                    "$ref": "#/files/paths/readme"
+                }
+            ]
+        },
+        "template-node-cli": {
+            "signature": {
+                "name": "Node (CLI)",
+                "id": "template-node-cli",
+                "aliases": ["cli", "node-cli", "cli-js"]
+            },
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
+            },
+            "paths": [
+                {
+                    "$ref": "#/files/paths/github"
+                },
+                {
+                    "$ref": "#/files/paths/husky"
+                },
+                {
+                    "$ref": "#/files/paths/vscode"
+                },
+                {
+                    "$ref": "#/files/paths/src"
+                },
+                {
+                    "$ref": "#/files/paths/changelogrc"
+                },
+                {
+                    "$ref": "#/files/paths/commitlintrc"
+                },
+                {
+                    "$ref": "#/files/paths/czrc"
+                },
+                {
+                    "$ref": "#/files/paths/editorconfig"
+                },
+                {
+                    "$ref": "#/files/paths/gitattributes"
+                },
+                {
+                    "$ref": "#/files/paths/gitignore"
+                },
+                {
+                    "$ref": "#/files/paths/gitversion"
+                },
+                {
+                    "$ref": "#/files/paths/lintstagedrc"
+                },
+                {
+                    "$ref": "#/files/paths/nvmrc"
+                },
+                {
+                    "$ref": "#/files/paths/packagejson"
+                },
+                {
+                    "$ref": "#/files/paths/prettierrc"
+                },
+                {
+                    "$ref": "#/files/paths/prettierignore"
+                },
+                {
+                    "$ref": "#/files/paths/license"
+                },
+                {
+                    "$ref": "#/files/paths/readme"
+                }
+            ]
+        },
+        "template-py": {
+            "signature": {
+                "name": "Python",
+                "id": "template-py",
+                "aliases": ["py", "python"]
+            },
+            "paths": [
+                {
+                    "$ref": "#/files/paths/github"
+                },
+                {
+                    "$ref": "#/files/paths/vscode"
+                },
+                {
+                    "$ref": "#/files/paths/src"
+                },
+                {
+                    "$ref": "#/files/paths/editorconfig"
+                },
+                {
+                    "$ref": "#/files/paths/gitattributes"
+                },
+                {
+                    "$ref": "#/files/paths/gitignore"
+                },
+                {
+                    "$ref": "#/files/paths/gitversion"
+                },
+                {
+                    "$ref": "#/files/paths/license"
+                },
+                {
+                    "$ref": "#/files/paths/readme"
+                }
+            ]
+        },
+        "template-html": {
+            "signature": {
+                "name": "HTML, CSS & JS",
+                "id": "template-html",
+                "aliases": ["html", "web", "vanilla"]
+            },
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
+            },
+            "paths": [
+                {
+                    "$ref": "#/files/paths/github"
+                },
+                {
+                    "$ref": "#/files/paths/husky"
+                },
+                {
+                    "$ref": "#/files/paths/vscode"
+                },
+                {
+                    "$ref": "#/files/paths/assets"
+                },
+                {
+                    "$ref": "#/files/paths/public"
+                },
+                {
+                    "$ref": "#/files/paths/changelogrc"
+                },
+                {
+                    "$ref": "#/files/paths/commitlintrc"
+                },
+                {
+                    "$ref": "#/files/paths/czrc"
+                },
+                {
+                    "$ref": "#/files/paths/editorconfig"
+                },
+                {
+                    "$ref": "#/files/paths/gitattributes"
+                },
+                {
+                    "$ref": "#/files/paths/gitignore"
+                },
+                {
+                    "$ref": "#/files/paths/gitversion"
+                },
+                {
+                    "$ref": "#/files/paths/lintstagedrc"
+                },
+                {
+                    "$ref": "#/files/paths/nvmrc"
+                },
+                {
+                    "$ref": "#/files/paths/packagejson"
+                },
+                {
+                    "$ref": "#/files/paths/prettierrc"
+                },
+                {
+                    "$ref": "#/files/paths/prettierignore"
+                },
+                {
+                    "$ref": "#/files/paths/license"
+                },
+                {
+                    "$ref": "#/files/paths/readme"
+                }
+            ]
+        },
+        "template-simpl": {
+            "signature": {
+                "name": "Crestron SIMPL",
+                "id": "template-simpl",
+                "aliases": ["simpl", "crestron-simpl"]
+            },
+            "pkgmanager": {
+                "$ref": "#/pkgmanager/node"
+            },
+            "paths": [
+                {
+                    "$ref": "#/files/paths/github"
+                },
+                {
+                    "$ref": "#/files/paths/husky"
+                },
+                {
+                    "$ref": "#/files/paths/vscode"
+                },
+                {
+                    "$ref": "#/files/paths/src"
+                },
+                {
+                    "$ref": "#/files/paths/ui"
+                },
+                {
+                    "$ref": "#/files/paths/changelogrc"
+                },
+                {
+                    "$ref": "#/files/paths/commitlintrc"
+                },
+                {
+                    "$ref": "#/files/paths/czrc"
+                },
+                {
+                    "$ref": "#/files/paths/editorconfig"
+                },
+                {
+                    "$ref": "#/files/paths/gitattributes"
+                },
+                {
+                    "$ref": "#/files/paths/gitignore"
+                },
+                {
+                    "$ref": "#/files/paths/gitversion"
+                },
+                {
+                    "$ref": "#/files/paths/lintstagedrc"
+                },
+                {
+                    "$ref": "#/files/paths/nvmrc"
+                },
+                {
+                    "$ref": "#/files/paths/packagejson"
+                },
+                {
+                    "$ref": "#/files/paths/prettierrc"
+                },
+                {
+                    "$ref": "#/files/paths/prettierignore"
+                },
+                {
+                    "$ref": "#/files/paths/license"
+                },
+                {
+                    "$ref": "#/files/paths/readme"
+                }
+            ]
+        }
+    },
+    "files": {
+        "directory": "templates",
+        "paths": {
+            "github": {
+                "from": "github",
+                "to": ".github"
+            },
+            "husky": {
+                "from": "husky",
+                "to": ".husky"
+            },
+            "vscode": {
+                "from": "vscode",
+                "to": ".vscode"
+            },
+            "changelog": {
+                "from": "CHANGELOG.md",
+                "to": "CHANGELOG.md"
+            },
+            "changelogrc": {
+                "from": "changelogrc.json",
+                "to": ".changelogrc.json"
+            },
+            "commitlintrc": {
+                "from": "commitlintrc.json",
+                "to": ".commitlintrc.json"
+            },
+            "czrc": {
+                "from": "czrc",
+                "to": ".czrc"
+            },
+            "editorconfig": {
+                "from": "editorconfig",
+                "to": ".editorconfig"
+            },
+            "env": {
+                "from": "env",
+                "to": ".env"
+            },
+            "gitversion": {
+                "from": "GitVersion.yml",
+                "to": "GitVersion.yml"
+            },
+            "license": {
+                "from": "LICENSE",
+                "to": "LICENSE"
+            },
+            "lintstagedrc": {
+                "from": "lintstagedrc.json",
+                "to": ".lintstagedrc.json"
+            },
+            "nvmrc": {
+                "from": "nvmrc",
+                "to": ".nvmrc"
+            },
+            "npmrc": {
+                "from": "npmrc",
+                "to": ".npmrc"
+            },
+            "prettierignore": {
+                "from": "prettierignore",
+                "to": ".prettierignore"
+            },
+            "prettierrc": {
+                "from": "prettierrc.json",
+                "to": ".prettierrc.json"
+            },
+            "readme": {
+                "from": "README.md",
+                "to": "README.md"
+            },
+            "assets": {
+                "from": "assets",
+                "to": "assets"
+            },
+            "gitattributes": {
+                "from": "gitattributes",
+                "to": ".gitattributes"
+            },
+            "gitignore": {
+                "from": "gitignore",
+                "to": ".gitignore"
+            },
+            "makefile": {
+                "from": "Makefile",
+                "to": "Makefile"
+            },
+            "packagejson": {
+                "from": "package.json.ejs",
+                "to": "package.json"
+            },
+            "public": {
+                "from": "public",
+                "to": "public"
+            },
+            "src": {
+                "from": "src",
+                "to": "src"
+            },
+            "tsconfig": {
+                "from": "tsconfig.json",
+                "to": "tsconfig.json"
+            },
+            "tsupconfig": {
+                "from": "tsup.config.json",
+                "to": "tsup.config.json"
+            },
+            "tsupschema": {
+                "from": "tsup.schema.json",
+                "to": "tsup.schema.json"
+            },
+            "ui": {
+                "from": "ui",
+                "to": "ui"
+            }
+        }
+    },
+    "pkgmanager": {
+        "node": {
+            "default": "pnpm",
+            "choices": ["pnpm", "yarn", "npm"]
+        }
+    },
+    "environments": {
+        "node": {
+            "engine": {
+                "fallback": "20.11.0"
+            },
+            "pkgmanager": {
+                "default": "pnpm",
+                "choices": ["pnpm", "yarn", "npm"]
+            }
+        }
+    }
+}

@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x, 20.x]
         os: [ubuntu-latest, macOS-latest, windows-latest]
 
     steps:
@@ -31,6 +31,12 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Build
+        run: pnpm build
 
   release:
     name: Run Semantic Release
@@ -60,6 +66,9 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
+
+      - name: Build
+        run: pnpm build
 
       - name: Release
         run: pnpm semantic-release

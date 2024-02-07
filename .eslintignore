@@ -3,3 +3,4 @@ dist/
 .history/
 tests/
 vitest.config.ts
+src/templates/

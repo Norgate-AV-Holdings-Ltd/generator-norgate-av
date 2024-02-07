@@ -1,5 +1,6 @@
 import { BaseOptions } from "yeoman-generator";
-import { NodeProject } from "./index.js";
+// import { NodeProject } from "./index.js";
+import type { NodeEnvironment } from "../environments/NodeEnvironment.js";
 
 export type AppOptions = BaseOptions & {
     type: string;
@@ -13,5 +14,5 @@ export type AppOptions = BaseOptions & {
     destination: string;
     name: string;
     displayName: string;
-    node: NodeProject;
+    node?: NodeEnvironment;
 };

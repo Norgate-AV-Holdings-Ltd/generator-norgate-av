@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import assert from "yeoman-assert";
 import helpers, { RunResult } from "yeoman-test";
 import { describe, beforeAll, afterAll, expect, it } from "vitest";

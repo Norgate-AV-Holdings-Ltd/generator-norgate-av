@@ -17,7 +17,7 @@ import {
     Git,
     PackageManager,
 } from "../questions/index.js";
-import { NodeHelper } from "../helpers/index.js";
+import { NodeEnvironment } from "../environments/index.js";
 
 export class ClangGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
@@ -33,14 +33,11 @@ export class ClangGenerator implements GeneratorInterface {
 
     public constructor(generator: AppGenerator) {
         this.generator = generator;
-        this.generator.options.node = {
-            engine: NodeHelper.getNodeEngine(),
-            getDependency: (name: string) => NodeHelper.getDependency(name),
-            getDevDependency: (name: string) =>
-                NodeHelper.getDevDependency(name),
-            installDependencies: true,
-            getNodeEngine: () => NodeHelper.getNodeEngine(),
-        };
+        this.generator.options.node = new NodeEnvironment();
+    }
+
+    public async initialize(): Promise<void> {
+        await this.generator.options.node?.initialize();
     }
 
     public static getSignature(): GeneratorSignature {
@@ -111,8 +108,6 @@ export class ClangGenerator implements GeneratorInterface {
             return;
         }
 
-        this.generator.log(paths);
-
         this.generator.env.cwd = this.generator.destinationPath();
 
         this.generator.log();
@@ -136,10 +131,16 @@ export class ClangGenerator implements GeneratorInterface {
                 this.generator.options,
             );
         }
-        // this.project.installDependencies = true;
     }
 
-    public async install(): Promise<void> {}
+    public async install(): Promise<void> {
+        if (this.generator.abort) {
+            this.generator.options.skipInstall = true;
+            return;
+        }
+
+        await this.generator.spawn(this.generator.options.pkg, ["install"]);
+    }
 
     public async end(): Promise<void> {
         const { name, pkg } = this.generator.options;

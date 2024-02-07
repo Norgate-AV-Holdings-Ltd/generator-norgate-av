@@ -2,11 +2,13 @@ import path from "node:path";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
+import config from "config";
 import {
     Answers,
     AppOptions,
     GeneratorInterface,
     GeneratorSignature,
+    NodePackageManager,
 } from "./@types/index.js";
 import { GeneratorFactory } from "./generators/GeneratorFactory.js";
 import { CliHelper, CodeHelper, GitHelper } from "./helpers/index.js";
@@ -31,7 +33,9 @@ class AppGenerator extends Generator<AppOptions> {
 
         if (this.options.skipPrompts) {
             this.options.git = true;
-            this.options.pkg = "pnpm";
+            this.options.pkg = config.get<NodePackageManager>(
+                "environments.node.pkgmanager.default",
+            );
         }
     }
 
@@ -91,6 +95,7 @@ class AppGenerator extends Generator<AppOptions> {
 
         try {
             this.generator = GeneratorFactory.create(this);
+            await this.generator.initialize();
             await this.generator.prompting();
         } catch (error) {
             this._logError(error);
@@ -115,12 +120,6 @@ class AppGenerator extends Generator<AppOptions> {
             this.options.skipInstall = true;
             return;
         }
-
-        // if (this.options.installDependencies) {
-        //     this.options.nodePackageManager = this.options.pkg;
-        // } else {
-        //     this.options.skipInstall = true;
-        // }
 
         if (this.options.git) {
             try {
@@ -192,28 +191,36 @@ class AppGenerator extends Generator<AppOptions> {
         this.log(chalk.magenta("Happy Hacking! 😀"));
         this.log();
 
+        const code = await CodeHelper.getPath();
+
         if (this.options.open) {
             await CodeHelper.open(this, this.destinationPath());
         }
 
-        // const choices = [];
-        // if (code) {
-        //     choices.push({
-        //         name: "Open with `code`",
-        //         value: code,
-        //     });
-        // }
-        // choices.push({ name: "Skip", value: "skip" });
-        // const answer = await this.prompt({
-        //     type: "list",
-        //     name: "openWith",
-        //     message: "Do you want to open the new folder with Visual Studio Code?",
-        //     choices,
-        // });
-        // if (answer && answer.openWith && answer.openWith !== "skip") {
-        //     this.spawnCommand(answer.openWith, [this.destinationPath()]);
-        // }
-        // return;
+        const choices = [];
+
+        if (code) {
+            choices.push({
+                name: "Open with `code`",
+                value: code,
+            });
+        }
+
+        choices.push({ name: "Skip", value: "skip" });
+
+        const answer = await this.prompt<{ openWith: string }>({
+            type: "list",
+            name: "openWith",
+            message:
+                "Do you want to open the new folder with Visual Studio Code?",
+            choices,
+        });
+
+        if (answer.openWith === "skip") {
+            return;
+        }
+
+        await this.spawn(answer.openWith, [this.destinationPath()]);
     }
 }
 

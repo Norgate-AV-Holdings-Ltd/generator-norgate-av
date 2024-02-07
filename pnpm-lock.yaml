@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  axios:
+    specifier: ^1.6.7
+    version: 1.6.7
   chalk:
     specifier: ^5.3.0
     version: 5.3.0
@@ -2852,6 +2855,19 @@ packages:
     engines: { node: ">= 4.0.0" }
     dev: true
 
+  /axios@1.6.7:
+    resolution:
+      {
+        integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==,
+      }
+    dependencies:
+      follow-redirects: 1.15.5
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /bail@1.0.5:
     resolution:
       {
@@ -4754,6 +4770,19 @@ packages:
     transitivePeerDependencies:
       - bluebird
       - supports-color
+
+  /follow-redirects@1.15.5:
+    resolution:
+      {
+        integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==,
+      }
+    engines: { node: ">=4.0" }
+    peerDependencies:
+      debug: "*"
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
 
   /foreground-child@3.1.1:
     resolution:
@@ -8410,6 +8439,13 @@ packages:
       {
         integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==,
       }
+
+  /proxy-from-env@1.1.0:
+    resolution:
+      {
+        integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==,
+      }
+    dev: false
 
   /punycode@2.3.0:
     resolution:

@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.2](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.1...v2.0.2) (2024-02-07)
+
+### 🐛 Bug Fixes
+
+-   output build to generators folder ([7d3a5e8](https://github.com/Norgate-AV/generator-norgate-av/commit/7d3a5e87903a76802841e4338f8f5c6940620dbc))
+
 ## [2.0.1](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.0...v2.0.1) (2024-02-07)
 
 ### 🐛 Bug Fixes

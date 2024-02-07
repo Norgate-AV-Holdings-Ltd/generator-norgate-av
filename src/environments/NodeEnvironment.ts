@@ -1,24 +1,25 @@
 import path from "node:path";
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { PackageJson } from "type-fest";
-import { findUpSync } from "find-up";
+import { findUp } from "find-up";
 import axios from "axios";
 import config from "config";
 import { NodeVersion } from "../@types/index.js";
 
 export class NodeEnvironment {
-    private readonly packageJson = this.getPackageJson();
+    private packageJson: PackageJson = {} as PackageJson;
     private latestLts: string = config.get<string>(
         "environments.node.engine.fallback",
     );
 
     public async initialize(): Promise<void> {
+        this.packageJson = await this.getPackageJson();
         this.latestLts = await this.getLatestLtsNodeVersion();
     }
 
-    private getPackageJson(): PackageJson {
-        const file = findUpSync("dependencies/package.json", {
+    private async getPackageJson(): Promise<PackageJson> {
+        const file = await findUp("dependencies/package.json", {
             cwd: path.dirname(fileURLToPath(import.meta.url)),
         });
 
@@ -26,7 +27,7 @@ export class NodeEnvironment {
             throw new Error("Could not find package.json file.");
         }
 
-        return JSON.parse(fs.readFileSync(file, "utf-8")) as PackageJson;
+        return JSON.parse(await fs.readFile(file, "utf-8")) as PackageJson;
     }
 
     public getDependency(name: string): string {

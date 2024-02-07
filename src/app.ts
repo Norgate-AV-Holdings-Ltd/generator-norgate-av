@@ -193,8 +193,9 @@ class AppGenerator extends Generator<AppOptions> {
 
         const code = await CodeHelper.getPath();
 
-        if (this.options.open) {
+        if (code && this.options.open) {
             await CodeHelper.open(this, this.destinationPath());
+            return;
         }
 
         const choices = [];

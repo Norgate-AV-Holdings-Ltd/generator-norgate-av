@@ -11,5 +11,5 @@
     "format": ["esm"],
     "target": "node20",
     "splitting": true,
-    "onSuccess": "ncp config dist/config && ncp src/templates dist/app/templates && ncp src/dependencies dist/app/dependencies"
+    "onSuccess": "ncp config dist/config && ncp src/templates dist/app/templates && ncp src/dependencies dist/app/dependencies && ncp src/USAGE dist/app/USAGE"
 }

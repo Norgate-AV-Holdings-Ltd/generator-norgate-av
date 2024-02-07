@@ -13,4 +13,12 @@ export type Config = {
     pkgmanager: {
         [key: string]: PackageManager;
     };
+    environments: {
+        node: {
+            engine: {
+                fallback: string;
+            };
+            pkgmanager: PackageManager;
+        };
+    };
 };

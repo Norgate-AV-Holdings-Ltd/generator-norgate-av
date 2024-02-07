@@ -1,4 +1,6 @@
+import { NodePackageManager } from "./index.js";
+
 export type PackageManager = {
-    default: string;
-    choices: Array<string>;
+    default: NodePackageManager;
+    choices: Array<NodePackageManager>;
 };

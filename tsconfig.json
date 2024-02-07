@@ -18,6 +18,6 @@
         "allowSyntheticDefaultImports": true,
         "noEmit": true
     },
-    "include": ["src"],
-    "exclude": ["**/template-files"]
+    "include": ["src/**/*"],
+    "exclude": ["**/templates"]
 }

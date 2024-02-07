@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.4](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.3...v2.0.4) (2024-02-07)
+
+### 🐛 Bug Fixes
+
+-   copy config directory to correct location ([c683e71](https://github.com/Norgate-AV/generator-norgate-av/commit/c683e71fb76dd6114e4c0569b5469fd1a7b8349b))
+
 ## [2.0.3](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.2...v2.0.3) (2024-02-07)
 
 ### 🐛 Bug Fixes

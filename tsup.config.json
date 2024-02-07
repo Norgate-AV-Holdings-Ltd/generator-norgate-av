@@ -1,6 +1,6 @@
 {
     "entry": ["src/app.ts"],
-    "outDir": "dist/app",
+    "outDir": "dist/generators",
     "minify": "terser",
     "dts": true,
     "sourcemap": true,
@@ -11,5 +11,5 @@
     "format": ["esm"],
     "target": "node20",
     "splitting": true,
-    "onSuccess": "ncp config dist/config && ncp src/templates dist/app/templates && ncp src/dependencies dist/app/dependencies && ncp src/USAGE dist/app/USAGE"
+    "onSuccess": "ncp config dist/config && ncp src/templates dist/generators/templates && ncp src/dependencies dist/generators/dependencies && ncp src/USAGE dist/generators/USAGE"
 }

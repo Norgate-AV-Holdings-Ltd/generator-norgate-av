@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.2...v2.0.3) (2024-02-07)
+
+### 🐛 Bug Fixes
+
+-   fix linting errors ([6a16dbb](https://github.com/Norgate-AV/generator-norgate-av/commit/6a16dbbfb4e2e760be194dd78e1a9fc653b7dd37))
+-   make build output correct structure for yeoman ([78bb5d8](https://github.com/Norgate-AV/generator-norgate-av/commit/78bb5d83c228252e15cc45fa3d9515b4350c8cd0))
+
 ## [2.0.2](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.1...v2.0.2) (2024-02-07)
 
 ### 🐛 Bug Fixes

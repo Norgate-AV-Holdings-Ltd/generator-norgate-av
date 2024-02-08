@@ -69,7 +69,7 @@
                 }
             ]
         },
-        "ts": {
+        "typescript": {
             "signature": {
                 "name": "Node.js (TypeScript)",
                 "id": "typescript",
@@ -149,7 +149,7 @@
                     "$ref": "#/files/paths/eslintignore"
                 },
                 {
-                    "$ref": "#/files/paths/all-contributorsrc"
+                    "$ref": "#/files/paths/allcontributorsrc"
                 },
                 {
                     "$ref": "#/files/paths/releaserc"
@@ -171,7 +171,7 @@
                 }
             ]
         },
-        "js": {
+        "javascript": {
             "signature": {
                 "name": "Node.js (Javascript)",
                 "id": "javascript",
@@ -303,7 +303,7 @@
                 }
             ]
         },
-        "py": {
+        "python": {
             "signature": {
                 "name": "Python",
                 "id": "python",
@@ -605,7 +605,7 @@
                 "from": "eslintignore",
                 "to": ".eslintignore"
             },
-            "all-contributorsrc": {
+            "allcontributorsrc": {
                 "from": "all-contributorsrc.ejs",
                 "to": ".all-contributorsrc"
             },

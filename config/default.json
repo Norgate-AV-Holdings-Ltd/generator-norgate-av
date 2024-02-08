@@ -3,7 +3,7 @@
         "c": {
             "signature": {
                 "name": "C",
-                "id": "template-c",
+                "id": "c",
                 "aliases": ["c", "clang"]
             },
             "pkgmanager": {
@@ -72,7 +72,7 @@
         "ts": {
             "signature": {
                 "name": "Node.js (TypeScript)",
-                "id": "template-ts",
+                "id": "typescript",
                 "aliases": ["ts", "typescript", "node-ts"]
             },
             "pkgmanager": {
@@ -174,7 +174,7 @@
         "js": {
             "signature": {
                 "name": "Node.js (Javascript)",
-                "id": "template-js",
+                "id": "javascript",
                 "aliases": ["js", "javascript", "node-js"]
             },
             "pkgmanager": {
@@ -240,7 +240,7 @@
         "nodecli": {
             "signature": {
                 "name": "Node.js (CLI)",
-                "id": "template-node-cli",
+                "id": "nodecli",
                 "aliases": ["cli", "node-cli", "cli-js"]
             },
             "pkgmanager": {
@@ -306,7 +306,7 @@
         "py": {
             "signature": {
                 "name": "Python",
-                "id": "template-py",
+                "id": "python",
                 "aliases": ["py", "python"]
             },
             "paths": [
@@ -342,7 +342,7 @@
         "html": {
             "signature": {
                 "name": "HTML, CSS & JS",
-                "id": "template-html",
+                "id": "html",
                 "aliases": ["html", "web", "vanilla"]
             },
             "pkgmanager": {
@@ -411,7 +411,7 @@
         "simpl": {
             "signature": {
                 "name": "Crestron SIMPL",
-                "id": "template-simpl",
+                "id": "simpl",
                 "aliases": ["simpl", "crestron-simpl"]
             },
             "pkgmanager": {

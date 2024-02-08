@@ -41,7 +41,9 @@ export class JavascriptGenerator implements GeneratorInterface {
     }
 
     public static getSignature(): GeneratorSignature {
-        return config.get<GeneratorSignature>("config.generators.js.signature");
+        return config.get<GeneratorSignature>(
+            "config.generators.javascript.signature",
+        );
     }
 
     public getSourceRoot(): string {

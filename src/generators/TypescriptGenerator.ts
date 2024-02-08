@@ -41,7 +41,9 @@ export class TypescriptGenerator implements GeneratorInterface {
     }
 
     public static getSignature(): GeneratorSignature {
-        return config.get<GeneratorSignature>("config.generators.ts.signature");
+        return config.get<GeneratorSignature>(
+            "config.generators.typescript.signature",
+        );
     }
 
     public getSourceRoot(): string {

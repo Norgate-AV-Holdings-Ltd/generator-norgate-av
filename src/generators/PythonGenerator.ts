@@ -37,7 +37,9 @@ export class PythonGenerator implements GeneratorInterface {
     }
 
     public static getSignature(): GeneratorSignature {
-        return config.get<GeneratorSignature>("config.generators.py.signature");
+        return config.get<GeneratorSignature>(
+            "config.generators.python.signature",
+        );
     }
 
     public getSourceRoot(): string {

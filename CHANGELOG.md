@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.6](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.5...v2.0.6) (2024-02-08)
+
+### 🐛 Bug Fixes
+
+-   read config directory into app ([efa07f6](https://github.com/Norgate-AV/generator-norgate-av/commit/efa07f640526e1d6bab9578a418a121617a7f84d))
+
 ## [2.0.5](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.4...v2.0.5) (2024-02-08)
 
 ### 🐛 Bug Fixes

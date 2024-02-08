@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.9](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.8...v2.0.9) (2024-02-08)
+
+### 🐛 Bug Fixes
+
+-   remove "-" from template folder indexing ([0d90296](https://github.com/Norgate-AV/generator-norgate-av/commit/0d902969d591b664168b384583b35724008d9744))
+
 ## [2.0.8](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.7...v2.0.8) (2024-02-08)
 
 ### 🐛 Bug Fixes

@@ -41,9 +41,7 @@ export class ClangGenerator implements GeneratorInterface {
     }
 
     public static getSignature(): GeneratorSignature {
-        return config.get<GeneratorSignature>(
-            "config.generators.template-c.signature",
-        );
+        return config.get<GeneratorSignature>("config.generators.c.signature");
     }
 
     public getSourceRoot(): string {

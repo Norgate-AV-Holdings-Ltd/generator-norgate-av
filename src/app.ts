@@ -2,10 +2,7 @@ import path from "node:path";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
-
-process.env["SUPPRESS_NO_CONFIG_WARNING"] = "y";
 import config from "config";
-
 import {
     Answers,
     AppOptions,
@@ -18,6 +15,7 @@ import { CliHelper, CodeHelper, GitHelper } from "./helpers/index.js";
 import { ProjectType } from "./questions/index.js";
 import appConfig from "../config/default.json";
 
+process.env["SUPPRESS_NO_CONFIG_WARNING"] = "y";
 config.util.setModuleDefaults("config", appConfig);
 
 class AppGenerator extends Generator<AppOptions> {

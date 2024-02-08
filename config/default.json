@@ -1,6 +1,6 @@
 {
     "generators": {
-        "template-c": {
+        "c": {
             "signature": {
                 "name": "C",
                 "id": "template-c",
@@ -69,7 +69,7 @@
                 }
             ]
         },
-        "template-ts": {
+        "ts": {
             "signature": {
                 "name": "Node.js (TypeScript)",
                 "id": "template-ts",
@@ -171,7 +171,7 @@
                 }
             ]
         },
-        "template-js": {
+        "js": {
             "signature": {
                 "name": "Node.js (Javascript)",
                 "id": "template-js",
@@ -237,7 +237,7 @@
                 }
             ]
         },
-        "template-node-cli": {
+        "nodecli": {
             "signature": {
                 "name": "Node.js (CLI)",
                 "id": "template-node-cli",
@@ -303,7 +303,7 @@
                 }
             ]
         },
-        "template-py": {
+        "py": {
             "signature": {
                 "name": "Python",
                 "id": "template-py",
@@ -339,7 +339,7 @@
                 }
             ]
         },
-        "template-html": {
+        "html": {
             "signature": {
                 "name": "HTML, CSS & JS",
                 "id": "template-html",
@@ -408,7 +408,7 @@
                 }
             ]
         },
-        "template-simpl": {
+        "simpl": {
             "signature": {
                 "name": "Crestron SIMPL",
                 "id": "template-simpl",

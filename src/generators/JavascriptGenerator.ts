@@ -139,7 +139,10 @@ export class JavascriptGenerator implements GeneratorInterface {
             return;
         }
 
-        await this.generator.spawn(this.generator.options.pkg, ["install"]);
+        await this.generator.spawn(this.generator.options.pkg, [
+            "install",
+            "--silent",
+        ]);
     }
 
     public async end(): Promise<void> {

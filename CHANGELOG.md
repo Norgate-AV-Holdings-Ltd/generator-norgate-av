@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.5](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.4...v2.0.5) (2024-02-08)
+
+### 🐛 Bug Fixes
+
+-   set node config directory in environment ([0909795](https://github.com/Norgate-AV/generator-norgate-av/commit/090979532693664ec9140d6edd278d2309abca17))
+
 ## [2.0.4](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.3...v2.0.4) (2024-02-07)
 
 ### 🐛 Bug Fixes

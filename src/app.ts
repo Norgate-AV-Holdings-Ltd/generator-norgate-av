@@ -1,9 +1,11 @@
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
+
+process.env["SUPPRESS_NO_CONFIG_WARNING"] = "y";
 import config from "config";
+
 import {
     Answers,
     AppOptions,
@@ -14,11 +16,9 @@ import {
 import { GeneratorFactory } from "./generators/GeneratorFactory.js";
 import { CliHelper, CodeHelper, GitHelper } from "./helpers/index.js";
 import { ProjectType } from "./questions/index.js";
+import appConfig from "../config/default.json";
 
-process.env["NODE_CONFIG_DIR"] = path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    "config",
-);
+config.util.setModuleDefaults("config", appConfig);
 
 class AppGenerator extends Generator<AppOptions> {
     private generator: GeneratorInterface | undefined = undefined;
@@ -40,7 +40,7 @@ class AppGenerator extends Generator<AppOptions> {
         if (this.options.skipPrompts) {
             this.options.git = true;
             this.options.pkg = config.get<NodePackageManager>(
-                "environments.node.pkgmanager.default",
+                "config.environments.node.pkgmanager.default",
             );
         }
     }

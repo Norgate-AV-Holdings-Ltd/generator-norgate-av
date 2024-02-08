@@ -1,28 +1,28 @@
-// import path from "node:path";
-// import { fileURLToPath } from "node:url";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 // import assert from "yeoman-assert";
-// import helpers, { RunResult } from "yeoman-test";
-// import { describe, beforeAll, afterAll, expect, it } from "vitest";
-import { describe, expect, it } from "vitest";
+import helpers, { RunResult } from "yeoman-test";
+import { describe, before, after, expect, it } from "esmocha";
+// import AppGenerator from "../src/app.js";
 
 describe("generator-norgate-av:app", () => {
-    // let result: RunResult;
+    let result: RunResult;
 
-    // beforeAll(async () => {
-    //     result = await helpers
-    //         .create(
-    //             path.join(
-    //                 path.dirname(fileURLToPath(import.meta.url)),
-    //                 "../generators/app",
-    //             ),
-    //         )
-    //         .withOptions({})
-    //         .withAnswers({});
-    // });
+    before(async () => {
+        result = await helpers
+            .create(
+                path.join(
+                    path.dirname(fileURLToPath(import.meta.url)),
+                    "../generators/app/index.js",
+                ),
+            )
+            .withOptions({})
+            .withAnswers({});
+    });
 
-    // afterAll(() => {
-    //     result.cleanup();
-    // });
+    after(() => {
+        result?.cleanup();
+    });
 
     it("should always pass", () => {
         expect(1).toEqual(1);

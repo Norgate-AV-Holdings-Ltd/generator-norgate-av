@@ -42,14 +42,14 @@ export class TypescriptGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         return config.get<GeneratorSignature>(
-            "generators.template-ts.signature",
+            "config.generators.template-ts.signature",
         );
     }
 
     public getSourceRoot(): string {
         return path.join(
             path.dirname(fileURLToPath(import.meta.url)),
-            config.get<string>("files.directory"),
+            config.get<string>("config.files.directory"),
             TypescriptGenerator.getSignature().id,
         );
     }

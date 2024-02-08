@@ -42,7 +42,7 @@ export class JavascriptGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         return config.get<GeneratorSignature>(
-            "generators.template-js.signature",
+            "config.generators.template-js.signature",
         );
     }
 

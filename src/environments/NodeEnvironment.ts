@@ -10,7 +10,7 @@ import { NodeVersion } from "../@types/index.js";
 export class NodeEnvironment {
     private packageJson: PackageJson = {} as PackageJson;
     private latestLts: string = config.get<string>(
-        "environments.node.engine.fallback",
+        "config.environments.node.engine.fallback",
     );
 
     public async initialize(): Promise<void> {

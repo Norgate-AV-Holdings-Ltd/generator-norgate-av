@@ -42,7 +42,7 @@ export class NodeCliGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         return config.get<GeneratorSignature>(
-            "generators.template-node-cli.signature",
+            "config.generators.template-node-cli.signature",
         );
     }
 

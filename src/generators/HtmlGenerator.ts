@@ -42,7 +42,7 @@ export class HtmlGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         return config.get<GeneratorSignature>(
-            "generators.template-html.signature",
+            "config.generators.template-html.signature",
         );
     }
 

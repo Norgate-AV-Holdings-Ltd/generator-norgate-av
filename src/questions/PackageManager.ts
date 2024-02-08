@@ -5,9 +5,11 @@ import { Answers, NodePackageManager } from "../@types/index.js";
 import AppGenerator from "../app.js";
 
 export class PackageManager extends BaseQuestion {
-    private default = config.get<NodePackageManager>("pkgmanager.node.default");
+    private default = config.get<NodePackageManager>(
+        "config.pkgmanager.node.default",
+    );
     private choices = config.get<Array<NodePackageManager>>(
-        "pkgmanager.node.choices",
+        "config.pkgmanager.node.choices",
     );
 
     constructor(generator: AppGenerator) {

@@ -141,6 +141,33 @@
                 },
                 {
                     "$ref": "#/files/paths/tsupschema"
+                },
+                {
+                    "$ref": "#/files/paths/eslintrc"
+                },
+                {
+                    "$ref": "#/files/paths/eslintignore"
+                },
+                {
+                    "$ref": "#/files/paths/all-contributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/releaserc"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/tests"
+                },
+                {
+                    "$ref": "#/files/paths/vitestconfig"
                 }
             ]
         },
@@ -510,6 +537,10 @@
                 "from": "npmrc",
                 "to": ".npmrc"
             },
+            "npmignore": {
+                "from": "npmignore",
+                "to": ".npmignore"
+            },
             "prettierignore": {
                 "from": "prettierignore",
                 "to": ".prettierignore"
@@ -565,6 +596,66 @@
             "ui": {
                 "from": "ui",
                 "to": "ui"
+            },
+            "eslintrc": {
+                "from": "eslintrc.json",
+                "to": ".eslintrc.json"
+            },
+            "eslintignore": {
+                "from": "eslintignore",
+                "to": ".eslintignore"
+            },
+            "all-contributorsrc": {
+                "from": "all-contributorsrc.ejs",
+                "to": ".all-contributorsrc"
+            },
+            "releaserc": {
+                "from": "releaserc.json",
+                "to": ".releaserc.json"
+            },
+            "config": {
+                "from": "config",
+                "to": "config"
+            },
+            "dockerignore": {
+                "from": "dockerignore",
+                "to": ".dockerignore"
+            },
+            "dockerfile": {
+                "from": "Dockerfile",
+                "to": "Dockerfile"
+            },
+            "contributing": {
+                "from": "CONTRIBUTING.md.ejs",
+                "to": "CONTRIBUTING.md"
+            },
+            "bin": {
+                "from": "bin",
+                "to": "bin"
+            },
+            "tests": {
+                "from": "tests",
+                "to": "tests"
+            },
+            "docs": {
+                "from": "docs",
+                "to": "docs"
+            },
+            "lib": {
+                "from": "lib",
+                "to": "lib"
+            },
+            "examples": {
+                "from": "examples",
+                "to": "examples"
+            },
+            "scripts": {
+                "from": "scripts",
+                "to": "scripts"
+            },
+            "vitestconfig": {
+                "from": "vitest.config.ts",
+                "to": "vitest.config.ts"
             }
         }
     },

@@ -42,7 +42,7 @@ export class CrestronSimplGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         return config.get<GeneratorSignature>(
-            "generators.template-simpl.signature",
+            "config.generators.template-simpl.signature",
         );
     }
 

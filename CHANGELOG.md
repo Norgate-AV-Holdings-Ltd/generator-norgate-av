@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.11](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.10...v2.0.11) (2024-02-08)
+
+### 🐛 Bug Fixes
+
+-   update keys when getting signatures ([65e1acc](https://github.com/Norgate-AV/generator-norgate-av/commit/65e1acc06b5ad69f3d97206e226dd2be2fa91c60))
+
 ## [2.0.10](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.9...v2.0.10) (2024-02-08)
 
 ### 🐛 Bug Fixes

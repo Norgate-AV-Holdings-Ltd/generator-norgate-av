@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.10](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.9...v2.0.10) (2024-02-08)
+
+### 🐛 Bug Fixes
+
+-   make generator keys and ids match with no "-" ([531ec44](https://github.com/Norgate-AV/generator-norgate-av/commit/531ec44e78488b7ad5df2374d8a5421b80bf489b))
+
 ## [2.0.9](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.8...v2.0.9) (2024-02-08)
 
 ### 🐛 Bug Fixes

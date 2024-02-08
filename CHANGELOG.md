@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.7](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.6...v2.0.7) (2024-02-08)
+
+### ✨ Refactor
+
+-   **config:** rename "Node" templates to "Node.js..." ([d26a7c1](https://github.com/Norgate-AV/generator-norgate-av/commit/d26a7c101c40758246ee1e75ddc14b14a77aa060))
+
 ## [2.0.6](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.5...v2.0.6) (2024-02-08)
 
 ### 🐛 Bug Fixes

@@ -1,4 +1,5 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
@@ -13,6 +14,11 @@ import {
 import { GeneratorFactory } from "./generators/GeneratorFactory.js";
 import { CliHelper, CodeHelper, GitHelper } from "./helpers/index.js";
 import { ProjectType } from "./questions/index.js";
+
+process.env["NODE_CONFIG_DIR"] = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "config",
+);
 
 class AppGenerator extends Generator<AppOptions> {
     private generator: GeneratorInterface | undefined = undefined;

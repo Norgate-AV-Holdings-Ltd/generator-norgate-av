@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.8](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.7...v2.0.8) (2024-02-08)
+
+### 🐛 Bug Fixes
+
+-   remove "-" from generator configs ([9115b41](https://github.com/Norgate-AV/generator-norgate-av/commit/9115b41fe33b2f5dae4991288168885bfd140673))
+
 ## [2.0.7](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.6...v2.0.7) (2024-02-08)
 
 ### ✨ Refactor

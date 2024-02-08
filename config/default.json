@@ -71,7 +71,7 @@
         },
         "template-ts": {
             "signature": {
-                "name": "Node (TypeScript)",
+                "name": "Node.js (TypeScript)",
                 "id": "template-ts",
                 "aliases": ["ts", "typescript", "node-ts"]
             },
@@ -173,7 +173,7 @@
         },
         "template-js": {
             "signature": {
-                "name": "Node (Javascript)",
+                "name": "Node.js (Javascript)",
                 "id": "template-js",
                 "aliases": ["js", "javascript", "node-js"]
             },
@@ -239,7 +239,7 @@
         },
         "template-node-cli": {
             "signature": {
-                "name": "Node (CLI)",
+                "name": "Node.js (CLI)",
                 "id": "template-node-cli",
                 "aliases": ["cli", "node-cli", "cli-js"]
             },

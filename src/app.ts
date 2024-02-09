@@ -1,32 +1,25 @@
-import dotenv, { DotenvPopulateInput } from "dotenv";
-import process from "node:process";
-
-dotenv.populate(
-    process.env as DotenvPopulateInput,
-    {
-        SUPPRESS_NO_CONFIG_WARNING: "y",
-    },
-    { override: true },
-);
-
 import path from "node:path";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
-import config from "config";
 import {
     Answers,
     AppOptions,
     GeneratorInterface,
     GeneratorSignature,
-    NodePackageManager,
+    UnresolvedConfig,
 } from "./@types/index.js";
 import { GeneratorFactory } from "./generators/GeneratorFactory.js";
-import { CliHelper, CodeHelper, GitHelper } from "./helpers/index.js";
+import {
+    CliHelper,
+    CodeHelper,
+    ConfigHelper,
+    GitHelper,
+} from "./helpers/index.js";
 import { ProjectType } from "./questions/index.js";
 import appConfig from "../config/default.json";
 
-config.util.setModuleDefaults("config", appConfig);
+await ConfigHelper.initialize(appConfig as UnresolvedConfig);
 
 class AppGenerator extends Generator<AppOptions> {
     private generator: GeneratorInterface | undefined = undefined;
@@ -47,9 +40,10 @@ class AppGenerator extends Generator<AppOptions> {
 
         if (this.options.skipPrompts) {
             this.options.git = true;
-            this.options.pkg = config.get<NodePackageManager>(
-                "config.environments.node.pkgmanager.default",
-            );
+
+            const config = ConfigHelper.getInstance().getConfig();
+            const { pkgmanager } = config.environments.node;
+            this.options.pkg = pkgmanager.default;
         }
     }
 

@@ -1,5 +1,6 @@
 import { BaseOptions } from "yeoman-generator";
 import { NodeEnvironment } from "../environments/NodeEnvironment.js";
+// import { ConfigHelper } from "../helpers/index.js";
 
 export type AppOptions = BaseOptions & {
     type: string;
@@ -14,4 +15,5 @@ export type AppOptions = BaseOptions & {
     name: string;
     displayName: string;
     node?: NodeEnvironment;
+    // config: ConfigHelper;
 };

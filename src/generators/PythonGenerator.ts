@@ -1,13 +1,11 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import chalk from "chalk";
-import config from "config";
-import { ResolvedRefsResults, resolveRefs } from "json-refs";
 import {
     Answers,
-    Config,
     GeneratorInterface,
     GeneratorSignature,
+    PathMap,
 } from "../@types/index.js";
 import AppGenerator from "../app.js";
 import {
@@ -16,6 +14,7 @@ import {
     ProjectDescription,
     Git,
 } from "../questions/index.js";
+import { ConfigHelper } from "../helpers/index.js";
 
 export class PythonGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
@@ -37,22 +36,22 @@ export class PythonGenerator implements GeneratorInterface {
     }
 
     public static getSignature(): GeneratorSignature {
-        return config.get<GeneratorSignature>(
-            "config.generators.python.signature",
-        );
+        const config = ConfigHelper.getInstance().getConfig();
+        return config.generators.python!.signature;
     }
 
     public getSourceRoot(): string {
+        const config = ConfigHelper.getInstance().getConfig();
         return path.join(
             path.dirname(fileURLToPath(import.meta.url)),
-            config.get<string>("files.directory"),
+            config.files.directory,
             PythonGenerator.getSignature().id,
         );
     }
 
     public async prompting(): Promise<void> {
-        const questions = this.questions.map((question) =>
-            new question(this.generator).getQuestion(),
+        const questions = this.questions.map((Question) =>
+            new Question(this.generator).getQuestion(),
         );
 
         const answers = await this.generator.prompt(
@@ -79,24 +78,16 @@ export class PythonGenerator implements GeneratorInterface {
             this.generator.options.displayName || answers.displayName;
     }
 
-    private async getFilePaths() {
-        try {
-            const result: ResolvedRefsResults = await resolveRefs(
-                config.util.toObject() as Config,
-            );
+    private getFilePaths(): Array<PathMap> {
+        const config = ConfigHelper.getInstance().getConfig();
 
-            const resolved = result.resolved as Config;
+        const id = PythonGenerator.getSignature().id;
 
-            const id = PythonGenerator.getSignature().id;
-
-            return resolved.generators[id]?.paths;
-        } catch (error) {
-            this.generator.log(error);
-        }
+        return config.generators[id]!.paths;
     }
 
     public async writing(): Promise<void> {
-        const paths = await this.getFilePaths();
+        const paths = this.getFilePaths();
 
         if (!paths) {
             this.generator.abort = true;

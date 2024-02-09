@@ -29,8 +29,6 @@ class AppGenerator extends Generator<AppOptions> {
     constructor(args: string | Array<string>, options: AppOptions) {
         super(args, options);
 
-        this.options.nodePackageManager = "pnpm";
-
         this._initializeCliArguments();
         this._initializeCliOptions();
 
@@ -54,8 +52,6 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     public async initializing(): Promise<void> {
-        this.options.nodePackageManager = "pnpm";
-
         this.log(
             yosay(
                 `Welcome to the\n${chalk.bold.magenta(

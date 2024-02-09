@@ -8,7 +8,8 @@ import { NodeVersion } from "../@types/index.js";
 import { ConfigHelper } from "../helpers/index.js";
 
 export class NodeEnvironment {
-    private packageJson: PackageJson = {} as PackageJson;
+    private _packageJson: PackageJson = {} as PackageJson;
+
     private engine: string;
 
     constructor() {
@@ -77,5 +78,13 @@ export class NodeEnvironment {
 
     public getNodeEngine(): string {
         return this.engine;
+    }
+
+    public get packageJson(): PackageJson {
+        return this._packageJson;
+    }
+
+    private set packageJson(value: PackageJson) {
+        this._packageJson = value;
     }
 }

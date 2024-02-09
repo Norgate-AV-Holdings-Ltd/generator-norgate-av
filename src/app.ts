@@ -17,9 +17,9 @@ import {
     GitHelper,
 } from "./helpers/index.js";
 import { ProjectType } from "./questions/index.js";
-import appConfig from "../config/default.json";
+import config from "../config/default.json";
 
-await ConfigHelper.initialize(appConfig as UnresolvedConfig);
+await ConfigHelper.initialize(config as UnresolvedConfig);
 
 class AppGenerator extends Generator<AppOptions> {
     private generator: GeneratorInterface | undefined = undefined;
@@ -29,7 +29,7 @@ class AppGenerator extends Generator<AppOptions> {
     constructor(args: string | Array<string>, options: AppOptions) {
         super(args, options);
 
-        this.appname = "Norgate AV Project Generator";
+        this.options.nodePackageManager = "pnpm";
 
         this._initializeCliArguments();
         this._initializeCliOptions();
@@ -40,10 +40,6 @@ class AppGenerator extends Generator<AppOptions> {
 
         if (this.options.skipPrompts) {
             this.options.git = true;
-
-            const config = ConfigHelper.getInstance().getConfig();
-            const { pkgmanager } = config.environments.node;
-            this.options.pkg = pkgmanager.default;
         }
     }
 
@@ -58,6 +54,8 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     public async initializing(): Promise<void> {
+        this.options.nodePackageManager = "pnpm";
+
         this.log(
             yosay(
                 `Welcome to the\n${chalk.bold.magenta(
@@ -121,13 +119,6 @@ class AppGenerator extends Generator<AppOptions> {
         }
 
         await this.generator?.writing();
-    }
-
-    public async install(): Promise<void> {
-        if (this.abort) {
-            this.options.skipInstall = true;
-            return;
-        }
 
         if (this.options.git) {
             try {
@@ -146,11 +137,22 @@ class AppGenerator extends Generator<AppOptions> {
                 this.options.git = false;
             }
         }
+    }
 
-        await this.generator?.install();
+    public async install(): Promise<void> {
+        if (this.abort) {
+            this.options.skipInstall = true;
+            return;
+        }
+
+        if (this.options.skipInstall) {
+            return;
+        }
 
         this.log();
         this.log("Installing packages. This might take a couple of minutes.");
+
+        await this.generator?.install();
     }
 
     public async end(): Promise<void> {

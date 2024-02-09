@@ -81,7 +81,7 @@ export class PythonGenerator implements GeneratorInterface {
     private getFilePaths(): Array<PathMap> {
         const config = ConfigHelper.getInstance().getConfig();
 
-        const id = PythonGenerator.getSignature().id;
+        const { id } = PythonGenerator.getSignature();
 
         return config.generators[id]!.paths;
     }
@@ -122,10 +122,11 @@ export class PythonGenerator implements GeneratorInterface {
     public async install(): Promise<void> {
         if (this.generator.abort) {
             this.generator.options.skipInstall = true;
-            return;
         }
 
-        return Promise.resolve();
+        if (this.generator.options.skipInstall) {
+            return;
+        }
     }
 
     public async end(): Promise<void> {

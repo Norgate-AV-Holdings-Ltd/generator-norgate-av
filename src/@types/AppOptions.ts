@@ -1,12 +1,12 @@
 import { BaseOptions } from "yeoman-generator";
 import { NodeEnvironment } from "../environments/NodeEnvironment.js";
-// import { ConfigHelper } from "../helpers/index.js";
+import { NodePackageManager } from "./index.js";
 
 export type AppOptions = BaseOptions & {
     type: string;
     description?: string;
     id?: string;
-    pkg: string;
+    pkg: NodePackageManager;
     git: boolean;
     open?: boolean;
     yes?: boolean;
@@ -15,5 +15,5 @@ export type AppOptions = BaseOptions & {
     name: string;
     displayName: string;
     node?: NodeEnvironment;
-    // config: ConfigHelper;
+    nodePackageManager?: NodePackageManager;
 };

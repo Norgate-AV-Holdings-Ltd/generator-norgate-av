@@ -66,6 +66,9 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
                 }
             ]
         },
@@ -168,6 +171,9 @@
                 },
                 {
                     "$ref": "#/files/paths/vitestconfig"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
                 }
             ]
         },
@@ -234,6 +240,9 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
                 }
             ]
         },
@@ -300,6 +309,9 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
                 }
             ]
         },
@@ -336,6 +348,9 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
                 }
             ]
         },
@@ -405,6 +420,9 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
                 }
             ]
         },
@@ -474,6 +492,9 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
                 }
             ]
         }

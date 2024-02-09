@@ -33,6 +33,13 @@ export class JavascriptGenerator implements GeneratorInterface {
     public constructor(generator: AppGenerator) {
         this.generator = generator;
         this.generator.options.node = new NodeEnvironment();
+
+        if (this.generator.options.skipPrompts) {
+            const config = ConfigHelper.getInstance().getConfig();
+            const { pkgmanager } = config.environments.node;
+            this.generator.options.pkg = pkgmanager.default;
+            this.generator.options.nodePackageManager = pkgmanager.default;
+        }
     }
 
     public async initialize(): Promise<void> {
@@ -79,6 +86,8 @@ export class JavascriptGenerator implements GeneratorInterface {
             this.generator.options.description || answers.description;
         this.generator.options.git = this.generator.options.git || answers.git;
         this.generator.options.pkg = this.generator.options.pkg || answers.pkg;
+        this.generator.options.nodePackageManager =
+            this.generator.options.pkg || answers.pkg;
         this.generator.options.displayName =
             this.generator.options.displayName || answers.displayName;
     }
@@ -86,7 +95,7 @@ export class JavascriptGenerator implements GeneratorInterface {
     private getFilePaths(): Array<PathMap> {
         const config = ConfigHelper.getInstance().getConfig();
 
-        const id = JavascriptGenerator.getSignature().id;
+        const { id } = JavascriptGenerator.getSignature();
 
         return config.generators[id]!.paths;
     }
@@ -127,13 +136,11 @@ export class JavascriptGenerator implements GeneratorInterface {
     public async install(): Promise<void> {
         if (this.generator.abort) {
             this.generator.options.skipInstall = true;
-            return;
         }
 
-        await this.generator.spawn(this.generator.options.pkg, [
-            "install",
-            "--silent",
-        ]);
+        if (this.generator.options.skipInstall) {
+            return;
+        }
     }
 
     public async end(): Promise<void> {

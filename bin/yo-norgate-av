@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Save this script to a `yo-norgate-av` file, make it
 # executable and save to your $PATH directory.

@@ -4,18 +4,21 @@ import { fileURLToPath } from "node:url";
 import { PackageJson } from "type-fest";
 import { findUp } from "find-up";
 import axios from "axios";
-import config from "config";
 import { NodeVersion } from "../@types/index.js";
+import { ConfigHelper } from "../helpers/index.js";
 
 export class NodeEnvironment {
     private packageJson: PackageJson = {} as PackageJson;
-    private latestLts: string = config.get<string>(
-        "config.environments.node.engine.fallback",
-    );
+    private engine: string;
+
+    constructor() {
+        const config = ConfigHelper.getInstance().getConfig();
+        this.engine = config.environments.node.engine.fallback;
+    }
 
     public async initialize(): Promise<void> {
         this.packageJson = await this.getPackageJson();
-        this.latestLts = await this.getLatestLtsNodeVersion();
+        this.engine = await this.getLatestLtsNodeVersion();
     }
 
     private async getPackageJson(): Promise<PackageJson> {
@@ -69,10 +72,10 @@ export class NodeEnvironment {
 
         const lts = response.data.filter((version) => version.lts);
 
-        return lts[0]?.version.slice(1) || "18";
+        return lts[0]?.version.slice(1) || this.engine;
     }
 
     public getNodeEngine(): string {
-        return this.latestLts;
+        return this.engine;
     }
 }

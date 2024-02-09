@@ -1,19 +1,19 @@
 import { PromptQuestion } from "@yeoman/types";
-import config from "config";
 import { BaseQuestion } from "./index.js";
 import { Answers, NodePackageManager } from "../@types/index.js";
+import { ConfigHelper } from "../helpers/index.js";
 import AppGenerator from "../app.js";
 
 export class PackageManager extends BaseQuestion {
-    private default = config.get<NodePackageManager>(
-        "config.pkgmanager.node.default",
-    );
-    private choices = config.get<Array<NodePackageManager>>(
-        "config.pkgmanager.node.choices",
-    );
+    private default: NodePackageManager;
+    private choices: Array<NodePackageManager>;
 
     constructor(generator: AppGenerator) {
         super(generator);
+
+        const config = ConfigHelper.getInstance().getConfig();
+        this.default = config.pkgmanager.node!.default;
+        this.choices = config.pkgmanager.node!.choices;
     }
 
     public getQuestion(): PromptQuestion<Answers> {

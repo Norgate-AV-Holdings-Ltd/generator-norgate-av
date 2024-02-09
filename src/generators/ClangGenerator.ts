@@ -54,11 +54,11 @@ export class ClangGenerator implements GeneratorInterface {
     }
 
     public async prompting(): Promise<void> {
-        const questions = this.questions.map((question) =>
-            new question(this.generator).getQuestion(),
+        const questions = this.questions.map((Question) =>
+            new Question(this.generator).getQuestion(),
         );
 
-        const answers = await this.generator.prompt(
+        const answers = await this.generator.prompt<Answers>(
             questions.map((q) => {
                 return {
                     ...q,

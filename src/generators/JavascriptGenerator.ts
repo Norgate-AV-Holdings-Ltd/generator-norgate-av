@@ -58,7 +58,7 @@ export class JavascriptGenerator implements GeneratorInterface {
             new Question(this.generator).getQuestion(),
         );
 
-        const answers = await this.generator.prompt(
+        const answers = await this.generator.prompt<Answers>(
             questions.map((q) => {
                 return {
                     ...q,

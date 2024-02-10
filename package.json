@@ -32,7 +32,7 @@
     "scripts": {
         "commit": "git-cz",
         "lint": "tsc && eslint . --fix",
-        "clean": "rimraf generators",
+        "clean": "rimraf dist",
         "prebuild": "pnpm clean && pnpm lint",
         "build": "tsup",
         "copy:deps": "ncp src/dependencies dist/generators/app/dependencies",

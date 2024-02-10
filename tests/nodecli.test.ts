@@ -20,14 +20,8 @@ await node.initialize();
 const { devDependencies, dependencies } = node.packageJson;
 const engine = node.getNodeEngine().split(".")[0];
 
-const lock = {
-    pnpm: "pnpm-lock.yaml",
-    npm: "package-lock.json",
-    yarn: "yarn.lock",
-};
-
 describe("generator-norgate-av:app", () => {
-    describe("typescript:skip-install", () => {
+    describe("nodecli:skip-install", () => {
         let result: RunResult<AppGenerator>;
 
         const name = "test";
@@ -36,7 +30,7 @@ describe("generator-norgate-av:app", () => {
 
         beforeAll(async () => {
             result = await helpers.create<AppGenerator>(generator).withAnswers({
-                type: "typescript",
+                type: "nodecli",
                 name,
                 description,
                 git: false,
@@ -63,15 +57,12 @@ describe("generator-norgate-av:app", () => {
                 ".husky/pre-commit",
                 ".vscode/extensions.json",
                 ".vscode/settings.json",
-                "src/app.ts",
-                "tests/app.test.ts",
+                "src/app.js",
                 ".all-contributorsrc",
                 ".changelogrc.json",
                 ".commitlintrc.json",
                 ".czrc",
                 ".editorconfig",
-                ".eslintignore",
-                ".eslintrc.json",
                 ".gitattributes",
                 ".gitignore",
                 ".lintstagedrc.json",
@@ -87,10 +78,6 @@ describe("generator-norgate-av:app", () => {
                 "LICENSE",
                 "package.json",
                 "README.md",
-                "tsconfig.json",
-                "tsup.config.json",
-                "tsup.schema.json",
-                "vitest.config.ts",
             ]);
         });
 
@@ -100,10 +87,6 @@ describe("generator-norgate-av:app", () => {
                 description,
                 engines: {
                     node: `>=${engine}`,
-                },
-                scripts: {
-                    prebuild: `${pkg} clean`,
-                    prestart: `${pkg} lint && ${pkg} build`,
                 },
                 devDependencies: {
                     "@commitlint/config-conventional":
@@ -115,10 +98,6 @@ describe("generator-norgate-av:app", () => {
                     "@types/config": devDependencies!["@types/config"],
                     "@types/node": devDependencies!["@types/node"],
                     "@types/nodemon": devDependencies!["@types/nodemon"],
-                    "@typescript-eslint/eslint-plugin":
-                        devDependencies!["@typescript-eslint/eslint-plugin"],
-                    "@typescript-eslint/parser":
-                        devDependencies!["@typescript-eslint/parser"],
                     "all-contributors-cli":
                         devDependencies!["all-contributors-cli"],
                     commitizen: devDependencies!.commitizen,
@@ -126,20 +105,11 @@ describe("generator-norgate-av:app", () => {
                     "cz-conventional-changelog":
                         devDependencies!["cz-conventional-changelog"],
                     doctoc: devDependencies!.doctoc,
-                    eslint: devDependencies!.eslint,
-                    "eslint-config-prettier":
-                        devDependencies!["eslint-config-prettier"],
                     husky: devDependencies!.husky,
                     "lint-staged": devDependencies!["lint-staged"],
                     nodemon: devDependencies!.nodemon,
                     prettier: devDependencies!.prettier,
-                    rimraf: devDependencies!.rimraf,
                     "semantic-release": devDependencies!["semantic-release"],
-                    terser: devDependencies!.terser,
-                    tsup: devDependencies!.tsup,
-                    "type-fest": devDependencies!["type-fest"],
-                    typescript: devDependencies!.typescript,
-                    vitest: devDependencies!.vitest,
                 },
                 dependencies: {
                     config: dependencies!.config,
@@ -197,44 +167,6 @@ describe("generator-norgate-av:app", () => {
                 `${pkg} commitlint --edit $1`,
             );
             assert.fileContent(".husky/pre-commit", `${pkg} lint-staged`);
-        });
-
-        it("should always pass", () => {
-            expect(1).toEqual(1);
-        });
-    });
-
-    describe.skip("typescript:install", () => {
-        let result: RunResult<AppGenerator>;
-
-        const name = "test";
-        const description = "test-description";
-        const pkg = "pnpm";
-
-        beforeAll(async () => {
-            result = await helpers
-                .create<AppGenerator>(generator)
-                .withOptions({
-                    skipInstall: false,
-                })
-                .withAnswers({
-                    type: "typescript",
-                    name,
-                    description,
-                    git: false,
-                    pkg,
-                    openWith: "skip",
-                });
-
-            process.chdir(name);
-        }, 200000);
-
-        afterAll(() => {
-            result?.cleanup();
-        });
-
-        it("should install packages using the correct package manager", () => {
-            assert.file(lock[pkg]);
         });
 
         it("should always pass", () => {

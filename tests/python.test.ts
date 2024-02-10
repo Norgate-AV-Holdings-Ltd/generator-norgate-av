@@ -16,18 +16,13 @@ describe("generator-norgate-av:app", () => {
         const description = "test-description";
 
         beforeAll(async () => {
-            result = await helpers
-                .create<AppGenerator>(generator)
-                // .withOptions({
-                //     skipInstall: true,
-                // })
-                .withAnswers({
-                    type: "python",
-                    name,
-                    description,
-                    git: false,
-                    openWith: "skip",
-                });
+            result = await helpers.create<AppGenerator>(generator).withAnswers({
+                type: "python",
+                name,
+                description,
+                git: false,
+                openWith: "skip",
+            });
 
             process.chdir(name);
         });

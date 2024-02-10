@@ -1,0 +1,10 @@
+/__test__
+/.vscode
+/.github
+/.editorconfig
+/.eslintignore
+/.eslintrc.json
+/.gitattributes
+/jsconfig.json
+/.dockerignore
+/Dockerfile

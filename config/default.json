@@ -69,6 +69,18 @@
                 },
                 {
                     "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
                 }
             ]
         },
@@ -243,6 +255,21 @@
                 },
                 {
                     "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/releaserc"
                 }
             ]
         },
@@ -312,6 +339,21 @@
                 },
                 {
                     "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/releaserc"
                 }
             ]
         },
@@ -351,6 +393,9 @@
                 },
                 {
                     "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
                 }
             ]
         },
@@ -423,6 +468,18 @@
                 },
                 {
                     "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
                 }
             ]
         },
@@ -495,6 +552,24 @@
                 },
                 {
                     "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/docs"
+                },
+                {
+                    "$ref": "#/files/paths/config"
                 }
             ]
         }

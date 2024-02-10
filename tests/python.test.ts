@@ -45,6 +45,7 @@ describe("generator-norgate-av:app", () => {
                 ".editorconfig",
                 ".gitattributes",
                 ".gitignore",
+                "CONTRIBUTING.md",
                 "CHANGELOG.md",
                 "GitVersion.yml",
                 "LICENSE",

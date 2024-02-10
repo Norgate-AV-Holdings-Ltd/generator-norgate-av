@@ -1,4 +1,5 @@
 import path from "node:path";
+import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import chalk from "chalk";
 import {
@@ -141,9 +142,39 @@ export class CrestronSimplGenerator implements GeneratorInterface {
         }
     }
 
+    private async findAndRename(
+        search: string,
+        replace: string,
+    ): Promise<void> {
+        const entities = await fs.readdir(this.generator.destinationPath(), {
+            recursive: true,
+        });
+
+        if (!entities) {
+            return;
+        }
+
+        await Promise.all(
+            entities.map(async (entity) => {
+                if (!entity.endsWith(search)) {
+                    return;
+                }
+
+                await fs.rename(
+                    path.join(this.generator.destinationPath(), entity),
+                    path.join(
+                        this.generator.destinationPath(),
+                        entity.replace(search, replace),
+                    ),
+                );
+            }),
+        );
+    }
+
     public async install(): Promise<void> {
         if (this.generator.abort) {
             this.generator.options.skipInstall = true;
+            return Promise.resolve();
         }
 
         if (this.generator.options.skipInstall) {
@@ -152,6 +183,10 @@ export class CrestronSimplGenerator implements GeneratorInterface {
     }
 
     public async end(): Promise<void> {
+        // Search for any gitkeep files copied to the destination
+        // and rename them to .gitkeep
+        await this.findAndRename("gitkeep", ".gitkeep");
+
         const { name, pkg } = this.generator.options;
 
         this.generator.log();

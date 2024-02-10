@@ -1,5 +1,8 @@
 FROM node:lts-alpine
 
+# Make image public
+# LABEL org.opencontainers.image.source
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable

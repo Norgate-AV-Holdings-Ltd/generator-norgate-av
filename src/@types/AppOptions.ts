@@ -15,5 +15,4 @@ export type AppOptions = BaseOptions & {
     name: string;
     displayName: string;
     node?: NodeEnvironment;
-    nodePackageManager?: NodePackageManager;
 };

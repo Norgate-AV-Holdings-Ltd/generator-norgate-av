@@ -6,7 +6,7 @@ import { describe, beforeEach, afterEach, expect, it } from "vitest";
 import AppGenerator from "../src/app.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const generator = path.resolve(__dirname, "../generators/app");
+const generator = path.resolve(__dirname, "../dist/generators/app");
 
 describe("generator-norgate-av:python:skipInstall", () => {
     let result: RunResult<AppGenerator>;

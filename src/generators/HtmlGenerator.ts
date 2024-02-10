@@ -37,8 +37,12 @@ export class HtmlGenerator implements GeneratorInterface {
         if (this.generator.options.skipPrompts) {
             const config = ConfigHelper.getInstance().getConfig();
             const { pkgmanager } = config.environments.node;
+
             this.generator.options.pkg = pkgmanager.default;
-            this.generator.options.nodePackageManager = pkgmanager.default;
+
+            // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            this.generator.env.options.nodePackageManager = pkgmanager.default;
         }
     }
 
@@ -86,8 +90,12 @@ export class HtmlGenerator implements GeneratorInterface {
             this.generator.options.description || answers.description;
         this.generator.options.git = this.generator.options.git || answers.git;
         this.generator.options.pkg = this.generator.options.pkg || answers.pkg;
-        this.generator.options.nodePackageManager =
+
+        // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        this.generator.env.options.nodePackageManager =
             this.generator.options.pkg || answers.pkg;
+
         this.generator.options.displayName =
             this.generator.options.displayName || answers.displayName;
     }
@@ -105,7 +113,7 @@ export class HtmlGenerator implements GeneratorInterface {
 
         if (!paths) {
             this.generator.abort = true;
-            return;
+            return Promise.resolve();
         }
 
         this.generator.env.cwd = this.generator.destinationPath();
@@ -139,7 +147,7 @@ export class HtmlGenerator implements GeneratorInterface {
         }
 
         if (this.generator.options.skipInstall) {
-            return;
+            return Promise.resolve();
         }
     }
 

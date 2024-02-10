@@ -10,7 +10,7 @@ import config from "../config/default.json";
 import { UnresolvedConfig } from "../src/@types/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const generator = path.resolve(__dirname, "../generators/app");
+const generator = path.resolve(__dirname, "../dist/generators/app");
 
 await ConfigHelper.initialize(config as UnresolvedConfig);
 

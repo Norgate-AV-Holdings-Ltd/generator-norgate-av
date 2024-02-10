@@ -7,11 +7,14 @@
         "project",
         "javascript",
         "typescript",
-        "boilerplate"
+        "boilerplate",
+        "python",
+        "node-cli",
+        "crestron-simpl"
     ],
     "license": "MIT",
-    "main": "generators/app/index.js",
-    "typings": "generators/app/index.d.ts",
+    "main": "dist/generators/app/index.js",
+    "typings": "dist/generators/app/index.d.ts",
     "type": "module",
     "repository": {
         "type": "git",
@@ -21,7 +24,7 @@
         "url": "https://github.com/Norgate-AV/generator-norgate-av/issues"
     },
     "files": [
-        "generators"
+        "dist"
     ],
     "engines": {
         "node": ">=18"
@@ -32,9 +35,9 @@
         "clean": "rimraf generators",
         "prebuild": "pnpm clean && pnpm lint",
         "build": "tsup",
-        "copy:deps": "ncp src/dependencies generators/app/dependencies",
-        "copy:templates": "ncp src/templates generators/app/templates",
-        "copy:usage": "ncp src/USAGE generators/app/USAGE",
+        "copy:deps": "ncp src/dependencies dist/generators/app/dependencies",
+        "copy:templates": "ncp templates dist/generators/app/templates",
+        "copy:usage": "ncp src/USAGE dist/generators/app/USAGE",
         "test": "vitest --no-threads",
         "pretty:fix": "prettier --write .",
         "doctoc": "doctoc --title '## Contents 📖' README.md",

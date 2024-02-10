@@ -91,7 +91,7 @@ export class PythonGenerator implements GeneratorInterface {
 
         if (!paths) {
             this.generator.abort = true;
-            return;
+            return Promise.resolve();
         }
 
         this.generator.env.cwd = this.generator.destinationPath();
@@ -125,7 +125,7 @@ export class PythonGenerator implements GeneratorInterface {
         }
 
         if (this.generator.options.skipInstall) {
-            return;
+            return Promise.resolve();
         }
     }
 

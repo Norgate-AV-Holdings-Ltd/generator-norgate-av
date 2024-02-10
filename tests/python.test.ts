@@ -17,10 +17,10 @@ describe("generator-norgate-av:app", () => {
 
         beforeAll(async () => {
             result = await helpers
-                .run<AppGenerator>(generator)
-                .withOptions({
-                    skipInstall: true,
-                })
+                .create<AppGenerator>(generator)
+                // .withOptions({
+                //     skipInstall: true,
+                // })
                 .withAnswers({
                     type: "python",
                     name,

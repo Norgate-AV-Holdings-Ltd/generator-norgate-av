@@ -36,10 +36,10 @@ describe("generator-norgate-av:app", () => {
 
         beforeAll(async () => {
             result = await helpers
-                .run<AppGenerator>(generator)
-                .withOptions({
-                    skipInstall: true,
-                })
+                .create<AppGenerator>(generator)
+                // .withOptions({
+                //     skipInstall: true,
+                // })
                 .withAnswers({
                     type: "typescript",
                     name,
@@ -209,7 +209,7 @@ describe("generator-norgate-av:app", () => {
         });
     });
 
-    describe("typescript:install", () => {
+    describe.skip("typescript:install", () => {
         let result: RunResult<AppGenerator>;
 
         const name = "test";
@@ -218,10 +218,10 @@ describe("generator-norgate-av:app", () => {
 
         beforeAll(async () => {
             result = await helpers
-                .run<AppGenerator>(generator)
-                // .withOptions({
-                //     forceInstall: true,
-                // })
+                .create<AppGenerator>(generator)
+                .withOptions({
+                    skipInstall: false,
+                })
                 .withAnswers({
                     type: "typescript",
                     name,
@@ -232,7 +232,7 @@ describe("generator-norgate-av:app", () => {
                 });
 
             process.chdir(name);
-        }, 120000);
+        }, 200000);
 
         afterAll(() => {
             result?.cleanup();

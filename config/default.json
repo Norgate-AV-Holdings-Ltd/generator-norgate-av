@@ -277,7 +277,7 @@
             "signature": {
                 "name": "Node.js (CLI)",
                 "id": "nodecli",
-                "aliases": ["cli", "node-cli", "cli-js"]
+                "aliases": ["nodecli", "node-cli", "cli-js"]
             },
             "pkgmanager": {
                 "$ref": "#/pkgmanager/node"

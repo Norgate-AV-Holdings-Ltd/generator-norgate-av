@@ -200,21 +200,19 @@ class AppGenerator extends Generator<AppOptions> {
 
         const code = await CodeHelper.getPath();
 
-        if (code && this.options.open) {
+        if (!code) {
+            return;
+        }
+
+        if (this.options.open) {
             await CodeHelper.open(this, this.destinationPath());
             return;
         }
 
-        const choices = [];
-
-        if (code) {
-            choices.push({
-                name: "Open with `code`",
-                value: code,
-            });
-        }
-
-        choices.push({ name: "Skip", value: "skip" });
+        const choices = [
+            { name: "Open with `code`", value: code },
+            { name: "Skip", value: "skip" },
+        ];
 
         const answer = await this.prompt<{ openWith: string }>({
             type: "list",

@@ -14,11 +14,17 @@
     "scripts": {
         "commit": "git-cz",
         "pretty:fix": "prettier --write .",
-        "prepare": "husky"
+        "prepare": "husky",
+        "doctoc": "doctoc --title '## Contents 📖' README.md",
+        "contrib:add": "all-contributors add",
+        "contrib:generate": "all-contributors generate",
+        "contrib:check": "all-contributors check"
     },
     "devDependencies": {
         <%- node.getDevDependency("@commitlint/cli") %>,
         <%- node.getDevDependency("@commitlint/config-conventional") %>,
+        <%- node.getDevDependency("@semantic-release/changelog") %>,
+        <%- node.getDevDependency("@semantic-release/git") %>,
         <%- node.getDevDependency("all-contributors-cli") %>,
         <%- node.getDevDependency("commitizen") %>,
         <%- node.getDevDependency("cz-conventional-changelog") %>,
@@ -26,5 +32,6 @@
         <%- node.getDevDependency("husky") %>,
         <%- node.getDevDependency("lint-staged") %>,
         <%- node.getDevDependency("prettier") %>,
+        <%- node.getDevDependency("semantic-release") %>
     }
 }

@@ -106,7 +106,7 @@ describe("generator-norgate-av:app", () => {
                 ]);
             });
 
-            it.skip("should create the correct package.json", () => {
+            it("should create the correct package.json", () => {
                 assert.jsonFileContent("package.json", {
                     name,
                     description,

@@ -106,7 +106,7 @@ describe("generator-norgate-av:app", () => {
                 ]);
             });
 
-            it.skip("should create the correct package.json", () => {
+            it("should create the correct package.json", () => {
                 assert.jsonFileContent("package.json", {
                     name,
                     description,
@@ -114,8 +114,13 @@ describe("generator-norgate-av:app", () => {
                         node: `>=${engine}`,
                     },
                     devDependencies: {
+                        "@commitlint/cli": devDependencies!["@commitlint/cli"],
                         "@commitlint/config-conventional":
                             devDependencies!["@commitlint/config-conventional"],
+                        "@semantic-release/changelog":
+                            devDependencies!["@semantic-release/changelog"],
+                        "@semantic-release/git":
+                            devDependencies!["@semantic-release/git"],
                         "all-contributors-cli":
                             devDependencies!["all-contributors-cli"],
                         commitizen: devDependencies!.commitizen,
@@ -124,8 +129,9 @@ describe("generator-norgate-av:app", () => {
                         doctoc: devDependencies!.doctoc,
                         husky: devDependencies!.husky,
                         "lint-staged": devDependencies!["lint-staged"],
-                        nodemon: devDependencies!.nodemon,
                         prettier: devDependencies!.prettier,
+                        "semantic-release":
+                            devDependencies!["semantic-release"],
                     },
                 });
             });

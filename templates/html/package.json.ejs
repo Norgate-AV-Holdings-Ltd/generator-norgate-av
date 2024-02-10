@@ -17,11 +17,17 @@
         "commit": "git-cz",
         "pretty:fix": "prettier --write .",
         "start": "live-server",
-        "prepare": "husky"
+        "prepare": "husky",
+        "doctoc": "doctoc --title '## Contents 📖' README.md",
+        "contrib:add": "all-contributors add",
+        "contrib:generate": "all-contributors generate",
+        "contrib:check": "all-contributors check"
     },
     "devDependencies": {
         <%- node.getDevDependency("@commitlint/cli") %>,
         <%- node.getDevDependency("@commitlint/config-conventional") %>,
+        <%- node.getDevDependency("@semantic-release/changelog") %>,
+        <%- node.getDevDependency("@semantic-release/git") %>,
         <%- node.getDevDependency("@types/config") %>,
         <%- node.getDevDependency("@types/live-server") %>,
         <%- node.getDevDependency("@types/node") %>,
@@ -33,6 +39,7 @@
         <%- node.getDevDependency("lint-staged") %>,
         <%- node.getDevDependency("live-server") %>,
         <%- node.getDevDependency("prettier") %>,
+        <%- node.getDevDependency("semantic-release") %>
     },
     "dependencies": {
         <%- node.getDependency("config") %>,

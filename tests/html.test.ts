@@ -1,5 +1,4 @@
 import path from "node:path";
-import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import assert from "yeoman-assert";
 import helpers, { RunResult } from "yeoman-test";
@@ -110,8 +109,7 @@ describe("generator-norgate-av:app", () => {
                 ]);
             });
 
-            it.skip("should create the correct package.json", async () => {
-                console.log(await fs.readFile("package.json", "utf-8"));
+            it("should create the correct package.json", () => {
                 assert.jsonFileContent("package.json", {
                     name,
                     description,
@@ -122,6 +120,10 @@ describe("generator-norgate-av:app", () => {
                         "@commitlint/cli": devDependencies!["@commitlint/cli"],
                         "@commitlint/config-conventional":
                             devDependencies!["@commitlint/config-conventional"],
+                        "@semantic-release/changelog":
+                            devDependencies!["@semantic-release/changelog"],
+                        "@semantic-release/git":
+                            devDependencies!["@semantic-release/git"],
                         "@types/config": devDependencies!["@types/config"],
                         "@types/live-server":
                             devDependencies!["@types/live-server"],
@@ -136,6 +138,8 @@ describe("generator-norgate-av:app", () => {
                         "lint-staged": devDependencies!["lint-staged"],
                         "live-server": devDependencies!["live-server"],
                         prettier: devDependencies!.prettier,
+                        "semantic-release":
+                            devDependencies!["semantic-release"],
                     },
                     dependencies: {
                         config: dependencies!.config,

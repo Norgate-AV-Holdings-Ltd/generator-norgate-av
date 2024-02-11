@@ -210,6 +210,10 @@ class AppGenerator extends Generator<AppOptions> {
             return;
         }
 
+        if (this.options.skipPrompts) {
+            return;
+        }
+
         const choices = [
             { name: "Open with `code`", value: code },
             { name: "Skip", value: "skip" },

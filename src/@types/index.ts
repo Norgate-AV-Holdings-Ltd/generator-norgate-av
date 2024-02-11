@@ -8,6 +8,7 @@ export * from "./NodePackageManager.js";
 export * from "./NodeVersion.js";
 export * from "./PackageManager.js";
 export * from "./PathMap.js";
+export * from "./ProjectConfig.js";
 export * from "./ResolvedConfig.js";
 export * from "./TemplateConfig.js";
 export * from "./UnresolvedConfig.js";

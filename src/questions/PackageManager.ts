@@ -14,6 +14,13 @@ export class PackageManager extends BaseQuestion {
         const config = ConfigHelper.getInstance().getConfig();
         this.default = config.pkgmanager.node!.default;
         this.choices = config.pkgmanager.node!.choices;
+
+        this.generator.options.pkg =
+            this.generator.options.pkg || this.getDefault();
+    }
+
+    private getDefault(): NodePackageManager {
+        return this.default;
     }
 
     public getQuestion(): PromptQuestion<Answers> {
@@ -27,10 +34,8 @@ export class PackageManager extends BaseQuestion {
                     value: choice,
                 };
             }),
-            default: this.default,
-            when:
-                !this.generator.options.pkg &&
-                !this.generator.options.skipPrompts,
+            default: this.generator.options.pkg,
+            when: !this.generator.options.skipPrompts,
         };
     }
 }

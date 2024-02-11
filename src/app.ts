@@ -116,6 +116,13 @@ class AppGenerator extends Generator<AppOptions> {
         }
 
         await this.generator?.writing();
+    }
+
+    public async install(): Promise<void> {
+        if (this.abort) {
+            this.options.skipInstall = true;
+            return;
+        }
 
         if (this.options.git) {
             try {
@@ -133,13 +140,6 @@ class AppGenerator extends Generator<AppOptions> {
                 this.log();
                 this.options.git = false;
             }
-        }
-    }
-
-    public async install(): Promise<void> {
-        if (this.abort) {
-            this.options.skipInstall = true;
-            return;
         }
 
         if (this.options.skipInstall) {

@@ -1,24 +1,24 @@
 import { PromptQuestion } from "@yeoman/types";
-import { Answers } from "../@types/index.js";
 import { BaseQuestion } from "./index.js";
+import { Answers } from "../@types/index.js";
 import AppGenerator from "../app.js";
 
-export class ProjectDescription extends BaseQuestion {
+export class Author extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
-        this.generator.options.description = this.getDefault();
+        // this.generator.options.author = this.generator.git.name();
     }
 
-    private getDefault(): string {
-        return "";
+    private getDefault(): boolean {
+        return true;
     }
 
     public getQuestion(): PromptQuestion<Answers> {
         return {
             type: "input",
-            name: "description",
-            message: "What's the description of your project?",
-            default: this.generator.options.description,
+            name: "author",
+            message: "Who's the author of this project?",
+            default: this.generator.options.author,
             when: !this.generator.options.skipPrompts,
         };
     }

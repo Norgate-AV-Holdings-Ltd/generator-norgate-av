@@ -8,17 +8,22 @@ export class ProjectId extends BaseQuestion {
 
     constructor(generator: AppGenerator) {
         super(generator);
+        this.generator.options.id = this.getDefault(
+            this.generator.options.name,
+        );
+    }
+
+    private getDefault(name: string): string {
+        return name.toLowerCase().replace(/[^a-z0-9]/g, "-");
     }
 
     public getQuestion(): PromptQuestion<Answers> {
         return {
             type: "input",
-            name: "name",
+            name: "id",
             message: "What's the identifier of your project?",
             default: (answers: Answers) => {
-                return answers.displayName
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]/g, "-");
+                return this.getDefault(answers.name);
             },
             when:
                 !this.generator.options.id &&

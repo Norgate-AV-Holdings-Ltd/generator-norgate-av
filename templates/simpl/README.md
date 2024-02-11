@@ -1,6 +1,6 @@
-# <%= name %> README
+# <%= id %> README
 
-This is the README for your project "<%= name %>". After writing up a brief description, we recommend including the following sections.
+This is the README for your project "<%= id %>". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 

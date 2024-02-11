@@ -71,11 +71,12 @@ export class PythonGenerator implements GeneratorInterface {
             this.generator.options.type || answers.type;
         this.generator.options.name =
             this.generator.options.name || answers.name;
+        this.generator.options.id = this.generator.options.id || answers.id;
         this.generator.options.description =
             this.generator.options.description || answers.description;
         this.generator.options.git = this.generator.options.git || answers.git;
-        this.generator.options.displayName =
-            this.generator.options.displayName || answers.displayName;
+        // this.generator.options.displayName =
+        //     this.generator.options.displayName || answers.displayName;
     }
 
     private getFilePaths(): Array<PathMap> {

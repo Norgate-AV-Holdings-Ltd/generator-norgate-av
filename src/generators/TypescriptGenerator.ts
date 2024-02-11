@@ -1,4 +1,5 @@
 import path from "node:path";
+import util from "node:util";
 import { fileURLToPath } from "node:url";
 import chalk from "chalk";
 import {
@@ -82,10 +83,29 @@ export class TypescriptGenerator implements GeneratorInterface {
     }
 
     private updateOptions(answers: Answers): void {
+        this.generator.log("Answers:");
+        this.generator.log(
+            util.inspect(answers, {
+                showHidden: true,
+                depth: null,
+                colors: true,
+            }),
+        );
+
+        this.generator.log("Current Options:");
+        this.generator.log(
+            util.inspect(this.generator.options, {
+                showHidden: false,
+                depth: null,
+                colors: true,
+            }),
+        );
+
         this.generator.options.type =
             this.generator.options.type || answers.type;
         this.generator.options.name =
             this.generator.options.name || answers.name;
+        this.generator.options.id = this.generator.options.id || answers.id;
         this.generator.options.description =
             this.generator.options.description || answers.description;
         this.generator.options.git = this.generator.options.git || answers.git;
@@ -96,8 +116,8 @@ export class TypescriptGenerator implements GeneratorInterface {
         this.generator.env.options.nodePackageManager =
             this.generator.options.pkg || answers.pkg;
 
-        this.generator.options.displayName =
-            this.generator.options.displayName || answers.displayName;
+        // this.generator.options.displayName =
+        //     this.generator.options.displayName || answers.displayName;
     }
 
     private getFilePaths(): Array<PathMap> {

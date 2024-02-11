@@ -6,6 +6,11 @@ import AppGenerator from "../app.js";
 export class Git extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
+        this.generator.options.git = this.getDefault();
+    }
+
+    private getDefault(): boolean {
+        return true;
     }
 
     public getQuestion(): PromptQuestion<Answers> {
@@ -13,10 +18,8 @@ export class Git extends BaseQuestion {
             type: "confirm",
             name: "git",
             message: "Initialize a git repository?",
-            default: true,
-            when:
-                !this.generator.options.git &&
-                !this.generator.options.skipPrompts,
+            default: this.generator.options.git,
+            when: !this.generator.options.skipPrompts,
         };
     }
 }

@@ -7,20 +7,23 @@ import { BaseQuestion } from "./index.js";
 export class ProjectName extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
+        this.generator.options.name = this.getDefault();
+    }
+
+    private getDefault(): string {
+        return this.generator.options.destination
+            ? path.basename(this.generator.destinationPath())
+            : "";
     }
 
     public getQuestion(): PromptQuestion<Answers> {
-        const nameFromFolder = this.generator.options.destination
-            ? path.basename(this.generator.destinationPath())
-            : "";
-
         return {
             type: "input",
-            name: "displayName",
+            name: "name",
             message: "What's the name of your project?",
-            default: nameFromFolder,
+            default: this.generator.options.name,
             when:
-                !this.generator.options.displayName &&
+                !this.generator.options.name &&
                 !this.generator.options.skipPrompts,
         };
     }

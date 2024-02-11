@@ -2,6 +2,7 @@ import path from "node:path";
 import util from "node:util";
 import { fileURLToPath } from "node:url";
 import chalk from "chalk";
+import { PromptQuestion } from "@yeoman/types";
 import {
     Answers,
     GeneratorInterface,
@@ -23,32 +24,44 @@ export class TypescriptGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
     private readonly name = TypescriptGenerator.getSignature().name;
 
-    private readonly questions = [
-        ProjectName,
-        ProjectId,
-        ProjectDescription,
-        Git,
-        PackageManager,
-    ];
+    // private readonly questions = [
+    //     ProjectName,
+    //     ProjectId,
+    //     ProjectDescription,
+    //     Git,
+    //     PackageManager,
+    // ];
+    private readonly questions: Array<PromptQuestion<Answers>> = [];
 
     public constructor(generator: AppGenerator) {
         this.generator = generator;
         this.generator.options.node = new NodeEnvironment();
 
-        if (this.generator.options.skipPrompts) {
-            const config = ConfigHelper.getInstance().getConfig();
-            const { pkgmanager } = config.environments.node;
+        // if (this.generator.options.skipPrompts) {
+        //     const config = ConfigHelper.getInstance().getConfig();
+        //     const { pkgmanager } = config.environments.node;
 
-            this.generator.options.pkg = pkgmanager.default;
+        //     this.generator.options.pkg = pkgmanager.default;
 
-            // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            this.generator.env.options.nodePackageManager = pkgmanager.default;
-        }
+        //     // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
+        //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        //     this.generator.env.options.nodePackageManager = pkgmanager.default;
+        // }
     }
 
     public async initialize(): Promise<void> {
+        this.setupPrompts();
         await this.generator.options.node?.initialize();
+    }
+
+    private setupPrompts() {
+        this.questions.push(
+            new ProjectName(this.generator).getQuestion(),
+            new ProjectId(this.generator).getQuestion(),
+            new ProjectDescription(this.generator).getQuestion(),
+            new Git(this.generator).getQuestion(),
+            new PackageManager(this.generator).getQuestion(),
+        );
     }
 
     public static getSignature(): GeneratorSignature {
@@ -66,12 +79,13 @@ export class TypescriptGenerator implements GeneratorInterface {
     }
 
     public async prompting(): Promise<void> {
-        const questions = this.questions.map((Question) =>
-            new Question(this.generator).getQuestion(),
-        );
+        // const questions = this.questions.map((Question) =>
+        //     new Question(this.generator).getQuestion(),
+        // );
+        console.log("Prompting");
 
         const answers = await this.generator.prompt<Answers>(
-            questions.map((q) => {
+            this.questions.map((q) => {
                 return {
                     ...q,
                     name: q.name as string,
@@ -83,17 +97,18 @@ export class TypescriptGenerator implements GeneratorInterface {
     }
 
     private updateOptions(answers: Answers): void {
-        this.generator.log("Answers:");
-        this.generator.log(
+        console.log("Updating");
+        console.log("Answers:");
+        console.log(
             util.inspect(answers, {
-                showHidden: true,
+                showHidden: false,
                 depth: null,
                 colors: true,
             }),
         );
 
-        this.generator.log("Current Options:");
-        this.generator.log(
+        console.log("Current Options:");
+        console.log(
             util.inspect(this.generator.options, {
                 showHidden: false,
                 depth: null,

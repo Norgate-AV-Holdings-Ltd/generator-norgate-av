@@ -38,9 +38,9 @@ class AppGenerator extends Generator<AppOptions> {
 
         this.options.skipPrompts = this.options.yes || false;
 
-        if (this.options.skipPrompts) {
-            this.options.git = true;
-        }
+        // if (this.options.skipPrompts) {
+        //     this.options.git = true;
+        // }
     }
 
     private _initializeCliArguments(): void {

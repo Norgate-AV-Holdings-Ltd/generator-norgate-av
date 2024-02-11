@@ -27,7 +27,7 @@ const lock = {
 };
 
 describe("generator-norgate-av:app", () => {
-    describe.skip.each([
+    describe.each([
         {
             type: "typescript",
             name: "test",
@@ -312,13 +312,12 @@ describe("generator-norgate-av:app", () => {
             id: "test-id",
             description: "test-description",
             author: "Yeoman",
-            git: false,
             pkg: "pnpm",
             yes: true,
         },
     ])(
         "call with cli args",
-        ({ destination, type, id, description, author, git, pkg, yes }) => {
+        ({ destination, type, id, description, author, pkg, yes }) => {
             let result: RunResult<AppGenerator>;
 
             beforeAll(async () => {
@@ -330,7 +329,6 @@ describe("generator-norgate-av:app", () => {
                         id,
                         description,
                         author,
-                        git,
                         pkg: pkg as NodePackageManager,
                         yes,
                     });
@@ -513,9 +511,9 @@ describe("generator-norgate-av:app", () => {
             });
 
             it.skipIf(process.env.CI)(
-                "should create a git repository if git is true",
+                "should not create a git repository",
                 () => {
-                    git ? assert.file(".git") : assert.noFile(".git");
+                    assert.noFile(".git");
                 },
             );
 

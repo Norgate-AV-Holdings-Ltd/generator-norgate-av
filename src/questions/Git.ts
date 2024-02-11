@@ -6,7 +6,10 @@ import AppGenerator from "../app.js";
 export class Git extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
-        // this.generator.options.git = this.getDefault();
+
+        if (!this.generator.options.git && this.generator.options.skipPrompts) {
+            this.generator.options.git = this.getDefault();
+        }
     }
 
     private getDefault(): boolean {

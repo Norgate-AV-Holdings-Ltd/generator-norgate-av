@@ -6,7 +6,13 @@ import AppGenerator from "../app.js";
 export class ProjectDescription extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
-        this.generator.options.description = this.getDefault();
+
+        if (
+            !this.generator.options.description &&
+            this.generator.options.skipPrompts
+        ) {
+            this.generator.options.description = this.getDefault();
+        }
     }
 
     private getDefault(): string {

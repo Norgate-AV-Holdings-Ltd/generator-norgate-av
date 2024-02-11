@@ -8,9 +8,12 @@ export class ProjectId extends BaseQuestion {
 
     constructor(generator: AppGenerator) {
         super(generator);
-        // this.generator.options.id = this.getDefault(
-        //     this.generator.options.name,
-        // );
+
+        if (!this.generator.options.id && this.generator.options.skipPrompts) {
+            this.generator.options.id = this.getDefault(
+                this.generator.options.name,
+            );
+        }
     }
 
     private getDefault(name: string): string {

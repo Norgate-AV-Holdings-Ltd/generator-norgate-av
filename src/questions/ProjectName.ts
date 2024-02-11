@@ -7,7 +7,10 @@ import { BaseQuestion } from "./index.js";
 export class ProjectName extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
-        // this.generator.options.name = this.getDefault();
+
+        if (this.generator.options.skipPrompts) {
+            this.generator.options.name = this.getDefault();
+        }
     }
 
     private getDefault(): string {

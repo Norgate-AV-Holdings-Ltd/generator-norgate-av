@@ -15,8 +15,14 @@ export class PackageManager extends BaseQuestion {
         this.default = config.pkgmanager.node!.default;
         this.choices = config.pkgmanager.node!.choices;
 
-        // this.generator.options.pkg =
-        //     this.generator.options.pkg || this.getDefault();
+        if (!this.generator.options.pkg && this.generator.options.skipPrompts) {
+            this.generator.options.pkg = this.getDefault();
+
+            // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            this.generator.env.options.nodePackageManager =
+                this.generator.options.pkg;
+        }
     }
 
     private getDefault(): NodePackageManager {

@@ -7,7 +7,7 @@ import { BaseQuestion } from "./index.js";
 export class ProjectName extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
-        this.generator.options.name = this.getDefault();
+        // this.generator.options.name = this.getDefault();
     }
 
     private getDefault(): string {
@@ -21,7 +21,7 @@ export class ProjectName extends BaseQuestion {
             type: "input",
             name: "name",
             message: "What's the name of your project?",
-            default: this.generator.options.name,
+            default: this.getDefault(),
             when:
                 !this.generator.options.name &&
                 !this.generator.options.skipPrompts,

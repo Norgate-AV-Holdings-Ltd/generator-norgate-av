@@ -27,6 +27,7 @@ describe("generator-norgate-av:app", () => {
             name: "test",
             id: "test-id",
             description: "test-description",
+            author: "Yeoman",
             git: false,
             pkg: "pnpm",
             openWith: "skip",
@@ -36,6 +37,7 @@ describe("generator-norgate-av:app", () => {
             name: "test",
             id: "test-id",
             description: "test-description",
+            author: "Yeoman",
             git: true,
             pkg: "yarn",
             openWith: "skip",
@@ -45,13 +47,14 @@ describe("generator-norgate-av:app", () => {
             name: "test",
             id: "test-id",
             description: "test-description",
+            author: "Yeoman",
             git: true,
             pkg: "npm",
             openWith: "skip",
         },
     ])(
         'c with type $type, package manager $pkg, and git "$git"',
-        ({ type, name, id, description, git, pkg, openWith }) => {
+        ({ type, name, id, description, author, git, pkg, openWith }) => {
             let result: RunResult<AppGenerator>;
 
             beforeAll(async () => {
@@ -62,6 +65,7 @@ describe("generator-norgate-av:app", () => {
                         name,
                         id,
                         description,
+                        author,
                         git,
                         pkg,
                         openWith,
@@ -169,7 +173,6 @@ describe("generator-norgate-av:app", () => {
                 assert.fileContent("CONTRIBUTING.md", `/${id}.git`);
                 assert.fileContent("CONTRIBUTING.md", `cd ${id}`);
                 assert.fileContent("CONTRIBUTING.md", `${pkg} install`);
-                assert.fileContent("CONTRIBUTING.md", `${pkg} contrib:add`);
                 assert.fileContent(
                     "CONTRIBUTING.md",
                     `If in doubt, you can use the \`${pkg} commit\``,
@@ -177,6 +180,14 @@ describe("generator-norgate-av:app", () => {
                 assert.fileContent(
                     "CONTRIBUTING.md",
                     `Be sure to run \`${pkg} test\``,
+                );
+                assert.fileContent(
+                    "CONTRIBUTING.md",
+                    `Run the \`${pkg} contrib:add\``,
+                );
+                assert.fileContent(
+                    "CONTRIBUTING.md",
+                    `${pkg} contrib:add <username>`,
                 );
             });
 

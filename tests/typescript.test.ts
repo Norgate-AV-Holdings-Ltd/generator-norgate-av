@@ -31,7 +31,9 @@ describe("generator-norgate-av:app", () => {
         {
             type: "typescript",
             name: "test",
+            id: "test-id",
             description: "test-description",
+            author: "Yeoman",
             git: false,
             pkg: "pnpm",
             openWith: "skip",
@@ -39,7 +41,9 @@ describe("generator-norgate-av:app", () => {
         {
             type: "ts",
             name: "test",
+            id: "test-id",
             description: "test-description",
+            author: "Yeoman",
             git: true,
             pkg: "yarn",
             openWith: "skip",
@@ -47,14 +51,16 @@ describe("generator-norgate-av:app", () => {
         {
             type: "node-ts",
             name: "test",
+            id: "test-id",
             description: "test-description",
+            author: "Yeoman",
             git: true,
             pkg: "npm",
             openWith: "skip",
         },
     ])(
         'typescript using type $type, package manager $pkg, and git "$git"',
-        ({ type, name, description, git, pkg, openWith }) => {
+        ({ type, name, id, description, author, git, pkg, openWith }) => {
             let result: RunResult<AppGenerator>;
 
             beforeAll(async () => {
@@ -63,7 +69,9 @@ describe("generator-norgate-av:app", () => {
                     .withAnswers({
                         type,
                         name,
+                        id,
                         description,
+                        author,
                         git,
                         pkg,
                         openWith,
@@ -121,7 +129,8 @@ describe("generator-norgate-av:app", () => {
 
             it("should create the correct package.json", () => {
                 assert.jsonFileContent("package.json", {
-                    name,
+                    name: id,
+                    displayName: name,
                     description,
                     engines: {
                         node: `>=${engine}`,
@@ -178,10 +187,10 @@ describe("generator-norgate-av:app", () => {
             });
 
             it("should create the correct README.md", () => {
-                assert.fileContent("README.md", `# ${name}`);
+                assert.fileContent("README.md", `# ${id}`);
                 assert.fileContent(
                     "README.md",
-                    `This is the README for your project "${name}". After writing up a brief description, we recommend including the following sections.`,
+                    `This is the README for your project "${id}". After writing up a brief description, we recommend including the following sections.`,
                 );
             });
 
@@ -200,12 +209,11 @@ describe("generator-norgate-av:app", () => {
             it("should create the correct CONTRIBUTING.md", () => {
                 assert.fileContent(
                     "CONTRIBUTING.md",
-                    `/${name}/issues/new/choose`,
+                    `/${id}/issues/new/choose`,
                 );
-                assert.fileContent("CONTRIBUTING.md", `/${name}.git`);
-                assert.fileContent("CONTRIBUTING.md", `cd ${name}`);
+                assert.fileContent("CONTRIBUTING.md", `/${id}.git`);
+                assert.fileContent("CONTRIBUTING.md", `cd ${id}`);
                 assert.fileContent("CONTRIBUTING.md", `${pkg} install`);
-                assert.fileContent("CONTRIBUTING.md", `${pkg} contrib:add`);
                 assert.fileContent(
                     "CONTRIBUTING.md",
                     `If in doubt, you can use the \`${pkg} commit\``,
@@ -214,19 +222,27 @@ describe("generator-norgate-av:app", () => {
                     "CONTRIBUTING.md",
                     `Be sure to run \`${pkg} test\``,
                 );
+                assert.fileContent(
+                    "CONTRIBUTING.md",
+                    `Run the \`${pkg} contrib:add\``,
+                );
+                assert.fileContent(
+                    "CONTRIBUTING.md",
+                    `${pkg} contrib:add <username>`,
+                );
             });
 
             it("should create the correct CHANGELOG.md", () => {
                 assert.fileContent(
                     "CHANGELOG.md",
-                    `All notable changes to the "${name}" project will be documented in this file.`,
+                    `All notable changes to the "${id}" project will be documented in this file.`,
                 );
             });
 
             it("should create the correct .all-contributorsrc", () => {
                 assert.fileContent(
                     ".all-contributorsrc",
-                    `"projectName": "${name}"`,
+                    `"projectName": "${id}"`,
                 );
             });
 

@@ -15,8 +15,8 @@ export class PackageManager extends BaseQuestion {
         this.default = config.pkgmanager.node!.default;
         this.choices = config.pkgmanager.node!.choices;
 
-        this.generator.options.pkg =
-            this.generator.options.pkg || this.getDefault();
+        // this.generator.options.pkg =
+        //     this.generator.options.pkg || this.getDefault();
     }
 
     private getDefault(): NodePackageManager {
@@ -34,8 +34,10 @@ export class PackageManager extends BaseQuestion {
                     value: choice,
                 };
             }),
-            default: this.generator.options.pkg,
-            when: !this.generator.options.skipPrompts,
+            default: this.getDefault(),
+            when:
+                !this.generator.options.pkg &&
+                !this.generator.options.skipPrompts,
         };
     }
 }

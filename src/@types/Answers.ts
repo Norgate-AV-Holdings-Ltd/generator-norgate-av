@@ -1,34 +1,32 @@
 import { NodePackageManager } from "./index.js";
 
 export type Answers = {
-    type: string;
-    name: string;
-    id: string;
-    description: string;
-    author: string;
-    git: boolean;
-    pkg: NodePackageManager;
-    openWith: "code" | "skip";
-};
-
-export type Answers2 = {
     // The project type
     type: string;
 
-    // The display name of the project
-    // Defaults to the folder name
+    // The name of the project
+    // This will be used as the directory name
+    // Will be taken from the 'destination' argument
+    // Defaults to the name of the CWD
     name: string;
 
-    // The name of the project
-    // Defaults to lowercased name
-    // with spaces replaced by dashes
+    // The id of the project
+    // This will be used as the package name
+    // Defaults to the name in kebab-case
     id: string;
+
+    // The description of the project
     description: string;
 
     // The author of the project
-    // Defaults to the git user name
     author: string;
+
+    // Whether to initialize a git repository
     git: boolean;
+
+    // The package manager to use
     pkg: NodePackageManager;
+
+    // Whether to open the project with VS Code
     openWith: "code" | "skip";
 };

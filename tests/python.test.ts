@@ -13,20 +13,24 @@ describe("generator-norgate-av:app", () => {
         {
             type: "python",
             name: "test",
+            id: "test-id",
             description: "test-description",
+            author: "Yeoman",
             git: false,
             openWith: "skip",
         },
         {
             type: "py",
             name: "test",
+            id: "test-id",
             description: "test-description",
+            author: "Yeoman",
             git: true,
             openWith: "skip",
         },
     ])(
         'python using type "$type" and git "$git"',
-        ({ type, name, description, git, openWith }) => {
+        ({ type, name, id, description, author, git, openWith }) => {
             let result: RunResult<AppGenerator>;
 
             beforeAll(async () => {
@@ -35,7 +39,9 @@ describe("generator-norgate-av:app", () => {
                     .withAnswers({
                         type,
                         name,
+                        id,
                         description,
+                        author,
                         git,
                         openWith,
                     });
@@ -70,10 +76,10 @@ describe("generator-norgate-av:app", () => {
             });
 
             it("should create the correct README.md", () => {
-                assert.fileContent("README.md", `# ${name}`);
+                assert.fileContent("README.md", `# ${id}`);
                 assert.fileContent(
                     "README.md",
-                    `This is the README for your project "${name}". After writing up a brief description, we recommend including the following sections.`,
+                    `This is the README for your project "${id}". After writing up a brief description, we recommend including the following sections.`,
                 );
             });
 
@@ -88,7 +94,7 @@ describe("generator-norgate-av:app", () => {
             it("should create the correct CHANGELOG.md", () => {
                 assert.fileContent(
                     "CHANGELOG.md",
-                    `All notable changes to the "${name}" project will be documented in this file.`,
+                    `All notable changes to the "${id}" project will be documented in this file.`,
                 );
             });
 

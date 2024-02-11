@@ -8,9 +8,9 @@ export class ProjectId extends BaseQuestion {
 
     constructor(generator: AppGenerator) {
         super(generator);
-        this.generator.options.id = this.getDefault(
-            this.generator.options.name,
-        );
+        // this.generator.options.id = this.getDefault(
+        //     this.generator.options.name,
+        // );
     }
 
     private getDefault(name: string): string {

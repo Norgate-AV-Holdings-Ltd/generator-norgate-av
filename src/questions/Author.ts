@@ -9,8 +9,8 @@ export class Author extends BaseQuestion {
         // this.generator.options.author = this.generator.git.name();
     }
 
-    private getDefault(): boolean {
-        return true;
+    private getDefault(): string {
+        return "";
     }
 
     public getQuestion(): PromptQuestion<Answers> {
@@ -18,8 +18,10 @@ export class Author extends BaseQuestion {
             type: "input",
             name: "author",
             message: "Who's the author of this project?",
-            default: this.generator.options.author,
-            when: !this.generator.options.skipPrompts,
+            default: this.getDefault(),
+            when:
+                !this.generator.options.author &&
+                !this.generator.options.skipPrompts,
         };
     }
 }

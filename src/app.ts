@@ -29,6 +29,7 @@ class AppGenerator extends Generator<AppOptions> {
     constructor(args: string | Array<string>, options: AppOptions) {
         super(args, options);
 
+        CliHelper.initialize(ConfigHelper.getInstance().getConfig());
         this._initializeCliArguments();
         this._initializeCliOptions();
 

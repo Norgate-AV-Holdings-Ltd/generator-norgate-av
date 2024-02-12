@@ -68,6 +68,9 @@ export class TypescriptGenerator implements GeneratorInterface {
             }),
         );
 
+        console.log("Before");
+        console.log(this.generator.options);
+
         this.updateOptions(answers);
     }
 
@@ -93,6 +96,9 @@ export class TypescriptGenerator implements GeneratorInterface {
         // this.generator.options.git = this.generator.options.skipPrompts
         //     ? this.generator.options.git
         //     : answers.git;
+
+        console.log("After");
+        console.log(this.generator.options);
     }
 
     private getFilePaths(): Array<PathMap> {

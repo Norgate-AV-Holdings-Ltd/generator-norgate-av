@@ -90,6 +90,9 @@ export class TypescriptGenerator implements GeneratorInterface {
         this.generator.options.description = this.generator.options.skipPrompts
             ? this.generator.options.description
             : answers.description;
+        // this.generator.options.git = this.generator.options.skipPrompts
+        //     ? this.generator.options.git
+        //     : answers.git;
     }
 
     private getFilePaths(): Array<PathMap> {

@@ -25,7 +25,9 @@ export class Git extends BaseQuestion {
             name: "git",
             message: "Initialize a git repository?",
             default: this.getDefault(),
-            when: !this.generator.options.skipPrompts,
+            when:
+                !this.generator.options.git &&
+                !this.generator.options.skipPrompts,
         };
     }
 }

@@ -7,7 +7,10 @@ export class Git extends BaseQuestion {
     constructor(generator: AppGenerator) {
         super(generator);
 
-        if (!this.generator.options.git && this.generator.options.skipPrompts) {
+        if (
+            this.generator.options.git === undefined &&
+            this.generator.options.skipPrompts
+        ) {
             this.generator.options.git = this.getDefault();
         }
     }

@@ -1,5 +1,4 @@
 import path from "node:path";
-import util from "node:util";
 import { fileURLToPath } from "node:url";
 import chalk from "chalk";
 import { PromptQuestion } from "@yeoman/types";
@@ -23,30 +22,11 @@ import { NodeEnvironment } from "../environments/index.js";
 export class TypescriptGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
     private readonly name = TypescriptGenerator.getSignature().name;
-
-    // private readonly questions = [
-    //     ProjectName,
-    //     ProjectId,
-    //     ProjectDescription,
-    //     Git,
-    //     PackageManager,
-    // ];
     private readonly questions: Array<PromptQuestion<Answers>> = [];
 
     public constructor(generator: AppGenerator) {
         this.generator = generator;
         this.generator.options.node = new NodeEnvironment();
-
-        // if (this.generator.options.skipPrompts) {
-        //     const config = ConfigHelper.getInstance().getConfig();
-        //     const { pkgmanager } = config.environments.node;
-
-        //     this.generator.options.pkg = pkgmanager.default;
-
-        //     // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
-        //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        //     this.generator.env.options.nodePackageManager = pkgmanager.default;
-        // }
     }
 
     public async initialize(): Promise<void> {
@@ -79,11 +59,6 @@ export class TypescriptGenerator implements GeneratorInterface {
     }
 
     public async prompting(): Promise<void> {
-        // const questions = this.questions.map((Question) =>
-        //     new Question(this.generator).getQuestion(),
-        // );
-        console.log("Prompting");
-
         const answers = await this.generator.prompt<Answers>(
             this.questions.map((q) => {
                 return {
@@ -97,32 +72,17 @@ export class TypescriptGenerator implements GeneratorInterface {
     }
 
     private updateOptions(answers: Answers): void {
-        console.log("Updating");
-        console.log("Answers:");
-        console.log(
-            util.inspect(answers, {
-                showHidden: false,
-                depth: null,
-                colors: true,
-            }),
-        );
-
-        console.log("Current Options:");
-        console.log(
-            util.inspect(this.generator.options, {
-                showHidden: false,
-                depth: null,
-                colors: true,
-            }),
-        );
-
         this.generator.options.type =
             this.generator.options.type || answers.type;
+
         this.generator.options.name =
             this.generator.options.name || answers.name;
+
         this.generator.options.id = this.generator.options.id || answers.id;
+
         this.generator.options.description =
-            this.generator.options.description || answers.description;
+            this.generator.options.description || answers.description || "";
+
         this.generator.options.git = this.generator.options.git || answers.git;
         this.generator.options.pkg = this.generator.options.pkg || answers.pkg;
 
@@ -130,9 +90,6 @@ export class TypescriptGenerator implements GeneratorInterface {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         this.generator.env.options.nodePackageManager =
             this.generator.options.pkg || answers.pkg;
-
-        // this.generator.options.displayName =
-        //     this.generator.options.displayName || answers.displayName;
     }
 
     private getFilePaths(): Array<PathMap> {

@@ -8,7 +8,7 @@ export class ProjectDescription extends BaseQuestion {
         super(generator);
 
         if (
-            !this.generator.options.description &&
+            this.generator.options.description === undefined &&
             this.generator.options.skipPrompts
         ) {
             this.generator.options.description = this.getDefault();
@@ -24,8 +24,10 @@ export class ProjectDescription extends BaseQuestion {
             type: "input",
             name: "description",
             message: "What's the description of your project?",
-            default: this.generator.options.description,
-            when: !this.generator.options.skipPrompts,
+            default: this.getDefault(),
+            when:
+                this.generator.options.description === undefined &&
+                !this.generator.options.skipPrompts,
         };
     }
 }

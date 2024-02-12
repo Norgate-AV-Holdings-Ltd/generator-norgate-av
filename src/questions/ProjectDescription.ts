@@ -26,7 +26,7 @@ export class ProjectDescription extends BaseQuestion {
             message: "What's the description of your project?",
             default: this.getDefault(),
             when:
-                this.generator.options.description === undefined &&
+                !this.generator.options.description &&
                 !this.generator.options.skipPrompts,
         };
     }

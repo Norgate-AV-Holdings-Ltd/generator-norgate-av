@@ -92,6 +92,12 @@ describe("generator-norgate-av:typescript", () => {
                 // assert.equal(result.generator.options.author, author);
                 assert.equal(result.generator.options.git, git);
                 assert.equal(result.generator.options.pkg, pkg);
+                assert.equal(
+                    // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                    result.generator.env.options.nodePackageManager,
+                    pkg,
+                );
             });
 
             it(`should create a directory named '${name}' and CD into it`, () => {
@@ -381,6 +387,12 @@ describe("generator-norgate-av:typescript", () => {
                 // assert.equal(result.generator.options.author, author);
                 assert.equal(result.generator.options.git, git || undefined);
                 assert.equal(result.generator.options.pkg, pkg);
+                assert.equal(
+                    // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                    result.generator.env.options.nodePackageManager,
+                    pkg,
+                );
             });
 
             it(`should create a directory named '${destination}' and CD into it`, () => {
@@ -599,6 +611,12 @@ describe("generator-norgate-av:typescript", () => {
                 assert.equal(result.generator.options.author, "");
                 assert.equal(result.generator.options.git, true);
                 assert.equal(result.generator.options.pkg, "pnpm");
+                assert.equal(
+                    // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                    result.generator.env.options.nodePackageManager,
+                    "pnpm",
+                );
             });
 
             it(`should create a directory named '${destination}' and CD into it`, () => {

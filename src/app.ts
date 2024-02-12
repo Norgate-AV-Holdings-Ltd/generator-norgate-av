@@ -37,10 +37,6 @@ class AppGenerator extends Generator<AppOptions> {
             "Generates project boilerplates of various types ready for development.";
 
         this.options.skipPrompts = this.options.yes || false;
-
-        // if (this.options.skipPrompts) {
-        //     this.options.git = true;
-        // }
     }
 
     private _initializeCliArguments(): void {

@@ -1,6 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import chalk from "chalk";
+import { PromptQuestion } from "@yeoman/types";
 import {
     Answers,
     GeneratorInterface,
@@ -19,20 +20,24 @@ import { ConfigHelper } from "../helpers/index.js";
 export class PythonGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
     private readonly name = PythonGenerator.getSignature().name;
-
-    private readonly questions = [
-        ProjectName,
-        ProjectId,
-        ProjectDescription,
-        Git,
-    ];
+    private readonly questions: Array<PromptQuestion<Answers>> = [];
 
     public constructor(generator: AppGenerator) {
         this.generator = generator;
     }
 
     public async initialize(): Promise<void> {
+        this.setupPrompts();
         await this.generator.options.node?.initialize();
+    }
+
+    private setupPrompts(): void {
+        this.questions.push(
+            new ProjectName(this.generator).getQuestion(),
+            new ProjectId(this.generator).getQuestion(),
+            new ProjectDescription(this.generator).getQuestion(),
+            new Git(this.generator).getQuestion(),
+        );
     }
 
     public static getSignature(): GeneratorSignature {
@@ -50,12 +55,8 @@ export class PythonGenerator implements GeneratorInterface {
     }
 
     public async prompting(): Promise<void> {
-        const questions = this.questions.map((Question) =>
-            new Question(this.generator).getQuestion(),
-        );
-
         const answers = await this.generator.prompt<Answers>(
-            questions.map((q) => {
+            this.questions.map((q) => {
                 return {
                     ...q,
                     name: q.name as string,
@@ -69,14 +70,16 @@ export class PythonGenerator implements GeneratorInterface {
     private updateOptions(answers: Answers): void {
         this.generator.options.type =
             this.generator.options.type || answers.type;
+
         this.generator.options.name =
             this.generator.options.name || answers.name;
+
         this.generator.options.id = this.generator.options.id || answers.id;
-        this.generator.options.description =
-            this.generator.options.description || answers.description;
         this.generator.options.git = this.generator.options.git || answers.git;
-        // this.generator.options.displayName =
-        //     this.generator.options.displayName || answers.displayName;
+
+        this.generator.options.description = this.generator.options.skipPrompts
+            ? this.generator.options.description
+            : answers.description;
     }
 
     private getFilePaths(): Array<PathMap> {

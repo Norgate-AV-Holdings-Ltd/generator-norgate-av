@@ -79,10 +79,6 @@ export class TypescriptGenerator implements GeneratorInterface {
             this.generator.options.name || answers.name;
 
         this.generator.options.id = this.generator.options.id || answers.id;
-
-        this.generator.options.description =
-            this.generator.options.description || answers.description || "";
-
         this.generator.options.git = this.generator.options.git || answers.git;
         this.generator.options.pkg = this.generator.options.pkg || answers.pkg;
 
@@ -90,6 +86,10 @@ export class TypescriptGenerator implements GeneratorInterface {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         this.generator.env.options.nodePackageManager =
             this.generator.options.pkg || answers.pkg;
+
+        this.generator.options.description = this.generator.options.skipPrompts
+            ? this.generator.options.description
+            : answers.description;
     }
 
     private getFilePaths(): Array<PathMap> {

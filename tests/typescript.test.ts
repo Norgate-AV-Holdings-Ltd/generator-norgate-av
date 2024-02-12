@@ -20,6 +20,43 @@ await node.initialize();
 const { devDependencies, dependencies } = node.packageJson;
 const engine = node.getNodeEngine().split(".")[0];
 
+const files = [
+    ".github/workflows/main.yml",
+    ".github/dependabot.yml",
+    ".husky/commit-msg",
+    ".husky/pre-commit",
+    ".vscode/extensions.json",
+    ".vscode/settings.json",
+    "src/app.ts",
+    "tests/app.test.ts",
+    ".all-contributorsrc",
+    ".changelogrc.json",
+    ".commitlintrc.json",
+    ".czrc",
+    ".editorconfig",
+    ".eslintignore",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".gitignore",
+    ".lintstagedrc.json",
+    ".npmignore",
+    ".npmrc",
+    ".nvmrc",
+    ".prettierignore",
+    ".prettierrc.json",
+    ".releaserc.json",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "GitVersion.yml",
+    "LICENSE",
+    "package.json",
+    "README.md",
+    "tsconfig.json",
+    "tsup.config.json",
+    "tsup.schema.json",
+    "vitest.config.ts",
+];
+
 const lock = {
     pnpm: "pnpm-lock.yaml",
     npm: "package-lock.json",
@@ -105,42 +142,7 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct files", () => {
-                assert.file([
-                    ".github/workflows/main.yml",
-                    ".github/dependabot.yml",
-                    ".husky/commit-msg",
-                    ".husky/pre-commit",
-                    ".vscode/extensions.json",
-                    ".vscode/settings.json",
-                    "src/app.ts",
-                    "tests/app.test.ts",
-                    ".all-contributorsrc",
-                    ".changelogrc.json",
-                    ".commitlintrc.json",
-                    ".czrc",
-                    ".editorconfig",
-                    ".eslintignore",
-                    ".eslintrc.json",
-                    ".gitattributes",
-                    ".gitignore",
-                    ".lintstagedrc.json",
-                    ".npmignore",
-                    ".npmrc",
-                    ".nvmrc",
-                    ".prettierignore",
-                    ".prettierrc.json",
-                    ".releaserc.json",
-                    "CHANGELOG.md",
-                    "CONTRIBUTING.md",
-                    "GitVersion.yml",
-                    "LICENSE",
-                    "package.json",
-                    "README.md",
-                    "tsconfig.json",
-                    "tsup.config.json",
-                    "tsup.schema.json",
-                    "vitest.config.ts",
-                ]);
+                assert.file(files);
             });
 
             it("should create the correct package.json", () => {
@@ -400,42 +402,7 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct files", () => {
-                assert.file([
-                    ".github/workflows/main.yml",
-                    ".github/dependabot.yml",
-                    ".husky/commit-msg",
-                    ".husky/pre-commit",
-                    ".vscode/extensions.json",
-                    ".vscode/settings.json",
-                    "src/app.ts",
-                    "tests/app.test.ts",
-                    ".all-contributorsrc",
-                    ".changelogrc.json",
-                    ".commitlintrc.json",
-                    ".czrc",
-                    ".editorconfig",
-                    ".eslintignore",
-                    ".eslintrc.json",
-                    ".gitattributes",
-                    ".gitignore",
-                    ".lintstagedrc.json",
-                    ".npmignore",
-                    ".npmrc",
-                    ".nvmrc",
-                    ".prettierignore",
-                    ".prettierrc.json",
-                    ".releaserc.json",
-                    "CHANGELOG.md",
-                    "CONTRIBUTING.md",
-                    "GitVersion.yml",
-                    "LICENSE",
-                    "package.json",
-                    "README.md",
-                    "tsconfig.json",
-                    "tsup.config.json",
-                    "tsup.schema.json",
-                    "vitest.config.ts",
-                ]);
+                assert.file(files);
             });
 
             it("should create the correct package.json", () => {
@@ -624,42 +591,7 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct files", () => {
-                assert.file([
-                    ".github/workflows/main.yml",
-                    ".github/dependabot.yml",
-                    ".husky/commit-msg",
-                    ".husky/pre-commit",
-                    ".vscode/extensions.json",
-                    ".vscode/settings.json",
-                    "src/app.ts",
-                    "tests/app.test.ts",
-                    ".all-contributorsrc",
-                    ".changelogrc.json",
-                    ".commitlintrc.json",
-                    ".czrc",
-                    ".editorconfig",
-                    ".eslintignore",
-                    ".eslintrc.json",
-                    ".gitattributes",
-                    ".gitignore",
-                    ".lintstagedrc.json",
-                    ".npmignore",
-                    ".npmrc",
-                    ".nvmrc",
-                    ".prettierignore",
-                    ".prettierrc.json",
-                    ".releaserc.json",
-                    "CHANGELOG.md",
-                    "CONTRIBUTING.md",
-                    "GitVersion.yml",
-                    "LICENSE",
-                    "package.json",
-                    "README.md",
-                    "tsconfig.json",
-                    "tsup.config.json",
-                    "tsup.schema.json",
-                    "vitest.config.ts",
-                ]);
+                assert.file(files);
             });
 
             it("should create the correct package.json", () => {

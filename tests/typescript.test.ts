@@ -8,6 +8,7 @@ import { NodeEnvironment } from "../src/environments/index.js";
 import { ConfigHelper } from "../src/helpers/index.js";
 import config from "../config/default.json";
 import { UnresolvedConfig, NodePackageManager } from "../src/@types/index.js";
+import { getNodeDependencyObject } from "./helpers.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const generator = path.resolve(__dirname, "../dist/generators/app");
@@ -17,8 +18,38 @@ await ConfigHelper.initialize(config as UnresolvedConfig);
 const node = new NodeEnvironment();
 await node.initialize();
 
-const { devDependencies, dependencies } = node.packageJson;
 const engine = node.getNodeEngine().split(".")[0];
+
+const devDependencies = [
+    "@commitlint/config-conventional",
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    "@types/config",
+    "@types/node",
+    "@types/nodemon",
+    "@typescript-eslint/eslint-plugin",
+    "@typescript-eslint/parser",
+    "all-contributors-cli",
+    "commitizen",
+    "cross-env",
+    "cz-conventional-changelog",
+    "doctoc",
+    "eslint",
+    "eslint-config-prettier",
+    "husky",
+    "lint-staged",
+    "nodemon",
+    "prettier",
+    "rimraf",
+    "semantic-release",
+    "terser",
+    "tsup",
+    "type-fest",
+    "typescript",
+    "vitest",
+];
+
+const dependencies = ["config", "dotenv", "envalid"];
 
 const files = [
     ".github/workflows/main.yml",
@@ -57,11 +88,11 @@ const files = [
     "vitest.config.ts",
 ];
 
-const lock = {
-    pnpm: "pnpm-lock.yaml",
-    npm: "package-lock.json",
-    yarn: "yarn.lock",
-};
+// const lock = {
+//     pnpm: "pnpm-lock.yaml",
+//     npm: "package-lock.json",
+//     yarn: "yarn.lock",
+// };
 
 describe("generator-norgate-av:typescript", () => {
     describe.each([
@@ -157,50 +188,17 @@ describe("generator-norgate-av:typescript", () => {
                         prebuild: `${pkg} clean`,
                         prestart: `${pkg} lint && ${pkg} build`,
                     },
-                    devDependencies: {
-                        "@commitlint/config-conventional":
-                            devDependencies!["@commitlint/config-conventional"],
-                        "@semantic-release/changelog":
-                            devDependencies!["@semantic-release/changelog"],
-                        "@semantic-release/git":
-                            devDependencies!["@semantic-release/git"],
-                        "@types/config": devDependencies!["@types/config"],
-                        "@types/node": devDependencies!["@types/node"],
-                        "@types/nodemon": devDependencies!["@types/nodemon"],
-                        "@typescript-eslint/eslint-plugin":
-                            devDependencies![
-                                "@typescript-eslint/eslint-plugin"
-                            ],
-                        "@typescript-eslint/parser":
-                            devDependencies!["@typescript-eslint/parser"],
-                        "all-contributors-cli":
-                            devDependencies!["all-contributors-cli"],
-                        commitizen: devDependencies!.commitizen,
-                        "cross-env": devDependencies!["cross-env"],
-                        "cz-conventional-changelog":
-                            devDependencies!["cz-conventional-changelog"],
-                        doctoc: devDependencies!.doctoc,
-                        eslint: devDependencies!.eslint,
-                        "eslint-config-prettier":
-                            devDependencies!["eslint-config-prettier"],
-                        husky: devDependencies!.husky,
-                        "lint-staged": devDependencies!["lint-staged"],
-                        nodemon: devDependencies!.nodemon,
-                        prettier: devDependencies!.prettier,
-                        rimraf: devDependencies!.rimraf,
-                        "semantic-release":
-                            devDependencies!["semantic-release"],
-                        terser: devDependencies!.terser,
-                        tsup: devDependencies!.tsup,
-                        "type-fest": devDependencies!["type-fest"],
-                        typescript: devDependencies!.typescript,
-                        vitest: devDependencies!.vitest,
-                    },
-                    dependencies: {
-                        config: dependencies!.config,
-                        dotenv: dependencies!.dotenv,
-                        envalid: dependencies!.envalid,
-                    },
+                    devDependencies: getNodeDependencyObject(
+                        devDependencies,
+                        node.packageJson.devDependencies as Record<
+                            string,
+                            string
+                        >,
+                    ),
+                    dependencies: getNodeDependencyObject(
+                        dependencies,
+                        node.packageJson.dependencies as Record<string, string>,
+                    ),
                 });
             });
 
@@ -285,43 +283,43 @@ describe("generator-norgate-av:typescript", () => {
         },
     );
 
-    describe.skip("typescript:install", () => {
-        let result: RunResult<AppGenerator>;
+    // describe.skip("typescript:install", () => {
+    //     let result: RunResult<AppGenerator>;
 
-        const name = "test";
-        const description = "test-description";
-        const pkg = "pnpm";
+    //     const name = "test";
+    //     const description = "test-description";
+    //     const pkg = "pnpm";
 
-        beforeAll(async () => {
-            result = await helpers
-                .create<AppGenerator>(generator)
-                .withOptions({
-                    skipInstall: false,
-                })
-                .withAnswers({
-                    type: "typescript",
-                    name,
-                    description,
-                    git: false,
-                    pkg,
-                    openWith: "skip",
-                });
+    //     beforeAll(async () => {
+    //         result = await helpers
+    //             .create<AppGenerator>(generator)
+    //             .withOptions({
+    //                 skipInstall: false,
+    //             })
+    //             .withAnswers({
+    //                 type: "typescript",
+    //                 name,
+    //                 description,
+    //                 git: false,
+    //                 pkg,
+    //                 openWith: "skip",
+    //             });
 
-            process.chdir(name);
-        }, 200000);
+    //         process.chdir(name);
+    //     }, 200000);
 
-        afterAll(() => {
-            result?.cleanup();
-        });
+    //     afterAll(() => {
+    //         result?.cleanup();
+    //     });
 
-        it("should install packages using the correct package manager", () => {
-            assert.file(lock[pkg]);
-        });
+    //     it("should install packages using the correct package manager", () => {
+    //         assert.file(lock[pkg]);
+    //     });
 
-        it("should always pass", () => {
-            expect(1).toEqual(1);
-        });
-    });
+    //     it("should always pass", () => {
+    //         expect(1).toEqual(1);
+    //     });
+    // });
 
     describe.each([
         {
@@ -417,50 +415,17 @@ describe("generator-norgate-av:typescript", () => {
                         prebuild: `${pkg} clean`,
                         prestart: `${pkg} lint && ${pkg} build`,
                     },
-                    devDependencies: {
-                        "@commitlint/config-conventional":
-                            devDependencies!["@commitlint/config-conventional"],
-                        "@semantic-release/changelog":
-                            devDependencies!["@semantic-release/changelog"],
-                        "@semantic-release/git":
-                            devDependencies!["@semantic-release/git"],
-                        "@types/config": devDependencies!["@types/config"],
-                        "@types/node": devDependencies!["@types/node"],
-                        "@types/nodemon": devDependencies!["@types/nodemon"],
-                        "@typescript-eslint/eslint-plugin":
-                            devDependencies![
-                                "@typescript-eslint/eslint-plugin"
-                            ],
-                        "@typescript-eslint/parser":
-                            devDependencies!["@typescript-eslint/parser"],
-                        "all-contributors-cli":
-                            devDependencies!["all-contributors-cli"],
-                        commitizen: devDependencies!.commitizen,
-                        "cross-env": devDependencies!["cross-env"],
-                        "cz-conventional-changelog":
-                            devDependencies!["cz-conventional-changelog"],
-                        doctoc: devDependencies!.doctoc,
-                        eslint: devDependencies!.eslint,
-                        "eslint-config-prettier":
-                            devDependencies!["eslint-config-prettier"],
-                        husky: devDependencies!.husky,
-                        "lint-staged": devDependencies!["lint-staged"],
-                        nodemon: devDependencies!.nodemon,
-                        prettier: devDependencies!.prettier,
-                        rimraf: devDependencies!.rimraf,
-                        "semantic-release":
-                            devDependencies!["semantic-release"],
-                        terser: devDependencies!.terser,
-                        tsup: devDependencies!.tsup,
-                        "type-fest": devDependencies!["type-fest"],
-                        typescript: devDependencies!.typescript,
-                        vitest: devDependencies!.vitest,
-                    },
-                    dependencies: {
-                        config: dependencies!.config,
-                        dotenv: dependencies!.dotenv,
-                        envalid: dependencies!.envalid,
-                    },
+                    devDependencies: getNodeDependencyObject(
+                        devDependencies,
+                        node.packageJson.devDependencies as Record<
+                            string,
+                            string
+                        >,
+                    ),
+                    dependencies: getNodeDependencyObject(
+                        dependencies,
+                        node.packageJson.dependencies as Record<string, string>,
+                    ),
                 });
             });
 
@@ -551,6 +516,16 @@ describe("generator-norgate-av:typescript", () => {
             type: "typescript",
             yes: true,
         },
+        {
+            destination: "Test Project",
+            type: "ts",
+            yes: true,
+        },
+        {
+            destination: "Test Project",
+            type: "node-ts",
+            yes: true,
+        },
     ])(
         "cli: using all defaults, skipping prompts",
         ({ destination, type, yes }) => {
@@ -606,50 +581,17 @@ describe("generator-norgate-av:typescript", () => {
                         prebuild: `${result.generator.options.pkg} clean`,
                         prestart: `${result.generator.options.pkg} lint && ${result.generator.options.pkg} build`,
                     },
-                    devDependencies: {
-                        "@commitlint/config-conventional":
-                            devDependencies!["@commitlint/config-conventional"],
-                        "@semantic-release/changelog":
-                            devDependencies!["@semantic-release/changelog"],
-                        "@semantic-release/git":
-                            devDependencies!["@semantic-release/git"],
-                        "@types/config": devDependencies!["@types/config"],
-                        "@types/node": devDependencies!["@types/node"],
-                        "@types/nodemon": devDependencies!["@types/nodemon"],
-                        "@typescript-eslint/eslint-plugin":
-                            devDependencies![
-                                "@typescript-eslint/eslint-plugin"
-                            ],
-                        "@typescript-eslint/parser":
-                            devDependencies!["@typescript-eslint/parser"],
-                        "all-contributors-cli":
-                            devDependencies!["all-contributors-cli"],
-                        commitizen: devDependencies!.commitizen,
-                        "cross-env": devDependencies!["cross-env"],
-                        "cz-conventional-changelog":
-                            devDependencies!["cz-conventional-changelog"],
-                        doctoc: devDependencies!.doctoc,
-                        eslint: devDependencies!.eslint,
-                        "eslint-config-prettier":
-                            devDependencies!["eslint-config-prettier"],
-                        husky: devDependencies!.husky,
-                        "lint-staged": devDependencies!["lint-staged"],
-                        nodemon: devDependencies!.nodemon,
-                        prettier: devDependencies!.prettier,
-                        rimraf: devDependencies!.rimraf,
-                        "semantic-release":
-                            devDependencies!["semantic-release"],
-                        terser: devDependencies!.terser,
-                        tsup: devDependencies!.tsup,
-                        "type-fest": devDependencies!["type-fest"],
-                        typescript: devDependencies!.typescript,
-                        vitest: devDependencies!.vitest,
-                    },
-                    dependencies: {
-                        config: dependencies!.config,
-                        dotenv: dependencies!.dotenv,
-                        envalid: dependencies!.envalid,
-                    },
+                    devDependencies: getNodeDependencyObject(
+                        devDependencies,
+                        node.packageJson.devDependencies as Record<
+                            string,
+                            string
+                        >,
+                    ),
+                    dependencies: getNodeDependencyObject(
+                        dependencies,
+                        node.packageJson.dependencies as Record<string, string>,
+                    ),
                 });
             });
 

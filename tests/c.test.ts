@@ -8,6 +8,7 @@ import { NodeEnvironment } from "../src/environments/index.js";
 import { ConfigHelper } from "../src/helpers/index.js";
 import config from "../config/default.json";
 import { UnresolvedConfig, NodePackageManager } from "../src/@types/index.js";
+import { getNodeDependencyObject } from "./helpers.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const generator = path.resolve(__dirname, "../dist/generators/app");
@@ -17,8 +18,22 @@ await ConfigHelper.initialize(config as UnresolvedConfig);
 const node = new NodeEnvironment();
 await node.initialize();
 
-const { devDependencies } = node.packageJson;
 const engine = node.getNodeEngine().split(".")[0];
+
+const devDependencies = [
+    "@commitlint/cli",
+    "@commitlint/config-conventional",
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    "all-contributors-cli",
+    "commitizen",
+    "cz-conventional-changelog",
+    "doctoc",
+    "husky",
+    "lint-staged",
+    "prettier",
+    "semantic-release",
+];
 
 const files = [
     ".github/workflows/main.yml",
@@ -140,26 +155,13 @@ describe("generator-norgate-av:c", () => {
                     engines: {
                         node: `>=${engine}`,
                     },
-                    devDependencies: {
-                        "@commitlint/cli": devDependencies!["@commitlint/cli"],
-                        "@commitlint/config-conventional":
-                            devDependencies!["@commitlint/config-conventional"],
-                        "@semantic-release/changelog":
-                            devDependencies!["@semantic-release/changelog"],
-                        "@semantic-release/git":
-                            devDependencies!["@semantic-release/git"],
-                        "all-contributors-cli":
-                            devDependencies!["all-contributors-cli"],
-                        commitizen: devDependencies!.commitizen,
-                        "cz-conventional-changelog":
-                            devDependencies!["cz-conventional-changelog"],
-                        doctoc: devDependencies!.doctoc,
-                        husky: devDependencies!.husky,
-                        "lint-staged": devDependencies!["lint-staged"],
-                        prettier: devDependencies!.prettier,
-                        "semantic-release":
-                            devDependencies!["semantic-release"],
-                    },
+                    devDependencies: getNodeDependencyObject(
+                        devDependencies,
+                        node.packageJson.devDependencies as Record<
+                            string,
+                            string
+                        >,
+                    ),
                 });
             });
 
@@ -334,26 +336,13 @@ describe("generator-norgate-av:c", () => {
                     engines: {
                         node: `>=${engine}`,
                     },
-                    devDependencies: {
-                        "@commitlint/cli": devDependencies!["@commitlint/cli"],
-                        "@commitlint/config-conventional":
-                            devDependencies!["@commitlint/config-conventional"],
-                        "@semantic-release/changelog":
-                            devDependencies!["@semantic-release/changelog"],
-                        "@semantic-release/git":
-                            devDependencies!["@semantic-release/git"],
-                        "all-contributors-cli":
-                            devDependencies!["all-contributors-cli"],
-                        commitizen: devDependencies!.commitizen,
-                        "cz-conventional-changelog":
-                            devDependencies!["cz-conventional-changelog"],
-                        doctoc: devDependencies!.doctoc,
-                        husky: devDependencies!.husky,
-                        "lint-staged": devDependencies!["lint-staged"],
-                        prettier: devDependencies!.prettier,
-                        "semantic-release":
-                            devDependencies!["semantic-release"],
-                    },
+                    devDependencies: getNodeDependencyObject(
+                        devDependencies,
+                        node.packageJson.devDependencies as Record<
+                            string,
+                            string
+                        >,
+                    ),
                 });
             });
 
@@ -444,6 +433,11 @@ describe("generator-norgate-av:c", () => {
             type: "c",
             yes: true,
         },
+        {
+            destination: "Test Project",
+            type: "clang",
+            yes: true,
+        },
     ])(
         "cli: using all defaults, skipping prompts",
         ({ destination, type, yes }) => {
@@ -495,26 +489,13 @@ describe("generator-norgate-av:c", () => {
                     engines: {
                         node: `>=${engine}`,
                     },
-                    devDependencies: {
-                        "@commitlint/cli": devDependencies!["@commitlint/cli"],
-                        "@commitlint/config-conventional":
-                            devDependencies!["@commitlint/config-conventional"],
-                        "@semantic-release/changelog":
-                            devDependencies!["@semantic-release/changelog"],
-                        "@semantic-release/git":
-                            devDependencies!["@semantic-release/git"],
-                        "all-contributors-cli":
-                            devDependencies!["all-contributors-cli"],
-                        commitizen: devDependencies!.commitizen,
-                        "cz-conventional-changelog":
-                            devDependencies!["cz-conventional-changelog"],
-                        doctoc: devDependencies!.doctoc,
-                        husky: devDependencies!.husky,
-                        "lint-staged": devDependencies!["lint-staged"],
-                        prettier: devDependencies!.prettier,
-                        "semantic-release":
-                            devDependencies!["semantic-release"],
-                    },
+                    devDependencies: getNodeDependencyObject(
+                        devDependencies,
+                        node.packageJson.devDependencies as Record<
+                            string,
+                            string
+                        >,
+                    ),
                 });
             });
 

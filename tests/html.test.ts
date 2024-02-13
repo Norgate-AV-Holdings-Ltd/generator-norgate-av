@@ -138,7 +138,10 @@ describe("generator-norgate-av:html", () => {
                 assert.equal(result.generator.options.id, id);
                 assert.equal(result.generator.options.description, description);
                 // assert.equal(result.generator.options.author, author);
-                assert.equal(result.generator.options.git, git);
+                assert.equal(
+                    result.generator.options.git,
+                    process.env.CI ? false : git,
+                );
                 assert.equal(result.generator.options.pkg, pkg);
                 assert.equal(
                     // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
@@ -327,7 +330,10 @@ describe("generator-norgate-av:html", () => {
                 assert.equal(result.generator.options.id, id);
                 assert.equal(result.generator.options.description, description);
                 // assert.equal(result.generator.options.author, author);
-                assert.equal(result.generator.options.git, git || undefined);
+                assert.equal(
+                    result.generator.options.git,
+                    process.env.CI ? false : git,
+                );
                 assert.equal(result.generator.options.pkg, pkg);
                 assert.equal(
                     // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
@@ -489,7 +495,7 @@ describe("generator-norgate-av:html", () => {
                 assert.equal(result.generator.options.id, "test-project");
                 assert.equal(result.generator.options.description, "");
                 assert.equal(result.generator.options.author, "");
-                assert.equal(result.generator.options.git, true);
+                assert.equal(result.generator.options.git, !process.env.CI);
                 assert.equal(result.generator.options.pkg, "pnpm");
                 assert.equal(
                     // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.

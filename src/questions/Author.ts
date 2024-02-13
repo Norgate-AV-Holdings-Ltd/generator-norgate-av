@@ -4,7 +4,7 @@ import { Answers } from "../@types/index.js";
 import AppGenerator from "../app.js";
 
 export class Author extends BaseQuestion {
-    constructor(generator: AppGenerator) {
+    public constructor(generator: AppGenerator) {
         super(generator);
         // this.generator.options.author = this.generator.git.name();
     }

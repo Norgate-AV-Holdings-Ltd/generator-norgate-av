@@ -6,7 +6,7 @@ import AppGenerator from "../app.js";
 export class ProjectId extends BaseQuestion {
     private readonly pattern: RegExp = /^[a-z0-9][a-z0-9-]*$/i;
 
-    constructor(generator: AppGenerator) {
+    public constructor(generator: AppGenerator) {
         super(generator);
 
         if (!this.generator.options.id && this.generator.options.skipPrompts) {

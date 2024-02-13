@@ -8,7 +8,7 @@ export class PackageManager extends BaseQuestion {
     private default: NodePackageManager;
     private choices: Array<NodePackageManager>;
 
-    constructor(generator: AppGenerator) {
+    public constructor(generator: AppGenerator) {
         super(generator);
 
         const config = ConfigHelper.getInstance().getConfig();

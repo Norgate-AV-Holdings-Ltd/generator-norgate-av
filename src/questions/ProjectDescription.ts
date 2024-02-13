@@ -4,7 +4,7 @@ import { BaseQuestion } from "./index.js";
 import AppGenerator from "../app.js";
 
 export class ProjectDescription extends BaseQuestion {
-    constructor(generator: AppGenerator) {
+    public constructor(generator: AppGenerator) {
         super(generator);
 
         if (

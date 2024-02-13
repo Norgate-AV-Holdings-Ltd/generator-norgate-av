@@ -4,13 +4,14 @@ import { Answers } from "../@types/index.js";
 import AppGenerator from "../app.js";
 
 export class Git extends BaseQuestion {
-    constructor(generator: AppGenerator) {
+    public constructor(generator: AppGenerator) {
         super(generator);
 
-        if (
-            this.generator.options.git === undefined &&
-            this.generator.options.skipPrompts
-        ) {
+        if (this.generator.options.git === false) {
+            return;
+        }
+
+        if (this.generator.options.skipPrompts) {
             this.generator.options.git = this.getDefault();
         }
     }
@@ -26,7 +27,7 @@ export class Git extends BaseQuestion {
             message: "Initialize a git repository?",
             default: this.getDefault(),
             when:
-                !this.generator.options.git &&
+                this.generator.options.git === undefined &&
                 !this.generator.options.skipPrompts,
         };
     }

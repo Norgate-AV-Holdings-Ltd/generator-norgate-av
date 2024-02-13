@@ -5,7 +5,7 @@ import { Answers } from "../@types/index.js";
 import { BaseQuestion } from "./index.js";
 
 export class ProjectName extends BaseQuestion {
-    constructor(generator: AppGenerator) {
+    public constructor(generator: AppGenerator) {
         super(generator);
 
         if (this.generator.options.skipPrompts) {

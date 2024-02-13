@@ -1,7 +1,5 @@
 FROM node:lts-alpine
-
-# Make image public
-# LABEL org.opencontainers.image.source
+LABEL org.opencontainers.image.source="https://github.com/Norgate-AV/generator-norgate-av"
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"

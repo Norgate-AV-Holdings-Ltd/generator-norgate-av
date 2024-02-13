@@ -75,11 +75,17 @@ export class PythonGenerator implements GeneratorInterface {
             this.generator.options.name || answers.name;
 
         this.generator.options.id = this.generator.options.id || answers.id;
-        this.generator.options.git = this.generator.options.git || answers.git;
 
         this.generator.options.description = this.generator.options.skipPrompts
             ? this.generator.options.description
             : answers.description;
+
+        // If git was passed in as false, the prompt wont be asked so we want to keep it as false
+        // If git was passed in as true, the prompt wont be asked so we want to keep it as true
+        // If git was not passed in, it be undefined and we want to set it to the answer
+        if (this.generator.options.git === undefined) {
+            this.generator.options.git = answers.git;
+        }
     }
 
     private getFilePaths(): Array<PathMap> {

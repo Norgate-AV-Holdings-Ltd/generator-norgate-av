@@ -2,11 +2,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import assert from "yeoman-assert";
 import helpers, { RunResult } from "yeoman-test";
-import { describe, beforeAll, afterAll, expect, it } from "vitest";
+import { describe, beforeAll, afterAll, expect, it, vi } from "vitest";
 import AppGenerator from "../src/app.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const generator = path.resolve(__dirname, "../dist/generators/app");
+
+const spawn = vi.spyOn(AppGenerator.prototype, "spawn");
 
 const files = [
     ".github/workflows/main.yml",
@@ -17,11 +19,13 @@ const files = [
     ".editorconfig",
     ".gitattributes",
     ".gitignore",
+    ".python-version",
     "CONTRIBUTING.md",
     "CHANGELOG.md",
     "GitVersion.yml",
     "LICENSE",
     "README.md",
+    "requirements.txt",
 ];
 
 describe("generator-norgate-av:python", () => {
@@ -127,6 +131,16 @@ describe("generator-norgate-av:python", () => {
                     git ? assert.file(".git") : assert.noFile(".git");
                 },
             );
+
+            it("should spawn a command to create a virtual environment", () => {
+                console.log(spawn);
+                console.log(spawn.mock.calls);
+                expect(spawn).toHaveBeenCalledWith("python3", [
+                    "-m",
+                    "venv",
+                    `${path.join(process.cwd(), name, ".venv")}`,
+                ]);
+            });
 
             it("should always pass", () => {
                 expect(1).toEqual(1);

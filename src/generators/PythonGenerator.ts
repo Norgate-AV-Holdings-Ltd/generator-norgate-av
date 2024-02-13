@@ -134,9 +134,50 @@ export class PythonGenerator implements GeneratorInterface {
             this.generator.options.skipInstall = true;
         }
 
+        await this.setupVenv();
+
         if (this.generator.options.skipInstall) {
             return Promise.resolve();
         }
+
+        await this.runPipInstall();
+    }
+
+    private async runPipInstall(): Promise<void> {
+        const { name } = this.generator.options;
+
+        this.generator.log();
+        this.generator.log(
+            "Running pip to install the project dependencies for you...",
+        );
+
+        const pip = path.join(
+            this.generator.env.cwd,
+            name,
+            ".venv",
+            "bin",
+            "pip",
+        );
+
+        const requirements = path.join(
+            this.generator.env.cwd,
+            name,
+            "requirements.txt",
+        );
+
+        await this.generator.spawn(pip, ["install", "-r", requirements]);
+    }
+
+    private async setupVenv(): Promise<void> {
+        const { name } = this.generator.options;
+
+        this.generator.log();
+        this.generator.log("Creating a virtual environment...");
+        await this.generator.spawn("python3", [
+            "-m",
+            "venv",
+            `${path.join(this.generator.env.cwd, name, ".venv")}`,
+        ]);
     }
 
     public async end(): Promise<void> {

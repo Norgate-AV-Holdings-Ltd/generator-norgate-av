@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.12](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.11...v2.0.12) (2024-02-13)
+
+### 🐛 Bug Fixes
+
+-   remove node config ([#119](https://github.com/Norgate-AV/generator-norgate-av/issues/119)) ([ed0da87](https://github.com/Norgate-AV/generator-norgate-av/commit/ed0da87c84cfb543d406502ca3e26d9701fcd40d))
+
 ## [2.0.11](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.10...v2.0.11) (2024-02-08)
 
 ### 🐛 Bug Fixes

@@ -1,19 +1,32 @@
 import { PromptQuestion } from "@yeoman/types";
-import config from "config";
 import { BaseQuestion } from "./index.js";
 import { Answers, NodePackageManager } from "../@types/index.js";
+import { ConfigHelper } from "../helpers/index.js";
 import AppGenerator from "../app.js";
 
 export class PackageManager extends BaseQuestion {
-    private default = config.get<NodePackageManager>(
-        "config.pkgmanager.node.default",
-    );
-    private choices = config.get<Array<NodePackageManager>>(
-        "config.pkgmanager.node.choices",
-    );
+    private default: NodePackageManager;
+    private choices: Array<NodePackageManager>;
 
-    constructor(generator: AppGenerator) {
+    public constructor(generator: AppGenerator) {
         super(generator);
+
+        const config = ConfigHelper.getInstance().getConfig();
+        this.default = config.pkgmanager.node!.default;
+        this.choices = config.pkgmanager.node!.choices;
+
+        if (!this.generator.options.pkg && this.generator.options.skipPrompts) {
+            this.generator.options.pkg = this.getDefault();
+
+            // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            this.generator.env.options.nodePackageManager =
+                this.generator.options.pkg;
+        }
+    }
+
+    private getDefault(): NodePackageManager {
+        return this.default;
     }
 
     public getQuestion(): PromptQuestion<Answers> {
@@ -27,7 +40,7 @@ export class PackageManager extends BaseQuestion {
                     value: choice,
                 };
             }),
-            default: this.default,
+            default: this.getDefault(),
             when:
                 !this.generator.options.pkg &&
                 !this.generator.options.skipPrompts,

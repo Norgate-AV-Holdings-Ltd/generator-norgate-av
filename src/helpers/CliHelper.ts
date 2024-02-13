@@ -1,7 +1,14 @@
 import { ArgumentSpec, CliOptionSpec } from "yeoman-generator";
 import { GeneratorFactory } from "../generators/index.js";
+import { ResolvedConfig } from "../@types/index.js";
 
 export class CliHelper {
+    private static config: ResolvedConfig;
+
+    public static initialize(config: ResolvedConfig): void {
+        this.config = config;
+    }
+
     public static getArguments(): Array<{
         name: string;
         config: Partial<ArgumentSpec>;
@@ -31,6 +38,12 @@ export class CliHelper {
                     .join(", ")}...`,
             },
             {
+                name: "id",
+                type: String,
+                alias: "i",
+                description: "Id of the project",
+            },
+            {
                 name: "description",
                 type: String,
                 alias: "d",
@@ -38,11 +51,23 @@ export class CliHelper {
                 default: "",
             },
             {
-                name: "yes",
+                name: "author",
+                type: String,
+                alias: "a",
+                description: "Author of the project",
+                default: "",
+            },
+            {
+                name: "git",
                 type: Boolean,
-                alias: "y",
-                description:
-                    "Quick mode, skip all optional prompts and use defaults",
+                alias: "g",
+                description: "Initialize a git repo",
+            },
+            {
+                name: "pkg",
+                type: String,
+                alias: "p",
+                description: `Package manager to use. Possible values: ${this.config.pkgmanager.node!.choices.join(", ")}`,
             },
             {
                 name: "open",
@@ -51,22 +76,11 @@ export class CliHelper {
                 description: "Open the generated project in Visual Studio Code",
             },
             {
-                name: "id",
-                type: String,
-                description: "Id of the project",
-            },
-            {
-                name: "pkg",
-                type: String,
-                alias: "p",
-                description:
-                    'Package manager to use. Possible values: ["pnpm", "yarn", "npm"]',
-            },
-            {
-                name: "git",
+                name: "yes",
                 type: Boolean,
-                alias: "g",
-                description: "Initialize a git repo",
+                alias: "y",
+                description:
+                    "Quick mode, skip all optional prompts and use defaults",
             },
         ];
     }

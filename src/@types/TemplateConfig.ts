@@ -1,7 +1,7 @@
-import { GeneratorSignature, PackageManager, PathMap } from "./index.js";
+import { GeneratorSignature } from "./index.js";
 
-export type TemplateConfig = {
+export type TemplateConfig<T, U> = {
     signature: GeneratorSignature;
-    pkgmanager: PackageManager;
-    paths: Array<PathMap>;
+    pkgmanager?: U;
+    paths: T;
 };

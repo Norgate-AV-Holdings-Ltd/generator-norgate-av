@@ -1,0 +1,53 @@
+{
+    "name": <%- JSON.stringify(id) %>,
+    "displayName": <%- JSON.stringify(name) %>,
+    "description": <%- JSON.stringify(description) %>,
+    "version": "0.0.0",
+    "license": "MIT",
+    "main": "src/app.js",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "engines": {
+        "node": ">=<%- node.getNodeEngine().split(".")[0] %>"
+    },
+    "scripts": {
+        "commit": "git-cz",
+        "pretty:fix": "prettier --write .",
+        "start": "cross-env NODE_ENV=production node src/app.js",
+        "dev": "nodemon src/app.js",
+        "test": "vitest",
+        "prepare": "husky",
+        "doctoc": "doctoc --title '## Contents 📖' README.md",
+        "contrib:add": "all-contributors add",
+        "contrib:generate": "all-contributors generate",
+        "contrib:check": "all-contributors check"
+    },
+    "devDependencies": {
+        <%- node.getDevDependency("@commitlint/cli") %>,
+        <%- node.getDevDependency("@commitlint/config-conventional") %>,
+        <%- node.getDevDependency("@semantic-release/changelog") %>,
+        <%- node.getDevDependency("@semantic-release/git") %>,
+        <%- node.getDevDependency("@types/config") %>,
+        <%- node.getDevDependency("@types/node") %>,
+        <%- node.getDevDependency("@types/nodemon") %>,
+        <%- node.getDevDependency("all-contributors-cli") %>,
+        <%- node.getDevDependency("commitizen") %>,
+        <%- node.getDevDependency("cross-env") %>,
+        <%- node.getDevDependency("cz-conventional-changelog") %>,
+        <%- node.getDevDependency("doctoc") %>,
+        <%- node.getDevDependency("husky") %>,
+        <%- node.getDevDependency("lint-staged") %>,
+        <%- node.getDevDependency("nodemon") %>,
+        <%- node.getDevDependency("prettier") %>,
+        <%- node.getDevDependency("semantic-release") %>,
+        <%- node.getDevDependency("vitest") %>
+    },
+    "dependencies": {
+        <%- node.getDependency("config") %>,
+        <%- node.getDependency("dotenv") %>,
+        <%- node.getDependency("envalid") %>
+    }
+}

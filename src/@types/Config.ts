@@ -1,9 +1,6 @@
-import { PackageManager, PathMap, TemplateConfig } from "./index.js";
+import { PackageManager, PathMap } from "./index.js";
 
 export type Config = {
-    generators: {
-        [key: string]: TemplateConfig;
-    };
     files: {
         directory: string;
         paths: {

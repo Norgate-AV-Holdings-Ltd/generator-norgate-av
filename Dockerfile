@@ -1,10 +1,13 @@
-FROM node:lts-alpine3.15
+FROM node:lts-alpine
+LABEL org.opencontainers.image.source="https://github.com/Norgate-AV/generator-norgate-av"
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
 RUN apk update && apk upgrade
-RUN apk add git
 
-RUN yarn global add yo generator-norgate-av
-RUN chown -R node:node /usr/local/lib/node_modules
+RUN pnpm add -g yo generator-norgate-av
 
 USER node
 ENTRYPOINT [ "yo", "--no-insight", "norgate-av" ]

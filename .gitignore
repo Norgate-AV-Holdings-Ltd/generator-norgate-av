@@ -106,6 +106,4 @@ dist
 # Local history
 .history/
 
-generators/
-
 *.bak

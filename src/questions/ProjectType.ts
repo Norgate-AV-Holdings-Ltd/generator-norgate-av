@@ -6,7 +6,10 @@ import AppGenerator from "../app.js";
 export class ProjectType extends BaseQuestion {
     private readonly choices: Array<GeneratorSignature>;
 
-    constructor(generator: AppGenerator, choices: Array<GeneratorSignature>) {
+    public constructor(
+        generator: AppGenerator,
+        choices: Array<GeneratorSignature>,
+    ) {
         super(generator);
         this.choices = choices;
     }

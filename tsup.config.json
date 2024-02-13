@@ -4,12 +4,12 @@
     },
     "format": ["esm"],
     "target": "node20",
-    "outDir": "generators/app",
+    "outDir": "dist/generators/app",
     "minify": "terser",
     "dts": true,
     "minifyWhitespace": true,
     "minifyIdentifiers": true,
     "minifySyntax": true,
     "treeshake": true,
-    "onSuccess": "ncp src/templates generators/app/templates && ncp src/dependencies generators/app/dependencies && ncp src/USAGE generators/app/USAGE"
+    "onSuccess": "pnpm copy:files"
 }

@@ -1,17 +1,19 @@
 import { BaseOptions } from "yeoman-generator";
-import { NodeEnvironment } from "../environments/NodeEnvironment.js";
+import { NodeEnvironment } from "../environments/index.js";
+import { NodePackageManager, ProjectConfig } from "./index.js";
 
 export type AppOptions = BaseOptions & {
     type: string;
-    description?: string;
+    destination?: string;
+    name: string;
     id?: string;
-    pkg: string;
-    git: boolean;
+    description?: string;
+    author?: string;
+    git?: boolean;
+    pkg?: NodePackageManager;
     open?: boolean;
     yes?: boolean;
     skipPrompts: boolean;
-    destination: string;
-    name: string;
-    displayName: string;
     node?: NodeEnvironment;
+    config: ProjectConfig;
 };

@@ -1,13 +1,12 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import chalk from "chalk";
-import config from "config";
-import { ResolvedRefsResults, resolveRefs } from "json-refs";
+import { PromptQuestion } from "@yeoman/types";
 import {
     Answers,
-    Config,
     GeneratorInterface,
     GeneratorSignature,
+    PathMap,
 } from "../@types/index.js";
 import AppGenerator from "../app.js";
 import {
@@ -16,47 +15,48 @@ import {
     ProjectDescription,
     Git,
 } from "../questions/index.js";
+import { ConfigHelper } from "../helpers/index.js";
 
 export class PythonGenerator implements GeneratorInterface {
     private readonly generator: AppGenerator;
     private readonly name = PythonGenerator.getSignature().name;
-
-    private readonly questions = [
-        ProjectName,
-        ProjectId,
-        ProjectDescription,
-        Git,
-    ];
+    private readonly questions: Array<PromptQuestion<Answers>> = [];
 
     public constructor(generator: AppGenerator) {
         this.generator = generator;
     }
 
     public async initialize(): Promise<void> {
+        this.setupPrompts();
         await this.generator.options.node?.initialize();
     }
 
-    public static getSignature(): GeneratorSignature {
-        return config.get<GeneratorSignature>(
-            "config.generators.python.signature",
+    private setupPrompts(): void {
+        this.questions.push(
+            new ProjectName(this.generator).getQuestion(),
+            new ProjectId(this.generator).getQuestion(),
+            new ProjectDescription(this.generator).getQuestion(),
+            new Git(this.generator).getQuestion(),
         );
     }
 
+    public static getSignature(): GeneratorSignature {
+        const config = ConfigHelper.getInstance().getConfig();
+        return config.generators.python!.signature;
+    }
+
     public getSourceRoot(): string {
+        const config = ConfigHelper.getInstance().getConfig();
         return path.join(
             path.dirname(fileURLToPath(import.meta.url)),
-            config.get<string>("files.directory"),
+            config.files.directory,
             PythonGenerator.getSignature().id,
         );
     }
 
     public async prompting(): Promise<void> {
-        const questions = this.questions.map((question) =>
-            new question(this.generator).getQuestion(),
-        );
-
-        const answers = await this.generator.prompt(
-            questions.map((q) => {
+        const answers = await this.generator.prompt<Answers>(
+            this.questions.map((q) => {
                 return {
                     ...q,
                     name: q.name as string,
@@ -70,37 +70,38 @@ export class PythonGenerator implements GeneratorInterface {
     private updateOptions(answers: Answers): void {
         this.generator.options.type =
             this.generator.options.type || answers.type;
+
         this.generator.options.name =
             this.generator.options.name || answers.name;
-        this.generator.options.description =
-            this.generator.options.description || answers.description;
-        this.generator.options.git = this.generator.options.git || answers.git;
-        this.generator.options.displayName =
-            this.generator.options.displayName || answers.displayName;
-    }
 
-    private async getFilePaths() {
-        try {
-            const result: ResolvedRefsResults = await resolveRefs(
-                config.util.toObject() as Config,
-            );
+        this.generator.options.id = this.generator.options.id || answers.id;
 
-            const resolved = result.resolved as Config;
+        this.generator.options.description = this.generator.options.skipPrompts
+            ? this.generator.options.description
+            : answers.description;
 
-            const id = PythonGenerator.getSignature().id;
-
-            return resolved.generators[id]?.paths;
-        } catch (error) {
-            this.generator.log(error);
+        // If git was passed in as false, the prompt wont be asked so we want to keep it as false
+        // If git was passed in as true, the prompt wont be asked so we want to keep it as true
+        // If git was not passed in, it be undefined and we want to set it to the answer
+        if (this.generator.options.git === undefined) {
+            this.generator.options.git = answers.git;
         }
     }
 
+    private getFilePaths(): Array<PathMap> {
+        const config = ConfigHelper.getInstance().getConfig();
+
+        const { id } = PythonGenerator.getSignature();
+
+        return config.generators[id]!.paths;
+    }
+
     public async writing(): Promise<void> {
-        const paths = await this.getFilePaths();
+        const paths = this.getFilePaths();
 
         if (!paths) {
             this.generator.abort = true;
-            return;
+            return Promise.resolve();
         }
 
         this.generator.env.cwd = this.generator.destinationPath();
@@ -131,10 +132,11 @@ export class PythonGenerator implements GeneratorInterface {
     public async install(): Promise<void> {
         if (this.generator.abort) {
             this.generator.options.skipInstall = true;
-            return;
         }
 
-        return Promise.resolve();
+        if (this.generator.options.skipInstall) {
+            return Promise.resolve();
+        }
     }
 
     public async end(): Promise<void> {

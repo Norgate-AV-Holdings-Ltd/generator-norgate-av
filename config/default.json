@@ -66,6 +66,21 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
                 }
             ]
         },
@@ -168,6 +183,9 @@
                 },
                 {
                     "$ref": "#/files/paths/vitestconfig"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
                 }
             ]
         },
@@ -234,6 +252,24 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/releaserc"
                 }
             ]
         },
@@ -241,7 +277,7 @@
             "signature": {
                 "name": "Node.js (CLI)",
                 "id": "nodecli",
-                "aliases": ["cli", "node-cli", "cli-js"]
+                "aliases": ["nodecli", "node-cli", "cli-js"]
             },
             "pkgmanager": {
                 "$ref": "#/pkgmanager/node"
@@ -300,6 +336,24 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/releaserc"
                 }
             ]
         },
@@ -336,6 +390,12 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
                 }
             ]
         },
@@ -405,6 +465,21 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
                 }
             ]
         },
@@ -474,6 +549,27 @@
                 },
                 {
                     "$ref": "#/files/paths/readme"
+                },
+                {
+                    "$ref": "#/files/paths/changelog"
+                },
+                {
+                    "$ref": "#/files/paths/allcontributorsrc"
+                },
+                {
+                    "$ref": "#/files/paths/npmignore"
+                },
+                {
+                    "$ref": "#/files/paths/npmrc"
+                },
+                {
+                    "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/docs"
+                },
+                {
+                    "$ref": "#/files/paths/config"
                 }
             ]
         }

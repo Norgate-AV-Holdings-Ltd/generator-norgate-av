@@ -3,21 +3,15 @@ import which from "which";
 import type Generator from "yeoman-generator";
 
 export class CodeHelper {
-    public static async getPath(): Promise<string | Error> {
-        const code = await which("code").catch(() => undefined);
-
-        if (!code) {
-            throw new Error(`${chalk.cyan("`code`")} command not found.`);
-        }
-
-        return code;
+    public static async getPath(): Promise<string | undefined> {
+        return await which("code").catch(() => undefined);
     }
 
     public static async open(
         generator: Generator,
         path: string,
     ): Promise<void> {
-        const code = await which("code").catch(() => undefined);
+        const code = await CodeHelper.getPath();
 
         if (!code) {
             generator.log(`${chalk.cyan("`code`")} command not found.`);

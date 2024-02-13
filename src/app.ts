@@ -1,32 +1,25 @@
-import dotenv, { DotenvPopulateInput } from "dotenv";
-import process from "node:process";
-
-dotenv.populate(
-    process.env as DotenvPopulateInput,
-    {
-        SUPPRESS_NO_CONFIG_WARNING: "y",
-    },
-    { override: true },
-);
-
 import path from "node:path";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
-import config from "config";
 import {
     Answers,
     AppOptions,
     GeneratorInterface,
     GeneratorSignature,
-    NodePackageManager,
+    UnresolvedConfig,
 } from "./@types/index.js";
 import { GeneratorFactory } from "./generators/GeneratorFactory.js";
-import { CliHelper, CodeHelper, GitHelper } from "./helpers/index.js";
+import {
+    CliHelper,
+    CodeHelper,
+    ConfigHelper,
+    GitHelper,
+} from "./helpers/index.js";
 import { ProjectType } from "./questions/index.js";
-import appConfig from "../config/default.json";
+import config from "../config/default.json";
 
-config.util.setModuleDefaults("config", appConfig);
+await ConfigHelper.initialize(config as UnresolvedConfig);
 
 class AppGenerator extends Generator<AppOptions> {
     private generator: GeneratorInterface | undefined = undefined;
@@ -36,21 +29,14 @@ class AppGenerator extends Generator<AppOptions> {
     constructor(args: string | Array<string>, options: AppOptions) {
         super(args, options);
 
-        this.appname = "Norgate AV Project Generator";
-
+        CliHelper.initialize(ConfigHelper.getInstance().getConfig());
         this._initializeCliArguments();
         this._initializeCliOptions();
 
         this.description =
             "Generates project boilerplates of various types ready for development.";
-        this.options.skipPrompts = this.options.yes || false;
 
-        if (this.options.skipPrompts) {
-            this.options.git = true;
-            this.options.pkg = config.get<NodePackageManager>(
-                "config.environments.node.pkgmanager.default",
-            );
-        }
+        this.options.skipPrompts = this.options.yes || false;
     }
 
     private _initializeCliArguments(): void {
@@ -153,10 +139,14 @@ class AppGenerator extends Generator<AppOptions> {
             }
         }
 
-        await this.generator?.install();
+        if (this.options.skipInstall) {
+            return;
+        }
 
         this.log();
         this.log("Installing packages. This might take a couple of minutes.");
+
+        await this.generator?.install();
     }
 
     public async end(): Promise<void> {
@@ -207,21 +197,23 @@ class AppGenerator extends Generator<AppOptions> {
 
         const code = await CodeHelper.getPath();
 
-        if (code && this.options.open) {
+        if (!code) {
+            return;
+        }
+
+        if (this.options.open) {
             await CodeHelper.open(this, this.destinationPath());
             return;
         }
 
-        const choices = [];
-
-        if (code) {
-            choices.push({
-                name: "Open with `code`",
-                value: code,
-            });
+        if (this.options.skipPrompts) {
+            return;
         }
 
-        choices.push({ name: "Skip", value: "skip" });
+        const choices = [
+            { name: "Open with `code`", value: code },
+            { name: "Skip", value: "skip" },
+        ];
 
         const answer = await this.prompt<{ openWith: string }>({
             type: "list",

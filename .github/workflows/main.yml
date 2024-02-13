@@ -101,13 +101,19 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{github.actor}}
-          password: ${{secrets.GITHUB_TOKEN}}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Convert github.repo to Lowercase
+        id: repository
+        uses: ASzc/change-string-case-action@v6
+        with:
+          string: ${{ github.repository }}
 
       - name: Build
         run: |
-          docker build . --tag ghcr.io/${{ github.repository }}:latest
-          docker tag ghcr.io/${{ github.repository }}:latest ghcr.io/${{ github.repository }}:${{ github.sha }}
+          docker build . --tag ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
+          docker tag ghcr.io/${{ steps.repository.outputs.lowercase }}:latest ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ github.sha }}
 
       - name: Push
-        run: docker push ghcr.io/${{ github.repository }}:latest
+        run: docker push ghcr.io/${{ steps.repository.outputs.lowercase }}:latest

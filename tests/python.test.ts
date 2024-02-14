@@ -3,12 +3,17 @@ import { fileURLToPath } from "node:url";
 import assert from "yeoman-assert";
 import helpers, { RunResult } from "yeoman-test";
 import { describe, beforeAll, afterAll, expect, it, vi } from "vitest";
+// import Generator from "yeoman-generator";
 import AppGenerator from "../src/app.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const generator = path.resolve(__dirname, "../dist/generators/app");
 
-const spawn = vi.spyOn(AppGenerator.prototype, "spawn").getMockImplementation();
+const spawn = vi
+    .spyOn(AppGenerator.prototype, "spawn")
+    .mockImplementation((command, args) =>
+        AppGenerator.prototype.spawn(command, [...args]),
+    );
 
 const files = [
     ".github/workflows/main.yml",
@@ -71,6 +76,7 @@ describe("generator-norgate-av:python", () => {
 
             afterAll(() => {
                 result?.cleanup();
+                spawn.mockClear();
             });
 
             it("should assign the correct values", () => {
@@ -133,11 +139,10 @@ describe("generator-norgate-av:python", () => {
             );
 
             it("should spawn a command to create a virtual environment", () => {
-                console.log(spawn);
                 expect(spawn).toHaveBeenCalledWith("python3", [
                     "-m",
                     "venv",
-                    `${path.join(process.cwd(), name, ".venv")}`,
+                    `${path.join(process.cwd(), ".venv")}`,
                 ]);
             });
 

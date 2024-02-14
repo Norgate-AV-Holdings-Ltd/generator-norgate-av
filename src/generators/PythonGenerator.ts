@@ -146,24 +146,15 @@ export class PythonGenerator implements GeneratorInterface {
     }
 
     private async runPipInstall(): Promise<void> {
-        const { name } = this.generator.options;
-
         this.generator.log();
         this.generator.log(
             "Running pip to install the project dependencies for you...",
         );
 
-        const pip = path.join(
-            this.generator.env.cwd,
-            name,
-            ".venv",
-            "bin",
-            "pip",
-        );
+        const pip = path.join(this.generator.env.cwd, ".venv", "bin", "pip");
 
         const requirements = path.join(
             this.generator.env.cwd,
-            name,
             "requirements.txt",
         );
 
@@ -171,14 +162,12 @@ export class PythonGenerator implements GeneratorInterface {
     }
 
     private async setupVenv(): Promise<void> {
-        const { name } = this.generator.options;
-
         this.generator.log();
         this.generator.log("Creating a virtual environment...");
         await this.generator.spawn("python3", [
             "-m",
             "venv",
-            `${path.join(this.generator.env.cwd, name, ".venv")}`,
+            `${path.join(this.generator.env.cwd, ".venv")}`,
         ]);
     }
 

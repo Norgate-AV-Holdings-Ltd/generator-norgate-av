@@ -760,7 +760,7 @@
                 "to": "vitest.config.ts"
             },
             "pythonversion": {
-                "from": "python-version",
+                "from": "python-version.ejs",
                 "to": ".python-version"
             },
             "pyprojecttoml": {
@@ -792,6 +792,10 @@
         "python": {
             "engine": {
                 "fallback": "3.9.0"
+            },
+            "pkgmanager": {
+                "default": "poetry",
+                "choices": ["poetry", "pip"]
             }
         }
     }

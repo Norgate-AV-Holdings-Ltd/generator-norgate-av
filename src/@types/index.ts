@@ -1,6 +1,8 @@
 export * from "./Answers.js";
 export * from "./AppOptions.js";
 export * from "./Config.js";
+export * from "./Environment.js";
+export * from "./EnvironmentInterface.js";
 export * from "./GeneratorInterface.js";
 export * from "./GeneratorSignature.js";
 export * from "./JsonRef.js";
@@ -9,6 +11,7 @@ export * from "./NodeVersion.js";
 export * from "./PackageManager.js";
 export * from "./PathMap.js";
 export * from "./ProjectConfig.js";
+export * from "./PythonPackageManager.js";
 export * from "./ResolvedConfig.js";
 export * from "./TemplateConfig.js";
 export * from "./UnresolvedConfig.js";

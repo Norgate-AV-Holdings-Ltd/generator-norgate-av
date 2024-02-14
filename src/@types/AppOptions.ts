@@ -1,5 +1,5 @@
 import { BaseOptions } from "yeoman-generator";
-import { NodeEnvironment } from "../environments/index.js";
+import { NodeEnvironment, PythonEnvironment } from "../environments/index.js";
 import { NodePackageManager, ProjectConfig } from "./index.js";
 
 export type AppOptions = BaseOptions & {
@@ -15,5 +15,6 @@ export type AppOptions = BaseOptions & {
     yes?: boolean;
     skipPrompts: boolean;
     node?: NodeEnvironment;
+    python?: PythonEnvironment;
     config: ProjectConfig;
 };

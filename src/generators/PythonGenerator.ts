@@ -15,6 +15,7 @@ import {
     ProjectDescription,
     Git,
 } from "../questions/index.js";
+import { PythonEnvironment } from "../environments/index.js";
 import { ConfigHelper } from "../helpers/index.js";
 
 export class PythonGenerator implements GeneratorInterface {
@@ -24,11 +25,12 @@ export class PythonGenerator implements GeneratorInterface {
 
     public constructor(generator: AppGenerator) {
         this.generator = generator;
+        this.generator.options.python = new PythonEnvironment();
     }
 
     public async initialize(): Promise<void> {
         this.setupPrompts();
-        await this.generator.options.node?.initialize();
+        return Promise.resolve();
     }
 
     private setupPrompts(): void {

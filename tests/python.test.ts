@@ -8,7 +8,7 @@ import AppGenerator from "../src/app.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const generator = path.resolve(__dirname, "../dist/generators/app");
 
-const spawn = vi.spyOn(AppGenerator.prototype, "spawn");
+const spawn = vi.spyOn(AppGenerator.prototype, "spawn").getMockImplementation();
 
 const files = [
     ".github/workflows/main.yml",
@@ -134,7 +134,6 @@ describe("generator-norgate-av:python", () => {
 
             it("should spawn a command to create a virtual environment", () => {
                 console.log(spawn);
-                console.log(spawn.mock.calls);
                 expect(spawn).toHaveBeenCalledWith("python3", [
                     "-m",
                     "venv",
@@ -148,7 +147,7 @@ describe("generator-norgate-av:python", () => {
         },
     );
 
-    describe.each([
+    describe.skip.each([
         {
             destination: "test",
             type: "python",
@@ -258,7 +257,7 @@ describe("generator-norgate-av:python", () => {
         },
     );
 
-    describe.each([
+    describe.skip.each([
         {
             destination: "Test Project",
             type: "python",

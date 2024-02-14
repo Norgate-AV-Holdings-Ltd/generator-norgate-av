@@ -1,11 +1,8 @@
-// export type Environment = {
-//     engine: {
-//         fallback: string;
-//     };
-//     pkgmanager: PackageManager;
-// };
+import { PackageManager } from "./index.js";
 
-export interface EnvironmentInterface {
-    initialize(): Promise<void>;
-    getEngine(): string;
-}
+export type Environment = {
+    engine: {
+        fallback: string;
+    };
+    pkgmanager: PackageManager;
+};

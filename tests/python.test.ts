@@ -4,10 +4,19 @@ import assert from "yeoman-assert";
 import helpers, { RunResult } from "yeoman-test";
 import { describe, beforeAll, afterAll, expect, it, vi } from "vitest";
 import Generator from "yeoman-generator";
+import { PythonEnvironment } from "../src/environments/index.js";
+import { ConfigHelper } from "../src/helpers/index.js";
+import config from "../config/default.json";
+import { UnresolvedConfig } from "../src/@types/index.js";
 import AppGenerator from "../src/app.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const generator = path.resolve(__dirname, "../dist/generators/app");
+
+await ConfigHelper.initialize(config as UnresolvedConfig);
+
+const python = new PythonEnvironment();
+await python.initialize();
 
 const spawn = vi.spyOn(Generator.prototype, "spawn");
 
@@ -103,6 +112,10 @@ describe("generator-norgate-av:python", () => {
                 );
             });
 
+            it("should create the correct .python-version", () => {
+                assert.fileContent(".python-version", python.getEngine());
+            });
+
             it("should create the correct LICENSE", () => {
                 assert.fileContent("LICENSE", "The MIT License (MIT)");
                 assert.fileContent(
@@ -127,13 +140,16 @@ describe("generator-norgate-av:python", () => {
                 assert.fileContent("CONTRIBUTING.md", `cd ${id}`);
             });
 
-            it("should have spawned a command to create a git repository if git is true", () => {
-                git &&
-                    expect(spawn).toHaveBeenCalledWith("git", [
-                        "init",
-                        "--quiet",
-                    ]);
-            });
+            it.skipIf(process.env.CI)(
+                "should have spawned a command to create a git repository if git is true",
+                () => {
+                    git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "init",
+                            "--quiet",
+                        ]);
+                },
+            );
 
             it.skipIf(process.env.CI)(
                 "should create a git repository if git is true",
@@ -142,18 +158,25 @@ describe("generator-norgate-av:python", () => {
                 },
             );
 
-            it("should have spawned a commands to add and commit files if git is true", () => {
-                git && expect(spawn).toHaveBeenCalledWith("git", ["add", "-A"]);
+            it.skipIf(process.env.CI)(
+                "should have spawned a commands to add and commit files if git is true",
+                () => {
+                    git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "add",
+                            "-A",
+                        ]);
 
-                git &&
-                    expect(spawn).toHaveBeenCalledWith("git", [
-                        "commit",
-                        "-m",
-                        "chore: initial commit",
-                        "--no-verify",
-                        "--quiet",
-                    ]);
-            });
+                    git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "commit",
+                            "-m",
+                            "chore: initial commit",
+                            "--no-verify",
+                            "--quiet",
+                        ]);
+                },
+            );
 
             // it("should spawn a command to create a virtual environment", () => {
             //     expect(spawn).toHaveBeenCalledWith("python3", [
@@ -169,7 +192,7 @@ describe("generator-norgate-av:python", () => {
         },
     );
 
-    describe.skip.each([
+    describe.each([
         {
             destination: "test",
             type: "python",
@@ -242,6 +265,10 @@ describe("generator-norgate-av:python", () => {
                 );
             });
 
+            it("should create the correct .python-version", () => {
+                assert.fileContent(".python-version", python.getEngine());
+            });
+
             it("should create the correct LICENSE", () => {
                 assert.fileContent("LICENSE", "The MIT License (MIT)");
                 assert.fileContent(
@@ -267,9 +294,40 @@ describe("generator-norgate-av:python", () => {
             });
 
             it.skipIf(process.env.CI)(
+                "should have spawned a command to create a git repository if git is true",
+                () => {
+                    git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "init",
+                            "--quiet",
+                        ]);
+                },
+            );
+
+            it.skipIf(process.env.CI)(
                 "should create a git repository if git is true",
                 () => {
                     git ? assert.file(".git") : assert.noFile(".git");
+                },
+            );
+
+            it.skipIf(process.env.CI)(
+                "should have spawned a commands to add and commit files if git is true",
+                () => {
+                    git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "add",
+                            "-A",
+                        ]);
+
+                    git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "commit",
+                            "-m",
+                            "chore: initial commit",
+                            "--no-verify",
+                            "--quiet",
+                        ]);
                 },
             );
 
@@ -279,7 +337,7 @@ describe("generator-norgate-av:python", () => {
         },
     );
 
-    describe.skip.each([
+    describe.each([
         {
             destination: "Test Project",
             type: "python",
@@ -337,6 +395,10 @@ describe("generator-norgate-av:python", () => {
                 );
             });
 
+            it("should create the correct .python-version", () => {
+                assert.fileContent(".python-version", python.getEngine());
+            });
+
             it("should create the correct LICENSE", () => {
                 assert.fileContent("LICENSE", "The MIT License (MIT)");
                 assert.fileContent(
@@ -368,11 +430,42 @@ describe("generator-norgate-av:python", () => {
             });
 
             it.skipIf(process.env.CI)(
+                "should have spawned a command to create a git repository if git is true",
+                () => {
+                    result.generator.options.git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "init",
+                            "--quiet",
+                        ]);
+                },
+            );
+
+            it.skipIf(process.env.CI)(
                 "should create a git repository if git is true",
                 () => {
                     result.generator.options.git
                         ? assert.file(".git")
                         : assert.noFile(".git");
+                },
+            );
+
+            it.skipIf(process.env.CI)(
+                "should have spawned a commands to add and commit files if git is true",
+                () => {
+                    result.generator.options.git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "add",
+                            "-A",
+                        ]);
+
+                    result.generator.options.git &&
+                        expect(spawn).toHaveBeenCalledWith("git", [
+                            "commit",
+                            "-m",
+                            "chore: initial commit",
+                            "--no-verify",
+                            "--quiet",
+                        ]);
                 },
             );
 

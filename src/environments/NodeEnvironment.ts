@@ -12,7 +12,7 @@ export class NodeEnvironment {
 
     private engine: string;
 
-    constructor() {
+    public constructor() {
         const config = ConfigHelper.getInstance().getConfig();
         this.engine = config.environments.node.engine.fallback;
     }

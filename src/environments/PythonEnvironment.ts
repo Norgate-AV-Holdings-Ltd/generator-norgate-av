@@ -3,7 +3,7 @@ import { ConfigHelper } from "../helpers/index.js";
 export class PythonEnvironment {
     private engine: string;
 
-    constructor() {
+    public constructor() {
         const config = ConfigHelper.getInstance().getConfig();
         this.engine = config.environments.python.engine.fallback;
     }

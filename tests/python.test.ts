@@ -3,17 +3,13 @@ import { fileURLToPath } from "node:url";
 import assert from "yeoman-assert";
 import helpers, { RunResult } from "yeoman-test";
 import { describe, beforeAll, afterAll, expect, it, vi } from "vitest";
-// import Generator from "yeoman-generator";
+import Generator from "yeoman-generator";
 import AppGenerator from "../src/app.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const generator = path.resolve(__dirname, "../dist/generators/app");
 
-const spawn = vi
-    .spyOn(AppGenerator.prototype, "spawn")
-    .mockImplementation((command, args) =>
-        AppGenerator.prototype.spawn(command, [...args]),
-    );
+const spawn = vi.spyOn(Generator.prototype, "spawn");
 
 const files = [
     ".github/workflows/main.yml",
@@ -131,6 +127,14 @@ describe("generator-norgate-av:python", () => {
                 assert.fileContent("CONTRIBUTING.md", `cd ${id}`);
             });
 
+            it("should have spawned a command to create a git repository if git is true", () => {
+                git &&
+                    expect(spawn).toHaveBeenCalledWith("git", [
+                        "init",
+                        "--quiet",
+                    ]);
+            });
+
             it.skipIf(process.env.CI)(
                 "should create a git repository if git is true",
                 () => {
@@ -138,13 +142,26 @@ describe("generator-norgate-av:python", () => {
                 },
             );
 
-            it("should spawn a command to create a virtual environment", () => {
-                expect(spawn).toHaveBeenCalledWith("python3", [
-                    "-m",
-                    "venv",
-                    `${path.join(process.cwd(), ".venv")}`,
-                ]);
+            it("should have spawned a commands to add and commit files if git is true", () => {
+                git && expect(spawn).toHaveBeenCalledWith("git", ["add", "-A"]);
+
+                git &&
+                    expect(spawn).toHaveBeenCalledWith("git", [
+                        "commit",
+                        "-m",
+                        "chore: initial commit",
+                        "--no-verify",
+                        "--quiet",
+                    ]);
             });
+
+            // it("should spawn a command to create a virtual environment", () => {
+            //     expect(spawn).toHaveBeenCalledWith("python3", [
+            //         "-m",
+            //         "venv",
+            //         `${path.join(process.cwd(), ".venv")}`,
+            //     ]);
+            // });
 
             it("should always pass", () => {
                 expect(1).toEqual(1);

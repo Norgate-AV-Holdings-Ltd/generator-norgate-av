@@ -158,7 +158,12 @@ export class PythonGenerator implements GeneratorInterface {
             "requirements.txt",
         );
 
-        await this.generator.spawn(pip, ["install", "-r", requirements]);
+        await this.generator.spawn(pip, [
+            "install",
+            "-r",
+            requirements,
+            "--quiet",
+        ]);
     }
 
     private async setupVenv(): Promise<void> {

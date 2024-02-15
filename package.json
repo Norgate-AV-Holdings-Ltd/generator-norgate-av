@@ -88,6 +88,7 @@
         "find-up": "^7.0.0",
         "json-refs": "^3.0.15",
         "mem-fs": "^4.0.0",
+        "toml": "^3.0.0",
         "which": "^4.0.0",
         "yeoman-generator": "^7.1.1",
         "yosay": "^3.0.0"

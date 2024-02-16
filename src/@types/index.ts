@@ -3,6 +3,7 @@ export * from "./AppOptions.js";
 export * from "./Config.js";
 export * from "./Environment.js";
 export * from "./EnvironmentInterface.js";
+export * from "./GeneratorId.js";
 export * from "./GeneratorInterface.js";
 export * from "./GeneratorSignature.js";
 export * from "./JsonRef.js";

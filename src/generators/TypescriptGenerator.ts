@@ -46,7 +46,7 @@ export class TypescriptGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         const config = ConfigHelper.getInstance().getConfig();
-        return config.generators.typescript!.signature;
+        return config.generators.typescript.signature;
     }
 
     public getSourceRoot(): string {
@@ -103,7 +103,7 @@ export class TypescriptGenerator implements GeneratorInterface {
 
         const { id } = TypescriptGenerator.getSignature();
 
-        return config.generators[id]!.paths;
+        return config.generators[id].paths;
     }
 
     public async writing(): Promise<void> {

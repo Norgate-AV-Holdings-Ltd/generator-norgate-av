@@ -47,7 +47,7 @@ export class CrestronSimplGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         const config = ConfigHelper.getInstance().getConfig();
-        return config.generators.simpl!.signature;
+        return config.generators.simpl.signature;
     }
 
     public getSourceRoot(): string {
@@ -104,7 +104,7 @@ export class CrestronSimplGenerator implements GeneratorInterface {
 
         const { id } = CrestronSimplGenerator.getSignature();
 
-        return config.generators[id]!.paths;
+        return config.generators[id].paths;
     }
 
     public async writing(): Promise<void> {

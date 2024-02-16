@@ -46,7 +46,7 @@ export class HtmlGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         const config = ConfigHelper.getInstance().getConfig();
-        return config.generators.html!.signature;
+        return config.generators.html.signature;
     }
 
     public getSourceRoot(): string {
@@ -103,7 +103,7 @@ export class HtmlGenerator implements GeneratorInterface {
 
         const { id } = HtmlGenerator.getSignature();
 
-        return config.generators[id]!.paths;
+        return config.generators[id].paths;
     }
 
     public async writing(): Promise<void> {

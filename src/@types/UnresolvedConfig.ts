@@ -1,7 +1,7 @@
-import { Config, JsonRef, TemplateConfig } from "./index.js";
+import { Config, GeneratorId, JsonRef, TemplateConfig } from "./index.js";
 
 export type UnresolvedConfig = Config & {
     generators: {
-        [key: string]: TemplateConfig<Array<JsonRef>, JsonRef>;
+        [K in GeneratorId]: TemplateConfig<Array<JsonRef>, JsonRef>;
     };
 };

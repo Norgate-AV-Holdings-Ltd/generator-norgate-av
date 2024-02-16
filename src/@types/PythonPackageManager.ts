@@ -1,1 +1,1 @@
-export type PythonPackageManager = "pip" | "poetry" | "pipenv";
+export type PythonPackageManager = "pip" | "poetry";

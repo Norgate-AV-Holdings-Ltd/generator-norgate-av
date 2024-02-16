@@ -2,6 +2,7 @@ export * from "./Answers.js";
 export * from "./AppOptions.js";
 export * from "./Config.js";
 export * from "./Environment.js";
+export * from "./EnvironmentId.js";
 export * from "./EnvironmentInterface.js";
 export * from "./GeneratorId.js";
 export * from "./GeneratorInterface.js";

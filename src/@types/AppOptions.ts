@@ -1,6 +1,10 @@
 import { BaseOptions } from "yeoman-generator";
 import { NodeEnvironment, PythonEnvironment } from "../environments/index.js";
-import { NodePackageManager, ProjectConfig } from "./index.js";
+import {
+    EnvironmentInterface,
+    NodePackageManager,
+    ProjectConfig,
+} from "./index.js";
 
 export type AppOptions = BaseOptions & {
     type: string;
@@ -17,4 +21,5 @@ export type AppOptions = BaseOptions & {
     node?: NodeEnvironment;
     python?: PythonEnvironment;
     config: ProjectConfig;
+    environment: EnvironmentInterface;
 };

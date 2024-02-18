@@ -1,4 +1,4 @@
-import { NodePackageManager } from "./index.js";
+import { EnvironmentInterface, NodePackageManager } from "./index.js";
 
 export type ProjectConfig = {
     name: string;
@@ -8,4 +8,5 @@ export type ProjectConfig = {
     git: boolean;
     pkg: NodePackageManager;
     skipPrompts: boolean;
+    environment: EnvironmentInterface;
 };

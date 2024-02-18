@@ -26,6 +26,7 @@ export class PythonGenerator implements GeneratorInterface {
     public constructor(generator: AppGenerator) {
         this.generator = generator;
         this.generator.options.python = new PythonEnvironment();
+        // this.generator.options.environment = new PythonEnvironment()
     }
 
     public async initialize(): Promise<void> {

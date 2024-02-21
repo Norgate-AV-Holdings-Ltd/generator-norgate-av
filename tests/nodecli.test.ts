@@ -25,6 +25,8 @@ const devDependencies = [
     "@semantic-release/changelog",
     "@semantic-release/git",
     "@types/config",
+    "@types/figlet",
+    "@types/inquirer",
     "@types/node",
     "@types/nodemon",
     "all-contributors-cli",
@@ -32,14 +34,30 @@ const devDependencies = [
     "cross-env",
     "cz-conventional-changelog",
     "doctoc",
+    "eslint",
+    "eslint-config-prettier",
     "husky",
     "lint-staged",
     "nodemon",
     "prettier",
     "semantic-release",
+    "vitest",
 ];
 
-const dependencies = ["config", "dotenv", "envalid"];
+const dependencies = [
+    "chalk",
+    "commander",
+    "config",
+    "dotenv",
+    "envalid",
+    "execa",
+    "figlet",
+    "find-up",
+    "inquirer",
+    "listr2",
+    "mergician",
+    "string-builder",
+];
 
 const files = [
     ".github/workflows/main.yml",
@@ -47,13 +65,20 @@ const files = [
     ".husky/commit-msg",
     ".husky/pre-commit",
     ".vscode/extensions.json",
+    ".vscode/launch.json",
     ".vscode/settings.json",
+    "src/commands/hello.js",
+    "src/commands/index.js",
+    "src/utils/getPackageJson.js",
+    "src/utils/index.js",
     "src/app.js",
+    "tests/app.test.js",
     ".all-contributorsrc",
     ".changelogrc.json",
     ".commitlintrc.json",
     ".czrc",
     ".editorconfig",
+    ".eslintrc.json",
     ".gitattributes",
     ".gitignore",
     ".lintstagedrc.json",
@@ -69,6 +94,7 @@ const files = [
     "LICENSE",
     "package.json",
     "README.md",
+    "vitest.config.js",
 ];
 
 describe("generator-norgate-av:nodecli", () => {
@@ -161,6 +187,9 @@ describe("generator-norgate-av:nodecli", () => {
                     name: id,
                     displayName: name,
                     description,
+                    bin: {
+                        [id]: "src/app.js",
+                    },
                     engines: {
                         node: `>=${engine}`,
                     },
@@ -349,6 +378,9 @@ describe("generator-norgate-av:nodecli", () => {
                     name: id,
                     displayName: destination,
                     description,
+                    bin: {
+                        [id]: "src/app.js",
+                    },
                     engines: {
                         node: `>=${engine}`,
                     },
@@ -511,6 +543,9 @@ describe("generator-norgate-av:nodecli", () => {
                     name: result.generator.options.id,
                     displayName: destination,
                     description: result.generator.options.description,
+                    bin: {
+                        [result.generator.options.id!]: "src/app.js",
+                    },
                     engines: {
                         node: `>=${engine}`,
                     },

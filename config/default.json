@@ -363,6 +363,12 @@
                 },
                 {
                     "$ref": "#/files/paths/releaserc"
+                },
+                {
+                    "$ref": "#/files/paths/tests"
+                },
+                {
+                    "$ref": "#/files/paths/vitestconfigjs"
                 }
             ]
         },

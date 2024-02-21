@@ -1,3 +1,7 @@
 import "dotenv/config";
 
-console.log("Hello, World!");
+export function helloWorld() {
+    return "Hello, World!";
+}
+
+console.log(helloWorld());

@@ -32,6 +32,8 @@ const devDependencies = [
     "cross-env",
     "cz-conventional-changelog",
     "doctoc",
+    "eslint",
+    "eslint-config-prettier",
     "husky",
     "lint-staged",
     "nodemon",
@@ -47,13 +49,16 @@ const files = [
     ".husky/commit-msg",
     ".husky/pre-commit",
     ".vscode/extensions.json",
+    ".vscode/launch.json",
     ".vscode/settings.json",
     "src/app.js",
+    "tests/app.test.js",
     ".all-contributorsrc",
     ".changelogrc.json",
     ".commitlintrc.json",
     ".czrc",
     ".editorconfig",
+    ".eslintrc.json",
     ".gitattributes",
     ".gitignore",
     ".lintstagedrc.json",
@@ -69,6 +74,7 @@ const files = [
     "LICENSE",
     "package.json",
     "README.md",
+    "vitest.config.js",
 ];
 
 describe("generator-norgate-av:javascript", () => {

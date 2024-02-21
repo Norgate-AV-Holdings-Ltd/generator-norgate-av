@@ -486,6 +486,9 @@
                 },
                 {
                     "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/aliveserver"
                 }
             ]
         },
@@ -770,6 +773,10 @@
             "pythonrequirements": {
                 "from": "requirements.txt",
                 "to": "requirements.txt"
+            },
+            "aliveserver": {
+                "from": "alive-server.json",
+                "to": ".alive-server.json"
             }
         }
     },

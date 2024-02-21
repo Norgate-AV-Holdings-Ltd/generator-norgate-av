@@ -25,21 +25,17 @@ const devDependencies = [
     "@commitlint/config-conventional",
     "@semantic-release/changelog",
     "@semantic-release/git",
-    "@types/config",
-    "@types/live-server",
     "@types/node",
+    "alive-server",
     "all-contributors-cli",
     "commitizen",
     "cz-conventional-changelog",
     "doctoc",
     "husky",
     "lint-staged",
-    "live-server",
     "prettier",
     "semantic-release",
 ];
-
-const dependencies = ["config", "dotenv", "envalid"];
 
 const files = [
     ".github/workflows/main.yml",
@@ -52,7 +48,9 @@ const files = [
     "assets/img/favicon.ico",
     "assets/img/yeoman-logo-svg-vector.svg",
     "assets/js/app.js",
+    "assets/js/counter.js",
     "public/index.html",
+    ".alive-server.json",
     ".all-contributorsrc",
     ".changelogrc.json",
     ".commitlintrc.json",
@@ -173,10 +171,6 @@ describe("generator-norgate-av:html", () => {
                             string,
                             string
                         >,
-                    ),
-                    dependencies: getNodeDependencyObject(
-                        dependencies,
-                        node.packageJson.dependencies as Record<string, string>,
                     ),
                 });
             });
@@ -366,10 +360,6 @@ describe("generator-norgate-av:html", () => {
                             string
                         >,
                     ),
-                    dependencies: getNodeDependencyObject(
-                        dependencies,
-                        node.packageJson.dependencies as Record<string, string>,
-                    ),
                 });
             });
 
@@ -527,10 +517,6 @@ describe("generator-norgate-av:html", () => {
                             string,
                             string
                         >,
-                    ),
-                    dependencies: getNodeDependencyObject(
-                        dependencies,
-                        node.packageJson.dependencies as Record<string, string>,
                     ),
                 });
             });

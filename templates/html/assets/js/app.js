@@ -1,3 +1,5 @@
-const container = document.querySelector(".container");
+import { setupCounter } from "./counter.js";
 
-container.querySelector("p").textContent = "Hello, World!";
+document.querySelector("#message").innerHTML = "Yo, World!";
+
+setupCounter(document.querySelector("#counter"));

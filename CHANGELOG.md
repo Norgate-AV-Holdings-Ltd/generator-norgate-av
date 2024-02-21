@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.3.0](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.2.0...v2.3.0) (2024-02-21)
+
+### 🌟 Features
+
+-   **nodecli:** add a basic test ([1401082](https://github.com/Norgate-AV/generator-norgate-av/commit/14010823ae3ba158afc3e13b212a5084f5023307))
+-   **nodecli:** add a vscode debug launch config ([311813d](https://github.com/Norgate-AV/generator-norgate-av/commit/311813db4e80fe3319af1391a86127b6cc76df25))
+-   **nodecli:** add boilerplate cli app ([4cd0018](https://github.com/Norgate-AV/generator-norgate-av/commit/4cd0018dc771f4b3eb988614704ba90ec010d665))
+-   **nodecli:** add eslint config ([60d4d9b](https://github.com/Norgate-AV/generator-norgate-av/commit/60d4d9b127b7f7cce81ca26c39eed57c998a8d0b))
+-   **nodecli:** update gitattributes ([534d695](https://github.com/Norgate-AV/generator-norgate-av/commit/534d695437bac309528cc7705133f8b6d5f20431))
+-   **nodecli:** update gitignore ([16e5ef7](https://github.com/Norgate-AV/generator-norgate-av/commit/16e5ef7803132b1c5f8c2b2b90aed710f65207be))
+-   **nodecli:** update semantic-release ci config ([5d5ec03](https://github.com/Norgate-AV/generator-norgate-av/commit/5d5ec03e5f641ff7c0e3467ef1eb48e545d9f024))
+-   **nodecli:** update vscode extensions ([65d5480](https://github.com/Norgate-AV/generator-norgate-av/commit/65d5480bda34d94cb43258e741e7b7957f0dbddb))
+
+### 🧰 Chores
+
+-   merge pull request [#134](https://github.com/Norgate-AV/generator-norgate-av/issues/134) from feat/update-nodecli ([a5abfb2](https://github.com/Norgate-AV/generator-norgate-av/commit/a5abfb2b4212b086c7beae962c0b6c6b0d275f36))
+
+### 🧪 Tests
+
+-   update nodecli tests for added features ([13475b5](https://github.com/Norgate-AV/generator-norgate-av/commit/13475b5b4a13212130efe86eccef200d4d3c77f2))
+
 ## [2.2.0](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.1.0...v2.2.0) (2024-02-21)
 
 ### 🌟 Features

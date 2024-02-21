@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.1.0](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.12...v2.1.0) (2024-02-21)
+
+### 🌟 Features
+
+-   **html:** add alive-server setup ([6b541ad](https://github.com/Norgate-AV/generator-norgate-av/commit/6b541ad1df922d3a4c46023df80a73fd8100383e))
+-   **html:** add better ci workflow ([231500b](https://github.com/Norgate-AV/generator-norgate-av/commit/231500b9b82282151065b459efbb596ad08bb404))
+-   **html:** update default web page with some interactivity ([20d92eb](https://github.com/Norgate-AV/generator-norgate-av/commit/20d92ebb9d66a4df89f13a7d242247b05821b87b))
+-   **html:** update gitattributes ([a2d1949](https://github.com/Norgate-AV/generator-norgate-av/commit/a2d194994669e991b63e8db0d50cb58bbcaa03da))
+-   **html:** update gitignore ([98977a0](https://github.com/Norgate-AV/generator-norgate-av/commit/98977a0acbbfdc1687033778dda70b45af12283c))
+
+### 🧰 Chores
+
+-   **deps:** bump all deps ([0ff5937](https://github.com/Norgate-AV/generator-norgate-av/commit/0ff593757f452690f1079dcad7c28c06102a385a))
+-   **node:** bump to 20.11.1 ([2f376e8](https://github.com/Norgate-AV/generator-norgate-av/commit/2f376e8dcdbf0da16aceceafbee3e5bb04d8c06d))
+-   merge pull request [#132](https://github.com/Norgate-AV/generator-norgate-av/issues/132) from feat/update-html ([7b27ac4](https://github.com/Norgate-AV/generator-norgate-av/commit/7b27ac423e9bd13f6a3ee39e84937eb1cbadd40f))
+-   **semantic-release:** update config ([312bc9e](https://github.com/Norgate-AV/generator-norgate-av/commit/312bc9efae854e22f074bc742600cffbdb50cb03))
+-   **git:** update gitignore ([871ce6a](https://github.com/Norgate-AV/generator-norgate-av/commit/871ce6a88a86b67e9b3aabb7dc2f845523014232))
+
+### 🧪 Tests
+
+-   **html:** update test for new features ([b8c52e6](https://github.com/Norgate-AV/generator-norgate-av/commit/b8c52e6065db18e6e257335a71fe5d01fbd4bf70))
+
+### 🤖 CI
+
+-   convert repository to lowercase for docker build ([ebaa6c4](https://github.com/Norgate-AV/generator-norgate-av/commit/ebaa6c45e1bd65e60b0e6c871e5f8b8bc73e5573))
+-   remove working dir from docker build ([8a35e42](https://github.com/Norgate-AV/generator-norgate-av/commit/8a35e428bf04c7c20bc93b3dee3ca3c705f91ff5))
+
 ## [2.0.12](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.11...v2.0.12) (2024-02-13)
 
 ### 🐛 Bug Fixes

@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.2.0](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.1.0...v2.2.0) (2024-02-21)
+
+### 🌟 Features
+
+-   **javascript:** add a basic test ([c1f6843](https://github.com/Norgate-AV/generator-norgate-av/commit/c1f6843f6da65f40b77f737842ba41b40a370995))
+-   **javascript:** add basic eslint config ([8694b3d](https://github.com/Norgate-AV/generator-norgate-av/commit/8694b3dd5c79637ea6c18b354642994be097281d))
+-   **javascript:** add debug launch config ([106a1c7](https://github.com/Norgate-AV/generator-norgate-av/commit/106a1c780941c827b0564b21647408699357d52c))
+-   **javascript:** add more comprehensive ci workflow ([9b8202c](https://github.com/Norgate-AV/generator-norgate-av/commit/9b8202c8389200df49f56bc7ce562cf7981bf4e7))
+-   **javascript:** update extensions list ([3396e14](https://github.com/Norgate-AV/generator-norgate-av/commit/3396e148d5dd9c7a56f37f5af395e4632df5b1ca))
+
+### 🧰 Chores
+
+-   merge pull request [#133](https://github.com/Norgate-AV/generator-norgate-av/issues/133) from feat/update-js ([4ee85ea](https://github.com/Norgate-AV/generator-norgate-av/commit/4ee85ea4ba0a34e32374802b8fdd5574c31d905d))
+-   **javascript:** update changelogrc ([065d4c2](https://github.com/Norgate-AV/generator-norgate-av/commit/065d4c24e84a2817a9dc0b4278e1c21921aa1fc1))
+-   **javascript:** update gitattributes ([787ccf4](https://github.com/Norgate-AV/generator-norgate-av/commit/787ccf421d543cd4545e2e5111f59183f8f92c86))
+-   **javascript:** update gitignore ([0f6ce2d](https://github.com/Norgate-AV/generator-norgate-av/commit/0f6ce2dd7c88607abc20cd6381328173e87d6679))
+
+### 🧪 Tests
+
+-   update javascript test for added features ([f1a6680](https://github.com/Norgate-AV/generator-norgate-av/commit/f1a6680e729d491860d679b715d63e9bb73bdae6))
+
 ## [2.1.0](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.0.12...v2.1.0) (2024-02-21)
 
 ### 🌟 Features

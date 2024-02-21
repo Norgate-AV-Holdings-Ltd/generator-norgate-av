@@ -15,6 +15,7 @@
     },
     "scripts": {
         "commit": "git-cz",
+        "lint": "eslint . --fix",
         "pretty:fix": "prettier --write .",
         "start": "cross-env NODE_ENV=production node src/app.js",
         "dev": "nodemon src/app.js",
@@ -38,6 +39,8 @@
         <%- node.getDevDependency("cross-env") %>,
         <%- node.getDevDependency("cz-conventional-changelog") %>,
         <%- node.getDevDependency("doctoc") %>,
+        <%- node.getDevDependency("eslint") %>,
+        <%- node.getDevDependency("eslint-config-prettier") %>,
         <%- node.getDevDependency("husky") %>,
         <%- node.getDevDependency("lint-staged") %>,
         <%- node.getDevDependency("nodemon") %>,

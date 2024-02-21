@@ -275,6 +275,9 @@
                     "$ref": "#/files/paths/tests"
                 },
                 {
+                    "$ref": "#/files/paths/eslintrc"
+                },
+                {
                     "$ref": "#/files/paths/vitestconfigjs"
                 }
             ]

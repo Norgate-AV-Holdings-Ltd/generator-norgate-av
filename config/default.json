@@ -182,7 +182,7 @@
                     "$ref": "#/files/paths/tests"
                 },
                 {
-                    "$ref": "#/files/paths/vitestconfig"
+                    "$ref": "#/files/paths/vitestconfigts"
                 },
                 {
                     "$ref": "#/files/paths/changelog"
@@ -270,6 +270,12 @@
                 },
                 {
                     "$ref": "#/files/paths/releaserc"
+                },
+                {
+                    "$ref": "#/files/paths/tests"
+                },
+                {
+                    "$ref": "#/files/paths/vitestconfigjs"
                 }
             ]
         },
@@ -752,9 +758,13 @@
                 "from": "scripts",
                 "to": "scripts"
             },
-            "vitestconfig": {
+            "vitestconfigts": {
                 "from": "vitest.config.ts",
                 "to": "vitest.config.ts"
+            },
+            "vitestconfigjs": {
+                "from": "vitest.config.js",
+                "to": "vitest.config.js"
             },
             "aliveserver": {
                 "from": "alive-server.json",

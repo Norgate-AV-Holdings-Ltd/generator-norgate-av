@@ -16,7 +16,7 @@
     "scripts": {
         "commit": "git-cz",
         "pretty:fix": "prettier --write .",
-        "start": "live-server",
+        "start": "alive-server",
         "prepare": "husky",
         "doctoc": "doctoc --title '## Contents 📖' README.md",
         "contrib:add": "all-contributors add",
@@ -28,22 +28,15 @@
         <%- node.getDevDependency("@commitlint/config-conventional") %>,
         <%- node.getDevDependency("@semantic-release/changelog") %>,
         <%- node.getDevDependency("@semantic-release/git") %>,
-        <%- node.getDevDependency("@types/config") %>,
-        <%- node.getDevDependency("@types/live-server") %>,
         <%- node.getDevDependency("@types/node") %>,
+        <%- node.getDevDependency("alive-server") %>,
         <%- node.getDevDependency("all-contributors-cli") %>,
         <%- node.getDevDependency("commitizen") %>,
         <%- node.getDevDependency("cz-conventional-changelog") %>,
         <%- node.getDevDependency("doctoc") %>,
         <%- node.getDevDependency("husky") %>,
         <%- node.getDevDependency("lint-staged") %>,
-        <%- node.getDevDependency("live-server") %>,
         <%- node.getDevDependency("prettier") %>,
         <%- node.getDevDependency("semantic-release") %>
-    },
-    "dependencies": {
-        <%- node.getDependency("config") %>,
-        <%- node.getDependency("dotenv") %>,
-        <%- node.getDependency("envalid") %>
     }
 }

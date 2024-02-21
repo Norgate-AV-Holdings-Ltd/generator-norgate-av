@@ -480,6 +480,9 @@
                 },
                 {
                     "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/aliveserver"
                 }
             ]
         },
@@ -752,6 +755,10 @@
             "vitestconfig": {
                 "from": "vitest.config.ts",
                 "to": "vitest.config.ts"
+            },
+            "aliveserver": {
+                "from": "alive-server.json",
+                "to": ".alive-server.json"
             }
         }
     },

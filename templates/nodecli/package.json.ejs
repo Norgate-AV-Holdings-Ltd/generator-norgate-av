@@ -6,6 +6,12 @@
     "license": "MIT",
     "main": "src/app.js",
     "type": "module",
+    "files": [
+        "src"
+    ],
+    "bin": {
+        <%- JSON.stringify(id) %>: "src/app.js"
+    },
     "repository": {
         "type": "git",
         "url": ""
@@ -32,6 +38,8 @@
         <%- node.getDevDependency("@semantic-release/changelog") %>,
         <%- node.getDevDependency("@semantic-release/git") %>,
         <%- node.getDevDependency("@types/config") %>,
+        <%- node.getDevDependency("@types/figlet") %>,
+        <%- node.getDevDependency("@types/inquirer") %>,
         <%- node.getDevDependency("@types/node") %>,
         <%- node.getDevDependency("@types/nodemon") %>,
         <%- node.getDevDependency("all-contributors-cli") %>,
@@ -49,8 +57,17 @@
         <%- node.getDevDependency("vitest") %>
     },
     "dependencies": {
+        <%- node.getDependency("chalk") %>,
+        <%- node.getDependency("commander") %>,
         <%- node.getDependency("config") %>,
         <%- node.getDependency("dotenv") %>,
-        <%- node.getDependency("envalid") %>
+        <%- node.getDependency("envalid") %>,
+        <%- node.getDependency("execa") %>,
+        <%- node.getDependency("figlet") %>,
+        <%- node.getDependency("find-up") %>,
+        <%- node.getDependency("inquirer") %>,
+        <%- node.getDependency("listr2") %>,
+        <%- node.getDependency("mergician") %>,
+        <%- node.getDependency("string-builder") %>
     }
 }

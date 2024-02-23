@@ -1,6 +1,6 @@
 import { PromptQuestion } from "@yeoman/types";
+import { BaseQuestion } from "./BaseQuestion.js";
 import { Answers } from "../@types/index.js";
-import { BaseQuestion } from "./index.js";
 import AppGenerator from "../app.js";
 
 export class ProjectDescription extends BaseQuestion {

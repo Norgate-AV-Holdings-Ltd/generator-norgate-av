@@ -2,17 +2,17 @@ import Generator from "yeoman-generator";
 import which from "which";
 
 export class GitHelper {
-    private static async isGitInstalled(): Promise<string | undefined> {
+    public static async isGitInstalled(): Promise<string | undefined> {
         return await which("git").catch(() => undefined);
     }
 
-    private static async getGitUserName(
+    public static async getGitUserName(
         generator: Generator,
     ): Promise<string | undefined> {
         return await generator.git.name();
     }
 
-    private static async getGitUserEmail(
+    public static async getGitUserEmail(
         generator: Generator,
     ): Promise<string | undefined> {
         return await generator.git.email();

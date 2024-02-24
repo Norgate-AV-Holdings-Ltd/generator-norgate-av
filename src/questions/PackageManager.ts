@@ -1,5 +1,5 @@
 import { PromptQuestion } from "@yeoman/types";
-import { BaseQuestion } from "./index.js";
+import { BaseQuestion } from "./BaseQuestion.js";
 import { Answers, NodePackageManager } from "../@types/index.js";
 import { ConfigHelper } from "../helpers/index.js";
 import AppGenerator from "../app.js";

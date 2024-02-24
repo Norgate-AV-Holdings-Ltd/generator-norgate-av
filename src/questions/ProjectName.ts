@@ -1,8 +1,8 @@
 import path from "node:path";
 import { PromptQuestion } from "@yeoman/types";
-import AppGenerator from "../app.js";
+import { BaseQuestion } from "./BaseQuestion.js";
 import { Answers } from "../@types/index.js";
-import { BaseQuestion } from "./index.js";
+import AppGenerator from "../app.js";
 
 export class ProjectName extends BaseQuestion {
     public constructor(generator: AppGenerator) {

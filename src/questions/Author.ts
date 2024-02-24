@@ -1,16 +1,26 @@
 import { PromptQuestion } from "@yeoman/types";
-import { BaseQuestion } from "./index.js";
+import { BaseQuestion } from "./BaseQuestion.js";
 import { Answers } from "../@types/index.js";
 import AppGenerator from "../app.js";
 
 export class Author extends BaseQuestion {
     public constructor(generator: AppGenerator) {
         super(generator);
-        // this.generator.options.author = this.generator.git.name();
+
+        if (this.generator.options.author) {
+            return;
+        }
+
+        if (
+            this.generator.options.author === undefined &&
+            this.generator.options.skipPrompts
+        ) {
+            this.generator.options.author = this.getDefault();
+        }
     }
 
     private getDefault(): string {
-        return "";
+        return this.generator.user;
     }
 
     public getQuestion(): PromptQuestion<Answers> {

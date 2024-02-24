@@ -48,14 +48,12 @@ export class CliHelper {
                 type: String,
                 alias: "d",
                 description: "Description of the project",
-                default: "",
             },
             {
                 name: "author",
                 type: String,
                 alias: "a",
                 description: "Author of the project",
-                default: "",
             },
             {
                 name: "git",

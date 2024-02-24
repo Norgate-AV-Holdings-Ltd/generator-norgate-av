@@ -1,4 +1,4 @@
-export * from "./BaseQuestion.js";
+export * from "./Author.js";
 export * from "./Git.js";
 export * from "./PackageManager.js";
 export * from "./ProjectDescription.js";

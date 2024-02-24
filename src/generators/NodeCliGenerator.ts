@@ -10,11 +10,12 @@ import {
 } from "../@types/index.js";
 import AppGenerator from "../app.js";
 import {
-    ProjectName,
-    ProjectId,
-    ProjectDescription,
+    Author,
     Git,
     PackageManager,
+    ProjectDescription,
+    ProjectId,
+    ProjectName,
 } from "../questions/index.js";
 import { ConfigHelper } from "../helpers/index.js";
 import { NodeEnvironment } from "../environments/index.js";
@@ -39,6 +40,7 @@ export class NodeCliGenerator implements GeneratorInterface {
             new ProjectName(this.generator).getQuestion(),
             new ProjectId(this.generator).getQuestion(),
             new ProjectDescription(this.generator).getQuestion(),
+            new Author(this.generator).getQuestion(),
             new Git(this.generator).getQuestion(),
             new PackageManager(this.generator).getQuestion(),
         );
@@ -80,6 +82,10 @@ export class NodeCliGenerator implements GeneratorInterface {
 
         this.generator.options.id = this.generator.options.id || answers.id;
         this.generator.options.pkg = this.generator.options.pkg || answers.pkg;
+
+        this.generator.options.author = this.generator.options.skipPrompts
+            ? this.generator.options.author
+            : answers.author;
 
         // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

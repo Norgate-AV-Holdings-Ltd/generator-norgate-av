@@ -25,6 +25,7 @@ class AppGenerator extends Generator<AppOptions> {
     private generator: GeneratorInterface | undefined = undefined;
     private readonly choices = GeneratorFactory.getAvailable();
     public abort: boolean = false;
+    public user: string = "";
 
     constructor(args: string | Array<string>, options: AppOptions) {
         super(args, options);
@@ -50,6 +51,8 @@ class AppGenerator extends Generator<AppOptions> {
     }
 
     public async initializing(): Promise<void> {
+        this.user = await GitHelper.getGitUserName(this);
+
         this.log(
             yosay(
                 `Welcome to the\n${chalk.bold.magenta(

@@ -458,7 +458,7 @@ describe("generator-norgate-av:simpl", () => {
             it("should create the correct .all-contributorsrc", () => {
                 assertAllContributorsRc(".all-contributorsrc", {
                     id: result.generator.options.id,
-                    pkg: result.generator.options.pkg,
+                    author: result.generator.options.author,
                 });
             });
 

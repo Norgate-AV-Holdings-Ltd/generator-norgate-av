@@ -4,6 +4,13 @@ import assert from "yeoman-assert";
 import helpers, { RunResult } from "yeoman-test";
 import { describe, beforeAll, afterAll, expect, it } from "vitest";
 import AppGenerator from "../src/app.js";
+import {
+    assertChangeLog,
+    assertContributing,
+    assertLicense,
+    assertOptionValues,
+    assertReadMe,
+} from "./helpers.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const generator = path.resolve(__dirname, "../dist/generators/app");
@@ -70,15 +77,14 @@ describe("generator-norgate-av:python", () => {
             });
 
             it("should assign the correct values", () => {
-                assert.equal(result.generator.options.type, type);
-                assert.equal(result.generator.options.name, name);
-                assert.equal(result.generator.options.id, id);
-                assert.equal(result.generator.options.description, description);
-                assert.equal(result.generator.options.author, author);
-                assert.equal(
-                    result.generator.options.git,
-                    process.env.CI ? false : git,
-                );
+                assertOptionValues(result, {
+                    type,
+                    name,
+                    id,
+                    description,
+                    author,
+                    git,
+                });
             });
 
             it(`should create a directory named '${name}' and CD into it`, () => {
@@ -90,35 +96,19 @@ describe("generator-norgate-av:python", () => {
             });
 
             it("should create the correct README.md", () => {
-                assert.fileContent("README.md", `# ${id}`);
-                assert.fileContent(
-                    "README.md",
-                    `This is the README for your project "${id}". After writing up a brief description, we recommend including the following sections.`,
-                );
+                assertReadMe("README.md", { id });
             });
 
             it("should create the correct LICENSE", () => {
-                assert.fileContent("LICENSE", "The MIT License (MIT)");
-                assert.fileContent(
-                    "LICENSE",
-                    `Copyright (c) ${new Date().getFullYear()} ${author}`,
-                );
+                assertLicense("LICENSE", { author });
             });
 
             it("should create the correct CHANGELOG.md", () => {
-                assert.fileContent(
-                    "CHANGELOG.md",
-                    `All notable changes to the "${id}" project will be documented in this file.`,
-                );
+                assertChangeLog("CHANGELOG.md", { id });
             });
 
             it("should create the correct CONTRIBUTING.md", () => {
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `/${id}/issues/new/choose`,
-                );
-                assert.fileContent("CONTRIBUTING.md", `/${id}.git`);
-                assert.fileContent("CONTRIBUTING.md", `cd ${id}`);
+                assertContributing("CONTRIBUTING.md", { id });
             });
 
             it.skipIf(process.env.CI)(
@@ -179,16 +169,14 @@ describe("generator-norgate-av:python", () => {
             });
 
             it("should assign the correct values", () => {
-                assert.equal(result.generator.options.type, type);
-                assert.equal(result.generator.options.destination, destination);
-                assert.equal(result.generator.options.name, destination);
-                assert.equal(result.generator.options.id, id);
-                assert.equal(result.generator.options.description, description);
-                assert.equal(result.generator.options.author, author);
-                assert.equal(
-                    result.generator.options.git,
-                    process.env.CI ? false : git,
-                );
+                assertOptionValues(result, {
+                    type,
+                    id,
+                    name: destination,
+                    description,
+                    author,
+                    git,
+                });
             });
 
             it(`should create a directory named '${destination}' and CD into it`, () => {
@@ -200,35 +188,19 @@ describe("generator-norgate-av:python", () => {
             });
 
             it("should create the correct README.md", () => {
-                assert.fileContent("README.md", `# ${id}`);
-                assert.fileContent(
-                    "README.md",
-                    `This is the README for your project "${id}". After writing up a brief description, we recommend including the following sections.`,
-                );
+                assertReadMe("README.md", { id });
             });
 
             it("should create the correct LICENSE", () => {
-                assert.fileContent("LICENSE", "The MIT License (MIT)");
-                assert.fileContent(
-                    "LICENSE",
-                    `Copyright (c) ${new Date().getFullYear()} ${author}`,
-                );
+                assertLicense("LICENSE", { author });
             });
 
             it("should create the correct CONTRIBUTING.md", () => {
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `/${id}/issues/new/choose`,
-                );
-                assert.fileContent("CONTRIBUTING.md", `/${id}.git`);
-                assert.fileContent("CONTRIBUTING.md", `cd ${id}`);
+                assertContributing("CONTRIBUTING.md", { id });
             });
 
             it("should create the correct CHANGELOG.md", () => {
-                assert.fileContent(
-                    "CHANGELOG.md",
-                    `All notable changes to the "${id}" project will be documented in this file.`,
-                );
+                assertChangeLog("CHANGELOG.md", { id });
             });
 
             it.skipIf(process.env.CI)(
@@ -277,15 +249,14 @@ describe("generator-norgate-av:python", () => {
             });
 
             it("should assign the correct default values", async () => {
-                assert.equal(result.generator.options.id, "test-project");
-                assert.equal(result.generator.options.description, "");
-
-                assert.equal(
-                    result.generator.options.author,
-                    (await result.generator.git.name()) || "",
-                );
-
-                assert.equal(result.generator.options.git, !process.env.CI);
+                assertOptionValues(result, {
+                    type,
+                    id: "test-project",
+                    name: destination,
+                    description: "",
+                    author: (await result.generator.git.name()) || "",
+                    git: !process.env.CI,
+                });
             });
 
             it(`should create a directory named '${destination}' and CD into it`, () => {
@@ -297,44 +268,25 @@ describe("generator-norgate-av:python", () => {
             });
 
             it("should create the correct README.md", () => {
-                assert.fileContent(
-                    "README.md",
-                    `# ${result.generator.options.id}`,
-                );
-                assert.fileContent(
-                    "README.md",
-                    `This is the README for your project "${result.generator.options.id}". After writing up a brief description, we recommend including the following sections.`,
-                );
+                assertReadMe("README.md", { id: result.generator.options.id });
             });
 
             it("should create the correct LICENSE", () => {
-                assert.fileContent("LICENSE", "The MIT License (MIT)");
-                assert.fileContent(
-                    "LICENSE",
-                    `Copyright (c) ${new Date().getFullYear()} ${result.generator.options.author}`,
-                );
+                assertLicense("LICENSE", {
+                    author: result.generator.options.author,
+                });
             });
 
             it("should create the correct CONTRIBUTING.md", () => {
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `/${result.generator.options.id}/issues/new/choose`,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `/${result.generator.options.id}.git`,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `cd ${result.generator.options.id}`,
-                );
+                assertContributing("CONTRIBUTING.md", {
+                    id: result.generator.options.id,
+                });
             });
 
             it("should create the correct CHANGELOG.md", () => {
-                assert.fileContent(
-                    "CHANGELOG.md",
-                    `All notable changes to the "${result.generator.options.id}" project will be documented in this file.`,
-                );
+                assertChangeLog("CHANGELOG.md", {
+                    id: result.generator.options.id,
+                });
             });
 
             it.skipIf(process.env.CI)(

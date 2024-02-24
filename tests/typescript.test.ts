@@ -11,6 +11,8 @@ import { UnresolvedConfig, NodePackageManager } from "../src/@types/index.js";
 import {
     assertAllContributorsRc,
     assertChangeLog,
+    assertContributing,
+    assertHuskyGitHooks,
     assertLicense,
     assertOptionValues,
     assertReadMe,
@@ -213,29 +215,10 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct CONTRIBUTING.md", () => {
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `/${id}/issues/new/choose`,
-                );
-                assert.fileContent("CONTRIBUTING.md", `/${id}.git`);
-                assert.fileContent("CONTRIBUTING.md", `cd ${id}`);
-                assert.fileContent("CONTRIBUTING.md", `${pkg} install`);
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `If in doubt, you can use the \`${pkg} commit\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `Be sure to run \`${pkg} test\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `Run the \`${pkg} contrib:add\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `${pkg} contrib:add <username>`,
-                );
+                assertContributing("CONTRIBUTING.md", {
+                    id,
+                    pkg: pkg as NodePackageManager,
+                });
             });
 
             it("should create the correct CHANGELOG.md", () => {
@@ -247,11 +230,7 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct husky git hooks", () => {
-                assert.fileContent(
-                    ".husky/commit-msg",
-                    `${pkg} commitlint --edit $1`,
-                );
-                assert.fileContent(".husky/pre-commit", `${pkg} lint-staged`);
+                assertHuskyGitHooks({ pkg: pkg as NodePackageManager });
             });
 
             it.skipIf(process.env.CI)(
@@ -384,29 +363,10 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct CONTRIBUTING.md", () => {
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `/${id}/issues/new/choose`,
-                );
-                assert.fileContent("CONTRIBUTING.md", `/${id}.git`);
-                assert.fileContent("CONTRIBUTING.md", `cd ${id}`);
-                assert.fileContent("CONTRIBUTING.md", `${pkg} install`);
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `If in doubt, you can use the \`${pkg} commit\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `Be sure to run \`${pkg} test\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `Run the \`${pkg} contrib:add\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `${pkg} contrib:add <username>`,
-                );
+                assertContributing("CONTRIBUTING.md", {
+                    id,
+                    pkg: pkg as NodePackageManager,
+                });
             });
 
             it("should create the correct CHANGELOG.md", () => {
@@ -418,11 +378,7 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct husky git hooks", () => {
-                assert.fileContent(
-                    ".husky/commit-msg",
-                    `${pkg} commitlint --edit $1`,
-                );
-                assert.fileContent(".husky/pre-commit", `${pkg} lint-staged`);
+                assertHuskyGitHooks({ pkg: pkg as NodePackageManager });
             });
 
             it.skipIf(process.env.CI)(
@@ -537,38 +493,10 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct CONTRIBUTING.md", () => {
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `/${result.generator.options.id}/issues/new/choose`,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `/${result.generator.options.id}.git`,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `cd ${result.generator.options.id}`,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `${result.generator.options.pkg} install`,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `If in doubt, you can use the \`${result.generator.options.pkg} commit\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `Be sure to run \`${result.generator.options.pkg} test\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `Run the \`${result.generator.options.pkg} contrib:add\``,
-                );
-                assert.fileContent(
-                    "CONTRIBUTING.md",
-                    `${result.generator.options.pkg} contrib:add <username>`,
-                );
+                assertContributing("CONTRIBUTING.md", {
+                    id: result.generator.options.id,
+                    pkg: result.generator.options.pkg,
+                });
             });
 
             it("should create the correct CHANGELOG.md", () => {
@@ -585,14 +513,7 @@ describe("generator-norgate-av:typescript", () => {
             });
 
             it("should create the correct husky git hooks", () => {
-                assert.fileContent(
-                    ".husky/commit-msg",
-                    `${result.generator.options.pkg} commitlint --edit $1`,
-                );
-                assert.fileContent(
-                    ".husky/pre-commit",
-                    `${result.generator.options.pkg} lint-staged`,
-                );
+                assertHuskyGitHooks({ pkg: result.generator.options.pkg });
             });
 
             it.skipIf(process.env.CI)(

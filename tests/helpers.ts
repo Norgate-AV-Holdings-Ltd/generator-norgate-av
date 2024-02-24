@@ -80,3 +80,27 @@ export function assertOptionValues(
         pkg,
     );
 }
+
+export function assertHuskyGitHooks({ pkg }: AssertionOptions): void {
+    assert.fileContent(".husky/commit-msg", `${pkg} commitlint --edit $1`);
+    assert.fileContent(".husky/pre-commit", `${pkg} lint-staged`);
+}
+
+export function assertContributing(
+    file: string,
+    { id, pkg }: AssertionOptions,
+): void {
+    assert.fileContent(file, `/${id}/issues/new/choose`);
+    assert.fileContent(file, `/${id}.git`);
+    assert.fileContent(file, `cd ${id}`);
+
+    if (pkg === undefined) {
+        return;
+    }
+
+    assert.fileContent(file, `${pkg} install`);
+    assert.fileContent(file, `If in doubt, you can use the \`${pkg} commit\``);
+    assert.fileContent(file, `Be sure to run \`${pkg} test\``);
+    assert.fileContent(file, `Run the \`${pkg} contrib:add\``);
+    assert.fileContent(file, `${pkg} contrib:add <username>`);
+}

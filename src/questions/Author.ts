@@ -11,7 +11,10 @@ export class Author extends BaseQuestion {
             return;
         }
 
-        if (this.generator.options.skipPrompts) {
+        if (
+            this.generator.options.author === undefined &&
+            this.generator.options.skipPrompts
+        ) {
             this.generator.options.author = this.getDefault();
         }
     }

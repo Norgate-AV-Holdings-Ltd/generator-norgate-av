@@ -10,10 +10,11 @@ import {
 } from "../@types/index.js";
 import AppGenerator from "../app.js";
 import {
-    ProjectName,
-    ProjectId,
-    ProjectDescription,
+    Author,
     Git,
+    ProjectDescription,
+    ProjectId,
+    ProjectName,
 } from "../questions/index.js";
 import { ConfigHelper } from "../helpers/index.js";
 
@@ -36,6 +37,7 @@ export class PythonGenerator implements GeneratorInterface {
             new ProjectName(this.generator).getQuestion(),
             new ProjectId(this.generator).getQuestion(),
             new ProjectDescription(this.generator).getQuestion(),
+            new Author(this.generator).getQuestion(),
             new Git(this.generator).getQuestion(),
         );
     }
@@ -75,6 +77,9 @@ export class PythonGenerator implements GeneratorInterface {
             this.generator.options.name || answers.name;
 
         this.generator.options.id = this.generator.options.id || answers.id;
+
+        this.generator.options.author =
+            this.generator.options.author || answers.author;
 
         this.generator.options.description = this.generator.options.skipPrompts
             ? this.generator.options.description

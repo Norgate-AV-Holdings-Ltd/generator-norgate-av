@@ -82,6 +82,7 @@ export class TypescriptGenerator implements GeneratorInterface {
 
         this.generator.options.id = this.generator.options.id || answers.id;
         this.generator.options.pkg = this.generator.options.pkg || answers.pkg;
+
         this.generator.options.author =
             this.generator.options.author || answers.author;
 

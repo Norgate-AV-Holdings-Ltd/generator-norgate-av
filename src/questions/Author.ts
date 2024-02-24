@@ -17,7 +17,7 @@ export class Author extends BaseQuestion {
     }
 
     private getDefault(): string {
-        return this.generator.user || "";
+        return this.generator.user;
     }
 
     public getQuestion(): PromptQuestion<Answers> {

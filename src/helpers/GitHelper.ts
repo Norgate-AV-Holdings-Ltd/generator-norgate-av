@@ -6,16 +6,12 @@ export class GitHelper {
         return await which("git").catch(() => undefined);
     }
 
-    public static async getGitUserName(
-        generator: Generator,
-    ): Promise<string | undefined> {
-        return await generator.git.name();
+    public static async getGitUserName(generator: Generator): Promise<string> {
+        return (await generator.git.name()) || "";
     }
 
-    public static async getGitUserEmail(
-        generator: Generator,
-    ): Promise<string | undefined> {
-        return await generator.git.email();
+    public static async getGitUserEmail(generator: Generator): Promise<string> {
+        return (await generator.git.email()) || "";
     }
 
     public static async init(generator: Generator): Promise<void | Error> {

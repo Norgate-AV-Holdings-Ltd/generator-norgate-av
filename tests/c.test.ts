@@ -128,7 +128,7 @@ describe("generator-norgate-av:c", () => {
                 assert.equal(result.generator.options.name, name);
                 assert.equal(result.generator.options.id, id);
                 assert.equal(result.generator.options.description, description);
-                // assert.equal(result.generator.options.author, author);
+                assert.equal(result.generator.options.author, author);
                 assert.equal(
                     result.generator.options.git,
                     process.env.CI ? false : git,
@@ -155,6 +155,7 @@ describe("generator-norgate-av:c", () => {
                     name: id,
                     displayName: name,
                     description,
+                    author,
                     engines: {
                         node: `>=${engine}`,
                     },
@@ -184,7 +185,7 @@ describe("generator-norgate-av:c", () => {
                 assert.fileContent("LICENSE", "The MIT License (MIT)");
                 assert.fileContent(
                     "LICENSE",
-                    `Copyright (c) ${new Date().getFullYear()}`,
+                    `Copyright (c) ${new Date().getFullYear()} ${author}`,
                 );
             });
 
@@ -225,6 +226,11 @@ describe("generator-norgate-av:c", () => {
                 assert.fileContent(
                     ".all-contributorsrc",
                     `"projectName": "${id}"`,
+                );
+
+                assert.fileContent(
+                    ".all-contributorsrc",
+                    `"projectOwner": "${author}"`,
                 );
             });
 
@@ -312,7 +318,7 @@ describe("generator-norgate-av:c", () => {
                 assert.equal(result.generator.options.name, destination);
                 assert.equal(result.generator.options.id, id);
                 assert.equal(result.generator.options.description, description);
-                // assert.equal(result.generator.options.author, author);
+                assert.equal(result.generator.options.author, author);
                 assert.equal(
                     result.generator.options.git,
                     process.env.CI ? false : git,
@@ -339,6 +345,7 @@ describe("generator-norgate-av:c", () => {
                     name: id,
                     displayName: destination,
                     description,
+                    author,
                     engines: {
                         node: `>=${engine}`,
                     },
@@ -368,7 +375,7 @@ describe("generator-norgate-av:c", () => {
                 assert.fileContent("LICENSE", "The MIT License (MIT)");
                 assert.fileContent(
                     "LICENSE",
-                    `Copyright (c) ${new Date().getFullYear()}`,
+                    `Copyright (c) ${new Date().getFullYear()} ${author}`,
                 );
             });
 
@@ -409,6 +416,11 @@ describe("generator-norgate-av:c", () => {
                 assert.fileContent(
                     ".all-contributorsrc",
                     `"projectName": "${id}"`,
+                );
+
+                assert.fileContent(
+                    ".all-contributorsrc",
+                    `"projectOwner": "${author}"`,
                 );
             });
 
@@ -465,10 +477,15 @@ describe("generator-norgate-av:c", () => {
                 result?.cleanup();
             });
 
-            it("should assign the correct default values", () => {
+            it("should assign the correct default values", async () => {
                 assert.equal(result.generator.options.id, "test-project");
                 assert.equal(result.generator.options.description, "");
-                assert.equal(result.generator.options.author, "");
+
+                assert.equal(
+                    result.generator.options.author,
+                    (await result.generator.git.name()) || "",
+                );
+
                 assert.equal(result.generator.options.git, !process.env.CI);
                 assert.equal(result.generator.options.pkg, "pnpm");
                 assert.equal(
@@ -492,6 +509,7 @@ describe("generator-norgate-av:c", () => {
                     name: result.generator.options.id,
                     displayName: destination,
                     description: result.generator.options.description,
+                    author: result.generator.options.author,
                     engines: {
                         node: `>=${engine}`,
                     },
@@ -524,7 +542,7 @@ describe("generator-norgate-av:c", () => {
                 assert.fileContent("LICENSE", "The MIT License (MIT)");
                 assert.fileContent(
                     "LICENSE",
-                    `Copyright (c) ${new Date().getFullYear()}`,
+                    `Copyright (c) ${new Date().getFullYear()} ${result.generator.options.author}`,
                 );
             });
 
@@ -574,6 +592,11 @@ describe("generator-norgate-av:c", () => {
                 assert.fileContent(
                     ".all-contributorsrc",
                     `"projectName": "${result.generator.options.id}"`,
+                );
+
+                assert.fileContent(
+                    ".all-contributorsrc",
+                    `"projectOwner": "${result.generator.options.author}"`,
                 );
             });
 

@@ -78,8 +78,9 @@ export class PythonGenerator implements GeneratorInterface {
 
         this.generator.options.id = this.generator.options.id || answers.id;
 
-        this.generator.options.author =
-            this.generator.options.author || answers.author;
+        this.generator.options.author = this.generator.options.skipPrompts
+            ? this.generator.options.author
+            : answers.author;
 
         this.generator.options.description = this.generator.options.skipPrompts
             ? this.generator.options.description

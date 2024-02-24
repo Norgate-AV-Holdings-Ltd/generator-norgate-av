@@ -83,8 +83,9 @@ export class HtmlGenerator implements GeneratorInterface {
         this.generator.options.id = this.generator.options.id || answers.id;
         this.generator.options.pkg = this.generator.options.pkg || answers.pkg;
 
-        this.generator.options.author =
-            this.generator.options.author || answers.author;
+        this.generator.options.author = this.generator.options.skipPrompts
+            ? this.generator.options.author
+            : answers.author;
 
         // @ts-expect-error This is necessary as the env 'options' property doesn't seem to be correctly typed on the Environment.
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

@@ -1,7 +1,13 @@
-import { Config, PackageManager, PathMap, TemplateConfig } from "./index.js";
+import {
+    Config,
+    GeneratorId,
+    PackageManager,
+    PathMap,
+    TemplateConfig,
+} from "./index.js";
 
 export type ResolvedConfig = Config & {
     generators: {
-        [key: string]: TemplateConfig<Array<PathMap>, PackageManager>;
+        [K in GeneratorId]: TemplateConfig<Array<PathMap>, PackageManager>;
     };
 };

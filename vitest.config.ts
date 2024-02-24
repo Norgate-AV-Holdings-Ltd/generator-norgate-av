@@ -4,6 +4,7 @@ export default defineConfig({
     test: {
         environment: "node",
         testTimeout: 60000,
+        hookTimeout: 60000,
         resolveSnapshotPath(path, extension) {
             return path + extension;
         },

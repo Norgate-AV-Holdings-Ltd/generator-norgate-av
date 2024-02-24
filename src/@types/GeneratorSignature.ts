@@ -1,5 +1,7 @@
+import { GeneratorId } from "./index.js";
+
 export type GeneratorSignature = {
-    id: string;
+    id: GeneratorId;
     name: string;
     aliases: Array<string>;
 };

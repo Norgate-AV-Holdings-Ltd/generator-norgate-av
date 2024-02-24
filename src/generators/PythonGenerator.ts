@@ -16,6 +16,7 @@ import {
     ProjectId,
     ProjectName,
 } from "../questions/index.js";
+import { PythonEnvironment } from "../environments/index.js";
 import { ConfigHelper } from "../helpers/index.js";
 
 export class PythonGenerator implements GeneratorInterface {
@@ -25,11 +26,13 @@ export class PythonGenerator implements GeneratorInterface {
 
     public constructor(generator: AppGenerator) {
         this.generator = generator;
+        this.generator.options.python = new PythonEnvironment();
+        // this.generator.options.environment = new PythonEnvironment()
     }
 
     public async initialize(): Promise<void> {
         this.setupPrompts();
-        await this.generator.options.node?.initialize();
+        return Promise.resolve();
     }
 
     private setupPrompts(): void {
@@ -44,7 +47,7 @@ export class PythonGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         const config = ConfigHelper.getInstance().getConfig();
-        return config.generators.python!.signature;
+        return config.generators.python.signature;
     }
 
     public getSourceRoot(): string {
@@ -99,7 +102,7 @@ export class PythonGenerator implements GeneratorInterface {
 
         const { id } = PythonGenerator.getSignature();
 
-        return config.generators[id]!.paths;
+        return config.generators[id].paths;
     }
 
     public async writing(): Promise<void> {
@@ -140,9 +143,44 @@ export class PythonGenerator implements GeneratorInterface {
             this.generator.options.skipInstall = true;
         }
 
+        await this.setupVenv();
+
         if (this.generator.options.skipInstall) {
             return Promise.resolve();
         }
+
+        await this.runPipInstall();
+    }
+
+    private async runPipInstall(): Promise<void> {
+        this.generator.log();
+        this.generator.log(
+            "Running pip to install the project dependencies for you...",
+        );
+
+        const pip = path.join(this.generator.env.cwd, ".venv", "bin", "pip");
+
+        const requirements = path.join(
+            this.generator.env.cwd,
+            "requirements.txt",
+        );
+
+        await this.generator.spawn(pip, [
+            "install",
+            "-r",
+            requirements,
+            "--quiet",
+        ]);
+    }
+
+    private async setupVenv(): Promise<void> {
+        this.generator.log();
+        this.generator.log("Creating a virtual environment...");
+        await this.generator.spawn("python3", [
+            "-m",
+            "venv",
+            `${path.join(this.generator.env.cwd, ".venv")}`,
+        ]);
     }
 
     public async end(): Promise<void> {

@@ -39,6 +39,7 @@
         "copy:templates": "ncp templates dist/generators/app/templates",
         "copy:usage": "ncp src/USAGE dist/generators/app/USAGE",
         "copy:files": "pnpm copy:deps && pnpm copy:templates && pnpm copy:usage",
+        "pretest": "pnpm build",
         "test": "vitest --no-threads",
         "pretty:fix": "prettier --write .",
         "doctoc": "doctoc --title '## Contents 📖' README.md",
@@ -87,6 +88,7 @@
         "find-up": "^7.0.0",
         "json-refs": "^3.0.15",
         "mem-fs": "^4.0.0",
+        "toml": "^3.0.0",
         "which": "^4.0.0",
         "yeoman-generator": "^7.1.1",
         "yosay": "^3.0.0"

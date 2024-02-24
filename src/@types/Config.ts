@@ -17,5 +17,10 @@ export type Config = {
             };
             pkgmanager: PackageManager;
         };
+        python: {
+            engine: {
+                fallback: string;
+            };
+        };
     };
 };

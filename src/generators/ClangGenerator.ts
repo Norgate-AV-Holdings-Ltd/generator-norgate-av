@@ -48,7 +48,7 @@ export class ClangGenerator implements GeneratorInterface {
 
     public static getSignature(): GeneratorSignature {
         const config = ConfigHelper.getInstance().getConfig();
-        return config.generators.c!.signature;
+        return config.generators.c.signature;
     }
 
     public getSourceRoot(): string {
@@ -109,7 +109,7 @@ export class ClangGenerator implements GeneratorInterface {
 
         const { id } = ClangGenerator.getSignature();
 
-        return config.generators[id]!.paths;
+        return config.generators[id].paths;
     }
 
     public async writing(): Promise<void> {

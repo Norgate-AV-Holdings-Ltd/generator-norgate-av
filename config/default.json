@@ -414,6 +414,12 @@
                 },
                 {
                     "$ref": "#/files/paths/contributing"
+                },
+                {
+                    "$ref": "#/files/paths/pythonversion"
+                },
+                {
+                    "$ref": "#/files/paths/pythonrequirements"
                 }
             ]
         },
@@ -774,6 +780,18 @@
                 "from": "vitest.config.ts",
                 "to": "vitest.config.ts"
             },
+            "pythonversion": {
+                "from": "python-version.ejs",
+                "to": ".python-version"
+            },
+            "pyprojecttoml": {
+                "from": "pyproject.toml",
+                "to": "pyproject.toml"
+            },
+            "pythonrequirements": {
+                "from": "requirements.txt",
+                "to": "requirements.txt"
+            },
             "vitestconfigjs": {
                 "from": "vitest.config.js",
                 "to": "vitest.config.js"
@@ -798,6 +816,15 @@
             "pkgmanager": {
                 "default": "pnpm",
                 "choices": ["pnpm", "yarn", "npm"]
+            }
+        },
+        "python": {
+            "engine": {
+                "fallback": "3.9.0"
+            },
+            "pkgmanager": {
+                "default": "poetry",
+                "choices": ["poetry", "pip"]
             }
         }
     }

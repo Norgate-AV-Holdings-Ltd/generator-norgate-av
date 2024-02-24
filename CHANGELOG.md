@@ -1,5 +1,40 @@
 # Changelog
 
+## [2.4.0](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.3.0...v2.4.0) (2024-02-24)
+
+### 🌟 Features
+
+-   add author prompt to remaining generators ([53501b7](https://github.com/Norgate-AV/generator-norgate-av/commit/53501b78aee4c7757fcaabf9f346619fca14e197))
+-   **typescript:** add author prompt ([6e3db94](https://github.com/Norgate-AV/generator-norgate-av/commit/6e3db945c8f7a5aabc5c421e8a40ebe89d53316e))
+-   add author template strings ([212083f](https://github.com/Norgate-AV/generator-norgate-av/commit/212083fcb7941b9fcab4f20d72634ff66d8d1132))
+-   **app:** add user field to root generator ([ea47cc5](https://github.com/Norgate-AV/generator-norgate-av/commit/ea47cc500d201fcb7b77c83c836b286d31681b87))
+-   **app:** complete Author question class ([09062d2](https://github.com/Norgate-AV/generator-norgate-av/commit/09062d21324ea02259d330175c2fb412d19bf089))
+
+### 🐛 Bug Fixes
+
+-   dont set the author from answers when skipping prompts ([57cc550](https://github.com/Norgate-AV/generator-norgate-av/commit/57cc550960e463a3054f7432ed7ed2d1485ef602))
+-   ensure user field is an empty string by default ([1e42806](https://github.com/Norgate-AV/generator-norgate-av/commit/1e4280637e5504723c0da198a4079e94c0e5a8fb))
+-   remove default values from author and description cli options ([3e9fd37](https://github.com/Norgate-AV/generator-norgate-av/commit/3e9fd37c9e827f0d39c0680bd96864fcc10cb33e))
+-   set author to default if undefined ([f793524](https://github.com/Norgate-AV/generator-norgate-av/commit/f793524d5cf7feef89a6943ca50f90601372030a))
+
+### 🧰 Chores
+
+-   **deps:** bump deps ([927b152](https://github.com/Norgate-AV/generator-norgate-av/commit/927b152e0d8ca4173c8e14a6b2a22c3e9cc48b8c))
+
+### ✨ Refactor
+
+-   **questions:** dont export BaseQuestion class ([466e1e0](https://github.com/Norgate-AV/generator-norgate-av/commit/466e1e019e96f82fdef70a40a9eae337c9275576))
+-   **helpers:** edit all methods on GitHelper to be public ([6986b61](https://github.com/Norgate-AV/generator-norgate-av/commit/6986b61600963477115e36bdfc48b525db0d9f02))
+
+### 🧪 Tests
+
+-   add author assertions to remaining tests ([e54e5f6](https://github.com/Norgate-AV/generator-norgate-av/commit/e54e5f67b9819191e6ea87ed07fed52d305b43d7))
+-   **typescript:** add author assertions to tests ([f6003cf](https://github.com/Norgate-AV/generator-norgate-av/commit/f6003cfeb45b169a3deece40e7c0b660e83fa405))
+-   **typescript:** add helper functions for common assertions ([e5f78c8](https://github.com/Norgate-AV/generator-norgate-av/commit/e5f78c843d7aadac830465cad0618a673d42ba17))
+-   **simpl:** fix incorrect arg passed to assertion helper for ([79ba274](https://github.com/Norgate-AV/generator-norgate-av/commit/79ba274eebe1d9a2c31b423c61715c62731deffc))
+-   pass an empty string to author as default when running in CI ([fff49b4](https://github.com/Norgate-AV/generator-norgate-av/commit/fff49b443057d1f874910557852172fafef00948))
+-   utilize helper assertions in remaining tests ([7cdede3](https://github.com/Norgate-AV/generator-norgate-av/commit/7cdede376a57cc36b9c2c3a199b72f3fae83a644))
+
 ## [2.3.0](https://github.com/Norgate-AV/generator-norgate-av/compare/v2.2.0...v2.3.0) (2024-02-21)
 
 ### 🌟 Features

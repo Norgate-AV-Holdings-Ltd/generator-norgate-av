@@ -254,7 +254,9 @@ describe("generator-norgate-av:python", () => {
                     id: "test-project",
                     name: destination,
                     description: "",
-                    author: (await result.generator.git.name()) || "",
+                    author: process.env.CI
+                        ? ""
+                        : (await result.generator.git.name()) || "",
                     git: !process.env.CI,
                 });
             });

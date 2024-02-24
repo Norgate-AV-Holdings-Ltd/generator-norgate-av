@@ -437,7 +437,9 @@ describe("generator-norgate-av:typescript", () => {
                     name: destination,
                     id: "test-project",
                     description: "",
-                    author: (await result.generator.git.name()) || "",
+                    author: process.env.CI
+                        ? ""
+                        : (await result.generator.git.name()) || "",
                     git: !process.env.CI,
                     pkg: "pnpm",
                 });

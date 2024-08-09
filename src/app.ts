@@ -129,7 +129,7 @@ class AppGenerator extends Generator<AppOptions> {
                 await GitHelper.init(this);
                 this.log();
                 this.log("Initialized a git repository.");
-            } catch (error) {
+            } catch (error: any) {
                 this.log();
                 this.log(`${chalk.red.bold("Oops!")} 🤦‍♂️`);
                 this.log(
